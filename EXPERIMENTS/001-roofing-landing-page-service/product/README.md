@@ -10,6 +10,7 @@ Use this folder for the landing page product strategy and demo planning.
 - `personalization-rules.md`: how to lightly tailor demos per prospect.
 - `personalized-demo-template.md`: reusable format for prospect-specific previews.
 - `personalized-demos/`: prospect-specific demo briefs created before coding or outreach.
+- `demo-app/`: reusable coded landing page demo driven by prospect data.
 
 ## Rule
 

@@ -26,10 +26,10 @@ Timebox: 10 days
 - `offer.md`: offer details and boundaries.
 - `validation.md`: validation process and metrics.
 - `marketing/first-outreach-batch.md`: first 10 prospects and audit notes.
+- `product/demo-app/`: reusable local demo app.
 
 ## Folders
 
 - `product/`: landing page spec, copy, wireframe, and demo planning.
 - `marketing/`: outreach scripts, prospect tracker, and audit notes.
 - `assets/`: experiment-specific images, screenshots, logos, or demo assets.
-
