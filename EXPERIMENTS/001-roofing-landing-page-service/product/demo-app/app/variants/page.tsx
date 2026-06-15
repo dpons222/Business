@@ -1,23 +1,29 @@
 import Link from "next/link";
-import { designVariants } from "../../lib/designVariants";
+import { designTemplateGroups } from "../../lib/designVariants";
 
 export default function VariantsIndexPage() {
   return (
     <main className="variants-index">
       <section>
         <p className="variant-eyebrow">Final Cut Roofing</p>
-        <h1>Roof Inspection Page Options</h1>
+        <h1>Template Variants</h1>
         <p>
-          Four homeowner-facing page options for free storm damage and roof inspection requests.
+          Internal comparison set: three page templates with two visual variants each. Pick
+          one best-fit direction per prospect and send only that demo link.
         </p>
-        <div className="variants-list">
-          {designVariants.map((variant) => (
-            <Link href={`/variants/${variant.id}`} key={variant.id}>
-              <span>{variant.name}</span>
-              <strong>{variant.summary}</strong>
-            </Link>
-          ))}
-        </div>
+        {designTemplateGroups.map((group) => (
+          <div className="variant-template-group" key={group.id}>
+            <h2>{group.name}</h2>
+            <div className="variants-list">
+              {group.variants.map((variant) => (
+                <Link href={`/variants/${variant.id}`} key={variant.id}>
+                  <span>{variant.name}</span>
+                  <strong>{variant.summary}</strong>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ))}
       </section>
     </main>
   );

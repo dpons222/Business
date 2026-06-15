@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { VariantLandingPage } from "../../../components/VariantLandingPage";
 import { designVariants, getDesignVariant } from "../../../lib/designVariants";
-import { finalCutRoofing } from "../../../lib/prospects";
+import { defaultProspect } from "../../../lib/prospects";
 
 type VariantPageProps = {
   params: Promise<{
@@ -23,6 +23,5 @@ export default async function VariantPage({ params }: VariantPageProps) {
     notFound();
   }
 
-  return <VariantLandingPage prospect={finalCutRoofing} variant={variant} />;
+  return <VariantLandingPage prospect={defaultProspect} variant={variant} />;
 }
-

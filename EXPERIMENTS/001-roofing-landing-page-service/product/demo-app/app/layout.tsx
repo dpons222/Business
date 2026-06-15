@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Final Cut Roofing | Free Roof Inspection",
-  description: "Schedule a free roof inspection for hail, wind, leak, or storm damage concerns.",
+  title: "Roofing Landing Page Demo System",
+  description:
+    "Reusable roofing landing page demo system with prospect-specific data and assets.",
 };
 
 export default function RootLayout({

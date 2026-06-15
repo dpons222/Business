@@ -1,53 +1,44 @@
-export type ProspectData = {
-  companyName: string;
-  city: string;
-  serviceArea: string;
-  phone: string;
-  phoneHref: string;
-  primaryService: string;
-  recommendedCta: string;
-  secondaryCta: string;
-  rating?: string;
-  reviewCount?: string;
-  trustSignal?: string;
-  logoUrl?: string;
-  heroImageUrl?: string;
-  brand: {
-    primary: string;
-    primaryDark: string;
-    accent: string;
-    accentSoft: string;
-  };
-  sourceWebsite: string;
-  observedIssue: string;
-  headline: string;
-  subheadline: string;
-  trustLine: string;
-  formReassurance: string;
-  pageAngle: string;
-  damageSigns: string[];
-  inspectionIncludes: string[];
-  process: string[];
-  services: string[];
-  faqs: Array<{
-    question: string;
-    answer: string;
-  }>;
-};
+import type { ProspectData } from "./types";
+
+const assetRoot = "/prospects/final-cut-roofing";
 
 export const finalCutRoofing: ProspectData = {
+  slug: "final-cut-roofing",
   companyName: "Final Cut Roofing",
+  shortName: "Final Cut",
   city: "Frisco",
   serviceArea: "Frisco, McKinney, Plano, The Colony, Denton, and nearby DFW neighborhoods",
   phone: "972-777-0350",
   phoneHref: "tel:9727770350",
+  alternatePhone: "888-618-3271",
+  alternatePhoneHref: "tel:8886183271",
   primaryService: "free storm and hail damage roof inspection",
   recommendedCta: "Schedule Free Roof Inspection",
   secondaryCta: "Call 972-777-0350",
   rating: "Excellent",
   reviewCount: "29 reviews",
-  logoUrl: "/final-cut/logo.webp",
-  heroImageUrl: "/final-cut/roofing-project.webp",
+  reviewQuote:
+    "Final Cut Roofing stands behind their craftsmanship. Any issues or concerns, one call/text and they have me on the schedule.",
+  logoUrl: `${assetRoot}/logo.webp`,
+  heroImageUrl: `${assetRoot}/roofing-project.webp`,
+  projectImages: [
+    {
+      src: `${assetRoot}/roofing-project.webp`,
+      label: "Storm damage roof replacement",
+    },
+    {
+      src: `${assetRoot}/roof-install-2.webp`,
+      label: "Roof installation in progress",
+    },
+    {
+      src: `${assetRoot}/roof-install-3.webp`,
+      label: "Full roof replacement",
+    },
+    {
+      src: `${assetRoot}/roofing-after.webp`,
+      label: "Completed roofing project",
+    },
+  ],
   brand: {
     primary: "#10AEE4",
     primaryDark: "#111827",
@@ -80,10 +71,10 @@ export const finalCutRoofing: ProspectData = {
     "Next steps before any work begins",
   ],
   process: [
-    "Request your inspection",
-    "Final Cut Roofing checks visible roof damage",
-    "You receive findings and photos",
-    "You choose the next step that fits your home",
+    "Request a free inspection",
+    "Get photos and a clear damage review",
+    "Choose a repair, replacement, or claim plan",
+    "Stay informed while the work is completed",
   ],
   services: [
     "Storm damage inspection",
