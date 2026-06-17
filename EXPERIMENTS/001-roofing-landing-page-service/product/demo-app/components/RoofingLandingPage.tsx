@@ -60,12 +60,6 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
       }
     >
       <header className="site-header">
-        <div className="brand-topbar">
-          {prospect.alternatePhone && prospect.alternatePhoneHref ? (
-            <a href={prospect.alternatePhoneHref}>{prospect.alternatePhone}</a>
-          ) : null}
-          <a href={prospect.phoneHref}>{prospect.phone}</a>
-        </div>
         <a className="brand" href="#top" aria-label={`${prospect.companyName} roof inspection page`}>
           {prospect.logoUrl ? (
             <span className="brand-logo">
