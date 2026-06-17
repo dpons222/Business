@@ -7,6 +7,7 @@ export type ProspectData = {
   slug: string;
   companyName: string;
   shortName: string;
+  createdAt: string;
   city: string;
   serviceArea: string;
   phone: string;

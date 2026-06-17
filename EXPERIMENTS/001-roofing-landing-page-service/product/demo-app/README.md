@@ -13,7 +13,7 @@ Final Cut Roofing
 Charger Roofing
 ```
 
-The root route currently uses the Final Cut Roofing page as the default demo. Prospect-specific routes render each company from separate data objects.
+The root route now renders an internal preview dashboard for choosing prospect demos. Prospect-specific routes render each company from separate data objects.
 
 Charger Roofing now has two internal demo directions:
 
@@ -199,7 +199,7 @@ lib/
 public/
 ```
 
-- `app/page.tsx`: renders the current prospect demo.
+- `app/page.tsx`: renders the internal preview dashboard with prospect sorting.
 - `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
 - `app/prospects/page.tsx`: lists prospect-specific demo pages.
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.

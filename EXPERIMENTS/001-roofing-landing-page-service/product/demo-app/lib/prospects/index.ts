@@ -9,6 +9,7 @@ export { finalCutRoofing } from "./final-cut-roofing";
 export const prospects: ProspectData[] = [finalCutRoofing, chargerRoofing];
 
 export const defaultProspect = finalCutRoofing;
+export const activeProspectSlug = chargerRoofing.slug;
 
 export function getProspectBySlug(slug: string): ProspectData | undefined {
   return prospects.find((prospect) => prospect.slug === slug);
