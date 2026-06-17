@@ -1,3 +1,5 @@
+import { VercelDashboardRedirect } from "../components/VercelDashboardRedirect";
+
 export const metadata = {
   title: "Preview Link Required",
   description: "Use the direct preview link you were provided.",
@@ -6,6 +8,7 @@ export const metadata = {
 export default function Home() {
   return (
     <main className="preview-gate">
+      <VercelDashboardRedirect />
       <section className="preview-gate-panel" aria-labelledby="preview-gate-title">
         <p className="eyebrow">Roof Check Preview</p>
         <h1 id="preview-gate-title">Preview link required</h1>
