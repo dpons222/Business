@@ -13,7 +13,7 @@ Final Cut Roofing
 Charger Roofing
 ```
 
-The root route now renders an internal preview dashboard for choosing prospect demos. Prospect-specific routes render each company from separate data objects.
+The root route now renders a neutral preview-link-required page so a prospect cannot remove their slug and see the internal selector. The internal preview dashboard lives at `/dashboard`. Prospect-specific routes render each company from separate data objects.
 
 Charger Roofing now has two internal demo directions:
 
@@ -199,7 +199,8 @@ lib/
 public/
 ```
 
-- `app/page.tsx`: renders the internal preview dashboard with prospect sorting.
+- `app/page.tsx`: renders the neutral preview-link-required page.
+- `app/dashboard/page.tsx`: renders the internal preview dashboard with prospect sorting.
 - `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
 - `app/prospects/page.tsx`: lists prospect-specific demo pages.
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.
@@ -225,6 +226,7 @@ Then open:
 
 ```text
 http://localhost:3000
+http://localhost:3000/dashboard
 http://localhost:3000/prospects
 http://localhost:3000/prospects/final-cut-roofing
 http://localhost:3000/prospects/charger-roofing
