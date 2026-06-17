@@ -4,6 +4,7 @@ export const chargerRoofing: ProspectData = {
   slug: "charger-roofing",
   companyName: "Charger Roofing",
   shortName: "Charger",
+  createdAt: "2026-06-17",
   city: "San Antonio",
   serviceArea: "San Antonio and surrounding areas",
   phone: "(210) 305-ROOF",
