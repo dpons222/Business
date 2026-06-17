@@ -5,6 +5,7 @@ import { ArrowUpDown, CalendarDays, ExternalLink } from "lucide-react";
 import type { ProspectData } from "../lib/prospects";
 
 type SortMode = "name" | "date";
+type SortDirection = "asc" | "desc";
 
 type ProspectPreviewDashboardProps = {
   activeProspect: ProspectData;
@@ -24,16 +25,33 @@ export function ProspectPreviewDashboard({
   prospects,
 }: ProspectPreviewDashboardProps) {
   const [sortMode, setSortMode] = useState<SortMode>("date");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
 
   const sortedProspects = useMemo(() => {
     return [...prospects].sort((first, second) => {
+      const direction = sortDirection === "asc" ? 1 : -1;
+
       if (sortMode === "name") {
-        return first.companyName.localeCompare(second.companyName);
+        return first.companyName.localeCompare(second.companyName) * direction;
       }
 
-      return second.createdAt.localeCompare(first.createdAt);
+      return first.createdAt.localeCompare(second.createdAt) * direction;
     });
-  }, [prospects, sortMode]);
+  }, [prospects, sortDirection, sortMode]);
+
+  function updateSort(nextSortMode: SortMode) {
+    if (nextSortMode === sortMode) {
+      setSortDirection((currentDirection) => (currentDirection === "asc" ? "desc" : "asc"));
+      return;
+    }
+
+    setSortMode(nextSortMode);
+    setSortDirection(nextSortMode === "date" ? "desc" : "asc");
+  }
+
+  const dateSortLabel =
+    sortMode === "date" && sortDirection === "asc" ? "Oldest First" : "Newest First";
+  const nameSortLabel = sortMode === "name" && sortDirection === "desc" ? "Z-A" : "A-Z";
 
   return (
     <main className="preview-dashboard">
@@ -76,18 +94,20 @@ export function ProspectPreviewDashboard({
               <button
                 className={sortMode === "date" ? "sort-button active" : "sort-button"}
                 type="button"
-                onClick={() => setSortMode("date")}
+                onClick={() => updateSort("date")}
+                aria-pressed={sortMode === "date"}
               >
                 <CalendarDays size={16} aria-hidden="true" />
-                Date Created
+                {dateSortLabel}
               </button>
               <button
                 className={sortMode === "name" ? "sort-button active" : "sort-button"}
                 type="button"
-                onClick={() => setSortMode("name")}
+                onClick={() => updateSort("name")}
+                aria-pressed={sortMode === "name"}
               >
                 <ArrowUpDown size={16} aria-hidden="true" />
-                A-Z
+                {nameSortLabel}
               </button>
             </div>
           </div>
