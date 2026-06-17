@@ -108,7 +108,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
 
   return (
     <main
-      className="assessment-demo min-h-screen bg-[#f3f7fb] text-[#172033]"
+      className="assessment-demo min-h-screen bg-[#f4f1ee] text-[#202124]"
       style={
         {
           "--primary": prospect.brand.primary,
@@ -118,8 +118,8 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
         } as CSSProperties
       }
     >
-      <header className="border-b border-[#dbe3ee] bg-white">
-        <div className="flex min-h-9 items-center justify-center bg-[#070b12] px-4 text-sm font-extrabold text-white md:justify-end md:px-14">
+      <header className="border-b border-[#ded8d3] bg-white">
+        <div className="flex min-h-9 items-center justify-center bg-[#111111] px-4 text-sm font-extrabold text-white md:justify-end md:px-14">
           <a href={prospect.phoneHref}>{prospect.phone}</a>
         </div>
         <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-4 px-4 py-4 md:flex-row md:items-center md:justify-between">
@@ -129,7 +129,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
             ) : null}
             <span>
               <strong className="block text-base">{prospect.companyName}</strong>
-              <small className="text-sm text-[#5c667a]">Storm damage inspection intake</small>
+              <small className="text-sm text-[#666666]">Storm damage inspection intake</small>
             </span>
           </a>
           <div className="flex flex-col gap-2 sm:flex-row">
@@ -154,7 +154,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
           <Badge className="mb-4 rounded-md bg-[var(--accent)] px-3 py-1 text-white hover:bg-[var(--accent)]">
             Free inspection assessment
           </Badge>
-          <h1 className="mb-5 max-w-3xl break-words text-3xl font-black leading-[1.06] text-[#172033] sm:text-4xl md:text-5xl xl:text-6xl">
+          <h1 className="mb-5 max-w-3xl break-words text-3xl font-black leading-[1.06] text-[#202124] sm:text-4xl md:text-5xl xl:text-6xl">
             <span className="hidden sm:inline">
               Check whether your San Antonio roof should be inspected after hail.
             </span>
@@ -164,7 +164,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
               Book a free roof check.
             </span>
           </h1>
-          <p className="max-w-2xl text-lg leading-8 text-[#5c667a]">
+          <p className="max-w-2xl text-lg leading-8 text-[#666666]">
             <span className="hidden sm:inline">
               Answer a few storm-damage questions, then request a free roof checkup from{" "}
               {prospect.companyName}. This demo turns Charger&apos;s educational hail page into a
@@ -193,14 +193,14 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
         </div>
 
         <div className="grid gap-3 self-start">
-          <Card className="rounded-lg border-[#dbe3ee] bg-white shadow-[0_22px_70px_rgba(23,32,51,0.12)]">
+          <Card className="rounded-lg border-[#ded8d3] bg-white shadow-[0_22px_70px_rgba(17,17,17,0.12)]">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-xl">
                 <ClipboardCheck className="size-5 text-[var(--accent)]" />
                 What this assessment does
               </CardTitle>
             </CardHeader>
-            <CardContent className="grid gap-3 text-sm leading-6 text-[#5c667a]">
+            <CardContent className="grid gap-3 text-sm leading-6 text-[#666666]">
               <p>
                 <span className="hidden sm:inline">{prospect.pageAngle}</span>
                 <span className="sm:hidden">
@@ -209,7 +209,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
               </p>
               <div className="grid gap-2">
                 {prospect.inspectionIncludes.slice(0, 4).map((item, index) => (
-                  <span className="flex items-start gap-2 font-semibold text-[#172033]" key={item}>
+                  <span className="flex items-start gap-2 font-semibold text-[#202124]" key={item}>
                     <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[var(--primary)]" />
                     <span className="hidden sm:inline">{item}</span>
                     <span className="sm:hidden">{mobileInspectionSummary[index]}</span>
@@ -221,10 +221,10 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
         </div>
       </section>
 
-      <section id="assessment" className="border-y border-[#dbe3ee] bg-white">
+      <section id="assessment" className="border-y border-[#ded8d3] bg-white">
         <div className="mx-auto grid w-full max-w-[1180px] gap-6 px-4 py-8 lg:grid-cols-[minmax(0,1fr)_360px]">
           <div className="grid gap-6">
-            <Card className="rounded-lg border-[#dbe3ee]">
+            <Card className="rounded-lg border-[#ded8d3]">
               <CardHeader>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div>
@@ -233,7 +233,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
                     </p>
                     <CardTitle className="text-2xl">What happened?</CardTitle>
                   </div>
-                  <Badge variant="outline" className="w-fit rounded-md border-[#dbe3ee]">
+                  <Badge variant="outline" className="w-fit rounded-md border-[#ded8d3]">
                     San Antonio hail intake
                   </Badge>
                 </div>
@@ -252,7 +252,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
 
                     return (
                       <Label
-                        className="flex cursor-pointer items-start gap-3 rounded-lg border border-[#dbe3ee] bg-white p-4 transition hover:border-[var(--primary)] has-[[data-state=checked]]:border-[var(--primary)] has-[[data-state=checked]]:bg-[var(--accent-soft)]"
+                        className="flex cursor-pointer items-start gap-3 rounded-lg border border-[#ded8d3] bg-white p-4 transition hover:border-[var(--accent)] has-[[data-state=checked]]:border-[var(--accent)] has-[[data-state=checked]]:bg-[var(--accent-soft)]"
                         htmlFor={issue.id}
                         key={issue.id}
                       >
@@ -260,7 +260,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
                         <Icon className="mt-0.5 size-5 shrink-0 text-[var(--primary)]" />
                         <span>
                           <strong className="block">{issue.label}</strong>
-                          <small className="mt-1 block text-sm font-normal leading-5 text-[#5c667a]">
+                          <small className="mt-1 block text-sm font-normal leading-5 text-[#666666]">
                             <span className="hidden sm:inline">{issue.description}</span>
                             <span className="sm:hidden">{issue.mobileDescription}</span>
                           </small>
@@ -272,7 +272,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
               </CardContent>
             </Card>
 
-            <Card className="rounded-lg border-[#dbe3ee]">
+            <Card className="rounded-lg border-[#ded8d3]">
               <CardHeader>
                 <p className="mb-2 text-xs font-black uppercase text-[var(--primary)]">Step 2</p>
                 <CardTitle className="text-2xl">Which signs do you see?</CardTitle>
@@ -280,7 +280,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
               <CardContent className="grid gap-3 md:grid-cols-2">
                 {prospect.damageSigns.map((sign) => (
                   <Label
-                    className="flex cursor-pointer items-start gap-3 rounded-lg border border-[#dbe3ee] p-4 transition hover:border-[var(--primary)]"
+                    className="flex cursor-pointer items-start gap-3 rounded-lg border border-[#ded8d3] p-4 transition hover:border-[var(--accent)]"
                     htmlFor={sign}
                     key={sign}
                   >
@@ -295,7 +295,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
               </CardContent>
             </Card>
 
-            <Card className="rounded-lg border-[#dbe3ee]">
+            <Card className="rounded-lg border-[#ded8d3]">
               <CardHeader>
                 <p className="mb-2 text-xs font-black uppercase text-[var(--primary)]">Step 3</p>
                 <CardTitle className="text-2xl">Request the free roof checkup</CardTitle>
@@ -337,7 +337,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
                   </div>
                 </form>
                 {submitted ? (
-                  <div className="mt-4 rounded-lg border border-[#b7dfc8] bg-[#edf8f2] p-4 text-sm font-bold text-[#17593a]">
+                  <div className="mt-4 rounded-lg border border-[#e7b4b8] bg-[#fff3f4] p-4 text-sm font-bold text-[#6f1018]">
                     Demo confirmation: this preview would send the inspection request to{" "}
                     {prospect.companyName}. No information was sent from this demo.
                   </div>
@@ -347,7 +347,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
           </div>
 
           <aside className="grid gap-4 self-start lg:sticky lg:top-4">
-            <Card className="rounded-lg border-[#dbe3ee] bg-[#172033] text-white shadow-[0_22px_70px_rgba(23,32,51,0.18)]">
+            <Card className="rounded-lg border-[#111111] bg-[#202124] text-white shadow-[0_22px_70px_rgba(17,17,17,0.22)]">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-xl">
                   <Clock className="size-5 text-[var(--accent)]" />
@@ -384,11 +384,11 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
               </CardContent>
             </Card>
 
-            <Accordion className="rounded-lg border border-[#dbe3ee] bg-white px-4" type="single" collapsible>
+            <Accordion className="rounded-lg border border-[#ded8d3] bg-white px-4" type="single" collapsible>
               {prospect.faqs.slice(0, 3).map((faq) => (
                 <AccordionItem value={faq.question} key={faq.question}>
                   <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-                  <AccordionContent className="text-[#5c667a]">{faq.answer}</AccordionContent>
+                  <AccordionContent className="text-[#666666]">{faq.answer}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

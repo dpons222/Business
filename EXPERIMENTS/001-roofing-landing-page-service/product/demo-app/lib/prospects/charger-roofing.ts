@@ -34,10 +34,10 @@ export const chargerRoofing: ProspectData = {
     },
   ],
   brand: {
-    primary: "#075985",
-    primaryDark: "#172554",
-    accent: "#F5B301",
-    accentSoft: "#FFF4CC",
+    primary: "#303236",
+    primaryDark: "#111111",
+    accent: "#C7202F",
+    accentSoft: "#FDE8EA",
   },
   sourceWebsite: "https://charger-roofing.com/roof-hail-damage-in-san-antonio-texas/",
   observedIssue:
