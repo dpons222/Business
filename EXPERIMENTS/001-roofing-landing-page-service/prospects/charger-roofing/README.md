@@ -12,7 +12,9 @@ Prospect-specific notes, recommendation, outreach material, and demo rationale f
 ## Demo URLs
 
 ```text
-Storm Response Landing Page: /prospects/charger-roofing
+Client-facing live URL: https://roof-check-preview.vercel.app/charger-roofing
+Internal dashboard: https://roof-check-preview.vercel.app/dashboard
+Internal storm response route: /prospects/charger-roofing
 Assessment Flow: /prospects/charger-roofing/assessment
 ```
 
@@ -21,5 +23,5 @@ Assessment Flow: /prospects/charger-roofing/assessment
 ```text
 Status: Not contacted
 Priority: High
-Recommended next action: build/check lightweight demo, then send short outreach message
+Recommended next action: manually send the initial outreach email and log the send date in the prospect tracker
 ```

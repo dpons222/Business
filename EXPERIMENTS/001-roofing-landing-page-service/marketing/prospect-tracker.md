@@ -21,7 +21,7 @@ Not a fit
 
 | # | Business | Website | City/State | Contact Method | Reviews | Page Reviewed | Observed Issue | Outreach Angle | Date Contacted | Follow-Up 1 | Follow-Up 2 | Reply | Status | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
+| 1 | Charger Roofing | https://charger-roofing.com/roof-hail-damage-in-san-antonio-texas/ | San Antonio, TX | Public email/contact form to confirm before sending | Not captured | San Antonio hail damage page | Has the right free inspection offer, but the request path can be made more focused and easier to act on after a storm. | Send focused hail inspection landing page demo: https://roof-check-preview.vercel.app/charger-roofing |  | 3-5 business days after send | Optional only if still worth pursuing |  | Not contacted | Priority prospect. Manual send first; do not imply approval/requested demo. |
 | 2 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
 | 3 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
 | 4 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
@@ -51,4 +51,3 @@ Not a fit
 | 28 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
 | 29 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
 | 30 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
-
