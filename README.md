@@ -23,6 +23,12 @@ EXPERIMENTS/
 Active or completed validation tests. Each experiment should be self-contained with its own plan, offer, research, validation notes, finances, product files, marketing files, and assets.
 
 ```text
+BUSINESS_OFFERS/
+```
+
+Operating offer layer for reusable business positioning, public website planning, shared sales assets, and actively tested vertical offers such as roofing.
+
+```text
 ASSETS/
 ```
 
@@ -65,4 +71,3 @@ AGENTS.MD
 ```
 
 Project instructions for AI agents working in this repo.
-

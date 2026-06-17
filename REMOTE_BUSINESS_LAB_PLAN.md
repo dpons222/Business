@@ -68,6 +68,12 @@ Business/
 |       +-- product/
 |       +-- marketing/
 |       +-- assets/
++-- BUSINESS_OFFERS/
+|   +-- brand/
+|   +-- website/
+|   +-- shared/
+|   +-- verticals/
+|       +-- roofing/
 +-- ASSETS/
 |   +-- brand/
 |   +-- templates/
@@ -89,6 +95,8 @@ Business/
 The repo should be organized around experiments, not file types alone.
 
 `EXPERIMENTS/` is where active or completed business tests live. Each experiment should contain its own plan, research, validation notes, offer, finances, product files, marketing files, and experiment-specific assets.
+
+`BUSINESS_OFFERS/` is where reusable operating offers live once an experiment starts turning into a sellable business direction. It holds the owner's public positioning, credibility-site planning, shared pricing/outreach assets, and vertical-specific offer material for actively tested markets.
 
 `ASSETS/` should contain shared assets that can be reused across multiple ideas, such as brand systems, prompt libraries, design templates, reusable images, reusable social formats, product templates, and launch checklists.
 
