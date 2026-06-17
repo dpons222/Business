@@ -15,7 +15,7 @@ The idea is not to replace your full website. This would be a campaign landing p
 Demo:
 
 ```text
-[public demo domain]/prospects/charger-roofing
+https://roof-check-preview.vercel.app/charger-roofing
 ```
 
 If useful, I can help set this up and track form submissions, click-to-call activity, and CTA clicks so you can compare it against the current path.
@@ -37,7 +37,7 @@ The main idea is simple: send San Antonio homeowners who may have hail damage to
 Demo:
 
 ```text
-[public demo domain]/prospects/charger-roofing
+https://roof-check-preview.vercel.app/charger-roofing
 ```
 
 If this is useful, I can help set it up as a short pilot and show you exactly what it tracks.
@@ -48,8 +48,8 @@ Diego
 
 ## Notes
 
-- Replace `[public demo domain]` with the deployed demo domain before sending.
-- Current preferred landing page route: `/prospects/charger-roofing`.
+- Public demo URL: `https://roof-check-preview.vercel.app/charger-roofing`.
+- Internal equivalent route: `/prospects/charger-roofing`.
 - Send the initial email first.
 - Use the follow-up only if there is no response after 3-5 business days.
 - Log the send date, reply status, and next follow-up date in the prospect tracker.

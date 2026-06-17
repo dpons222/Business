@@ -102,6 +102,20 @@ Each prospect can then have its own page:
 /prospects/loa-construction
 ```
 
+Client-facing share URLs should use the clean root-level alias routes:
+
+```text
+/final-cut-roofing
+/charger-roofing
+/loa-construction
+```
+
+For Charger Roofing outreach, use:
+
+```text
+https://roof-check-preview.vercel.app/charger-roofing
+```
+
 This keeps each company's copy, images, colors, and contact information separate while allowing the shared design system to improve over time.
 
 ## UI Convention
@@ -186,6 +200,7 @@ public/
 ```
 
 - `app/page.tsx`: renders the current prospect demo.
+- `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
 - `app/prospects/page.tsx`: lists prospect-specific demo pages.
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.
 - `app/prospects/[slug]/assessment/page.tsx`: renders the secondary Charger assessment flow variant.
@@ -213,6 +228,7 @@ http://localhost:3000
 http://localhost:3000/prospects
 http://localhost:3000/prospects/final-cut-roofing
 http://localhost:3000/prospects/charger-roofing
+http://localhost:3000/charger-roofing
 http://localhost:3000/prospects/charger-roofing/assessment
 ```
 
