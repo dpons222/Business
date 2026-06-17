@@ -18,8 +18,10 @@ primaryService: free hail damage roof inspection / roof checkup
 sourceWebsite: https://charger-roofing.com/roof-hail-damage-in-san-antonio-texas/
 observedIssue: The page has the right free inspection offer, but the conversion path feels basic and trust proof is not prominent near the inspection CTA.
 recommendedCTA: Schedule Free Hail Damage Inspection
-demoRoute: /prospects/charger-roofing
+primaryDemoRoute: /prospects/charger-roofing
+secondaryDemoRoute: /prospects/charger-roofing/storm-response
 recommendedVariant: Storm Damage Assessment / inspection intake flow
+alternateVariant: Charger Storm Response Landing Page
 ```
 
 ## Demo Direction
@@ -31,6 +33,17 @@ Use a short assessment flow rather than another brochure-style page:
 2. Which signs do you see?
 3. What is the property ZIP/contact info?
 4. Show the recommended next step and request the free inspection.
+```
+
+Keep a second internal variant available for comparison:
+
+```text
+Charger Storm Response Landing Page
+- Traditional urgent landing page structure.
+- Red / charcoal Charger branding.
+- Direct hail and wind damage headline.
+- Free inspection form above the fold.
+- Storm guidance, service proof, photos, FAQ, and click-to-call CTA.
 ```
 
 ## Demo Hero
@@ -70,3 +83,5 @@ I mocked the page direction around this headline:
 
 The main change I would make is turning the educational hail content into a quick inspection assessment, so storm visitors can identify what they are seeing and request the free roof checkup faster.
 ```
+
+Use the assessment flow as the recommended sendable demo unless the traditional landing page looks materially stronger after review.

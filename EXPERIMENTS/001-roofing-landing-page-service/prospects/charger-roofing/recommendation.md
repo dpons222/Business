@@ -6,16 +6,23 @@ Use this recommendation to explain why Charger Roofing should test a focused San
 
 This is not positioned as a full website replacement. It is positioned as a campaign page for homeowners who recently searched after hail, wind, or severe weather.
 
-Recommended demo URL:
+Recommended demo URLs:
 
 ```text
-/prospects/charger-roofing
+Assessment Flow: /prospects/charger-roofing
+Storm Response Landing Page: /prospects/charger-roofing/storm-response
 ```
 
 Recommended demo direction:
 
 ```text
 Storm Damage Assessment / inspection intake flow
+```
+
+Alternate internal direction:
+
+```text
+Charger Storm Response Landing Page
 ```
 
 ## 1. Current Page Strengths
@@ -53,6 +60,7 @@ https://charger-roofing.com/roof-hail-damage-in-san-antonio-texas/
 - Use simple reassurance around what happens next: inspection, visible damage review, photos/documentation, and repair or replacement options.
 - Move public trust cues closer to the inspection request.
 - Keep the page short enough for storm visitors who are comparing roofing companies quickly.
+- Keep a traditional storm-response landing page variant available for comparison against the assessment flow.
 
 ## 4. Recommended Positioning
 

@@ -14,6 +14,7 @@ Prepare Charger Roofing as the next high-priority outreach prospect for the roof
 - Add shadcn/ui foundations where they improve form/control quality.
 - Create a storm damage assessment interaction model for Charger.
 - Make the Charger demo feel more like a practical inspection intake tool than a brochure page.
+- Add a second Charger storm response landing page variant for internal comparison.
 - Update relevant navigation and tracker files.
 - Validate the app build and local preview if possible.
 
@@ -36,6 +37,10 @@ Prepare Charger Roofing as the next high-priority outreach prospect for the roof
 - [x] Update docs to describe the new assessment-style convention.
 - [x] Run final build and visual verification after the redesign.
 - [x] Post updated Issue #2 progress summary.
+- [x] Add Charger Storm Response Landing Page variant.
+- [x] Add switching/navigation between the two Charger variants.
+- [x] Update docs for the two-variant Charger setup.
+- [x] Rebuild and verify both Charger variant routes.
 
 ## Source Notes
 
@@ -59,6 +64,9 @@ Charger should be positioned as a stronger first outreach target than Final Cut 
 - Visual fallback check used headless Edge screenshots because in-app Browser control tools were not exposed in this session.
 - Desktop and mobile screenshots were reviewed; a mobile overflow issue with the long CTA/form area was found and fixed.
 - Final production preview is running with `next start` at `http://127.0.0.1:3000/prospects/charger-roofing`.
+- `npm run build` also passed after adding `/prospects/charger-roofing/storm-response`.
+- Local preview returned HTTP 200 for `/prospects/charger-roofing`, `/prospects/charger-roofing/storm-response`, and `/prospects`.
+- Headless Edge screenshots were reviewed for the storm-response variant and the mobile variant switcher. A low-contrast active switcher state was found and fixed.
 
 ## Scope Expansion
 
@@ -69,3 +77,4 @@ Updated June 16, 2026:
 - The Charger route now uses a shadcn-powered storm damage assessment / inspection intake flow.
 - Final Cut remains on the original reusable landing page component for comparison.
 - shadcn/ui was added as a controlled component foundation, not as a requirement that every prospect page follow the same layout.
+- Charger now has a second internal route for a traditional storm response landing page: `/prospects/charger-roofing/storm-response`.

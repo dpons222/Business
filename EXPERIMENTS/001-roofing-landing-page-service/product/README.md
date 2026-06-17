@@ -25,6 +25,11 @@ The demo app now supports two demo conventions:
 - focused landing page: best when the prospect needs a clearer campaign page.
 - assessment / intake flow: best when the prospect already has educational content that can become a practical inspection tool.
 
+Charger Roofing currently has both conventions available for internal comparison:
+
+- `/prospects/charger-roofing`: assessment / intake flow.
+- `/prospects/charger-roofing/storm-response`: urgent storm response landing page.
+
 Use shadcn/ui for forms, stateful controls, accordions, badges, and assessment UI where it improves quality. Do not use it as a generic skin over the same repeated layout.
 
 ## Rule

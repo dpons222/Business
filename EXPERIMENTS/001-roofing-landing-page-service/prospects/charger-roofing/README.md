@@ -9,10 +9,11 @@ Prospect-specific notes, recommendation, outreach material, and demo rationale f
 - `outreach-email.md`: initial email and follow-up draft.
 - `campaign-tracking-strategy.md`: how Charger could test a focused hail inspection page.
 
-## Recommended Demo URL
+## Demo URLs
 
 ```text
-/prospects/charger-roofing
+Assessment Flow: /prospects/charger-roofing
+Storm Response Landing Page: /prospects/charger-roofing/storm-response
 ```
 
 ## Current Status

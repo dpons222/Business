@@ -27,6 +27,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import type { ProspectData } from "../lib/prospects";
+import { ChargerVariantSwitcher } from "./ChargerVariantSwitcher";
 
 type StormAssessmentDemoProps = {
   prospect: ProspectData;
@@ -148,6 +149,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
           </div>
         </div>
       </header>
+      <ChargerVariantSwitcher activeVariant="assessment" />
 
       <section className="mx-auto grid w-full max-w-[1180px] gap-8 px-4 py-8 md:grid-cols-[minmax(0,0.92fr)_minmax(340px,0.58fr)] md:py-12">
         <div className="min-w-0">

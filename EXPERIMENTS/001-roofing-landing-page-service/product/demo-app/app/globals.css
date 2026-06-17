@@ -1220,7 +1220,7 @@ main.landing-page {
 }
 
 .landing-storm-dark-emergency {
-  --storm-red: #f97316;
+  --storm-red: var(--accent);
 }
 
 .landing-storm-dark-emergency .brand-topbar,
