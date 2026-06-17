@@ -48,9 +48,9 @@ export const finalCutRoofing: ProspectData = {
   sourceWebsite: "https://finalcutroofing.com/free-roof-inspection/",
   observedIssue:
     "If a recent storm moved through your neighborhood, a roof inspection can help catch hail, wind, or leak concerns before they become larger repairs.",
-  headline: "Storm Damage? Schedule a Free Roof Inspection with Final Cut Roofing.",
+  headline: "Storm Damage in Frisco? Schedule a Free Roof Inspection.",
   subheadline:
-    "If hail, wind, or heavy rain hit Frisco or nearby DFW neighborhoods, Final Cut Roofing can inspect your roof, document visible damage, and explain clear next steps before any work begins.",
+    "If hail, wind, or heavy rain hit your neighborhood, Final Cut Roofing can inspect your roof, document visible damage, and explain clear next steps before any work begins.",
   trustLine:
     "Serving Frisco, McKinney, Plano, The Colony, Denton, and nearby DFW homeowners.",
   formReassurance:

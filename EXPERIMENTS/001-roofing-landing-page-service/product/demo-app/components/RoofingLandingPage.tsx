@@ -14,6 +14,7 @@ import {
   Star,
 } from "lucide-react";
 import type { CSSProperties } from "react";
+import { DemoLeadForm } from "./DemoLeadForm";
 import type { DesignVariant } from "../lib/designVariants";
 import type { ProspectData } from "../lib/prospects";
 
@@ -28,8 +29,23 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
   const heroHeadline = variant?.headline ?? prospect.headline;
   const heroSubheadline = variant?.subheadline ?? prospect.subheadline;
   const formTitle = variant?.formTitle ?? "Request Your Free Roof Inspection";
-  const formNote =
-    variant?.formNote ?? `${prospect.companyName} is SSL secure. No downpayment. No hidden fees.`;
+  const formNote = variant?.formNote ?? prospect.formReassurance;
+  const brandMark = prospect.companyName
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+  const primaryProof = prospect.rating
+    ? `${prospect.rating} rating`
+    : "Free inspection available";
+  const secondaryProof = prospect.reviewCount
+    ? `Based on ${prospect.reviewCount}`
+    : prospect.trustSignal ?? "Free roof checkup available";
+  const supportProof = "Focused storm damage review";
+  const reviewHeading = prospect.rating ?? prospect.trustSignal ?? "Free inspection offer";
+  const reviewSubline = prospect.reviewCount ? `Based on ${prospect.reviewCount}` : prospect.trustLine;
 
   return (
     <main
@@ -56,7 +72,7 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
               <img src={prospect.logoUrl} alt={`${prospect.companyName} logo`} />
             </span>
           ) : (
-            <span className="brand-mark">FC</span>
+            <span className="brand-mark">{brandMark}</span>
           )}
           <span>
             <strong>{prospect.companyName}</strong>
@@ -68,13 +84,13 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
             Exterior Services
           </a>
           <a href="#insurance" className="header-link">
-            Insurance Claims
+            Storm Guidance
           </a>
           <a href="#gallery" className="header-link">
             Photo Gallery
           </a>
           <a href="#inspection-form" className="header-link">
-            Request Estimate
+            Request Inspection
           </a>
           <a href={prospect.phoneHref} className="button button-ghost">
             <Phone size={17} aria-hidden="true" />
@@ -91,8 +107,28 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
         <div className="brand-hero-inner">
           <div className="brand-hero-copy">
             <p className="eyebrow">{heroEyebrow}</p>
-            <h1>{heroHeadline}</h1>
-            <p className="hero-lede">{heroSubheadline}</p>
+            <h1>
+              <span className="desktop-copy">{heroHeadline}</span>
+              <span className="mobile-copy">
+                Storm Damage
+                <br />
+                in {prospect.city}?
+                <br />
+                Schedule a Free
+                <br />
+                Roof Inspection.
+              </span>
+            </h1>
+            <p className="hero-lede">
+              <span className="desktop-copy">{heroSubheadline}</span>
+              <span className="mobile-copy">
+                Hail, wind, or heavy rain?
+                <br />
+                {prospect.companyName} can check your roof,
+                <br />
+                document visible damage, and explain next steps.
+              </span>
+            </p>
             <div className="hero-actions">
               <a href="#inspection-form" className="button button-primary">
                 {prospect.recommendedCta}
@@ -106,60 +142,40 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
             <div className="brand-proof-row" aria-label="Trust proof">
               <span>
                 <Star size={17} aria-hidden="true" />
-                5-star customer service
+                <strong>{primaryProof}</strong>
+              </span>
+              <span>
+                <BadgeCheck size={17} aria-hidden="true" />
+                <strong>{secondaryProof}</strong>
+              </span>
+              <span>
+                <ShieldCheck size={17} aria-hidden="true" />
+                <strong>{supportProof}</strong>
               </span>
               <span>
                 <Home size={17} aria-hidden="true" />
-                Frisco, McKinney, Plano, The Colony, Denton
+                <strong>{prospect.trustLine}</strong>
               </span>
             </div>
           </div>
 
-          <form id="inspection-form" className="hero-estimate-form">
-            <p className="inspection-label">Request inspection</p>
-            <h2>{formTitle}</h2>
-            <div className="form-grid">
-              <label>
-                First Name
-                <input type="text" name="firstName" placeholder="First name" />
-              </label>
-              <label>
-                Last Name
-                <input type="text" name="lastName" placeholder="Last name" />
-              </label>
-              <label>
-                Phone Number
-                <input type="tel" name="phone" placeholder="Best phone number" />
-              </label>
-              <label>
-                Email Address
-                <input type="email" name="email" placeholder="Email address" />
-              </label>
-            </div>
-            <label>
-              Property ZIP Code
-              <input type="text" name="zip" placeholder="Property ZIP code" />
-            </label>
-            <label>
-              What are you seeing?
-              <textarea name="issue" placeholder="Hail, leak, missing shingles, or not sure yet" />
-            </label>
-            <button type="button" className="button button-primary full-width">
-              Request Free Inspection
-            </button>
-            <small>{formNote}</small>
-          </form>
+          <DemoLeadForm
+            companyName={prospect.companyName}
+            ctaLabel={prospect.recommendedCta}
+            formNote={formNote}
+            formTitle={formTitle}
+          />
         </div>
       </section>
 
       <section className="storm-alert-band">
         <div>
-          <p className="eyebrow">Invest in a roof that pays you back</p>
-          <h2>We make choosing a roofing contractor easy.</h2>
+          <p className="eyebrow">Free storm damage inspection</p>
+          <h2>Make the next step clear after hail or wind.</h2>
         </div>
         <p>
-          No downpayment. No hidden fees. Request a free inspection and{" "}
-          {prospect.companyName} will guide you through every step of the process.
+          {prospect.pageAngle} Request an inspection and {prospect.shortName} can explain what
+          happens before any repair decision is made.
         </p>
       </section>
 
@@ -193,8 +209,8 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
           </article>
           <article>
             <FileText size={26} aria-hidden="true" />
-            <h3>Insurance Claim Guidance</h3>
-            <p>Get help understanding next steps when storm damage may involve a claim.</p>
+            <h3>Claim Next Steps</h3>
+            <p>Understand what was found before deciding whether to discuss a claim.</p>
           </article>
         </div>
       </section>
@@ -212,18 +228,16 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
           <p className="eyebrow">Your problem. Our solution.</p>
           <h2>Your free roof inspection is just a click or phone call away.</h2>
           <p>
-            From the scope of work to materials, scheduling, financing, and repairs,
-            {prospect.shortName} keeps homeowners informed so the project feels manageable.
+            From the first roof check to documentation, options, scheduling, and repairs,{" "}
+            {prospect.shortName} keeps homeowners informed so the next step feels manageable.
           </p>
           <div className="help-list">
-            {["Pick products and colors", "Design a game plan", "Prepare the property", "Schedule the work", "Review financing"].map(
-              (item) => (
-                <span key={item}>
-                  <ClipboardCheck size={17} aria-hidden="true" />
-                  {item}
-                </span>
-              ),
-            )}
+            {prospect.process.map((item) => (
+              <span key={item}>
+                <ClipboardCheck size={17} aria-hidden="true" />
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       </section>
@@ -231,7 +245,7 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
       <section className="brand-section process-section">
         <div className="section-heading centered">
           <p className="eyebrow">Our easy process</p>
-          <h2>Meet, design, and build with fewer surprises.</h2>
+          <h2>Know what happens before repair or replacement decisions.</h2>
         </div>
         <div className="brand-process">
           {[
@@ -243,7 +257,7 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
             {
               icon: FileText,
               title: "Design Your Plan",
-              body: "Choose the best path for repair, replacement, materials, scheduling, and claim support.",
+              body: "Choose the best path for repair, replacement, materials, scheduling, and documentation.",
             },
             {
               icon: Hammer,
@@ -266,15 +280,15 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
 
       <section id="insurance" className="insurance-band">
         <div>
-          <p className="eyebrow">Free roof damage insurance claim assistance</p>
-          <h2>Get experts by your side after severe storm damage.</h2>
+          <p className="eyebrow">Storm damage documentation</p>
+          <h2>Get experienced eyes on the roof after severe weather.</h2>
           <p>
             {prospect.shortName} helps prevent damage from getting worse, document roof concerns,
             and guide you through next steps with no obligation.
           </p>
         </div>
         <a href="#inspection-form" className="button button-primary">
-          Request Estimate
+          {prospect.recommendedCta}
           <ArrowRight size={18} aria-hidden="true" />
         </a>
       </section>
@@ -300,8 +314,8 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
       <section className="review-band">
         <div className="review-score">
           <BadgeCheck size={30} aria-hidden="true" />
-          <strong>Excellent</strong>
-          <span>Based on {prospect.reviewCount}</span>
+          <strong>{reviewHeading}</strong>
+          <span>{reviewSubline}</span>
         </div>
         {prospect.reviewQuote ? <blockquote>"{prospect.reviewQuote}"</blockquote> : null}
       </section>
@@ -317,30 +331,21 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
           </div>
         </div>
 
-        <form className="lead-form">
-          <p className="eyebrow">Request your free estimate today</p>
-          <h2>Tell us what happened.</h2>
+        <div className="lead-form followup-card">
+          <p className="eyebrow">Ready when you are</p>
+          <h2>Tell {prospect.shortName} what happened.</h2>
           <p>{prospect.formReassurance}</p>
-          <label>
-            Name
-            <input type="text" name="name" placeholder="Your name" />
-          </label>
-          <label>
-            Phone
-            <input type="tel" name="phone" placeholder="Best phone number" />
-          </label>
-          <label>
-            Address or ZIP code
-            <input type="text" name="location" placeholder="Property location" />
-          </label>
-          <label>
-            Details
-            <textarea name="details" placeholder="Tell us about hail, wind, leaks, or visible damage" />
-          </label>
-          <button type="button" className="button button-primary full-width">
-            Request Estimate
-          </button>
-        </form>
+          <div className="followup-actions">
+            <a href="#inspection-form" className="button button-primary">
+              Use the Inspection Form
+              <ArrowRight size={18} aria-hidden="true" />
+            </a>
+            <a href={prospect.phoneHref} className="button button-ghost">
+              <Phone size={18} aria-hidden="true" />
+              {prospect.secondaryCta}
+            </a>
+          </div>
+        </div>
       </section>
 
       <section className="brand-section faq-section">

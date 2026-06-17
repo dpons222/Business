@@ -12,8 +12,20 @@ Use this folder for the landing page product strategy and demo planning.
 - `personalized-demos/`: prospect-specific demo briefs created before coding or outreach.
 - `demo-app/`: reusable coded landing page demo driven by prospect data.
 
+## Personalized Demo Briefs
+
+- `personalized-demos/final-cut-roofing-demo.md`: first coded demo brief.
+- `personalized-demos/charger-roofing-demo.md`: Charger Roofing high-priority prospect brief.
+
 See `demo-app/README.md` for the multi-prospect demo system approach: one reusable app, shared page components, and separate prospect data/assets for each business.
 The demo app also documents the internal template/variant set used to choose one best-fit demo direction per prospect. Variants should be complete, polished landing pages rather than simplified previews.
+
+The demo app now supports two demo conventions:
+
+- focused landing page: best when the prospect needs a clearer campaign page.
+- assessment / intake flow: best when the prospect already has educational content that can become a practical inspection tool.
+
+Use shadcn/ui for forms, stateful controls, accordions, badges, and assessment UI where it improves quality. Do not use it as a generic skin over the same repeated layout.
 
 ## Rule
 
