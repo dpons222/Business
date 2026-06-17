@@ -190,7 +190,6 @@ public/
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.
 - `app/prospects/[slug]/assessment/page.tsx`: renders the secondary Charger assessment flow variant.
 - `app/prospects/[slug]/storm-response/page.tsx`: legacy direct URL for the Charger storm response landing page variant.
-- `components/ChargerVariantSwitcher.tsx`: internal switcher between Charger demo variants.
 - `components/RoofingLandingPage.tsx`: reusable landing page component.
 - `components/StormAssessmentDemo.tsx`: shadcn-powered assessment / intake demo for prospects where a tool-like flow is stronger.
 - `components/VariantLandingPage.tsx`: alternate design branch renderer.
@@ -231,3 +230,4 @@ npm run build
 - Do not reuse logos, images, reviews, certifications, or claims in a public/client deliverable without approval.
 - Keep prospect-specific data in `lib/prospects/` so future demos can reuse the same page component.
 - shadcn components are source files in this repo; adjust them deliberately rather than treating them as a black-box package.
+- Do not show internal variant switchers on client-facing prospect demo pages. Use direct internal URLs to compare alternates.

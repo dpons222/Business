@@ -38,7 +38,7 @@ Prepare Charger Roofing as the next high-priority outreach prospect for the roof
 - [x] Run final build and visual verification after the redesign.
 - [x] Post updated Issue #2 progress summary.
 - [x] Add Charger Storm Response Landing Page variant.
-- [x] Add switching/navigation between the two Charger variants.
+- [x] Keep both Charger variants available by direct URL.
 - [x] Update docs for the two-variant Charger setup.
 - [x] Rebuild and verify both Charger variant routes.
 - [x] Make Storm Response Landing Page the preferred Charger route.
@@ -68,7 +68,8 @@ Charger should be positioned as a stronger first outreach target than Final Cut 
 - Final production preview is running with `next start` at `http://127.0.0.1:3000/prospects/charger-roofing`.
 - `npm run build` also passed after adding `/prospects/charger-roofing/storm-response`.
 - Local preview returned HTTP 200 for `/prospects/charger-roofing`, `/prospects/charger-roofing/storm-response`, and `/prospects`.
-- Headless Edge screenshots were reviewed for the storm-response variant and the mobile variant switcher. A low-contrast active switcher state was found and fixed.
+- Headless Edge screenshots were reviewed for the storm-response variant and the mobile client view.
+- The visible variant switcher was removed from client-facing pages so the client only sees the selected demo direction.
 - The chosen Charger direction is now the Storm Response Landing Page. `/prospects/charger-roofing` is the preferred route, and `/prospects/charger-roofing/assessment` keeps the assessment flow available for internal comparison.
 - LAN preview was bound to `0.0.0.0` so the preferred landing page can be viewed from a phone on the same network.
 
