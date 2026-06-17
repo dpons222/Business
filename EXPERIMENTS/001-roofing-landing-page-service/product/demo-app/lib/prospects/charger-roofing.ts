@@ -48,7 +48,9 @@ export const chargerRoofing: ProspectData = {
   trustLine:
     "Serving San Antonio and surrounding areas with roof inspections, repairs, installation, and replacement support.",
   formReassurance:
-    "No pressure. Charger Roofing can contact you to confirm the inspection request, review what you are seeing, and explain practical next steps.",
+    "No pressure. Charger Roofing can call to confirm the inspection time, review what you are seeing, and answer questions before any repair decision is required.",
+  galleryEyebrow: "Storm damage examples",
+  galleryHeading: "See the roof concerns San Antonio homeowners ask Charger to inspect.",
   pageAngle:
     "Start with a free roof checkup so you know whether hail damage needs repair, replacement, or continued monitoring.",
   damageSigns: [
@@ -65,10 +67,9 @@ export const chargerRoofing: ProspectData = {
     "Detailed estimate if damage is found",
   ],
   process: [
-    "Request the free inspection",
-    "Confirm what happened and where the property is located",
-    "Get the roof checked for visible and hidden hail damage",
-    "Review repair, replacement, or claim-related next steps",
+    "Request inspection",
+    "Roof check + documentation",
+    "Review repair or claim next steps",
   ],
   services: [
     "Hail damage inspection",

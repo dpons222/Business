@@ -14,5 +14,5 @@ export const chargerStormResponseVariant = {
     "If you see hail marks, leaks, missing shingles, or exterior damage after severe weather, Charger Roofing can check the roof, document visible concerns, and explain practical next steps.",
   formTitle: "Request a Free Storm Damage Inspection",
   formNote:
-    "No pressure. Share what happened and Charger Roofing can follow up to confirm the roof check request.",
+    "No pressure. Charger Roofing can call to confirm the inspection time, review what you are seeing, and answer questions before any repair decision is required.",
 } satisfies DesignVariant;

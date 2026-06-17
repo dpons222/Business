@@ -6,7 +6,6 @@ import {
   Clock,
   ClipboardCheck,
   FileText,
-  Hammer,
   Home,
   Images,
   Phone,
@@ -46,6 +45,30 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
   const supportProof = "Focused storm damage review";
   const reviewHeading = prospect.rating ?? prospect.trustSignal ?? "Free inspection offer";
   const reviewSubline = prospect.reviewCount ? `Based on ${prospect.reviewCount}` : prospect.trustLine;
+  const serviceAreaProof = prospect.serviceArea
+    ? `Serving ${prospect.serviceArea}.`
+    : prospect.trustLine;
+  const galleryEyebrow = prospect.galleryEyebrow ?? "Project photos";
+  const galleryHeading =
+    prospect.galleryHeading ??
+    `See the kind of roof work homeowners trust ${prospect.shortName} to handle.`;
+  const processCards = [
+    {
+      icon: ClipboardCheck,
+      title: prospect.process[0] ?? "Request inspection",
+      body: `Share what happened and ${prospect.shortName} can confirm a practical inspection time.`,
+    },
+    {
+      icon: Camera,
+      title: prospect.process[1] ?? "Roof check + documentation",
+      body: "The roof check focuses on visible concerns, affected exterior areas, and documentation that makes the findings easier to understand.",
+    },
+    {
+      icon: FileText,
+      title: prospect.process[2] ?? "Review repair or claim next steps",
+      body: "Review repair, replacement, or claim-related options before deciding what happens next.",
+    },
+  ];
 
   return (
     <main
@@ -148,7 +171,7 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
               </span>
               <span>
                 <Home size={17} aria-hidden="true" />
-                <strong>{prospect.trustLine}</strong>
+                <strong>{serviceAreaProof}</strong>
               </span>
             </div>
           </div>
@@ -242,23 +265,7 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
           <h2>Know what happens before repair or replacement decisions.</h2>
         </div>
         <div className="brand-process">
-          {[
-            {
-              icon: ClipboardCheck,
-              title: "Request Consult",
-              body: "Schedule a free inspection so the team can analyze your needs and provide a quote.",
-            },
-            {
-              icon: FileText,
-              title: "Design Your Plan",
-              body: "Choose the best path for repair, replacement, materials, scheduling, and documentation.",
-            },
-            {
-              icon: Hammer,
-              title: "Build & Complete",
-              body: "The project is completed while you stay informed, safe, and comfortable.",
-            },
-          ].map((step) => {
+          {processCards.map((step) => {
             const Icon = step.icon;
 
             return (
@@ -289,8 +296,8 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
 
       <section id="gallery" className="brand-section gallery-section">
         <div className="section-heading">
-          <p className="eyebrow">Before & after images</p>
-          <h2>See the kind of roof work homeowners trust {prospect.shortName} to handle.</h2>
+          <p className="eyebrow">{galleryEyebrow}</p>
+          <h2>{galleryHeading}</h2>
         </div>
         <div className="gallery-grid">
           {prospect.projectImages.map((image) => (

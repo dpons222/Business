@@ -37,13 +37,15 @@ export function DemoLeadForm({ companyName, formTitle, formNote, ctaLabel }: Dem
           <input type="tel" name="phone" placeholder="Best phone number" />
         </label>
         <label>
-          Email Address
-          <input type="email" name="email" placeholder="Email address" />
+          <span>
+            Email Address <span className="optional-field">(optional)</span>
+          </span>
+          <input type="email" name="email" placeholder="Email address (optional)" />
         </label>
       </div>
       <label>
-        Property ZIP Code
-        <input type="text" name="zip" placeholder="Property ZIP code" />
+        Property Address or ZIP Code
+        <input type="text" name="property" placeholder="Property address or ZIP code" />
       </label>
       <label>
         What are you seeing?

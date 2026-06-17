@@ -816,6 +816,12 @@ details p {
   font-weight: 850;
 }
 
+.optional-field {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
 .hero-estimate-form input,
 .hero-estimate-form textarea {
   width: 100%;
@@ -1365,6 +1371,8 @@ main.landing-page {
   .site-header {
     position: static;
     grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px 14px 12px;
   }
 
   .header-actions {
@@ -1375,6 +1383,15 @@ main.landing-page {
   .header-actions .button-ghost {
     width: 100%;
     justify-content: center;
+  }
+
+  .brand-logo {
+    width: 84px;
+    height: 40px;
+  }
+
+  .site-header .button {
+    min-height: 40px;
   }
 
   .brand-hero {
@@ -1482,6 +1499,16 @@ main.landing-page {
   .insurance-band,
   .brand-final-cta {
     padding: 28px 20px;
+  }
+
+  .insurance-band {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .insurance-band .button {
+    width: 100%;
   }
 }
 
