@@ -4,15 +4,25 @@ Reusable local demo app for the roofing landing page experiment.
 
 ## Purpose
 
-This app renders a personalized storm damage / roof inspection landing page from a reusable component and prospect data object.
+This app renders personalized storm damage / roof inspection demos from reusable components and prospect data objects.
 
-Current demo:
+Current demos:
 
 ```text
 Final Cut Roofing
+Charger Roofing
 ```
 
-The root route now uses a brand-led version of the page that mirrors key Final Cut Roofing site elements: project photography, black/blue branding, estimate/inspection language, process sections, insurance-claim assistance, review proof, and photo gallery content.
+The root route currently uses the Final Cut Roofing page as the default demo. Prospect-specific routes render each company from separate data objects.
+
+Charger Roofing now has two internal demo directions:
+
+```text
+/prospects/charger-roofing
+/prospects/charger-roofing/assessment
+```
+
+The primary Charger direction is the traditional urgent storm response landing page. The secondary Charger direction is the storm damage assessment / inspection intake flow for internal comparison.
 
 ## Multi-Prospect Demo System
 
@@ -26,6 +36,7 @@ The reusable page structure should live in components, such as:
 
 ```text
 components/RoofingLandingPage.tsx
+components/StormAssessmentDemo.tsx
 ```
 
 That component controls the shared landing page layout:
@@ -87,10 +98,56 @@ Each prospect can then have its own page:
 ```text
 /prospects/final-cut-roofing
 /prospects/charger-roofing
+/prospects/charger-roofing/assessment
 /prospects/loa-construction
 ```
 
+Client-facing share URLs should use the clean root-level alias routes:
+
+```text
+/final-cut-roofing
+/charger-roofing
+/loa-construction
+```
+
+For Charger Roofing outreach, use:
+
+```text
+https://roof-check-preview.vercel.app/charger-roofing
+```
+
 This keeps each company's copy, images, colors, and contact information separate while allowing the shared design system to improve over time.
+
+## UI Convention
+
+Use the prospect's conversion problem to choose the demo format:
+
+```text
+Weak or broad page -> focused landing page
+Educational hail/storm content -> assessment or intake flow
+Strong trust proof but scattered CTA -> proof-first conversion page
+Urgent repair/emergency offer -> dispatch-style page
+```
+
+Do not default every prospect to the same hero/form/cards/FAQ structure.
+
+shadcn/ui is installed for accessible, reusable controls:
+
+```text
+Button
+Card
+Input
+Textarea
+Label
+Badge
+RadioGroup
+Checkbox
+Accordion
+Progress
+Separator
+```
+
+Use shadcn for controls and stateful UI. Keep prospect-specific visual branding in prospect data and page-level CSS variables.
 
 ## Design Branches
 
@@ -143,10 +200,15 @@ public/
 ```
 
 - `app/page.tsx`: renders the current prospect demo.
+- `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
 - `app/prospects/page.tsx`: lists prospect-specific demo pages.
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.
+- `app/prospects/[slug]/assessment/page.tsx`: renders the secondary Charger assessment flow variant.
+- `app/prospects/[slug]/storm-response/page.tsx`: legacy direct URL for the Charger storm response landing page variant.
 - `components/RoofingLandingPage.tsx`: reusable landing page component.
+- `components/StormAssessmentDemo.tsx`: shadcn-powered assessment / intake demo for prospects where a tool-like flow is stronger.
 - `components/VariantLandingPage.tsx`: alternate design branch renderer.
+- `components/ui/`: shadcn/ui primitives owned by this repo.
 - `lib/prospects/`: prospect types, registry, and one data file per prospect.
 - `lib/designVariants.ts`: template/variant configuration for internal comparison.
 - `app/globals.css`: visual styling.
@@ -165,6 +227,9 @@ Then open:
 http://localhost:3000
 http://localhost:3000/prospects
 http://localhost:3000/prospects/final-cut-roofing
+http://localhost:3000/prospects/charger-roofing
+http://localhost:3000/charger-roofing
+http://localhost:3000/prospects/charger-roofing/assessment
 ```
 
 ## Build
@@ -176,7 +241,9 @@ npm run build
 ## Notes
 
 - This is a demo, not a live client page.
-- This local demo uses public Final Cut Roofing logo/photo references for private visualization only.
+- This local demo uses public Final Cut Roofing and Charger Roofing logo/photo references for private visualization only.
 - Do not publish personalized demos publicly without permission.
 - Do not reuse logos, images, reviews, certifications, or claims in a public/client deliverable without approval.
 - Keep prospect-specific data in `lib/prospects/` so future demos can reuse the same page component.
+- shadcn components are source files in this repo; adjust them deliberately rather than treating them as a black-box package.
+- Do not show internal variant switchers on client-facing prospect demo pages. Use direct internal URLs to compare alternates.

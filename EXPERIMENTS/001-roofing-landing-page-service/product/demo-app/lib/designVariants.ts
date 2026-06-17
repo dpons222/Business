@@ -32,9 +32,9 @@ export const designVariants: DesignVariant[] = [
     summary:
       "A branded page that leads with the company's own roof photography, logo, phone number, proof, and inspection form.",
     eyebrow: "Frisco roof inspection",
-    headline: "Storm damage? Schedule a free roof inspection with Final Cut Roofing.",
+    headline: "Storm damage in Frisco? Schedule a free roof inspection.",
     subheadline:
-      "If hail, wind, or heavy rain hit Frisco or nearby DFW neighborhoods, Final Cut Roofing can inspect your roof, document visible damage, and explain clear next steps before any work begins.",
+      "If hail, wind, or heavy rain hit your neighborhood, Final Cut Roofing can inspect your roof, document visible damage, and explain clear next steps before any work begins.",
     formTitle: "Request Your Free Roof Inspection",
     formNote: "Final Cut Roofing is SSL secure. No downpayment. No hidden fees.",
   },

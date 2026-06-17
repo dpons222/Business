@@ -28,6 +28,7 @@ Timebox: 10 days
 - `marketing/first-outreach-batch.md`: first 10 prospects and audit notes.
 - `product/demo-app/`: reusable local demo app.
 - `prospects/final-cut-roofing/recommendation.md`: Final Cut Roofing-specific recommendation and pilot rationale.
+- `prospects/charger-roofing/recommendation.md`: Charger Roofing-specific recommendation and next outreach rationale.
 
 ## Folders
 

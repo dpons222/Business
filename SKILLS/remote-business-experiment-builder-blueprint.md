@@ -10,6 +10,16 @@ The goal is not to clone the roofing experiment exactly. The goal is to turn the
 idea -> scoring -> research -> experiment setup -> prospect workflow -> demo/product assets -> outreach -> tracking
 ```
 
+## Status
+
+The first system-wide Codex skill has been created at:
+
+```text
+C:\Users\Diego\.codex\skills\remote-business-experiment-builder\
+```
+
+This blueprint remains the project record for what the skill is based on and how it should evolve.
+
 ## Inventory Of What Exists
 
 ### Business Lab Structure

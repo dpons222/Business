@@ -1,10 +1,12 @@
+import { chargerRoofing } from "./charger-roofing";
 import { finalCutRoofing } from "./final-cut-roofing";
 import type { ProspectData } from "./types";
 
 export type { ProspectData, ProjectImage } from "./types";
+export { chargerRoofing } from "./charger-roofing";
 export { finalCutRoofing } from "./final-cut-roofing";
 
-export const prospects: ProspectData[] = [finalCutRoofing];
+export const prospects: ProspectData[] = [finalCutRoofing, chargerRoofing];
 
 export const defaultProspect = finalCutRoofing;
 

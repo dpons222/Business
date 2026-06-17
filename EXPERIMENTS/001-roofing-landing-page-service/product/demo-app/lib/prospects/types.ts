@@ -35,6 +35,8 @@ export type ProspectData = {
   subheadline: string;
   trustLine: string;
   formReassurance: string;
+  galleryEyebrow?: string;
+  galleryHeading?: string;
   pageAngle: string;
   damageSigns: string[];
   inspectionIncludes: string[];
