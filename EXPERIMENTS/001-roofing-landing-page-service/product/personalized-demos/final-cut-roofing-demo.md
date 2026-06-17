@@ -212,9 +212,23 @@ Suggested data:
   "recommendedCTA": "Schedule Free Roof Inspection",
   "rating": "Excellent",
   "reviewCount": "29 reviews",
+  "logoUrl": "/final-cut/logo.webp",
+  "heroImageUrl": "/final-cut/roofing-project.webp",
+  "brand": {
+    "primary": "#10AEE4",
+    "primaryDark": "#111827",
+    "accent": "#10AEE4",
+    "accentSoft": "#E7F8FE"
+  },
   "trustSignal": "",
   "sourceWebsite": "https://finalcutroofing.com/free-roof-inspection/"
 }
+```
+
+Local demo asset note:
+
+```text
+The coded local demo may use public logo/photo references and Final Cut-inspired colors for private visualization only. Do not publish or reuse these assets in a public/client deliverable without approval.
 ```
 
 ## Decision
@@ -225,4 +239,3 @@ This is a strong first coded-demo candidate because:
 - The opportunity is specific and easy to explain.
 - The demo can focus on form friction and clearer inspection conversion.
 - The personalized page can be made without deep custom strategy.
-

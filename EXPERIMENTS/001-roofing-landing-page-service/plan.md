@@ -62,6 +62,13 @@ Out of scope for this phase:
 - [x] Create first outreach batch audit.
 - [x] Create personalized demo template.
 - [x] Create Final Cut Roofing demo brief.
+- [x] Create reusable coded demo app.
+- [x] Create initial alternate UI/UX design branches.
+- [x] Refactor demo app into multi-prospect structure.
+- [x] Define three template categories with two internal design variants each.
+- [x] Promote design variants to full polished landing pages.
+- [x] Validate demo app build.
+- [x] Start local demo preview.
 - [ ] Send outreach.
 - [ ] Track replies.
 - [ ] Decide continue, change, or archive.
