@@ -37,6 +37,7 @@ At the beginning of each chat/session:
 - Parent/epic Issues are for tracking only; do not create a broad implementation branch for an epic unless explicitly approved.
 - Keep each branch scoped to the Issue acceptance criteria.
 - Link the branch, PR, and commits back to the Issue.
+- Once the Issue is complete, validated, and accurately documented, merge the corresponding branch into `main` through its PR.
 
 ## 5) Implementation Plan Files
 For large or multi-phase work, create an implementation plan in:
