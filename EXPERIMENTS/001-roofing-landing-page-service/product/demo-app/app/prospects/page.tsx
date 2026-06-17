@@ -18,16 +18,16 @@ export default function ProspectsIndexPage() {
     return [
       {
         href: "/prospects/charger-roofing",
-        label: `${prospect.companyName} - Assessment Flow`,
-        variantLabel: "Charger variant 1",
-        summary: "Storm damage assessment / inspection intake flow",
+        label: `${prospect.companyName} - Storm Response Landing Page`,
+        variantLabel: "Preferred Charger variant",
+        summary: "Traditional urgent storm response landing page",
         prospect,
       },
       {
-        href: "/prospects/charger-roofing/storm-response",
-        label: `${prospect.companyName} - Storm Response Landing Page`,
-        variantLabel: "Charger variant 2",
-        summary: "Traditional urgent storm response landing page",
+        href: "/prospects/charger-roofing/assessment",
+        label: `${prospect.companyName} - Assessment Flow`,
+        variantLabel: "Secondary Charger variant",
+        summary: "Storm damage assessment / inspection intake flow",
         prospect,
       },
     ];

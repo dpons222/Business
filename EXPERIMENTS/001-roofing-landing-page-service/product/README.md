@@ -27,8 +27,8 @@ The demo app now supports two demo conventions:
 
 Charger Roofing currently has both conventions available for internal comparison:
 
-- `/prospects/charger-roofing`: assessment / intake flow.
-- `/prospects/charger-roofing/storm-response`: urgent storm response landing page.
+- `/prospects/charger-roofing`: urgent storm response landing page.
+- `/prospects/charger-roofing/assessment`: assessment / intake flow.
 
 Use shadcn/ui for forms, stateful controls, accordions, badges, and assessment UI where it improves quality. Do not use it as a generic skin over the same repeated layout.
 

@@ -8,14 +8,14 @@ type ChargerVariantSwitcherProps = {
 
 const variants = [
   {
-    id: "assessment",
-    label: "Assessment Flow",
-    href: "/prospects/charger-roofing#assessment",
-  },
-  {
     id: "storm-response",
     label: "Storm Response Landing Page",
-    href: "/prospects/charger-roofing/storm-response",
+    href: "/prospects/charger-roofing",
+  },
+  {
+    id: "assessment",
+    label: "Assessment Flow",
+    href: "/prospects/charger-roofing/assessment#assessment",
   },
 ] as const;
 

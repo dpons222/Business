@@ -19,14 +19,24 @@ sourceWebsite: https://charger-roofing.com/roof-hail-damage-in-san-antonio-texas
 observedIssue: The page has the right free inspection offer, but the conversion path feels basic and trust proof is not prominent near the inspection CTA.
 recommendedCTA: Schedule Free Hail Damage Inspection
 primaryDemoRoute: /prospects/charger-roofing
-secondaryDemoRoute: /prospects/charger-roofing/storm-response
-recommendedVariant: Storm Damage Assessment / inspection intake flow
-alternateVariant: Charger Storm Response Landing Page
+secondaryDemoRoute: /prospects/charger-roofing/assessment
+recommendedVariant: Charger Storm Response Landing Page
+alternateVariant: Storm Damage Assessment / inspection intake flow
 ```
 
 ## Demo Direction
 
-Use a short assessment flow rather than another brochure-style page:
+Use a traditional urgent storm response landing page as the primary demo:
+
+```text
+1. Lead with San Antonio hail/wind urgency.
+2. Put the free inspection form above the fold.
+3. Use Charger red / charcoal branding.
+4. Keep the click-to-call path visible.
+5. Support the CTA with storm guidance, photos, FAQ, and reassurance.
+```
+
+Keep the assessment flow as the alternate internal variant:
 
 ```text
 1. What happened? Hail, leak, wind, or not sure.
@@ -35,15 +45,10 @@ Use a short assessment flow rather than another brochure-style page:
 4. Show the recommended next step and request the free inspection.
 ```
 
-Keep a second internal variant available for comparison:
+The alternate assessment variant is available at:
 
 ```text
-Charger Storm Response Landing Page
-- Traditional urgent landing page structure.
-- Red / charcoal Charger branding.
-- Direct hail and wind damage headline.
-- Free inspection form above the fold.
-- Storm guidance, service proof, photos, FAQ, and click-to-call CTA.
+/prospects/charger-roofing/assessment
 ```
 
 ## Demo Hero
@@ -84,4 +89,4 @@ I mocked the page direction around this headline:
 The main change I would make is turning the educational hail content into a quick inspection assessment, so storm visitors can identify what they are seeing and request the free roof checkup faster.
 ```
 
-Use the assessment flow as the recommended sendable demo unless the traditional landing page looks materially stronger after review.
+Use the storm response landing page as the recommended sendable demo.

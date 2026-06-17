@@ -12,8 +12,8 @@ Prospect-specific notes, recommendation, outreach material, and demo rationale f
 ## Demo URLs
 
 ```text
-Assessment Flow: /prospects/charger-roofing
-Storm Response Landing Page: /prospects/charger-roofing/storm-response
+Storm Response Landing Page: /prospects/charger-roofing
+Assessment Flow: /prospects/charger-roofing/assessment
 ```
 
 ## Current Status

@@ -19,10 +19,10 @@ Charger Roofing now has two internal demo directions:
 
 ```text
 /prospects/charger-roofing
-/prospects/charger-roofing/storm-response
+/prospects/charger-roofing/assessment
 ```
 
-The primary Charger direction is a distinct storm damage assessment / inspection intake flow. The secondary Charger direction is a traditional urgent storm response landing page for comparison.
+The primary Charger direction is the traditional urgent storm response landing page. The secondary Charger direction is the storm damage assessment / inspection intake flow for internal comparison.
 
 ## Multi-Prospect Demo System
 
@@ -98,7 +98,7 @@ Each prospect can then have its own page:
 ```text
 /prospects/final-cut-roofing
 /prospects/charger-roofing
-/prospects/charger-roofing/storm-response
+/prospects/charger-roofing/assessment
 /prospects/loa-construction
 ```
 
@@ -188,7 +188,8 @@ public/
 - `app/page.tsx`: renders the current prospect demo.
 - `app/prospects/page.tsx`: lists prospect-specific demo pages.
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.
-- `app/prospects/[slug]/storm-response/page.tsx`: renders the Charger storm response landing page variant.
+- `app/prospects/[slug]/assessment/page.tsx`: renders the secondary Charger assessment flow variant.
+- `app/prospects/[slug]/storm-response/page.tsx`: legacy direct URL for the Charger storm response landing page variant.
 - `components/ChargerVariantSwitcher.tsx`: internal switcher between Charger demo variants.
 - `components/RoofingLandingPage.tsx`: reusable landing page component.
 - `components/StormAssessmentDemo.tsx`: shadcn-powered assessment / intake demo for prospects where a tool-like flow is stronger.
@@ -213,7 +214,7 @@ http://localhost:3000
 http://localhost:3000/prospects
 http://localhost:3000/prospects/final-cut-roofing
 http://localhost:3000/prospects/charger-roofing
-http://localhost:3000/prospects/charger-roofing/storm-response
+http://localhost:3000/prospects/charger-roofing/assessment
 ```
 
 ## Build

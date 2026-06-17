@@ -9,20 +9,20 @@ This is not positioned as a full website replacement. It is positioned as a camp
 Recommended demo URLs:
 
 ```text
-Assessment Flow: /prospects/charger-roofing
-Storm Response Landing Page: /prospects/charger-roofing/storm-response
+Storm Response Landing Page: /prospects/charger-roofing
+Assessment Flow: /prospects/charger-roofing/assessment
 ```
 
 Recommended demo direction:
 
 ```text
-Storm Damage Assessment / inspection intake flow
+Charger Storm Response Landing Page
 ```
 
 Alternate internal direction:
 
 ```text
-Charger Storm Response Landing Page
+Storm Damage Assessment / inspection intake flow
 ```
 
 ## 1. Current Page Strengths

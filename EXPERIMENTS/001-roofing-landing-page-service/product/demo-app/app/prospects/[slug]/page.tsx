@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { ChargerStormResponseLandingPage } from "../../../components/ChargerStormResponseLandingPage";
 import { RoofingLandingPage } from "../../../components/RoofingLandingPage";
-import { StormAssessmentDemo } from "../../../components/StormAssessmentDemo";
 import { getProspectBySlug, getProspectStaticParams } from "../../../lib/prospects";
 
 type ProspectPageProps = {
@@ -39,7 +39,7 @@ export default async function ProspectPage({ params }: ProspectPageProps) {
   }
 
   if (prospect.slug === "charger-roofing") {
-    return <StormAssessmentDemo prospect={prospect} />;
+    return <ChargerStormResponseLandingPage prospect={prospect} />;
   }
 
   return <RoofingLandingPage prospect={prospect} />;

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ChargerStormResponseLandingPage } from "../../../../components/ChargerStormResponseLandingPage";
+import { StormAssessmentDemo } from "../../../../components/StormAssessmentDemo";
 import { getProspectBySlug } from "../../../../lib/prospects";
 
-type ChargerStormResponsePageProps = {
+type ChargerAssessmentPageProps = {
   params: Promise<{
     slug: string;
   }>;
@@ -15,7 +15,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({
   params,
-}: ChargerStormResponsePageProps): Promise<Metadata> {
+}: ChargerAssessmentPageProps): Promise<Metadata> {
   const { slug } = await params;
   const prospect = getProspectBySlug(slug);
 
@@ -26,14 +26,12 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${prospect.companyName} Storm Response Landing Page Demo`,
-    description: `Urgent storm response landing page variant for ${prospect.companyName}.`,
+    title: `${prospect.companyName} Assessment Flow Demo`,
+    description: `Storm damage assessment and inspection intake variant for ${prospect.companyName}.`,
   };
 }
 
-export default async function ChargerStormResponsePage({
-  params,
-}: ChargerStormResponsePageProps) {
+export default async function ChargerAssessmentPage({ params }: ChargerAssessmentPageProps) {
   const { slug } = await params;
   const prospect = getProspectBySlug(slug);
 
@@ -41,5 +39,5 @@ export default async function ChargerStormResponsePage({
     notFound();
   }
 
-  return <ChargerStormResponseLandingPage prospect={prospect} />;
+  return <StormAssessmentDemo prospect={prospect} />;
 }
