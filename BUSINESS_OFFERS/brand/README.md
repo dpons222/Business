@@ -17,9 +17,27 @@ The brand should feel:
 ## Current Positioning Draft
 
 ```text
-I build focused landing pages and tracking systems for local service businesses.
+DigiDap builds focused landing pages, tracking systems, and digital assets for local service businesses.
 
 Current focus: roofing companies that want a clearer post-storm inspection request path.
+```
+
+## Name Direction
+
+```text
+DigiDap
+```
+
+Rationale:
+
+- "Digi" signals digital assets and web systems.
+- "Dap" connects to the founder initials, D A P.
+- The name can support websites, automations, AI images, and practical digital assets without locking the business into one service.
+
+Current tone target:
+
+```text
+Modern utility, practical, direct, local-business friendly.
 ```
 
 ## Credibility Principles
