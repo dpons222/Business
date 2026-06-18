@@ -36,19 +36,20 @@ Do not build a broad multi-industry agency site yet.
 
 The first version should support the active roofing offer. Add pages for plumbing, dental, real estate, or other verticals only after those offers are actively tested.
 
-## Static Prototype
+## Static Site
 
-The first browser-viewable DigiDap prototype lives here:
+The first browser-viewable DigiDap site lives here:
 
 ```text
 site/index.html
 ```
 
-Open it directly in a browser to compare the two current brand palettes:
+Open it directly in a browser.
+
+Selected palette:
 
 ```text
 Signal Blue: deep ink, signal blue, clean white, soft gray, warm accent
-Steel Copper: charcoal, steel blue, soft cloud, copper, white
 ```
 
-This prototype is for brand direction review before building a deployable public site.
+This static version is the plain first credibility site before building a deployable public app.
