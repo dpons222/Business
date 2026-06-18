@@ -34,17 +34,19 @@ a {
 }
 
 .site-header {
-  position: sticky;
+  position: absolute;
   z-index: 10;
   top: 0;
+  right: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 16px clamp(18px, 5vw, 56px);
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(16px);
+  background: transparent;
+  color: var(--paper);
 }
 
 .brand-lockup,
@@ -69,22 +71,24 @@ a {
   width: 36px;
   height: 36px;
   place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.42);
   border-radius: 8px;
-  background: var(--ink);
+  background: linear-gradient(135deg, var(--accent), var(--primary));
   color: var(--paper);
   font-weight: 950;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
 }
 
 .site-nav {
   align-items: center;
   gap: 22px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.82);
   font-size: 0.92rem;
   font-weight: 800;
 }
 
 .site-nav a:hover {
-  color: var(--primary);
+  color: var(--paper);
 }
 
 .section-inner {
@@ -93,16 +97,37 @@ a {
 }
 
 .hero-section {
-  background: linear-gradient(180deg, var(--cloud), var(--paper));
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(8, 14, 25, 0.94), rgba(13, 28, 45, 0.74), rgba(13, 49, 78, 0.56)),
+    radial-gradient(circle at 72% 24%, rgba(229, 107, 47, 0.42), transparent 28%),
+    radial-gradient(circle at 82% 76%, rgba(18, 103, 163, 0.76), transparent 34%),
+    linear-gradient(135deg, #090f19, #12243a 52%, #123f63);
+  color: var(--paper);
+}
+
+.hero-section::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .hero-layout {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(320px, 420px);
   gap: 56px;
   align-items: center;
-  min-height: 76vh;
-  padding: 88px 0;
+  min-height: 92vh;
+  padding: 132px 0 76px;
 }
 
 .eyebrow {
@@ -156,6 +181,7 @@ h3 {
 .hero-copy > p {
   max-width: 680px;
   margin-bottom: 28px;
+  color: rgba(255, 255, 255, 0.84);
   font-size: 1.18rem;
 }
 
@@ -176,18 +202,19 @@ h3 {
 }
 
 .primary-button {
-  background: var(--primary);
+  background: var(--accent);
   color: var(--paper);
+  box-shadow: 0 18px 44px rgba(229, 107, 47, 0.26);
 }
 
 .primary-button:hover {
-  background: #0f5688;
+  background: #cf5d28;
 }
 
 .secondary-button {
-  border-color: var(--line);
-  background: var(--paper);
-  color: var(--ink);
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--paper);
 }
 
 .service-snapshot,
@@ -202,13 +229,18 @@ h3 {
 
 .service-snapshot {
   overflow: hidden;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--paper);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.26);
+  backdrop-filter: blur(18px);
 }
 
 .snapshot-header {
   gap: 8px;
   padding: 14px 16px;
-  border-bottom: 1px solid var(--line);
-  background: var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .snapshot-header span {
@@ -247,16 +279,17 @@ h3 {
 .snapshot-body li {
   border-left: 4px solid var(--primary);
   padding-left: 12px;
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.78);
   font-weight: 750;
 }
 
 .plain-section {
   padding: 84px 0;
+  background: var(--paper);
 }
 
 .muted-section {
-  background: var(--cloud);
+  background: linear-gradient(90deg, #dcebf4, #eef6fb 58%, #ffffff);
 }
 
 .section-heading {
@@ -325,7 +358,9 @@ h3 {
 }
 
 .example-card {
-  background: var(--ink);
+  background:
+    linear-gradient(135deg, rgba(18, 103, 163, 0.28), transparent),
+    var(--ink);
   color: var(--paper);
 }
 
@@ -377,7 +412,7 @@ h3 {
 
   .hero-layout {
     min-height: auto;
-    padding: 68px 0;
+    padding: 112px 0 68px;
   }
 
   .plain-section,
