@@ -40,6 +40,16 @@ Current tone target:
 Modern utility, practical, direct, local-business friendly.
 ```
 
+## Selected Palette
+
+```text
+Deep ink: #172033
+Signal blue: #1267A3
+Clean white: #FFFFFF
+Soft gray: #EEF3F7
+Warm accent: #E56B2F
+```
+
 ## Credibility Principles
 
 - Use real demos and clear explanations instead of inflated claims.
