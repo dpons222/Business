@@ -46,6 +46,12 @@ site/index.html
 
 Open it directly in a browser.
 
+Future improvements for the public site are tracked here:
+
+```text
+roadmap.md
+```
+
 Selected palette:
 
 ```text
