@@ -22,7 +22,7 @@
       </a>
       <nav class="site-nav" aria-label="Primary navigation">
         <a href="#services">Services</a>
-        <a href="#work">Example</a>
+        <a href="#work">Sample</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
@@ -38,7 +38,7 @@
               a clear page, faster response path, and simple tracking system.
             </p>
             <div class="hero-actions">
-              <a class="button primary-button" href="mailto:digidaps@gmail.com?subject=Sample%20concept%20request">Request a sample concept</a>
+              <a class="button primary-button" href="#sample-form">Request a sample concept</a>
               <a class="button secondary-button" href="#services">View services</a>
             </div>
           </div>
@@ -109,18 +109,54 @@
               If your business has a clear offer or workflow, I can create a lightweight sample
               concept so you can see the direction before deciding on a paid pilot.
             </p>
-            <a class="button primary-button" href="mailto:digidaps@gmail.com?subject=Sample%20concept%20request">
-              Request a sample concept
-            </a>
           </div>
-          <div class="example-card">
-            <p class="example-label">Sample concept focus</p>
-            <h3>A sample concept starts with one public offer or workflow from your website.</h3>
-            <p>
-              The goal is to show the structure and direction, not to publish a full custom
-              page before there is a real pilot.
-            </p>
-          </div>
+          <form
+            class="sample-form"
+            id="sample-form"
+            action="mailto:digidaps@gmail.com?subject=Sample%20concept%20request"
+            method="post"
+            enctype="text/plain"
+          >
+            <div class="form-heading">
+              <p class="example-label">Sample concept request</p>
+              <h3>Tell me what you want to improve.</h3>
+            </div>
+            <div class="form-grid">
+              <label>
+                <span>Name</span>
+                <input name="name" type="text" autocomplete="name" required />
+              </label>
+              <label>
+                <span>Business name</span>
+                <input name="business_name" type="text" autocomplete="organization" required />
+              </label>
+            </div>
+            <label>
+              <span>Website</span>
+              <input name="website" type="url" autocomplete="url" placeholder="https://example.com" required />
+            </label>
+            <div class="form-grid">
+              <label>
+                <span>Email</span>
+                <input name="email" type="email" autocomplete="email" required />
+              </label>
+              <label>
+                <span>Phone <em>optional</em></span>
+                <input name="phone" type="tel" autocomplete="tel" />
+              </label>
+            </div>
+            <label>
+              <span>What do you want to improve?</span>
+              <textarea
+                name="request"
+                rows="5"
+                placeholder="Example: a clearer service page, faster lead response, follow-up automation, or tracking."
+                required
+              ></textarea>
+            </label>
+            <input name="source_page" type="hidden" value="digidap-homepage" />
+            <button class="button primary-button" type="submit">Request sample concept</button>
+          </form>
         </div>
       </section>
 

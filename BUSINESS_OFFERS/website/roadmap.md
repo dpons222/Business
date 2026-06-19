@@ -15,9 +15,14 @@ DigiDap helps local service businesses turn one offer or customer workflow into 
 - [x] Avoid naming implementation tools unless a client needs technical detail.
 - [x] Offer a private sample concept instead of exposing prospect demos publicly.
 - [x] Provide a direct email contact path.
+- [x] Add basic sample concept request form UI.
 
 ## Near-Term Improvements
 
+- [ ] Connect the sample concept form to an n8n webhook.
+- [ ] Store form submissions in a Supabase `leads` table.
+- [ ] Send an email notification when a new lead is submitted.
+- [ ] Add basic spam protection, such as a honeypot field or rate limiting.
 - [ ] Add a small founder photo or personal credibility block when there is a suitable image.
 - [ ] Add one short example summary after a real client or approved public demo exists.
 - [ ] Add a roofing-specific page if roofing outreach continues beyond the first batch.
