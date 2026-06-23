@@ -44,7 +44,17 @@ The first browser-viewable DigiDap site lives here:
 site/index.html
 ```
 
-Open it directly in a browser.
+Production Vercel deployment:
+
+```text
+https://digidap.vercel.app
+```
+
+Vercel project:
+
+```text
+digidap
+```
 
 Future improvements for the public site are tracked here:
 
@@ -58,4 +68,4 @@ Selected palette:
 Signal Blue: deep ink, signal blue, clean white, soft gray, warm accent
 ```
 
-This static version is the plain first credibility site before building a deployable public app.
+This static version is the plain first credibility site. It is currently deployed as a static Vercel project.

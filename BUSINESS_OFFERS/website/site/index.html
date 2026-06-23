@@ -113,9 +113,8 @@
           <form
             class="sample-form"
             id="sample-form"
-            action="mailto:digidaps@gmail.com?subject=Sample%20concept%20request"
+            action="https://digidap.dpons.duckdns.org/webhook/digidap-sample-concept"
             method="post"
-            enctype="text/plain"
           >
             <div class="form-heading">
               <p class="example-label">Sample concept request</p>
@@ -154,8 +153,14 @@
                 required
               ></textarea>
             </label>
+            <label class="form-honeypot" aria-hidden="true">
+              <span>Company website</span>
+              <input name="company_website" type="text" tabindex="-1" autocomplete="off" />
+            </label>
             <input name="source_page" type="hidden" value="digidap-homepage" />
+            <input name="vertical" type="hidden" value="general" />
             <button class="button primary-button" type="submit">Request sample concept</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </section>
@@ -179,5 +184,64 @@
         </div>
       </section>
     </main>
+    <script>
+      const sampleForm = document.querySelector("#sample-form");
+
+      if (sampleForm) {
+        const status = sampleForm.querySelector(".form-status");
+        const submitButton = sampleForm.querySelector('button[type="submit"]');
+
+        sampleForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const formData = new FormData(sampleForm);
+          const honeypot = String(formData.get("company_website") || "").trim();
+
+          if (honeypot) {
+            sampleForm.reset();
+            status.textContent = "Thanks. I received your request and will review it soon.";
+            status.className = "form-status success";
+            return;
+          }
+
+          const payload = {
+            name: String(formData.get("name") || "").trim(),
+            business_name: String(formData.get("business_name") || "").trim(),
+            website: String(formData.get("website") || "").trim(),
+            email: String(formData.get("email") || "").trim(),
+            phone: String(formData.get("phone") || "").trim(),
+            request: String(formData.get("request") || "").trim(),
+            source_page: String(formData.get("source_page") || "digidap-homepage"),
+            vertical: String(formData.get("vertical") || "general"),
+          };
+
+          status.textContent = "Sending request...";
+          status.className = "form-status";
+          submitButton.disabled = true;
+
+          try {
+            const body = new URLSearchParams(payload);
+            const response = await fetch(sampleForm.action, {
+              method: "POST",
+              body,
+            });
+
+            if (!response.ok) {
+              throw new Error("Request failed");
+            }
+
+            sampleForm.reset();
+            status.textContent = "Thanks. I received your request and will review it soon.";
+            status.className = "form-status success";
+          } catch (error) {
+            status.textContent =
+              "Something went wrong. Please email digidaps@gmail.com and I will review it directly.";
+            status.className = "form-status error";
+          } finally {
+            submitButton.disabled = false;
+          }
+        });
+      }
+    </script>
   </body>
 </html>

@@ -387,6 +387,35 @@ h3 {
   width: 100%;
 }
 
+.sample-form .button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.form-honeypot {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form-status {
+  min-height: 24px;
+  margin: -4px 0 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  font-weight: 800;
+}
+
+.form-status.success {
+  color: #1d7a4d;
+}
+
+.form-status.error {
+  color: #b7352c;
+}
+
 .offer-box {
   border-top: 6px solid var(--accent);
 }
