@@ -21,9 +21,10 @@ Assessment Flow: /prospects/charger-roofing/assessment
 ## Current Status
 
 ```text
-Status: Contacted
+Status: Contact form sent
 Priority: High
-Date contacted: 2026-06-23 2:09 PM ET
-Follow-up 1 due: 2026-06-29 2:09 PM ET if no reply
-Recommended next action: monitor for reply; send follow-up 1 on or after the due date if there is no response
+Date contacted: 2026-06-23 2:09 PM ET by email; 2026-06-23 4:53 PM ET by contact form
+Email delivery issue: Gmail returned 550 5.7.520 because the recipient organization does not allow external forwarding.
+Follow-up 1 due: 2026-06-30 4:53 PM ET if no reply
+Recommended next action: monitor for reply; follow up on or after June 30, 2026 if there is no response.
 ```

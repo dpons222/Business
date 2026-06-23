@@ -51,7 +51,9 @@ Diego
 - Credibility link: `https://digidap.vercel.app`
 - Send method: manual email or website contact form.
 - Sent: 2026-06-23 2:09 PM ET.
-- Follow-up 1: due 2026-06-29 2:09 PM ET if there is no reply.
+- Delivery issue: Gmail returned `550 5.7.520`; recipient organization does not allow external forwarding.
+- Website contact form sent: 2026-06-23 4:53 PM ET.
+- Follow-up 1: due 2026-06-30 4:53 PM ET if there is no reply.
 - Follow-up 2: send only if the first follow-up gets no reply and the prospect still looks worth pursuing.
 - Reply handling: mark as `Positive reply`, `Neutral reply`, `Negative reply`, or `Call booked`.
 
@@ -61,6 +63,8 @@ Diego
 - DigiDap credibility URL: `https://digidap.vercel.app`.
 - Internal dashboard route: `/dashboard`.
 - Initial email sent 2026-06-23 at 2:09 PM ET.
-- Use the follow-up only if there is no response by the follow-up due date.
+- Initial email produced a delivery failure. This may be a forwarding configuration issue, not proof that the public email address is fake.
+- Contact form message sent 2026-06-23 at 4:53 PM ET using the shorter contact-form version.
+- Next recommended contact route if no reply: follow up after 2026-06-30 or call (210) 305-7663.
 - Log the send date, reply status, and next follow-up date in the prospect tracker.
 - Do not imply Charger Roofing requested or approved the demo unless they reply positively.

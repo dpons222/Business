@@ -7,6 +7,8 @@ Use this tracker for the first 30 roofing prospects.
 ```text
 Not contacted
 Contacted
+Delivery issue
+Contact form sent
 Follow-up 1 sent
 Follow-up 2 sent
 Positive reply
@@ -21,7 +23,7 @@ Not a fit
 
 | # | Business | Website | City/State | Contact Method | Reviews | Page Reviewed | Observed Issue | Outreach Angle | Date Contacted | Follow-Up 1 | Follow-Up 2 | Reply | Status | Notes |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | Charger Roofing | https://charger-roofing.com/roof-hail-damage-in-san-antonio-texas/ | San Antonio, TX | Sales@Charger-Roofing.com | Not captured | San Antonio hail damage page | Has the right free inspection offer, but the request path can be made more focused and easier to act on after a storm. | Sent focused hail inspection landing page demo: https://roof-check-preview.vercel.app/charger-roofing | 2026-06-23 2:09 PM ET | 2026-06-29 2:09 PM ET | Optional only if still worth pursuing |  | Contacted | Initial outreach sent. Do not imply approval/requested demo in follow-up. |
+| 1 | Charger Roofing | https://charger-roofing.com/roof-hail-damage-in-san-antonio-texas/ | San Antonio, TX | Website contact form sent; Sales@Charger-Roofing.com had delivery issue | Not captured | San Antonio hail damage page | Has the right free inspection offer, but the request path can be made more focused and easier to act on after a storm. | Sent focused hail inspection landing page demo: https://roof-check-preview.vercel.app/charger-roofing | 2026-06-23 4:53 PM ET via contact form | 2026-06-30 4:53 PM ET | Optional only if still worth pursuing | Email bounced / forwarding blocked; contact form sent | Contact form sent | Initial email produced Gmail 550 5.7.520 forwarding-blocked bounce. Short contact-form message sent afterward through https://charger-roofing.com/contact/. |
 | 2 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
 | 3 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
 | 4 |  |  |  |  |  |  |  |  |  |  |  |  | Not contacted |  |
