@@ -29,6 +29,7 @@ Timebox: 10 days
 - `product/demo-app/`: reusable local demo app.
 - `prospects/final-cut-roofing/recommendation.md`: Final Cut Roofing-specific recommendation and pilot rationale.
 - `prospects/charger-roofing/recommendation.md`: Charger Roofing-specific recommendation and next outreach rationale.
+- `prospects/loa-construction/recommendation.md`: LOA Construction-specific recommendation and next outreach rationale.
 
 ## Folders
 
