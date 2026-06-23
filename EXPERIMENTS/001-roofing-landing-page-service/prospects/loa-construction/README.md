@@ -9,3 +9,9 @@ Prospect-specific notes, recommendation, outreach material, and tracking rationa
 - `outreach-email.md`: initial email and follow-up template for contacting LOA Construction.
 - `campaign-tracking-strategy.md`: how LOA could test and measure a focused landing page.
 
+## Demo Routes
+
+```text
+/prospects/loa-construction
+/loa-construction
+```

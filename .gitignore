@@ -18,5 +18,6 @@ Thumbs.db
 
 # Generated screenshots / mistaken temp expansion
 %TEMP%/
+.verification/
 
 .vercel

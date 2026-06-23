@@ -16,6 +16,7 @@ Use this folder for the landing page product strategy and demo planning.
 
 - `personalized-demos/final-cut-roofing-demo.md`: first coded demo brief.
 - `personalized-demos/charger-roofing-demo.md`: Charger Roofing high-priority prospect brief.
+- LOA Construction is implemented directly in the reusable demo app as a light prospect data object.
 
 See `demo-app/README.md` for the multi-prospect demo system approach: one reusable app, shared page components, and separate prospect data/assets for each business.
 The demo app also documents the internal template/variant set used to choose one best-fit demo direction per prospect. Variants should be complete, polished landing pages rather than simplified previews.
@@ -29,6 +30,11 @@ Charger Roofing currently has both conventions available for internal comparison
 
 - `/prospects/charger-roofing`: urgent storm response landing page.
 - `/prospects/charger-roofing/assessment`: assessment / intake flow.
+
+LOA Construction uses the focused landing page convention:
+
+- `/prospects/loa-construction`: Austin hail inspection landing page.
+- `/loa-construction`: clean client-facing alias if deployed.
 
 Use shadcn/ui for forms, stateful controls, accordions, badges, and assessment UI where it improves quality. Do not use it as a generic skin over the same repeated layout.
 

@@ -11,6 +11,7 @@ Current demos:
 ```text
 Final Cut Roofing
 Charger Roofing
+LOA Construction
 ```
 
 The root route now renders a neutral preview-link-required page so a prospect cannot remove their slug and see the internal selector. The internal preview dashboard lives at `/dashboard`. Prospect-specific routes render each company from separate data objects.
@@ -114,6 +115,13 @@ For Charger Roofing outreach, use:
 
 ```text
 https://roof-check-preview.vercel.app/charger-roofing
+```
+
+For LOA Construction review, use:
+
+```text
+/prospects/loa-construction
+/loa-construction
 ```
 
 This keeps each company's copy, images, colors, and contact information separate while allowing the shared design system to improve over time.
@@ -230,7 +238,9 @@ http://localhost:3000/dashboard
 http://localhost:3000/prospects
 http://localhost:3000/prospects/final-cut-roofing
 http://localhost:3000/prospects/charger-roofing
+http://localhost:3000/prospects/loa-construction
 http://localhost:3000/charger-roofing
+http://localhost:3000/loa-construction
 http://localhost:3000/prospects/charger-roofing/assessment
 ```
 
@@ -243,7 +253,7 @@ npm run build
 ## Notes
 
 - This is a demo, not a live client page.
-- This local demo uses public Final Cut Roofing and Charger Roofing logo/photo references for private visualization only.
+- This local demo uses public Final Cut Roofing, Charger Roofing, and LOA Construction logo/photo references for private visualization only.
 - Do not publish personalized demos publicly without permission.
 - Do not reuse logos, images, reviews, certifications, or claims in a public/client deliverable without approval.
 - Keep prospect-specific data in `lib/prospects/` so future demos can reuse the same page component.
