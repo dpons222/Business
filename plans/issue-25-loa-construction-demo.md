@@ -66,13 +66,13 @@ Prototype Phase D - Functional Prototype
 - [x] Update app/demo README files and experiment navigation as needed.
 - [x] Update LOA outreach email with the selected demo route or final URL.
 - [x] Update local tracker docs if status/demo route changes.
-- [ ] Update Supabase `public.prospects` if a public demo URL is finalized.
+- [x] Update Supabase `public.prospects` if a public demo URL is finalized.
 - [x] Run build validation.
 - [x] Start local preview and verify `/prospects/loa-construction`.
 - [x] Verify `/loa-construction` if supported by the existing clean URL route.
 - [x] Check that existing Final Cut and Charger routes still render.
 - [x] Fix any mobile/layout/text overflow issues found during preview.
-- [ ] Commit implementation changes with Issue #25 reference.
+- [x] Commit implementation changes with Issue #25 reference.
 - [ ] Push branch and prepare PR if requested by the workflow/user.
 - [ ] Post Issue #25 progress/session-end update with evidence.
 
@@ -119,6 +119,14 @@ Prototype Phase D - Functional Prototype
 - `agent-browser` was unavailable in this shell, so visual verification used headless Edge screenshots.
 - Desktop and mobile first-viewport screenshots were reviewed. LOA branding, headline, CTA, proof row, and form rendered coherently.
 - Edge printed a Chromium task-manager warning during screenshot capture; no Next runtime errors appeared in the app log.
+- Vercel preview deployed successfully:
+  - `https://roof-check-preview-le93cf61o-dpons222-9388s-projects.vercel.app`
+  - Deployment ID: `dpl_texziqvNuLKNZP8g7K7zKwmxFSAo`
+- Preview HTTP 200 checks passed for:
+  - `https://roof-check-preview-le93cf61o-dpons222-9388s-projects.vercel.app/prospects/loa-construction`
+  - `https://roof-check-preview-le93cf61o-dpons222-9388s-projects.vercel.app/loa-construction`
+- Vercel build completed successfully but reported an existing config warning: `outputFileTracingRoot` and `turbopack.root` are both set and should have the same value.
+- Supabase `public.prospects` was updated for `loa-construction` with the preview demo URL while keeping status as `not_contacted`.
 
 ## Risk Notes
 
