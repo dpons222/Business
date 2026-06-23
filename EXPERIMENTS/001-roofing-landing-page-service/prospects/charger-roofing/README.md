@@ -21,7 +21,9 @@ Assessment Flow: /prospects/charger-roofing/assessment
 ## Current Status
 
 ```text
-Status: Not contacted
+Status: Contacted
 Priority: High
-Recommended next action: manually send the initial outreach email and log the send date in the prospect tracker
+Date contacted: 2026-06-23 2:09 PM ET
+Follow-up 1 due: 2026-06-29 2:09 PM ET if no reply
+Recommended next action: monitor for reply; send follow-up 1 on or after the due date if there is no response
 ```
