@@ -73,7 +73,7 @@ Prototype Phase D - Functional Prototype
 - [x] Check that existing Final Cut and Charger routes still render.
 - [x] Fix any mobile/layout/text overflow issues found during preview.
 - [x] Commit implementation changes with Issue #25 reference.
-- [ ] Push branch and prepare PR if requested by the workflow/user.
+- [x] Push branch and prepare PR if requested by the workflow/user.
 - [ ] Post Issue #25 progress/session-end update with evidence.
 
 ## Working Assumptions
@@ -127,6 +127,10 @@ Prototype Phase D - Functional Prototype
   - `https://roof-check-preview-le93cf61o-dpons222-9388s-projects.vercel.app/loa-construction`
 - Vercel build completed successfully but reported an existing config warning: `outputFileTracingRoot` and `turbopack.root` are both set and should have the same value.
 - Supabase `public.prospects` was updated for `loa-construction` with the preview demo URL while keeping status as `not_contacted`.
+- Branch pushed:
+  - `origin/issue-25-loa-construction-demo`
+- Draft PR opened:
+  - https://github.com/dpons222/Business/pull/26
 
 ## Risk Notes
 
