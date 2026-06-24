@@ -1,3 +1,4 @@
+import { brotherhoodRoofing } from "./brotherhood-roofing";
 import { chargerRoofing } from "./charger-roofing";
 import { edpRoofing } from "./edp-roofing";
 import { finalCutRoofing } from "./final-cut-roofing";
@@ -9,6 +10,7 @@ import { stormvets } from "./stormvets";
 import type { ProspectData } from "./types";
 
 export type { ProspectData, ProjectImage } from "./types";
+export { brotherhoodRoofing } from "./brotherhood-roofing";
 export { chargerRoofing } from "./charger-roofing";
 export { edpRoofing } from "./edp-roofing";
 export { finalCutRoofing } from "./final-cut-roofing";
@@ -24,6 +26,7 @@ export const prospects: ProspectData[] = [
   loaConstruction,
   rivertopRoofing,
   stormvets,
+  brotherhoodRoofing,
   integrityFirstRoofingConstruction,
   edpRoofing,
   properRoofing,

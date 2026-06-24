@@ -46,6 +46,11 @@ StormVets uses the focused landing page convention:
 - `/prospects/stormvets`: Frisco storm inspection landing page.
 - `/stormvets`: clean client-facing alias if deployed.
 
+Brotherhood Roofing uses the focused landing page convention:
+
+- `/prospects/brotherhood-roofing`: DFW hail and storm inspection landing page.
+- `/brotherhood-roofing`: clean client-facing alias if deployed.
+
 Integrity First Roofing & Construction uses the focused landing page convention:
 
 - `/prospects/integrity-first`: Frisco storm damage campaign page.

@@ -77,28 +77,38 @@ DFW hail and storm damage assessment page with faster free-inspection path.
 
 - [x] GitHub Issue #30 created.
 - [x] Implementation plan created in `plans/issue-30-brotherhood-roofing.md`.
-- [ ] Post session-start comment when implementation begins.
+- [x] Post session-start comment when implementation begins.
 
 ## Future Implementation Checklist
 
-- [ ] Create/switch to branch `issue-30-brotherhood-roofing`.
-- [ ] Recheck live Brotherhood page.
-- [ ] Create `prospects/brotherhood-roofing/` docs.
-- [ ] Add `lib/prospects/brotherhood-roofing.ts`.
-- [ ] Register Brotherhood in `lib/prospects/index.ts`.
-- [ ] Update app/product README files.
-- [ ] Draft outreach email and contact form version.
-- [ ] Run build validation.
-- [ ] Verify local and preview routes.
-- [ ] Update Supabase `public.prospects`.
-- [ ] Commit, push, open PR, and link Issue #30.
+- [x] Create/switch to branch `issue-30-brotherhood-roofing`.
+- [x] Recheck live Brotherhood page.
+- [x] Create `prospects/brotherhood-roofing/` docs.
+- [x] Add `lib/prospects/brotherhood-roofing.ts`.
+- [x] Register Brotherhood in `lib/prospects/index.ts`.
+- [x] Update app/product README files.
+- [x] Draft outreach email and contact form version.
+- [x] Run build validation.
+- [x] Verify local and preview routes.
+- [x] Update Supabase `public.prospects`.
+- [x] Commit, push, open PR, and link Issue #30.
 
 ## Validation Plan
 
-- Build passes.
-- Brotherhood routes return HTTP 200.
-- Existing prospect routes still build.
-- Outreach copy stays respectful and specific.
+- [x] Build passes with `npm run build`.
+- [x] `/prospects/brotherhood-roofing` returns HTTP 200 locally.
+- [x] `/brotherhood-roofing` returns HTTP 200 locally.
+- [x] Existing prospect routes still return HTTP 200 locally.
+- [x] Preview `/prospects/brotherhood-roofing` returns HTTP 200.
+- [x] Preview `/brotherhood-roofing` returns HTTP 200.
+- [x] Supabase `public.prospects` has the Brotherhood preview URL while status remains `not_contacted`.
+- [x] Outreach copy stays respectful and specific.
+
+## Preview URL
+
+```text
+https://roof-check-preview-6m7uadf9j-dpons222-9388s-projects.vercel.app/brotherhood-roofing
+```
 
 ## Risks
 
