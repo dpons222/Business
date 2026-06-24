@@ -86,7 +86,7 @@ Current branch starts from `issue-34-proper-roofing`, which already includes Int
 - [x] Deploy public production build.
 - [x] Verify all public clean routes return HTTP 200.
 - [x] Update Supabase prospect `demo_url` values for stale preview links.
-- [ ] Update Issue #43 with deployment evidence.
+- [x] Update Issue #43 with deployment evidence.
 - [x] Commit and push.
 - [x] Open draft PR.
 
