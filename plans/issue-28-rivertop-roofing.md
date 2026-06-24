@@ -75,29 +75,39 @@ Free Plano roof inspection after hail, wind, or storm damage.
 
 - [x] GitHub Issue #28 created.
 - [x] Implementation plan created in `plans/issue-28-rivertop-roofing.md`.
-- [ ] Post session-start comment when implementation begins.
+- [x] Post session-start comment when implementation begins.
 
 ## Future Implementation Checklist
 
-- [ ] Create/switch to branch `issue-28-rivertop-roofing`.
-- [ ] Recheck live Rivertop page.
-- [ ] Create `prospects/rivertop-roofing/` docs.
-- [ ] Add `lib/prospects/rivertop-roofing.ts`.
-- [ ] Register Rivertop in `lib/prospects/index.ts`.
-- [ ] Update demo app README and product README.
-- [ ] Create/update outreach email with selected demo URL.
-- [ ] Run `npm run build`.
-- [ ] Verify local routes and existing prospect routes.
-- [ ] Deploy preview if needed.
-- [ ] Update Supabase `public.prospects`.
-- [ ] Commit, push, open PR, and link Issue #28.
+- [x] Create/switch to branch `issue-28-rivertop-roofing`.
+- [x] Recheck live Rivertop page.
+- [x] Create `prospects/rivertop-roofing/` docs.
+- [x] Add `lib/prospects/rivertop-roofing.ts`.
+- [x] Register Rivertop in `lib/prospects/index.ts`.
+- [x] Update demo app README and product README.
+- [x] Create/update outreach email with selected demo URL.
+- [x] Run `npm run build`.
+- [x] Verify local routes and existing prospect routes.
+- [x] Deploy preview if needed.
+- [x] Update Supabase `public.prospects`.
+- [x] Commit, push, open PR, and link Issue #28.
 
 ## Validation Plan
 
-- Build passes.
-- `/prospects/rivertop-roofing` returns HTTP 200.
-- `/rivertop-roofing` returns HTTP 200 if the clean alias route supports it.
-- Demo copy stays storm-inspection-specific and conservative.
+- [x] Build passes with `npm run build`.
+- [x] `/prospects/rivertop-roofing` returns HTTP 200 locally.
+- [x] `/rivertop-roofing` returns HTTP 200 locally.
+- [x] Existing prospect routes still return HTTP 200 locally.
+- [x] Preview `/prospects/rivertop-roofing` returns HTTP 200.
+- [x] Preview `/rivertop-roofing` returns HTTP 200.
+- [x] Supabase `public.prospects` has the Rivertop preview URL while status remains `not_contacted`.
+- [x] Demo copy stays storm-inspection-specific and conservative.
+
+## Preview URL
+
+```text
+https://roof-check-preview-motz2g8ol-dpons222-9388s-projects.vercel.app/rivertop-roofing
+```
 
 ## Risks
 
