@@ -3,6 +3,7 @@ import { edpRoofing } from "./edp-roofing";
 import { finalCutRoofing } from "./final-cut-roofing";
 import { integrityFirstRoofingConstruction } from "./integrity-first-roofing-construction";
 import { loaConstruction } from "./loa-construction";
+import { properRoofing } from "./proper-roofing";
 import type { ProspectData } from "./types";
 
 export type { ProspectData, ProjectImage } from "./types";
@@ -11,6 +12,7 @@ export { edpRoofing } from "./edp-roofing";
 export { finalCutRoofing } from "./final-cut-roofing";
 export { integrityFirstRoofingConstruction } from "./integrity-first-roofing-construction";
 export { loaConstruction } from "./loa-construction";
+export { properRoofing } from "./proper-roofing";
 
 export const prospects: ProspectData[] = [
   finalCutRoofing,
@@ -18,6 +20,7 @@ export const prospects: ProspectData[] = [
   loaConstruction,
   integrityFirstRoofingConstruction,
   edpRoofing,
+  properRoofing,
 ];
 
 export const defaultProspect = finalCutRoofing;

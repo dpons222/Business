@@ -77,28 +77,40 @@ Get a free Greater Houston storm inspection and documentation review.
 
 - [x] GitHub Issue #34 created.
 - [x] Implementation plan created in `plans/issue-34-proper-roofing.md`.
-- [ ] Post session-start comment when implementation begins.
+- [x] Post session-start comment when implementation begins.
 
 ## Future Implementation Checklist
 
-- [ ] Create/switch to branch `issue-34-proper-roofing`.
-- [ ] Recheck live Proper Roofing page.
-- [ ] Create `prospects/proper-roofing/` docs.
-- [ ] Add `lib/prospects/proper-roofing.ts`.
-- [ ] Register Proper in `lib/prospects/index.ts`.
-- [ ] Update README/navigation files.
-- [ ] Draft outreach email and contact form version.
-- [ ] Run build validation.
-- [ ] Verify routes.
-- [ ] Update Supabase `public.prospects`.
-- [ ] Commit, push, open PR, and link Issue #34.
+- [x] Create/switch to branch `issue-34-proper-roofing`.
+- [x] Recheck live Proper Roofing page.
+- [x] Create `prospects/proper-roofing/` docs.
+- [x] Add `lib/prospects/proper-roofing.ts`.
+- [x] Register Proper in `lib/prospects/index.ts`.
+- [x] Update README/navigation files.
+- [x] Draft outreach email and contact form version.
+- [x] Run build validation.
+- [x] Verify routes.
+- [x] Update Supabase `public.prospects`.
+- [x] Commit, push, open PR, and link Issue #34.
 
 ## Validation Plan
 
-- Build passes.
-- Proper Roofing routes return HTTP 200.
-- Copy stays focused on first-step inspection and documentation.
-- Existing prospect routes still render.
+- [x] Build passes with `npm run build`.
+- [x] `/prospects/proper-roofing` returns HTTP 200 locally.
+- [x] `/proper-roofing` returns HTTP 200 locally.
+- [x] Existing prospect routes still return HTTP 200 locally.
+- [x] EDP and Integrity First routes still return HTTP 200 locally.
+- [x] Copy stays focused on first-step inspection and documentation.
+- [x] Production `/prospects/proper-roofing` returns HTTP 200.
+- [x] Production `/proper-roofing` returns HTTP 200.
+- [x] Production EDP, Integrity First, Final Cut, Charger, and LOA routes still return HTTP 200.
+- [x] Supabase `public.prospects` has the Proper production URL while status remains `not_contacted`.
+
+## Deployment URL
+
+```text
+https://roof-check-preview.vercel.app/proper-roofing
+```
 
 ## Risks
 

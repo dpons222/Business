@@ -46,6 +46,11 @@ EDP Roofing uses the focused landing page convention:
 - `/prospects/edp-roofing`: Dallas storm damage roofer request page.
 - `/edp-roofing`: clean client-facing alias.
 
+Proper Roofing uses the focused landing page convention:
+
+- `/prospects/proper-roofing`: Greater Houston first-step storm inspection page.
+- `/proper-roofing`: clean client-facing alias.
+
 Use shadcn/ui for forms, stateful controls, accordions, badges, and assessment UI where it improves quality. Do not use it as a generic skin over the same repeated layout.
 
 ## Rule
