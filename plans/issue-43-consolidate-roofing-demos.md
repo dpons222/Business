@@ -87,8 +87,8 @@ Current branch starts from `issue-34-proper-roofing`, which already includes Int
 - [x] Verify all public clean routes return HTTP 200.
 - [x] Update Supabase prospect `demo_url` values for stale preview links.
 - [ ] Update Issue #43 with deployment evidence.
-- [ ] Commit and push.
-- [ ] Open draft PR.
+- [x] Commit and push.
+- [x] Open draft PR.
 
 ## Route Validation Matrix
 
@@ -108,6 +108,8 @@ Current branch starts from `issue-34-proper-roofing`, which already includes Int
 Production alias: `https://roof-check-preview.vercel.app`
 
 Deployment URL: `https://roof-check-preview-ow30ua1dp-dpons222-9388s-projects.vercel.app`
+
+Draft PR: `https://github.com/dpons222/Business/pull/44`
 
 Vercel production log scan: `vercel logs --level error --since 1h --environment production --no-branch --limit 20` returned no logs.
 
