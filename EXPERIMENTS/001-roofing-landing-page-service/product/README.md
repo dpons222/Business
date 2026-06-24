@@ -41,6 +41,11 @@ Integrity First Roofing & Construction uses the focused landing page convention:
 - `/prospects/integrity-first`: Frisco storm damage campaign page.
 - `/integrity-first`: clean client-facing alias.
 
+EDP Roofing uses the focused landing page convention:
+
+- `/prospects/edp-roofing`: Dallas storm damage roofer request page.
+- `/edp-roofing`: clean client-facing alias.
+
 Use shadcn/ui for forms, stateful controls, accordions, badges, and assessment UI where it improves quality. Do not use it as a generic skin over the same repeated layout.
 
 ## Rule

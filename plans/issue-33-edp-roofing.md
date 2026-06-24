@@ -77,28 +77,42 @@ Talk to a Dallas roofer after hail, leak, or storm damage.
 
 - [x] GitHub Issue #33 created.
 - [x] Implementation plan created in `plans/issue-33-edp-roofing.md`.
-- [ ] Post session-start comment when implementation begins.
+- [x] Post session-start comment when implementation begins.
 
 ## Future Implementation Checklist
 
-- [ ] Create/switch to branch `issue-33-edp-roofing`.
-- [ ] Recheck live EDP page.
-- [ ] Create `prospects/edp-roofing/` docs.
-- [ ] Add `lib/prospects/edp-roofing.ts`.
-- [ ] Register EDP in `lib/prospects/index.ts`.
-- [ ] Update README/navigation files.
-- [ ] Draft outreach email and contact form version.
-- [ ] Run build validation.
-- [ ] Verify routes.
-- [ ] Update Supabase `public.prospects`.
-- [ ] Commit, push, open PR, and link Issue #33.
+- [x] Create/switch to branch `issue-33-edp-roofing`.
+- [x] Recheck live EDP page.
+- [x] Create `prospects/edp-roofing/` docs.
+- [x] Add `lib/prospects/edp-roofing.ts`.
+- [x] Register EDP in `lib/prospects/index.ts`.
+- [x] Update README/navigation files.
+- [x] Draft outreach email and contact form version.
+- [x] Run build validation.
+- [x] Verify routes.
+- [x] Update Supabase `public.prospects`.
+- [x] Commit, push, open PR, and link Issue #33.
 
 ## Validation Plan
 
-- Build passes.
-- EDP routes return HTTP 200.
-- CTA hierarchy is simple and not crowded.
-- Existing prospect routes still render.
+- [x] Build passes with `npm run build`.
+- [x] `/prospects/edp-roofing` returns HTTP 200 locally.
+- [x] `/edp-roofing` returns HTTP 200 locally.
+- [x] Existing prospect routes still return HTTP 200 locally.
+- [x] Integrity First routes still return HTTP 200 locally.
+- [x] CTA hierarchy is simple and not crowded.
+- [x] Production `/prospects/edp-roofing` returns HTTP 200.
+- [x] Production `/edp-roofing` returns HTTP 200.
+- [x] Production Integrity First, Final Cut, Charger, and LOA routes still return HTTP 200.
+- [x] Supabase `public.prospects` has the EDP production URL while status remains `not_contacted`.
+
+## Deployment URL
+
+```text
+https://roof-check-preview.vercel.app/edp-roofing
+```
+
+The Vercel preview deployment returned HTTP 401, so this prospect uses the verified public production URL.
 
 ## Risks
 
