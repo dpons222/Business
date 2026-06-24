@@ -15,7 +15,7 @@ The idea is not to replace your full website or blog. It would be a focused stor
 Demo:
 
 ```text
-[insert deployed LOA demo link]
+https://roof-check-preview.vercel.app/loa-construction
 ```
 
 Would you be open to seeing a quick example of what that page could look like for LOA?
@@ -37,7 +37,7 @@ The main idea is simple: turn the useful hail article into a shorter page with o
 Demo:
 
 ```text
-[insert deployed LOA demo link]
+https://roof-check-preview.vercel.app/loa-construction
 ```
 
 If this is useful, I can put together a quick example and show what it would track.
@@ -58,8 +58,8 @@ https://digidap.vercel.app
 
 ## Notes
 
+- Verified production URL: `https://roof-check-preview.vercel.app/loa-construction`.
 - Send the initial email or contact form version first.
-- Replace `[insert deployed LOA demo link]` with `https://roof-check-preview.vercel.app/loa-construction` after the route is deployed and verified.
 - Use the follow-up only if there is no response after 3-5 business days.
 - Log the send date, reply status, and next follow-up date in the prospect tracker.
 - The lightweight demo route is `/loa-construction`; verify it before sending.

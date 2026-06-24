@@ -15,7 +15,7 @@ The idea is not to replace your full website. It would be a focused page you cou
 Demo:
 
 ```text
-https://roof-check-preview-90aw59lu3-dpons222-9388s-projects.vercel.app/stormvets
+https://roof-check-preview.vercel.app/stormvets
 ```
 
 Would you be open to seeing a quick example of what that page could look like for StormVets?
@@ -37,7 +37,7 @@ The main idea is simple: send homeowners who are worried about storm damage to o
 Demo:
 
 ```text
-https://roof-check-preview-90aw59lu3-dpons222-9388s-projects.vercel.app/stormvets
+https://roof-check-preview.vercel.app/stormvets
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -58,7 +58,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified preview URL: `https://roof-check-preview-90aw59lu3-dpons222-9388s-projects.vercel.app/stormvets`.
+- Verified production URL: `https://roof-check-preview.vercel.app/stormvets`.
 - Send the initial email or contact form version only after explicit approval.
 - Use the follow-up only if there is no response after 3-5 business days.
 - Log the send date, reply status, and next follow-up date in Supabase and the prospect tracker.
