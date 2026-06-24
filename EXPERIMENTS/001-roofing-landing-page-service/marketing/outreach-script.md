@@ -56,3 +56,16 @@ Use one specific observation in the first message, such as:
 - Form is buried too low.
 - Page talks about services but does not ask for an inspection.
 
+## Pre-Send Draft Check
+
+Run this check before every outbound send:
+
+```text
+1. Read the final draft exactly as it will be sent.
+2. Confirm every demo link uses https://roof-check-preview.vercel.app/... .
+3. Reject any roof-check-preview-[random]-dpons222-9388s-projects.vercel.app URL.
+4. Open the demo link and confirm the current prospect page loads.
+5. Confirm the draft still matches the prospect's site, offer, phone number, and brand colors.
+6. Confirm recipient/contact method.
+7. After sending, update Supabase and the prospect tracker.
+```
