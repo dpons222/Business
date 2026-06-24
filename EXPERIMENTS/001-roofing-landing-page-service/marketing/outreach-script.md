@@ -69,3 +69,20 @@ Run this check before every outbound send:
 6. Confirm recipient/contact method.
 7. After sending, update Supabase and the prospect tracker.
 ```
+
+## Supabase Approval Fields
+
+When preparing a reviewed batch, use these `public.prospects` fields:
+
+```text
+outreach_send_status: ready_for_review -> approved -> sent
+outreach_approved: false until Diego approves
+outreach_batch_id: shared label for a 3-5 prospect batch
+outreach_send_channel: email, contact_form, or manual
+outreach_draft_subject: exact subject reviewed
+outreach_draft_body: exact body reviewed
+outreach_draft_path: repo path to draft
+outreach_pre_send_checklist: structured checklist evidence
+```
+
+n8n must not send drafts with `outreach_send_status = ready_for_review`. It may only send email rows after Diego approval sets `outreach_send_status = approved` and `outreach_approved = true`.

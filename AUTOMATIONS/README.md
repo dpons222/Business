@@ -14,7 +14,10 @@ Use this directory for automation plans, workflow specs, and operational automat
 ## Current Automations
 
 - [DigiDap lead capture](digidap-lead-capture/README.md) - website form to n8n, Supabase, and email notification.
+- [Outreach approval send](outreach-approval-send/README.md) - planned human-approved prospect outreach sender using Supabase and n8n.
 
 ## Rule
 
 Do not automate a process until the manual version has been validated or clearly defined.
+
+For outreach, do not automate sending without an explicit approval gate. Codex may prepare drafts and checklist evidence, but n8n should send only rows that Diego has approved.

@@ -140,6 +140,19 @@ demo: https://roof-check-preview.vercel.app/charger-roofing
 | `interest_reason` | `text` | no | Reason the prospect showed interest or accepted the offer |
 | `loss_reason` | `text` | no | Reason the opportunity was lost, if known |
 | `decision_notes` | `text` | no | Additional decision context from replies, calls, or follow-up |
+| `outreach_send_status` | `text` | yes | Approval-gated send status for n8n outreach automation |
+| `outreach_approved` | `boolean` | yes | True only after Diego approves the exact draft/demo/contact method |
+| `outreach_approved_at` | `timestamptz` | no | Approval timestamp |
+| `outreach_approved_by` | `text` | no | Approver/operator |
+| `outreach_batch_id` | `text` | no | Batch label for grouped outreach review |
+| `outreach_send_channel` | `text` | no | Intended send path: email, contact_form, or manual |
+| `outreach_draft_subject` | `text` | no | Exact approved subject line, if email |
+| `outreach_draft_body` | `text` | no | Exact approved message body |
+| `outreach_draft_path` | `text` | no | Repo path to reviewed draft |
+| `outreach_pre_send_checked_at` | `timestamptz` | no | Pre-send checklist completion timestamp |
+| `outreach_pre_send_checked_by` | `text` | no | Checklist operator |
+| `outreach_pre_send_checklist` | `jsonb` | yes | Structured pre-send checklist evidence |
+| `outreach_last_error` | `text` | no | Latest send or automation guardrail error |
 
 ## Prospect Status Values
 
@@ -159,6 +172,30 @@ lost
 not_fit
 ```
 
+## Prospect Outreach Automation Status Values
+
+`outreach_send_status`:
+
+```text
+not_ready
+ready_for_review
+approved
+queued
+sent
+failed
+skipped
+```
+
+`outreach_send_channel`:
+
+```text
+email
+contact_form
+manual
+```
+
+The n8n sender may only send rows where `outreach_approved = true`, `outreach_send_status = approved`, `outreach_send_channel = email`, required draft fields are present, and `demo_url` uses the stable production alias.
+
 ## Prospect Security
 
 RLS is enabled on `public.prospects`.
@@ -172,4 +209,5 @@ Applied migrations:
 ```text
 create_prospects_table
 add_prospect_response_learning_fields
+add_prospect_outreach_approval_fields
 ```

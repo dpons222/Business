@@ -27,3 +27,17 @@ Before sending any outreach email or contact form message:
 - Confirm the message still matches the prospect's current site, offer, phone number, and brand colors.
 - Confirm the recipient/contact method is current.
 - After sending, update Supabase and the prospect tracker with send date, status, and follow-up date.
+
+## Batch Approval Workflow
+
+Use this when preparing 3-5 prospects for an approved outreach batch:
+
+1. Prepare or refresh each prospect demo and outreach draft.
+2. Complete the pre-send checklist for each prospect.
+3. Store the exact reviewed subject/body, draft path, channel, batch ID, and checklist evidence in Supabase.
+4. Mark the row `outreach_send_status = ready_for_review`.
+5. Diego reviews the live demo, exact draft, recipient/contact method, and fit.
+6. Only after approval, mark `outreach_approved = true` and `outreach_send_status = approved`.
+7. n8n may send only approved email rows. Contact-form rows remain manual until a separate workflow exists.
+
+Do not mark a row approved just because a draft exists. Approval means the exact message and demo link are ready to send.
