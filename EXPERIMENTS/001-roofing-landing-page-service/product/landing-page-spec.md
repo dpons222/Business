@@ -63,6 +63,7 @@ The page should feel:
 - Fast to understand
 - Proof-heavy
 - Calm but urgent
+- Visually aligned with the contractor's logo and live site colors
 
 Avoid:
 
@@ -74,6 +75,30 @@ Avoid:
 - Dense text blocks
 - Dark, dramatic disaster imagery
 - Overpromising insurance outcomes
+
+## Brand Color Alignment
+
+For prospect-specific demos or client pages, use the contractor's existing logo/site colors as the starting palette.
+
+Before coding, inspect:
+
+```text
+Logo SVG or image colors
+Live site CSS colors
+Header, button, link, and badge colors
+Public brand assets, if available
+```
+
+Map those colors into the page's reusable tokens:
+
+```text
+primary
+primaryDark
+accent
+accentSoft
+```
+
+Do not default to a generic roofing palette when the prospect has clear brand colors. If the logo/site colors are unclear or take too long to recover during a lightweight validation demo, use a restrained neutral palette and document that color matching is pending.
 
 ## Optional Tech Direction
 
@@ -385,6 +410,7 @@ Before building a real client page, collect:
 ```text
 Company name
 Logo
+Logo/site brand colors
 Phone number
 Service areas
 Inspection offer details
@@ -425,4 +451,3 @@ Create one of the following before coding:
 - Copy deck
 - Section-by-section mock content
 - Demo landing page outline
-

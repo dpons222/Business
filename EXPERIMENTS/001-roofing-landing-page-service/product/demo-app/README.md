@@ -161,6 +161,21 @@ For LOA Construction review, use:
 
 This keeps each company's copy, images, colors, and contact information separate while allowing the shared design system to improve over time.
 
+## Brand Palette Rule
+
+Before adding or updating a prospect demo, inspect the prospect's live site and logo colors. Prefer direct evidence from logo SVG/image colors and live site CSS, then visible button/header/link colors.
+
+Store the matched colors in the prospect data object's `brand` tokens:
+
+```text
+primary
+primaryDark
+accent
+accentSoft
+```
+
+Do not use a generic roofing palette when the prospect has clear brand colors. If the colors cannot be recovered quickly for a lightweight validation demo, use a restrained neutral palette and note that brand matching is pending.
+
 ## UI Convention
 
 Use the prospect's conversion problem to choose the demo format:
