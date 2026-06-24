@@ -1,14 +1,21 @@
 import { chargerRoofing } from "./charger-roofing";
 import { finalCutRoofing } from "./final-cut-roofing";
 import { loaConstruction } from "./loa-construction";
+import { matthewLorandRoofing } from "./matthew-lorand-roofing";
 import type { ProspectData } from "./types";
 
 export type { ProspectData, ProjectImage } from "./types";
 export { chargerRoofing } from "./charger-roofing";
 export { finalCutRoofing } from "./final-cut-roofing";
 export { loaConstruction } from "./loa-construction";
+export { matthewLorandRoofing } from "./matthew-lorand-roofing";
 
-export const prospects: ProspectData[] = [finalCutRoofing, chargerRoofing, loaConstruction];
+export const prospects: ProspectData[] = [
+  finalCutRoofing,
+  chargerRoofing,
+  loaConstruction,
+  matthewLorandRoofing,
+];
 
 export const defaultProspect = finalCutRoofing;
 export const activeProspectSlug = chargerRoofing.slug;
