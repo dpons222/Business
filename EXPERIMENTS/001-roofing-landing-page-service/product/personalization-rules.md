@@ -27,7 +27,7 @@ Primary CTA phone link
 Public rating or review count, if easy to verify
 One trust signal, if public and easy to verify
 Logo, if easy and appropriate
-Approximate brand color, if obvious
+Logo/site color palette
 ```
 
 Do not personalize deeply before interest:
@@ -40,8 +40,27 @@ Custom design system
 CRM integrations
 Analytics setup
 Multiple page variants
-Full brand matching
+Full brand system recreation
 ```
+
+## Brand Color Rule
+
+Before creating or updating a prospect website/demo, inspect the prospect's live site and logo for color direction.
+
+Use this order of evidence:
+
+```text
+Logo SVG or image colors
+Live site CSS colors
+Visible button/header/link colors
+Screenshot sampling, if code colors are not easy to recover
+```
+
+The demo should use the prospect's existing logo/site palette for its primary, dark, accent, and soft/background color tokens. Do not invent a generic palette when the prospect already has clear brand colors.
+
+For lightweight outreach demos, this does not require a full brand system. It does require a quick palette match so the page feels like it belongs to the company.
+
+If colors cannot be recovered within the 5-10 minute personalization window, use a restrained neutral palette and add a note that brand color matching is still pending.
 
 ## Required Personalization Fields
 
@@ -60,6 +79,7 @@ Recommended optional fields:
 ```text
 logoUrl
 primaryColor
+brandPaletteSource
 rating
 reviewCount
 trustSignal
@@ -81,6 +101,7 @@ website
   "trustSignal": "Licensed and insured",
   "yearsInBusiness": "15+",
   "primaryColor": "#1D4ED8",
+  "brandPaletteSource": "Logo SVG and homepage button colors",
   "logoUrl": "",
   "website": "https://example.com"
 }
@@ -140,7 +161,7 @@ Add:
 Full client copy
 Real photos
 Real testimonials
-Brand colors
+Expanded brand system
 Tracking setup
 Form destination
 Deployment plan
@@ -179,4 +200,3 @@ The main change I would make is giving storm visitors one clear path to call or 
 If personalization takes more than 10 minutes before the prospect replies, stop and use the base version.
 
 The goal is validation, not unpaid custom design work.
-
