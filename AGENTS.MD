@@ -6,3 +6,4 @@
 - Follow `GITHUB_ISSUES_GUIDE.md` for GitHub Issue workflow, branch naming, validation, and implementation plan file naming.
 - Follow `REMOTE_BUSINESS_LAB_PLAN.md` whenever work relates to business ideas, research, validation, experiments, assets, playbooks, automation, monetization strategy, or the project directory structure.
 - Update relevant `README.md` files when changes affect a directory's purpose, structure, key files, workflow, or navigation.
+- Before sending any outreach email or contact form message, run the relevant marketing pre-send checklist if one exists; at minimum verify the exact draft, stable production demo URL, current page state, prospect contact method, and required Supabase/tracker updates.
