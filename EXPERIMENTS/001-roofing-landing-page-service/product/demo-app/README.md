@@ -13,6 +13,7 @@ Final Cut Roofing
 Charger Roofing
 LOA Construction
 Rivertop Roofing
+StormVets
 Integrity First Roofing & Construction
 EDP Roofing
 Proper Roofing
@@ -92,6 +93,7 @@ lib/prospects/
   charger-roofing.ts
   loa-construction.ts
   rivertop-roofing.ts
+  stormvets.ts
   integrity-first-roofing-construction.ts
   edp-roofing.ts
   proper-roofing.ts
@@ -101,6 +103,7 @@ public/prospects/
   charger-roofing/
   loa-construction/
   rivertop-roofing/
+  stormvets/
   integrity-first-roofing-construction/
   edp-roofing/
   proper-roofing/
@@ -114,6 +117,7 @@ Each prospect can then have its own page:
 /prospects/charger-roofing/assessment
 /prospects/loa-construction
 /prospects/rivertop-roofing
+/prospects/stormvets
 /prospects/integrity-first
 /prospects/edp-roofing
 /prospects/proper-roofing
@@ -126,6 +130,7 @@ Client-facing share URLs should use the clean root-level alias routes:
 /charger-roofing
 /loa-construction
 /rivertop-roofing
+/stormvets
 /integrity-first
 /edp-roofing
 /proper-roofing
@@ -260,12 +265,14 @@ http://localhost:3000/prospects/final-cut-roofing
 http://localhost:3000/prospects/charger-roofing
 http://localhost:3000/prospects/loa-construction
 http://localhost:3000/prospects/rivertop-roofing
+http://localhost:3000/prospects/stormvets
 http://localhost:3000/prospects/integrity-first
 http://localhost:3000/prospects/edp-roofing
 http://localhost:3000/prospects/proper-roofing
 http://localhost:3000/charger-roofing
 http://localhost:3000/loa-construction
 http://localhost:3000/rivertop-roofing
+http://localhost:3000/stormvets
 http://localhost:3000/integrity-first
 http://localhost:3000/edp-roofing
 http://localhost:3000/proper-roofing
@@ -281,7 +288,7 @@ npm run build
 ## Notes
 
 - This is a demo, not a live client page.
-- This local demo uses public Final Cut Roofing, Charger Roofing, LOA Construction, Rivertop Roofing, Integrity First Roofing & Construction, EDP Roofing, and Proper Roofing logo/photo references for private visualization only.
+- This local demo uses public Final Cut Roofing, Charger Roofing, LOA Construction, Rivertop Roofing, StormVets, Integrity First Roofing & Construction, EDP Roofing, and Proper Roofing logo/photo references for private visualization only.
 - Do not publish personalized demos publicly without permission.
 - Do not reuse logos, images, reviews, certifications, or claims in a public/client deliverable without approval.
 - Keep prospect-specific data in `lib/prospects/` so future demos can reuse the same page component.

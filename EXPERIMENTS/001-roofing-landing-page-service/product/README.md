@@ -41,6 +41,11 @@ Rivertop Roofing uses the focused landing page convention:
 - `/prospects/rivertop-roofing`: Plano storm inspection landing page.
 - `/rivertop-roofing`: clean client-facing alias if deployed.
 
+StormVets uses the focused landing page convention:
+
+- `/prospects/stormvets`: Frisco storm inspection landing page.
+- `/stormvets`: clean client-facing alias if deployed.
+
 Integrity First Roofing & Construction uses the focused landing page convention:
 
 - `/prospects/integrity-first`: Frisco storm damage campaign page.

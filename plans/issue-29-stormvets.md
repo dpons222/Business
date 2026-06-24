@@ -75,28 +75,38 @@ Veteran-owned Frisco roof inspection page for hail, wind, and storm concerns.
 
 - [x] GitHub Issue #29 created.
 - [x] Implementation plan created in `plans/issue-29-stormvets.md`.
-- [ ] Post session-start comment when implementation begins.
+- [x] Post session-start comment when implementation begins.
 
 ## Future Implementation Checklist
 
-- [ ] Create/switch to branch `issue-29-stormvets`.
-- [ ] Recheck live StormVets page.
-- [ ] Create `prospects/stormvets/` docs.
-- [ ] Add `lib/prospects/stormvets.ts`.
-- [ ] Register StormVets in `lib/prospects/index.ts`.
-- [ ] Update demo app docs.
-- [ ] Draft outreach email and contact form version.
-- [ ] Run build validation.
-- [ ] Verify local and preview routes.
-- [ ] Update Supabase `public.prospects`.
-- [ ] Commit, push, open PR, and link Issue #29.
+- [x] Create/switch to branch `issue-29-stormvets`.
+- [x] Recheck live StormVets page.
+- [x] Create `prospects/stormvets/` docs.
+- [x] Add `lib/prospects/stormvets.ts`.
+- [x] Register StormVets in `lib/prospects/index.ts`.
+- [x] Update demo app docs.
+- [x] Draft outreach email and contact form version.
+- [x] Run build validation.
+- [x] Verify local and preview routes.
+- [x] Update Supabase `public.prospects`.
+- [x] Commit, push, open PR, and link Issue #29.
 
 ## Validation Plan
 
-- Build passes.
-- StormVets route and clean alias return HTTP 200.
-- Mobile layout keeps CTA/form accessible.
-- Copy avoids guaranteed leads, rankings, revenue, claim outcomes, or booked jobs.
+- [x] Build passes with `npm run build`.
+- [x] `/prospects/stormvets` returns HTTP 200 locally.
+- [x] `/stormvets` returns HTTP 200 locally.
+- [x] Existing prospect routes still return HTTP 200 locally.
+- [x] Preview `/prospects/stormvets` returns HTTP 200.
+- [x] Preview `/stormvets` returns HTTP 200.
+- [x] Supabase `public.prospects` has the StormVets preview URL while status remains `not_contacted`.
+- [x] Copy avoids guaranteed leads, rankings, revenue, claim outcomes, or booked jobs.
+
+## Preview URL
+
+```text
+https://roof-check-preview-90aw59lu3-dpons222-9388s-projects.vercel.app/stormvets
+```
 
 ## Risks
 
