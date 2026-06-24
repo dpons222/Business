@@ -15,6 +15,7 @@ export const properRoofing: ProspectData = {
   recommendedCta: "Get My Free Inspection Today",
   secondaryCta: "Call (832) 554-7830",
   trustSignal: "Texas-Tough products, trust-over-profits positioning, and detailed documentation process",
+  logoUrl: `${assetRoot}/logo.webp`,
   heroImageUrl: `${assetRoot}/storm-insurance-roofing-greater-houston-proper-roofing.webp`,
   projectImages: [
     {
