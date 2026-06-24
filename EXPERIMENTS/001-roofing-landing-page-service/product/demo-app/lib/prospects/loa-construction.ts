@@ -32,10 +32,10 @@ export const loaConstruction: ProspectData = {
     },
   ],
   brand: {
-    primary: "#1F3F63",
-    primaryDark: "#102235",
-    accent: "#C79A32",
-    accentSoft: "#F7EED9",
+    primary: "#264A9E",
+    primaryDark: "#19214F",
+    accent: "#7A90C8",
+    accentSoft: "#EEF3FF",
   },
   sourceWebsite:
     "https://www.loaconstruction.com/blog/after-the-hail-surge-in-austin-roof-inspections-and-claims/",
