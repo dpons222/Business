@@ -31,12 +31,25 @@ Result: success
 
 ## Send Test
 
-- [ ] Use one internal/test recipient first.
-- [ ] Confirm exact approved subject is sent.
-- [ ] Confirm exact approved body is sent.
-- [ ] Confirm demo URL is the stable production alias.
+- [x] Use one internal/test recipient first.
+- [x] Confirm exact approved subject is sent.
+- [x] Confirm exact approved body is sent.
+- [x] Confirm demo URL is the stable production alias.
 - [ ] Confirm Supabase status updates only after send success.
 - [ ] Confirm failed sends write `outreach_last_error`.
+
+Internal send evidence:
+
+```text
+Workflow: Approved Outreach Internal Gmail Send Test
+Workflow ID: sHtbTyLTxm5nYs8v
+Pinned test execution: 681
+Live internal send execution: 682
+Recipient: digidaps@gmail.com
+Subject: Internal test: Roof Check dashboard dry run
+Gmail message ID: 19efaf543aae87db
+Result: success
+```
 
 ## Production Pilot
 

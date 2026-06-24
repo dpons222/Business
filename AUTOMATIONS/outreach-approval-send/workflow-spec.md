@@ -8,6 +8,8 @@ This workflow should start as a manual-trigger n8n workflow. Scheduled sending c
 
 ## Current n8n Draft
 
+Dry-run workflow:
+
 ```text
 Name: Approved Outreach Dry Run
 Workflow ID: BcSmomoXyNpouHeP
@@ -15,9 +17,25 @@ URL: https://digidap.dpons.duckdns.org/workflow/BcSmomoXyNpouHeP
 Project: Diego digidaps@gmail.com <digidaps@gmail.com>
 Status: draft/manual dry run only
 Last pinned test execution: 677
+Last real-data dry-run execution: 679
 ```
 
 The current workflow does not include Gmail, email-provider, Supabase update, schedule, or publish steps. It only reads candidate Supabase rows, validates guardrails, and returns a dry-run review payload.
+
+Internal Gmail send test workflow:
+
+```text
+Name: Approved Outreach Internal Gmail Send Test
+Workflow ID: sHtbTyLTxm5nYs8v
+URL: https://digidap.dpons.duckdns.org/workflow/sHtbTyLTxm5nYs8v
+Project: Diego digidaps@gmail.com <digidaps@gmail.com>
+Status: draft/manual internal-send test only
+Pinned test execution: 681
+Live internal send execution: 682
+Gmail message ID: 19efaf543aae87db
+```
+
+The internal send workflow fetches only `prospect_slug = internal-test-digidap-dashboard` and `contact_email = digidaps@gmail.com`, then sends the exact stored subject/body to `digidaps@gmail.com`. It is not a real prospect sender.
 
 ## Trigger
 
@@ -70,6 +88,16 @@ Manual Trigger
 -> Set: prepare dry-run review output
 ```
 
+Current internal Gmail send test workflow:
+
+```text
+Manual Trigger
+-> Supabase: fetch only internal test outreach row
+-> Code: validate internal-only guardrails
+-> Gmail: send exact stored subject/body to digidaps@gmail.com
+-> Set: prepare internal send result
+```
+
 Future sender revision:
 
 ```text
@@ -100,6 +128,16 @@ outreach_pre_send_checked_at is present
 outreach_pre_send_checklist.copy_reviewed is true
 outreach_pre_send_checklist.demo_url_verified is true
 outreach_pre_send_checklist.contact_method_verified is true
+```
+
+The internal Gmail send test adds stricter checks:
+
+```text
+prospect_slug is internal-test-digidap-dashboard
+contact_email is digidaps@gmail.com
+metadata.is_internal_test is true
+metadata.do_not_send_real_outreach is true
+outreach_pre_send_checklist.internal_test is true
 ```
 
 If any guardrail fails, do not send that row. Mark it:

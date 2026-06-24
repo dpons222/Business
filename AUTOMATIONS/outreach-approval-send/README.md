@@ -12,8 +12,12 @@ It is not an autonomous cold-email sender. The purpose is to let Codex prepare s
 - Workflow ID: `BcSmomoXyNpouHeP`.
 - Workflow URL: `https://digidap.dpons.duckdns.org/workflow/BcSmomoXyNpouHeP`.
 - Workflow project: `Diego digidaps@gmail.com <digidaps@gmail.com>` personal project.
-- Workflow is manual-trigger only and not published as an automated sender.
-- No emails are sent by this automation yet.
+- Internal Gmail send test workflow created: `Approved Outreach Internal Gmail Send Test`.
+- Internal send workflow ID: `sHtbTyLTxm5nYs8v`.
+- Internal send workflow URL: `https://digidap.dpons.duckdns.org/workflow/sHtbTyLTxm5nYs8v`.
+- Internal test execution `682` sent one email to `digidaps@gmail.com` using the stored internal test row.
+- Both workflows are manual-trigger only and are not published or scheduled.
+- No real prospect emails are sent by this automation yet.
 
 ## Intended Operating Model
 
@@ -23,7 +27,8 @@ It is not an autonomous cold-email sender. The purpose is to let Codex prepare s
 3. Diego reviews the live demo, draft, recipient/contact method, and fit.
 4. Diego approves specific rows in Supabase.
 5. n8n dry-run workflow validates only approved email rows and outputs the would-send payload.
-6. After internal testing, a separate sender revision may send approved rows and write send results back to Supabase.
+6. n8n internal-send test proves Gmail can send the exact stored subject/body to Diego only.
+7. After internal testing, a separate sender revision may send approved rows and write send results back to Supabase.
 ```
 
 ## Human Approval Boundary
