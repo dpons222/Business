@@ -71,20 +71,42 @@ This should be a review/finalization task, not a rebuild from scratch.
 
 - [x] GitHub Issue #27 created.
 - [x] Implementation plan created in `plans/issue-27-final-cut-roofing.md`.
-- [ ] Post session-start comment when implementation begins.
+- [x] Post session-start comment when implementation begins.
 
 ## Future Implementation Checklist
 
-- [ ] Create/switch to branch `issue-27-final-cut-roofing`.
-- [ ] Recheck Final Cut public page and note any changes.
-- [ ] Audit existing `prospects/final-cut-roofing/` docs.
-- [ ] Verify existing demo-app data and routes.
-- [ ] Decide whether any light copy/data adjustment is needed.
-- [ ] Run `npm run build` in the demo app.
-- [ ] Verify `/prospects/final-cut-roofing` and `/final-cut-roofing`.
-- [ ] Update outreach email with final URL.
-- [ ] Update Supabase `public.prospects` with demo URL and notes.
+- [x] Create/switch to branch `issue-27-final-cut-roofing`.
+- [x] Recheck Final Cut public page and note any changes.
+- [x] Audit existing `prospects/final-cut-roofing/` docs.
+- [x] Verify existing demo-app data and routes.
+- [x] Decide whether any light copy/data adjustment is needed.
+- [x] Run `npm run build` in the demo app.
+- [x] Verify `/prospects/final-cut-roofing` and `/final-cut-roofing`.
+- [x] Update outreach email with final URL.
+- [x] Update Supabase `public.prospects` with demo URL and notes.
 - [ ] Commit, push, open PR, and link Issue #27.
+
+## Implementation Notes
+
+- Live page rechecked during implementation. It still presents a hail-damage inspection offer for Frisco / nearby DFW areas, a long multi-field request form, 29 reviews, and phone contact path.
+- Existing demo-app data remained aligned with the current offer. No data/component rebuild was needed.
+- Production demo URL selected for outreach:
+
+```text
+https://roof-check-preview.vercel.app/final-cut-roofing
+```
+
+## Validation Results
+
+- `npm run build` passed in `EXPERIMENTS/001-roofing-landing-page-service/product/demo-app`.
+- Local HTTP 200 checks passed:
+  - `http://127.0.0.1:3000/final-cut-roofing`
+  - `http://127.0.0.1:3000/prospects/final-cut-roofing`
+  - `http://127.0.0.1:3000/charger-roofing`
+  - `http://127.0.0.1:3000/loa-construction`
+- Production alias HTTP 200 check passed:
+  - `https://roof-check-preview.vercel.app/final-cut-roofing`
+- Supabase `public.prospects` updated for `final-cut-roofing` with the verified demo URL while keeping status as `not_contacted`.
 
 ## Validation Plan
 
