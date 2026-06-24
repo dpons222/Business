@@ -36,13 +36,13 @@ Austin hail and wind inspection page that makes the free evidence-based inspecti
 
 ## Implementation Checklist
 
-- [ ] Recheck live page for phone, scheduling path, proof, logo, colors, and HAAG language.
-- [ ] Create `prospects/sixth-gen-roofing/` docs if moving forward.
-- [ ] Add `lib/prospects/sixth-gen-roofing.ts`.
-- [ ] Register `/prospects/sixth-gen-roofing` and `/sixth-gen-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach approval false.
+- [x] Recheck live page for phone, scheduling path, proof, logo, colors, and HAAG language.
+- [x] Create `prospects/sixth-gen-roofing/` docs if moving forward.
+- [x] Add `lib/prospects/sixth-gen-roofing.ts`.
+- [x] Register `/prospects/sixth-gen-roofing` and `/sixth-gen-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach approval false.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ Austin hail and wind inspection page that makes the free evidence-based inspecti
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production aliases return HTTP 200.
-- [ ] Supabase row contains stable URL and remains unapproved.
-- [ ] Copy avoids certification overclaims.
+- [x] Build passes.
+- [x] Local aliases return HTTP 200.
+- [ ] Production aliases return HTTP 200 after deployment.
+- [x] Supabase row contains stable URL target and remains unapproved.
+- [x] Copy avoids certification overclaims.
 
 ## Risks
 

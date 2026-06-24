@@ -37,13 +37,13 @@ Houston post-storm inspection page for homeowners who need a free inspection aft
 
 ## Implementation Checklist
 
-- [ ] Recheck live article for current contact details, CTA, logo, colors, free inspection wording, and BBB proof.
-- [ ] Create `prospects/dynasty-roofing/` docs.
-- [ ] Add `lib/prospects/dynasty-roofing.ts`.
-- [ ] Register `/prospects/dynasty-roofing` and `/dynasty-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after verification.
-- [ ] Keep outreach unapproved.
+- [x] Recheck live article for current contact details, CTA, logo, colors, free inspection wording, and BBB proof.
+- [x] Create `prospects/dynasty-roofing/` docs.
+- [x] Add `lib/prospects/dynasty-roofing.ts`.
+- [x] Register `/prospects/dynasty-roofing` and `/dynasty-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after verification.
+- [x] Keep outreach unapproved.
 
 ## Demo Content Requirements
 
@@ -61,10 +61,11 @@ Houston post-storm inspection page for homeowners who need a free inspection aft
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production aliases return HTTP 200.
-- [ ] Supabase row contains stable URL and remains unapproved.
-- [ ] Copy avoids claim outcome promises.
+- [x] Build passes.
+- [x] Local aliases return HTTP 200.
+- [ ] Production aliases return HTTP 200 after deployment.
+- [x] Supabase row contains stable URL target and remains unapproved.
+- [x] Copy avoids claim outcome promises.
 
 ## Risks
 

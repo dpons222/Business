@@ -36,13 +36,13 @@ Plano post-hail roof inspection page focused on inspection and documentation aft
 
 ## Implementation Checklist
 
-- [ ] Recheck live article for contact path, phone, logo, colors, post-storm inspection wording, and documentation language.
-- [ ] Create `prospects/on-point-roofing/` docs.
-- [ ] Add `lib/prospects/on-point-roofing.ts`.
-- [ ] Register `/prospects/on-point-roofing` and `/on-point-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach unapproved.
+- [x] Recheck live article for contact path, phone, logo, colors, post-storm inspection wording, and documentation language.
+- [x] Create `prospects/on-point-roofing/` docs.
+- [x] Add `lib/prospects/on-point-roofing.ts`.
+- [x] Register `/prospects/on-point-roofing` and `/on-point-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach unapproved.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ Plano post-hail roof inspection page focused on inspection and documentation aft
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production routes return HTTP 200.
-- [ ] Supabase row has stable URL and remains unapproved.
-- [ ] Copy avoids claim outcome promises.
+- [x] Build passes.
+- [x] Local routes return HTTP 200.
+- [ ] Production routes return HTTP 200 after deployment.
+- [x] Supabase row has stable URL target and remains unapproved.
+- [x] Copy avoids claim outcome promises.
 
 ## Risks
 

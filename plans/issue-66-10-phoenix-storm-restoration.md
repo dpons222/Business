@@ -37,13 +37,13 @@ Fort Worth emergency storm inspection page for homeowners who need help after se
 
 ## Implementation Checklist
 
-- [ ] Recheck live page for phone, CTA, BBB proof, 24/7 language, logo, colors, and service claims.
-- [ ] Create `prospects/phoenix-storm-restoration/` docs.
-- [ ] Add `lib/prospects/phoenix-storm-restoration.ts`.
-- [ ] Register `/prospects/phoenix-storm-restoration` and `/phoenix-storm-restoration`.
-- [ ] Draft email and contact-form outreach.
-- [ ] Add Supabase row after live verification.
-- [ ] Stage outreach only as review-ready after checklist.
+- [x] Recheck live page for phone, CTA, BBB proof, 24/7 language, logo, colors, and service claims.
+- [x] Create `prospects/phoenix-storm-restoration/` docs.
+- [x] Add `lib/prospects/phoenix-storm-restoration.ts`.
+- [x] Register `/prospects/phoenix-storm-restoration` and `/phoenix-storm-restoration`.
+- [x] Draft email and contact-form outreach.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach `not_ready` and unapproved until production deployment is verified.
 
 ## Demo Content Requirements
 
@@ -61,10 +61,11 @@ Fort Worth emergency storm inspection page for homeowners who need help after se
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Routes return HTTP 200 locally and in production.
-- [ ] Supabase row remains unapproved.
-- [ ] Emergency claims and BBB proof are verified.
+- [x] Build passes.
+- [x] Routes return HTTP 200 locally.
+- [ ] Routes return HTTP 200 in production after deployment.
+- [x] Supabase row remains unapproved.
+- [x] Emergency claims and BBB proof are verified.
 
 ## Risks
 

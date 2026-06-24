@@ -30,6 +30,12 @@ Timebox: 10 days
 - `prospects/final-cut-roofing/recommendation.md`: Final Cut Roofing-specific recommendation and pilot rationale.
 - `prospects/charger-roofing/recommendation.md`: Charger Roofing-specific recommendation and next outreach rationale.
 - `prospects/loa-construction/recommendation.md`: LOA Construction-specific recommendation and next outreach rationale.
+- `marketing/remaining-leads.md`: remaining non-shortlisted roofing leads from the 30-prospect tracker.
+- `prospects/arrington-roofing/recommendation.md`: Arrington Roofing-specific recommendation for the first remaining-leads batch.
+- `prospects/phoenix-storm-restoration/recommendation.md`: Phoenix Storm Restoration-specific recommendation for the first remaining-leads batch.
+- `prospects/dynasty-roofing/recommendation.md`: Dynasty Roofing-specific recommendation for the first remaining-leads batch.
+- `prospects/sixth-gen-roofing/recommendation.md`: Sixth Gen Roofing-specific recommendation for the first remaining-leads batch.
+- `prospects/on-point-roofing/recommendation.md`: On Point Roofing-specific recommendation for the first remaining-leads batch.
 
 ## Folders
 

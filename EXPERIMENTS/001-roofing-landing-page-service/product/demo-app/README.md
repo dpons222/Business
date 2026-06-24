@@ -19,6 +19,11 @@ Matthew Lorand Roofing
 Integrity First Roofing & Construction
 EDP Roofing
 Proper Roofing
+Arrington Roofing
+Phoenix Storm Restoration
+Dynasty Roofing
+Sixth Gen Roofing
+On Point Roofing
 ```
 
 The root route now renders a neutral preview-link-required page so a prospect cannot remove their slug and see the internal selector. The internal preview dashboard lives at `/dashboard`. Prospect-specific routes render each company from separate data objects.
@@ -101,6 +106,11 @@ lib/prospects/
   integrity-first-roofing-construction.ts
   edp-roofing.ts
   proper-roofing.ts
+  arrington-roofing.ts
+  phoenix-storm-restoration.ts
+  dynasty-roofing.ts
+  sixth-gen-roofing.ts
+  on-point-roofing.ts
 
 public/prospects/
   final-cut-roofing/
@@ -113,6 +123,11 @@ public/prospects/
   integrity-first-roofing-construction/
   edp-roofing/
   proper-roofing/
+  arrington-roofing/
+  phoenix-storm-restoration/
+  dynasty-roofing/
+  sixth-gen-roofing/
+  on-point-roofing/
 ```
 
 Each prospect can then have its own page:
@@ -144,6 +159,11 @@ Client-facing share URLs should use the clean root-level alias routes:
 /integrity-first
 /edp-roofing
 /proper-roofing
+/arrington-roofing
+/phoenix-storm-restoration
+/dynasty-roofing
+/sixth-gen-roofing
+/on-point-roofing
 ```
 
 For Charger Roofing outreach, use:
@@ -296,6 +316,11 @@ http://localhost:3000/prospects/matthew-lorand-roofing
 http://localhost:3000/prospects/integrity-first
 http://localhost:3000/prospects/edp-roofing
 http://localhost:3000/prospects/proper-roofing
+http://localhost:3000/prospects/arrington-roofing
+http://localhost:3000/prospects/phoenix-storm-restoration
+http://localhost:3000/prospects/dynasty-roofing
+http://localhost:3000/prospects/sixth-gen-roofing
+http://localhost:3000/prospects/on-point-roofing
 http://localhost:3000/charger-roofing
 http://localhost:3000/loa-construction
 http://localhost:3000/rivertop-roofing
@@ -305,6 +330,11 @@ http://localhost:3000/matthew-lorand-roofing
 http://localhost:3000/integrity-first
 http://localhost:3000/edp-roofing
 http://localhost:3000/proper-roofing
+http://localhost:3000/arrington-roofing
+http://localhost:3000/phoenix-storm-restoration
+http://localhost:3000/dynasty-roofing
+http://localhost:3000/sixth-gen-roofing
+http://localhost:3000/on-point-roofing
 http://localhost:3000/prospects/charger-roofing/assessment
 ```
 
@@ -317,7 +347,7 @@ npm run build
 ## Notes
 
 - This is a demo, not a live client page.
-- This local demo uses public Final Cut Roofing, Charger Roofing, LOA Construction, Rivertop Roofing, StormVets, Brotherhood Roofing, Matthew Lorand Roofing, Integrity First Roofing & Construction, EDP Roofing, and Proper Roofing logo/photo references for private visualization only.
+- This local demo uses public Final Cut Roofing, Charger Roofing, LOA Construction, Rivertop Roofing, StormVets, Brotherhood Roofing, Matthew Lorand Roofing, Integrity First Roofing & Construction, EDP Roofing, Proper Roofing, Arrington Roofing, Phoenix Storm Restoration, Dynasty Roofing, Sixth Gen Roofing, and On Point Roofing logo/photo references for private visualization only.
 - Do not publish personalized demos publicly without permission.
 - Do not reuse logos, images, reviews, certifications, or claims in a public/client deliverable without approval.
 - Keep prospect-specific data in `lib/prospects/` so future demos can reuse the same page component.

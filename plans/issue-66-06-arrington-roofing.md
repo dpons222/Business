@@ -37,13 +37,13 @@ North Texas storm damage inspection page built from Arrington's existing blog co
 
 ## Implementation Checklist
 
-- [ ] Recheck live page for phone, CTA, logo, colors, review proof, BBB proof, and free inspection language.
-- [ ] Create `prospects/arrington-roofing/` docs.
-- [ ] Add `lib/prospects/arrington-roofing.ts`.
-- [ ] Register `/prospects/arrington-roofing` and `/arrington-roofing`.
-- [ ] Draft email and contact-form outreach.
-- [ ] Add Supabase row with stable demo URL after deployment.
-- [ ] Stage outreach as `ready_for_review` only after pre-send checklist.
+- [x] Recheck live page for phone, CTA, logo, colors, review proof, BBB proof, and free inspection language.
+- [x] Create `prospects/arrington-roofing/` docs.
+- [x] Add `lib/prospects/arrington-roofing.ts`.
+- [x] Register `/prospects/arrington-roofing` and `/arrington-roofing`.
+- [x] Draft email and contact-form outreach.
+- [x] Add Supabase row with stable demo URL after deployment.
+- [x] Keep outreach `not_ready` and unapproved until production deployment is verified.
 
 ## Demo Content Requirements
 
@@ -61,10 +61,11 @@ North Texas storm damage inspection page built from Arrington's existing blog co
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Routes return HTTP 200 locally and in production.
-- [ ] Supabase row has stable URL and unapproved outreach.
-- [ ] Copy does not overclaim reviews or certifications.
+- [x] Build passes.
+- [x] Routes return HTTP 200 locally.
+- [ ] Routes return HTTP 200 in production after deployment.
+- [x] Supabase row has stable URL target and unapproved outreach.
+- [x] Copy does not overclaim reviews or certifications.
 
 ## Risks
 

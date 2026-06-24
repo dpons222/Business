@@ -71,6 +71,19 @@ Proper Roofing uses the focused landing page convention:
 - `/prospects/proper-roofing`: Greater Houston first-step storm inspection page.
 - `/proper-roofing`: clean client-facing alias.
 
+Remaining leads batch 1 uses the focused landing page convention:
+
+- `/prospects/arrington-roofing`: North Texas storm damage inspection page.
+- `/arrington-roofing`: clean client-facing alias.
+- `/prospects/phoenix-storm-restoration`: Fort Worth emergency storm inspection page.
+- `/phoenix-storm-restoration`: clean client-facing alias.
+- `/prospects/dynasty-roofing`: Houston post-storm inspection page.
+- `/dynasty-roofing`: clean client-facing alias.
+- `/prospects/sixth-gen-roofing`: Austin certified inspection page.
+- `/sixth-gen-roofing`: clean client-facing alias.
+- `/prospects/on-point-roofing`: Plano free inspection page.
+- `/on-point-roofing`: clean client-facing alias.
+
 Use shadcn/ui for forms, stateful controls, accordions, badges, and assessment UI where it improves quality. Do not use it as a generic skin over the same repeated layout.
 
 ## Rule
