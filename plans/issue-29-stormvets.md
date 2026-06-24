@@ -108,6 +108,21 @@ Veteran-owned Frisco roof inspection page for hail, wind, and storm concerns.
 https://roof-check-preview-90aw59lu3-dpons222-9388s-projects.vercel.app/stormvets
 ```
 
+## Stable Review URL
+
+```text
+https://roof-check-preview.vercel.app/stormvets
+```
+
+## Review Batch Readiness - 2026-06-24
+
+- [x] Live StormVets page rechecked for current offer, phone, email, proof points, and storm-inspection language.
+- [x] Stable production demo alias verified with HTTP 200.
+- [x] Internal `/prospects/stormvets` production route verified with HTTP 200.
+- [x] Exact initial outreach email staged in Supabase for Diego review.
+- [x] Supabase row set to `outreach_send_status = ready_for_review`.
+- [x] Supabase row remains `outreach_approved = false`; no email sent.
+
 ## Risks
 
 - Phone/contact information was not captured in Supabase; live review must confirm the best contact method.

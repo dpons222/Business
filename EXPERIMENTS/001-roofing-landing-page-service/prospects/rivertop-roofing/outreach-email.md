@@ -59,6 +59,8 @@ https://digidap.vercel.app
 ## Notes
 
 - Verified production URL: `https://roof-check-preview.vercel.app/rivertop-roofing`.
+- Current contact method verified on 2026-06-24: `info@RivertopRoofing.com` and `(888) 909-5424` from the live Rivertop page footer.
+- Supabase review status prepared on 2026-06-24: `ready_for_review`; not approved and not sent.
 - Send the initial email or contact form version only after explicit approval.
 - Use the follow-up only if there is no response after 3-5 business days.
 - Log the send date, reply status, and next follow-up date in Supabase and the prospect tracker.
