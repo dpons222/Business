@@ -12,6 +12,12 @@ My thought was that the same message could work harder as a short landing page b
 
 The idea is not to replace your full website or blog. It would be a focused storm-season page you could test from Google Business Profile clicks, local ads, QR codes, or follow-up messages.
 
+Demo:
+
+```text
+[insert deployed LOA demo link]
+```
+
 Would you be open to seeing a quick example of what that page could look like for LOA?
 
 Best,
@@ -27,6 +33,12 @@ Hi LOA Construction,
 Just wanted to follow up on the Austin hail inspection landing page idea.
 
 The main idea is simple: turn the useful hail article into a shorter page with one clear path for homeowners to request a free inspection or call your team, then track whether it creates more inspection requests than the current path.
+
+Demo:
+
+```text
+[insert deployed LOA demo link]
+```
 
 If this is useful, I can put together a quick example and show what it would track.
 
@@ -47,7 +59,7 @@ https://digidap.vercel.app
 ## Notes
 
 - Send the initial email or contact form version first.
+- Replace `[insert deployed LOA demo link]` with `https://roof-check-preview.vercel.app/loa-construction` after the route is deployed and verified.
 - Use the follow-up only if there is no response after 3-5 business days.
 - Log the send date, reply status, and next follow-up date in the prospect tracker.
-- Build a lightweight demo only after reply or if a contact form requires a demo link.
-
+- The lightweight demo route is `/loa-construction`; verify it before sending.

@@ -11,6 +11,14 @@ Current demos:
 ```text
 Final Cut Roofing
 Charger Roofing
+LOA Construction
+Rivertop Roofing
+StormVets
+Brotherhood Roofing
+Matthew Lorand Roofing
+Integrity First Roofing & Construction
+EDP Roofing
+Proper Roofing
 ```
 
 The root route now renders a neutral preview-link-required page so a prospect cannot remove their slug and see the internal selector. The internal preview dashboard lives at `/dashboard`. Prospect-specific routes render each company from separate data objects.
@@ -86,11 +94,25 @@ lib/prospects/
   final-cut-roofing.ts
   charger-roofing.ts
   loa-construction.ts
+  rivertop-roofing.ts
+  stormvets.ts
+  brotherhood-roofing.ts
+  matthew-lorand-roofing.ts
+  integrity-first-roofing-construction.ts
+  edp-roofing.ts
+  proper-roofing.ts
 
 public/prospects/
   final-cut-roofing/
   charger-roofing/
   loa-construction/
+  rivertop-roofing/
+  stormvets/
+  brotherhood-roofing/
+  matthew-lorand-roofing/
+  integrity-first-roofing-construction/
+  edp-roofing/
+  proper-roofing/
 ```
 
 Each prospect can then have its own page:
@@ -100,6 +122,13 @@ Each prospect can then have its own page:
 /prospects/charger-roofing
 /prospects/charger-roofing/assessment
 /prospects/loa-construction
+/prospects/rivertop-roofing
+/prospects/stormvets
+/prospects/brotherhood-roofing
+/prospects/matthew-lorand-roofing
+/prospects/integrity-first
+/prospects/edp-roofing
+/prospects/proper-roofing
 ```
 
 Client-facing share URLs should use the clean root-level alias routes:
@@ -108,12 +137,26 @@ Client-facing share URLs should use the clean root-level alias routes:
 /final-cut-roofing
 /charger-roofing
 /loa-construction
+/rivertop-roofing
+/stormvets
+/brotherhood-roofing
+/matthew-lorand-roofing
+/integrity-first
+/edp-roofing
+/proper-roofing
 ```
 
 For Charger Roofing outreach, use:
 
 ```text
 https://roof-check-preview.vercel.app/charger-roofing
+```
+
+For LOA Construction review, use:
+
+```text
+/prospects/loa-construction
+/loa-construction
 ```
 
 This keeps each company's copy, images, colors, and contact information separate while allowing the shared design system to improve over time.
@@ -230,7 +273,23 @@ http://localhost:3000/dashboard
 http://localhost:3000/prospects
 http://localhost:3000/prospects/final-cut-roofing
 http://localhost:3000/prospects/charger-roofing
+http://localhost:3000/prospects/loa-construction
+http://localhost:3000/prospects/rivertop-roofing
+http://localhost:3000/prospects/stormvets
+http://localhost:3000/prospects/brotherhood-roofing
+http://localhost:3000/prospects/matthew-lorand-roofing
+http://localhost:3000/prospects/integrity-first
+http://localhost:3000/prospects/edp-roofing
+http://localhost:3000/prospects/proper-roofing
 http://localhost:3000/charger-roofing
+http://localhost:3000/loa-construction
+http://localhost:3000/rivertop-roofing
+http://localhost:3000/stormvets
+http://localhost:3000/brotherhood-roofing
+http://localhost:3000/matthew-lorand-roofing
+http://localhost:3000/integrity-first
+http://localhost:3000/edp-roofing
+http://localhost:3000/proper-roofing
 http://localhost:3000/prospects/charger-roofing/assessment
 ```
 
@@ -243,7 +302,7 @@ npm run build
 ## Notes
 
 - This is a demo, not a live client page.
-- This local demo uses public Final Cut Roofing and Charger Roofing logo/photo references for private visualization only.
+- This local demo uses public Final Cut Roofing, Charger Roofing, LOA Construction, Rivertop Roofing, StormVets, Brotherhood Roofing, Matthew Lorand Roofing, Integrity First Roofing & Construction, EDP Roofing, and Proper Roofing logo/photo references for private visualization only.
 - Do not publish personalized demos publicly without permission.
 - Do not reuse logos, images, reviews, certifications, or claims in a public/client deliverable without approval.
 - Keep prospect-specific data in `lib/prospects/` so future demos can reuse the same page component.
