@@ -6,6 +6,19 @@ Send outbound email outreach for approved prospects, then update Supabase with s
 
 This workflow should start as a manual-trigger n8n workflow. Scheduled sending can be considered only after the manual approval/send loop has been validated.
 
+## Current n8n Draft
+
+```text
+Name: Approved Outreach Dry Run
+Workflow ID: BcSmomoXyNpouHeP
+URL: https://digidap.dpons.duckdns.org/workflow/BcSmomoXyNpouHeP
+Project: Diego digidaps@gmail.com <digidaps@gmail.com>
+Status: draft/manual dry run only
+Last pinned test execution: 677
+```
+
+The current workflow does not include Gmail, email-provider, Supabase update, schedule, or publish steps. It only reads candidate Supabase rows, validates guardrails, and returns a dry-run review payload.
+
 ## Trigger
 
 Recommended first trigger:
@@ -48,6 +61,17 @@ limit 5;
 
 ## Node Outline
 
+Current dry-run workflow:
+
+```text
+Manual Trigger
+-> Supabase: fetch approved email outreach rows
+-> Code: validate guardrails
+-> Set: prepare dry-run review output
+```
+
+Future sender revision:
+
 ```text
 Manual Trigger
 -> Supabase: fetch approved prospect rows
@@ -84,6 +108,8 @@ If any guardrail fails, do not send that row. Mark it:
 outreach_send_status = failed
 outreach_last_error = clear reason
 ```
+
+In the current dry-run workflow, failed guardrails are returned in `guardrail_errors` and no database mutation occurs.
 
 ## Success Update
 

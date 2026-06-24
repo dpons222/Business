@@ -13,12 +13,21 @@ Use this checklist before publishing any n8n sender workflow.
 
 ## n8n Dry Run
 
-- [ ] Query returns only approved rows.
-- [ ] Query excludes unapproved rows.
-- [ ] Query excludes contact-form-only rows from email sending.
-- [ ] Guardrail node blocks rows with missing subject/body/email.
-- [ ] Guardrail node blocks immutable Vercel deployment URLs.
-- [ ] Workflow can run in test mode without sending.
+- [x] Query configured to return only approved rows.
+- [x] Query configured to exclude unapproved rows.
+- [x] Query configured to exclude contact-form-only rows from email sending.
+- [x] Guardrail node blocks rows with missing subject/body/email.
+- [x] Guardrail node blocks immutable Vercel deployment URLs.
+- [x] Workflow can run in test mode without sending.
+
+Dry-run evidence:
+
+```text
+Workflow: Approved Outreach Dry Run
+Workflow ID: BcSmomoXyNpouHeP
+Pinned test execution: 677
+Result: success
+```
 
 ## Send Test
 
