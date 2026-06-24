@@ -7,6 +7,7 @@ Use this folder for prospect research, outreach, and validation tracking.
 - `prospect-tracker.csv`: active prospect tracker.
 - `prospect-tracker.md`: tracker field guide and status values.
 - `first-outreach-batch.md`: first 10 shortlisted prospects and audit notes.
+- `remaining-leads.md`: non-shortlisted leads from the 30-prospect tracker for future outreach batches.
 - `outreach-script.md`: first message and follow-ups.
 - `discovery-call-questions.md`: questions for interested prospects.
 
