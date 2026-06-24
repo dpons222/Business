@@ -37,3 +37,13 @@ Timebox: 10 days
 - `marketing/`: outreach scripts, prospect tracker, and audit notes.
 - `prospects/`: company-specific recommendations, audit notes, and outreach rationale.
 - `assets/`: experiment-specific images, screenshots, logos, or demo assets.
+
+## Outreach Automation
+
+Approved outreach automation is documented in:
+
+```text
+AUTOMATIONS/outreach-approval-send/
+```
+
+Use the marketing pre-send checklist and Supabase approval fields before any n8n sender workflow is allowed to send email. Codex may prepare batches and draft evidence, but Diego must approve the exact draft and demo link before `outreach_send_status` becomes `approved`.

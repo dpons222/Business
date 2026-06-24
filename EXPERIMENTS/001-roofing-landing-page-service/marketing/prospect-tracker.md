@@ -19,6 +19,39 @@ Paid pilot
 Not a fit
 ```
 
+## Automation Approval Fields
+
+Supabase is the source of truth for approval-gated sending.
+
+Use these fields before any n8n send workflow:
+
+```text
+outreach_send_status
+outreach_approved
+outreach_approved_at
+outreach_approved_by
+outreach_batch_id
+outreach_send_channel
+outreach_draft_subject
+outreach_draft_body
+outreach_draft_path
+outreach_pre_send_checked_at
+outreach_pre_send_checked_by
+outreach_pre_send_checklist
+outreach_last_error
+```
+
+Draft preparation should set `outreach_send_status = ready_for_review`.
+
+Only Diego approval should set:
+
+```text
+outreach_approved = true
+outreach_send_status = approved
+```
+
+The initial n8n sender should only send approved rows where `outreach_send_channel = email`. Contact-form prospects remain manual until a separate workflow exists.
+
 ## Prospects
 
 | # | Business | Website | City/State | Contact Method | Reviews | Page Reviewed | Observed Issue | Outreach Angle | Date Contacted | Follow-Up 1 | Follow-Up 2 | Reply | Status | Notes |
