@@ -4,6 +4,7 @@ import { edpRoofing } from "./edp-roofing";
 import { finalCutRoofing } from "./final-cut-roofing";
 import { integrityFirstRoofingConstruction } from "./integrity-first-roofing-construction";
 import { loaConstruction } from "./loa-construction";
+import { matthewLorandRoofing } from "./matthew-lorand-roofing";
 import { properRoofing } from "./proper-roofing";
 import { rivertopRoofing } from "./rivertop-roofing";
 import { stormvets } from "./stormvets";
@@ -16,6 +17,7 @@ export { edpRoofing } from "./edp-roofing";
 export { finalCutRoofing } from "./final-cut-roofing";
 export { integrityFirstRoofingConstruction } from "./integrity-first-roofing-construction";
 export { loaConstruction } from "./loa-construction";
+export { matthewLorandRoofing } from "./matthew-lorand-roofing";
 export { properRoofing } from "./proper-roofing";
 export { rivertopRoofing } from "./rivertop-roofing";
 export { stormvets } from "./stormvets";
@@ -27,6 +29,7 @@ export const prospects: ProspectData[] = [
   rivertopRoofing,
   stormvets,
   brotherhoodRoofing,
+  matthewLorandRoofing,
   integrityFirstRoofingConstruction,
   edpRoofing,
   properRoofing,

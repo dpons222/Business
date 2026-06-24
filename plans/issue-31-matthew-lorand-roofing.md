@@ -77,28 +77,38 @@ Book a complimentary Austin storm damage inspection after hail, wind, leaks, or 
 
 - [x] GitHub Issue #31 created.
 - [x] Implementation plan created in `plans/issue-31-matthew-lorand-roofing.md`.
-- [ ] Post session-start comment when implementation begins.
+- [x] Post session-start comment when implementation begins.
 
 ## Future Implementation Checklist
 
-- [ ] Create/switch to branch `issue-31-matthew-lorand-roofing`.
-- [ ] Recheck live page and contact path.
-- [ ] Create `prospects/matthew-lorand-roofing/` docs.
-- [ ] Add `lib/prospects/matthew-lorand-roofing.ts`.
-- [ ] Register prospect in `lib/prospects/index.ts`.
-- [ ] Update README/navigation files.
-- [ ] Draft outreach email and contact form version.
-- [ ] Run build validation.
-- [ ] Verify local and preview routes.
-- [ ] Update Supabase `public.prospects`.
-- [ ] Commit, push, open PR, and link Issue #31.
+- [x] Create/switch to branch `issue-31-matthew-lorand-roofing`.
+- [x] Recheck live page and contact path.
+- [x] Create `prospects/matthew-lorand-roofing/` docs.
+- [x] Add `lib/prospects/matthew-lorand-roofing.ts`.
+- [x] Register prospect in `lib/prospects/index.ts`.
+- [x] Update README/navigation files.
+- [x] Draft outreach email and contact form version.
+- [x] Run build validation.
+- [x] Verify local and preview routes.
+- [x] Update Supabase `public.prospects`.
+- [x] Commit, push, open PR, and link Issue #31.
 
 ## Validation Plan
 
-- Build passes.
-- Matthew Lorand routes return HTTP 200.
-- Mobile copy and CTA are readable.
-- Existing prospect routes still render.
+- [x] Build passes with `npm run build`.
+- [x] `/prospects/matthew-lorand-roofing` returns HTTP 200 locally.
+- [x] `/matthew-lorand-roofing` returns HTTP 200 locally.
+- [x] Existing prospect routes still return HTTP 200 locally.
+- [x] Preview `/prospects/matthew-lorand-roofing` returns HTTP 200.
+- [x] Preview `/matthew-lorand-roofing` returns HTTP 200.
+- [x] Supabase `public.prospects` has the Matthew Lorand preview URL while status remains `not_contacted`.
+- [x] Mobile copy and CTA are readable.
+
+## Preview URL
+
+```text
+https://roof-check-preview-7ynuevgcb-dpons222-9388s-projects.vercel.app/matthew-lorand-roofing
+```
 
 ## Risks
 

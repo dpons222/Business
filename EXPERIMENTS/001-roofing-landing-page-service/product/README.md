@@ -51,6 +51,11 @@ Brotherhood Roofing uses the focused landing page convention:
 - `/prospects/brotherhood-roofing`: DFW hail and storm inspection landing page.
 - `/brotherhood-roofing`: clean client-facing alias if deployed.
 
+Matthew Lorand Roofing uses the focused landing page convention:
+
+- `/prospects/matthew-lorand-roofing`: Austin storm damage inspection landing page.
+- `/matthew-lorand-roofing`: clean client-facing alias if deployed.
+
 Integrity First Roofing & Construction uses the focused landing page convention:
 
 - `/prospects/integrity-first`: Frisco storm damage campaign page.
