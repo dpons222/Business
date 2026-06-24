@@ -35,8 +35,8 @@ Result: success
 - [x] Confirm exact approved subject is sent.
 - [x] Confirm exact approved body is sent.
 - [x] Confirm demo URL is the stable production alias.
-- [ ] Confirm Supabase status updates only after send success.
-- [ ] Confirm failed sends write `outreach_last_error`.
+- [x] Confirm Supabase status updates only after send success.
+- [x] Confirm failed sends write `outreach_last_error`.
 
 Internal send evidence:
 
@@ -49,6 +49,20 @@ Recipient: digidaps@gmail.com
 Subject: Internal test: Roof Check dashboard dry run
 Gmail message ID: 19efaf543aae87db
 Result: success
+```
+
+Approved sender evidence:
+
+```text
+Workflow: Manual Approved Prospect Email Sender
+Workflow ID: 5cyJ9A7RaQ1ZGBtJ
+Pinned success-path test execution: 684
+Pinned guardrail-failure test execution: 685
+Pinned no-limit branch test execution: 686
+Default batchLimit: 3
+noLimit supported: true
+Result: success
+Live prospect emails sent: 0
 ```
 
 ## Production Pilot

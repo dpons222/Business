@@ -37,6 +37,23 @@ Gmail message ID: 19efaf543aae87db
 
 The internal send workflow fetches only `prospect_slug = internal-test-digidap-dashboard` and `contact_email = digidaps@gmail.com`, then sends the exact stored subject/body to `digidaps@gmail.com`. It is not a real prospect sender.
 
+Manual approved prospect sender workflow:
+
+```text
+Name: Manual Approved Prospect Email Sender
+Workflow ID: 5cyJ9A7RaQ1ZGBtJ
+URL: https://digidap.dpons.duckdns.org/workflow/5cyJ9A7RaQ1ZGBtJ
+Project: Diego digidaps@gmail.com <digidaps@gmail.com>
+Status: draft/manual approved sender only
+Default batchLimit: 3
+Supports noLimit: true via Sender Config
+Pinned success-path test execution: 684
+Pinned guardrail-failure test execution: 685
+Pinned no-limit branch test execution: 686
+```
+
+The manual approved sender has not been executed against live prospect rows. It must be run only after Diego approves rows in Supabase and the dry-run workflow passes.
+
 ## Trigger
 
 Recommended first trigger:
@@ -102,14 +119,20 @@ Future sender revision:
 
 ```text
 Manual Trigger
--> Supabase: fetch approved prospect rows
--> IF: no rows found
-   -> Stop / return "No approved outreach rows"
--> Split In Batches
+-> Set: Sender Config
+   -> batchLimit = 3 by default
+   -> noLimit = false by default
+-> IF: Use No Limit?
+   -> true: Supabase fetch all approved email rows
+   -> false: Supabase fetch approved email rows up to batchLimit
 -> Code: validate guardrails
--> Gmail or email provider: send exact approved subject/body
--> Supabase: mark sent or failed
--> Optional notification to Diego with send summary
+-> IF: guardrails passed?
+   -> true: Gmail sends exact approved subject/body
+      -> Code: normalize Gmail result
+      -> IF: Gmail message ID exists?
+         -> true: Supabase marks sent/contacted and sets follow-up dates
+         -> false: Supabase marks failed with Gmail error
+   -> false: Supabase marks failed with guardrail error
 ```
 
 ## Guardrail Validation
@@ -148,6 +171,13 @@ outreach_last_error = clear reason
 ```
 
 In the current dry-run workflow, failed guardrails are returned in `guardrail_errors` and no database mutation occurs.
+
+In the approved sender workflow, failed guardrails update the row:
+
+```text
+outreach_send_status = failed
+outreach_last_error = Guardrail blocked send: ...
+```
 
 ## Success Update
 
@@ -192,7 +222,22 @@ should not go through this email sender. A later workflow can create manual task
 
 ## Rate Limit
 
-Start with a batch size of 3-5 prospects. Do not send larger batches until reply quality, deliverability, and tracking are validated.
+Start with a batch size of 3 prospects. Do not send larger batches until reply quality, deliverability, and tracking are validated.
+
+The approved sender's `Sender Config` node controls batch size:
+
+```text
+batchLimit = 3
+noLimit = false
+```
+
+To intentionally send every currently approved email row, set:
+
+```text
+noLimit = true
+```
+
+Use `noLimit = true` only after checking the dry-run output and confirming every approved row should be sent.
 
 ## Safety
 
