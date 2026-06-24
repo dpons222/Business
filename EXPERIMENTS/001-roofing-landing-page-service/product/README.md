@@ -36,6 +36,11 @@ LOA Construction uses the focused landing page convention:
 - `/prospects/loa-construction`: Austin hail inspection landing page.
 - `/loa-construction`: clean client-facing alias if deployed.
 
+StormVets uses the focused landing page convention:
+
+- `/prospects/stormvets`: Frisco storm inspection landing page.
+- `/stormvets`: clean client-facing alias if deployed.
+
 Use shadcn/ui for forms, stateful controls, accordions, badges, and assessment UI where it improves quality. Do not use it as a generic skin over the same repeated layout.
 
 ## Rule
