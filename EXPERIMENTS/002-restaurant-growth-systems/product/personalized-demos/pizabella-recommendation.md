@@ -8,7 +8,16 @@ Website: https://landing.arrowpos.com/home/pizzabella
 Order URL: https://onboarding.arrowpos.com/pizzabella_woodstock
 City/state: Woodstock, VA
 Cuisine or concept: Italian, pizza, pasta, subs, wings, pickup, delivery, dine-in
-Contact method: Needs manual verification
+Contact method: Public phone/Facebook verified; no verified business email found
+```
+
+Updated contact read, June 25, 2026:
+
+```text
+Phone and Facebook are publicly verified contact paths.
+No verified business email found.
+Recommended send path: manual Facebook message or phone-assisted owner/manager contact verification.
+Do not use email automation unless a proper recipient email is verified later.
 ```
 
 ## Source Reviewed

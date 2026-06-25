@@ -27,7 +27,22 @@ Brand colors observed: red navigation #A13D31, black primary #000000, white cont
 - ArrowPOS online ordering page: `https://onboarding.arrowpos.com/pizzabella_woodstock`
 - Town of Woodstock dining directory: `https://www.woodstockva.gov/658/Explore-Woodstock`
 - Facebook listing surfaced in search: `https://www.facebook.com/pizzabellainwoodstock/`
+- Virginia.org listing: `https://www.virginia.org/listing/pizza-bella/31233/`
 - Local pizza roundup mentioning Pizza Bella: `https://www.criswelljeepofwoodstock.com/blogs/4611/drive-on-over-3-of-the-best-pizza-places-near-woodstock-va/`
+
+## Contact Verification
+
+Updated June 25, 2026.
+
+Verified public contact details:
+
+```text
+Phone: 540-459-5363
+Address: 1013 S Main St, Woodstock, VA 22664
+Facebook: https://www.facebook.com/pizzabellainwoodstock/
+```
+
+No verified business email was found in public checks. Keep outreach as manual Facebook/message or phone-assisted contact verification unless a proper email is verified later.
 
 ## Observed Issues
 
@@ -218,4 +233,4 @@ I noticed your online ordering is already set up, but the public site around it 
 - Do not promise more orders, revenue, rankings, reviews, or delivery volume.
 - Do not imply Pizabella approved this recommendation.
 - Do not use any unapproved food photos in a public demo.
-- Verify contact method before outreach.
+- Phone/Facebook contact paths are publicly verified, but no email is verified. Do not use email automation unless an appropriate recipient email is found.

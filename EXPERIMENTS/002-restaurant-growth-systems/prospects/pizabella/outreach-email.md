@@ -23,17 +23,27 @@ Use the public route only after review. The email should explain that it is a co
 Current status:
 
 ```text
-Needs manual verification.
+Verified for manual outreach via public phone/Facebook. No verified business email found.
 ```
 
-Publicly visible contact paths reviewed:
+Publicly visible contact paths reviewed and re-verified June 25, 2026:
 
 - Phone: `540-459-5363`
 - Website: `https://landing.arrowpos.com/home/pizzabella`
 - Order page: `https://onboarding.arrowpos.com/pizzabella_woodstock`
-- Facebook page surfaced in search: `https://www.facebook.com/pizzabellainwoodstock/`
+- Facebook page: `https://www.facebook.com/pizzabellainwoodstock/`
+- Address: `1013 S. Main St., Woodstock, VA 22664`
+- Hours page: Sunday-Thursday 11am-10pm; Friday-Saturday 11am-11pm
 
-Do not use any email found only in source code until it is verified as an appropriate business outreach contact.
+No verified business email was found. Do not use email automation until a recipient email is verified as appropriate for business outreach.
+
+Recommended send path for now:
+
+```text
+Manual Facebook message or phone-assisted owner/manager contact verification.
+```
+
+The email-style draft below can still be used as the source copy for a manual message or future email if a verified email is found.
 
 ## First Email
 
@@ -70,6 +80,12 @@ Diego
 
 ```text
 Hi, I had a practical cleanup idea for Pizza Bella. Your online ordering is active, but the public site around it looks unfinished in a few places, including placeholder About copy. I would start with a focused customer journey cleanup: Home/About/Hours copy, order path review, top menu description/photo recommendations, public order-link cleanup, and a weekly specials workflow. I put together a short preview of what I would clean up first if useful. - Diego
+```
+
+## Short Manual Facebook Version
+
+```text
+Hi, I was looking at Pizza Bella's online ordering path and noticed the order system is live, but the public site around it still looks unfinished in a few places, including the About page. I put together a short customer-facing preview and a practical cleanup idea around Home/About copy, order links, menu highlights, and weekly specials. Would it be useful if I sent it over? - Diego
 ```
 
 ## Follow-Up 1
@@ -115,6 +131,8 @@ Before sending:
 - Verify the order URL still loads.
 - Verify the restaurant name, phone, and address.
 - Verify the contact method.
+- If sending by email, verify a real business email first. None is currently verified.
+- If sending manually, use the Facebook/manual message version or phone-assisted contact verification.
 - Review the customer-facing demo route and decide whether to send it as a link, screenshot, or not at all.
 - Keep audit notes, pricing, and implementation recommendations in internal docs or the email body, not on the public route.
 - Confirm no unapproved claims are made.
