@@ -10,7 +10,7 @@ export default function Home() {
     <main className="preview-gate">
       <VercelDashboardRedirect />
       <section className="preview-gate-panel" aria-labelledby="preview-gate-title">
-        <p className="eyebrow">Roof Check Preview</p>
+        <p className="eyebrow">local-growth-preview</p>
         <h1 id="preview-gate-title">Preview link required</h1>
         <p>Use the direct preview link you were provided.</p>
       </section>
