@@ -25,6 +25,7 @@ Status: researched
 - `client-summary.md`: client-facing explanation of the recommended pilot.
 - `outreach-email.md`: exact first outreach draft and follow-ups.
 - `campaign-tracking-strategy.md`: pilot tracking and review plan.
+- `pricing-strategy.md`: pilot price, monthly support, add-ons, discount rules, and proposal language.
 
 ## Current Read
 
