@@ -6,20 +6,20 @@ Create a focused San Antonio storm damage / roof inspection landing page for Tex
 
 ## Why This Prospect Fits
 
-The homepage lists roof inspection, emergency roof repair, storm damage roof repair, and current San Antonio hail damage guide content.
+The site lists free detailed roof inspections, emergency roof repair, storm damage roof repair, insurance-claim support, and current San Antonio hail damage guide content.
 
 ## Observed Opportunity
 
-Texas Star's homepage covers several services; storm wear and emergency inspection traffic can use a narrower conversion path.
+Texas Star has a free inspection path plus emergency and storm services, but the homepage splits attention across several roofing and construction paths.
 
 ## Demo Direction
 
-Give San Antonio homeowners one measured storm inspection path after hail, wind, leaks, or emergency roof concerns.
+Give San Antonio homeowners one measured free-inspection path after hail, wind, leaks, or emergency roof concerns.
 
 Primary CTA:
 
 ```text
-Get Quote
+Schedule Free Roof Inspection
 ```
 
 Stable URL target after deployment:

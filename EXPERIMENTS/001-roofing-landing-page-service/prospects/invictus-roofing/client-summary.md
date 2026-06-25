@@ -6,7 +6,7 @@ A focused Frisco storm inspection page that gives homeowners one clear next step
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Request Free Roof Inspection.
+The Frisco page already highlights free inspections and estimates, roof repairs, storm and hail damage, and homeowner decision guidance. The demo narrows that into a campaign page built around one action: Request Free Roof Inspection.
 
 ## Demo URL Target
 

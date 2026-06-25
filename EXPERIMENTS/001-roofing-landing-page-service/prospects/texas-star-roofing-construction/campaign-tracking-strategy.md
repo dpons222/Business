@@ -14,7 +14,7 @@ Test whether a focused San Antonio storm inspection page gets clearer inspection
 ## Primary Conversion
 
 ```text
-Get Quote
+Schedule Free Roof Inspection
 ```
 
 ## Metrics

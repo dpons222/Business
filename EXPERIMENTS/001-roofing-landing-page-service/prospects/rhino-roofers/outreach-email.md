@@ -6,7 +6,7 @@
 
 Hi Rhino Roofers,
 
-I was reviewing roofing companies in San Antonio and noticed your current page already has useful material around inspections, storm concerns, and next-step roofing help.
+I was reviewing roofing companies in San Antonio and noticed your homepage already has strong proof around the free 37-point roof inspection, 4.9 Google rating, 1,350+ five-star reviews, and San Antonio/Austin service area.
 
 My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
@@ -49,7 +49,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Rhino Roofers, I noticed your current page already has useful inspection and storm-related material. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Rhino?
+Hi Rhino Roofers, I noticed your homepage already has strong proof around the free 37-point roof inspection, 4.9 Google rating, 1,350+ five-star reviews, and San Antonio/Austin service area. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Rhino?
 
 Best,
 Diego

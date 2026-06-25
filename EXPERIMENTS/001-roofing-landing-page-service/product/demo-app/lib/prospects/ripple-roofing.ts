@@ -13,6 +13,8 @@ export const rippleRoofing: ProspectData = {
   recommendedCta: "Schedule Free Inspection Today",
   secondaryCta: "Call (512) 763-5277",
   trustSignal: "Free roof inspections, 24/7 emergency service, 5.0 Google rating, 63 reviews, CertainTeed certification, and 50-point inspection language on Waco page",
+  rating: "5.0 Google",
+  reviewCount: "63 reviews",
   projectImages: [],
   brand: {
     primary: "#0D5C63",
@@ -27,7 +29,7 @@ export const rippleRoofing: ProspectData = {
   trustLine: "The Waco page promotes free roof inspections, 24/7 emergency service, CertainTeed certification, 5.0 Google rating, 63 reviews, same-day availability, and 50-point inspections.",
   formReassurance: "No pressure. Ripple can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Waco storm inspection",
-  galleryHeading: "Turn Ripple's current proof into a focused storm inspection request path.",
+  galleryHeading: "Turn Ripple's 5.0-rated Waco proof into a focused storm inspection request path.",
   pageAngle: "Give Waco homeowners one action after severe weather: request a free inspection and understand visible damage before deciding what comes next.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Waco storm",

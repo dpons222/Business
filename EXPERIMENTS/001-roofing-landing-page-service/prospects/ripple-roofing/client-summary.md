@@ -6,7 +6,7 @@ A focused Waco storm inspection page that gives homeowners one clear next step a
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Schedule Free Inspection Today.
+The Waco page already has a strong storm-response offer: free inspections, 24/7 emergency service, 5.0 Google rating, 63 reviews, CertainTeed certification, and 50-point inspection language. The demo narrows that into a campaign page built around one action: Schedule Free Inspection Today.
 
 ## Demo URL Target
 

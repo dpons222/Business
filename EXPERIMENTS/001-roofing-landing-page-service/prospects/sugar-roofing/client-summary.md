@@ -6,7 +6,7 @@ A focused Houston storm inspection page that gives homeowners one clear next ste
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Get Free Estimate.
+The Houston page already promotes free roof inspections, hail damage repair, wind damage repair, hurricane damage help, and claim assistance. The demo narrows that into a campaign page built around one action: Get Free Estimate.
 
 ## Demo URL Target
 

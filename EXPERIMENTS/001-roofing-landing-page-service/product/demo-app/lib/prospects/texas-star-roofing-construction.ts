@@ -9,10 +9,10 @@ export const texasStarRoofingConstruction: ProspectData = {
   serviceArea: "San Antonio and nearby Central Texas communities",
   phone: "(210) 649-4300",
   phoneHref: "tel:2106494300",
-  primaryService: "San Antonio storm and emergency roof inspection",
-  recommendedCta: "Get Quote",
+  primaryService: "San Antonio free roof inspection and storm damage help",
+  recommendedCta: "Schedule Free Roof Inspection",
   secondaryCta: "Call (210) 649-4300",
-  trustSignal: "Homepage lists roof inspection, emergency roof repair, storm damage roof repair, and San Antonio hail damage guide content",
+  trustSignal: "Live site lists free detailed roof inspections, emergency roof repair, storm damage roof repair, insurance claim support, and San Antonio hail damage guide content",
   logoUrl: "https://tsrcinc.com/wp-content/uploads/2025/12/tx-star-roofing-construction-w.png",
   heroImageUrl: "https://tsrcinc.com/wp-content/uploads/2025/12/san-antonio-roofing-company-1.jpg",
   projectImages: [
@@ -35,15 +35,15 @@ export const texasStarRoofingConstruction: ProspectData = {
     accent: "#D62828",
     accentSoft: "#F4CACA"
   },
-  sourceWebsite: "https://tsrcinc.com/",
-  observedIssue: "Texas Star's homepage covers several services; storm wear and emergency inspection traffic can use a narrower conversion path.",
-  headline: "San Antonio Storm Wear or Roof Damage? Request an Inspection.",
-  subheadline: "Texas Star Roofing & Construction can help homeowners move from severe-weather concern to a clear roof inspection or emergency-repair conversation.",
-  trustLine: "The homepage lists roof inspection, emergency roof repair, storm damage roof repair, and current San Antonio hail damage guide content.",
+  sourceWebsite: "https://tsrcinc.com/roof-inspection-san-antonio/",
+  observedIssue: "Texas Star has a free roof inspection path plus emergency and storm services, but the homepage splits attention across several roofing and construction paths.",
+  headline: "San Antonio Storm Damage? Schedule a Free Roof Inspection.",
+  subheadline: "Texas Star Roofing & Construction can help homeowners move from severe-weather concern to a clear free-inspection or emergency-repair conversation.",
+  trustLine: "The live site lists free detailed roof inspections, emergency roof repair, storm damage roof repair, insurance claim support, and the direct San Antonio phone number.",
   formReassurance: "No pressure. Texas Star can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "San Antonio storm inspection",
-  galleryHeading: "Turn Texas Star's current proof into a focused storm inspection request path.",
-  pageAngle: "Give San Antonio homeowners one measured storm inspection path after hail, wind, leaks, or emergency roof concerns.",
+  galleryHeading: "Turn Texas Star's free-inspection proof into a focused storm request path.",
+  pageAngle: "Give San Antonio homeowners one measured inspection path after hail, wind, leaks, or emergency roof concerns.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a San Antonio storm",
     "Lifted, missing, or wind-creased shingles",
@@ -81,7 +81,7 @@ export const texasStarRoofingConstruction: ProspectData = {
     },
     {
       question: "What is the first action for a homeowner?",
-      answer: "The first action is to request the San Antonio storm and emergency roof inspection, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
+      answer: "The first action is to schedule the San Antonio free roof inspection, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
     },
     {
       question: "Why keep the page this focused?",

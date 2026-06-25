@@ -6,7 +6,7 @@ A focused Dallas County storm inspection page that gives homeowners one clear ne
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Request Free Roof Inspection.
+The Dallas County page already highlights free roof inspections, storm/tornado/hail repair, and direct insurance-company coordination. The demo narrows that into a campaign page built around one action: Request Free Roof Inspection.
 
 ## Demo URL Target
 

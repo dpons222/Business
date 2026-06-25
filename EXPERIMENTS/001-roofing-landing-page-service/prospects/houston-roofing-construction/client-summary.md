@@ -6,7 +6,7 @@ A focused Houston storm inspection page that gives homeowners one clear next ste
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Schedule Free Roof Inspection.
+The free inspection page already emphasizes no-cost inspections, free quotes, certified roofers, and a no-pressure process. The demo narrows that into a campaign page built around one action: Schedule Free Roof Inspection.
 
 ## Demo URL Target
 

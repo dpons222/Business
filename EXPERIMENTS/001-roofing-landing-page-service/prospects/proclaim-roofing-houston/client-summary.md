@@ -6,7 +6,7 @@ A focused Houston storm inspection page that gives homeowners one clear next ste
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Request Free Storm Inspection.
+The Houston page already has a strong free drone inspection, written report, and same-day estimate offer. The demo narrows that into a campaign page built around one action: Request Free Storm Inspection.
 
 ## Demo URL Target
 

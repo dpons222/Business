@@ -6,7 +6,7 @@ A focused Fort Worth storm inspection page that gives homeowners one clear next 
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Request a Free Roof Inspection.
+The Fort Worth page already has free no-obligation assessment proof, photo assessment report language, Google review proof, GAF credentials, and storm/hail services. The demo narrows that into a campaign page built around one action: Request a Free Roof Inspection.
 
 ## Demo URL Target
 

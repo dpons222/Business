@@ -6,7 +6,7 @@ A focused San Antonio storm inspection page that gives homeowners one clear next
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Get Quote.
+The site already has a free roof inspection path, emergency roof repair, storm damage roof repair, and insurance-claim support language. The demo narrows that into a campaign page built around one action: Schedule Free Roof Inspection.
 
 ## Demo URL Target
 
@@ -16,4 +16,4 @@ https://roof-check-preview.vercel.app/texas-star-roofing-construction
 
 ## Messaging Angle
 
-Texas Star Roofing & Construction can help homeowners move from severe-weather concern to a clear roof inspection or emergency-repair conversation.
+Texas Star Roofing & Construction can help homeowners move from severe-weather concern to a clear free-inspection or emergency-repair conversation.

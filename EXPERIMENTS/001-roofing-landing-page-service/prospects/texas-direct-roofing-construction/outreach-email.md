@@ -6,7 +6,7 @@
 
 Hi Texas Direct Roofing & Construction,
 
-I was reviewing roofing companies in Dallas-Fort Worth and noticed your current page already has useful material around inspections, storm concerns, and next-step roofing help.
+I was reviewing roofing companies in Dallas-Fort Worth and noticed your homepage already has a strong storm-damage offer: free inspections, same-day response, 450+ 5-star reviews, lifetime labor warranty, and Owens Corning Platinum Preferred proof.
 
 My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
@@ -49,7 +49,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Texas Direct Roofing & Construction, I noticed your current page already has useful inspection and storm-related material. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Texas Direct?
+Hi Texas Direct Roofing & Construction, I noticed your homepage already has a strong storm-damage offer: free inspections, same-day response, 450+ 5-star reviews, lifetime labor warranty, and Owens Corning Platinum Preferred proof. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Texas Direct?
 
 Best,
 Diego

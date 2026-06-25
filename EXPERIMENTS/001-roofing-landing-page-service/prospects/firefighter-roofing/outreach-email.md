@@ -6,7 +6,7 @@
 
 Hi Firefighter Roofing,
 
-I was reviewing roofing companies in Fort Worth and noticed your current page already has useful material around inspections, storm concerns, and next-step roofing help.
+I was reviewing roofing companies in Fort Worth and noticed your roof inspection article already does a good job explaining why post-storm inspections, photos, and written assessments matter.
 
 My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
@@ -49,7 +49,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Firefighter Roofing, I noticed your current page already has useful inspection and storm-related material. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Firefighter?
+Hi Firefighter Roofing, I noticed your roof inspection article already does a good job explaining why post-storm inspections, photos, and written assessments matter. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Firefighter?
 
 Best,
 Diego

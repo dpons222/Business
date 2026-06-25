@@ -13,6 +13,8 @@ export const rhinoRoofers: ProspectData = {
   recommendedCta: "Book My Free Roof Inspection",
   secondaryCta: "Call (210) 361-7663",
   trustSignal: "Free 37-point inspection, 1,350+ five-star reviews language, 4.9 Google rating, and San Antonio/Austin service area proof",
+  rating: "4.9 Google",
+  reviewCount: "1,350+ reviews",
   logoUrl: "https://rhinoroofers.com/wp-content/uploads/2022/09/rhino-roofers-white-2.png",
   projectImages: [
     {
@@ -38,7 +40,7 @@ export const rhinoRoofers: ProspectData = {
   observedIssue: "Rhino's homepage has strong inspection and review proof; a storm-specific page can isolate hail/wind traffic without replacing the main site.",
   headline: "San Antonio Storm Damage? Book a Free 37-Point Roof Inspection.",
   subheadline: "Rhino Roofers can give homeowners a clear assessment path after hail, wind, or leaks by centering the free 37-point inspection and trusted review proof.",
-  trustLine: "The homepage promotes free roof inspections, a free 37-point inspection, 1,350+ five-star reviews, and service across San Antonio, Austin, Round Rock, and Central Texas.",
+  trustLine: "The homepage promotes free roof inspections, a free 37-point inspection, 4.9 Google proof, 1,350+ five-star reviews, and service across San Antonio, Austin, Round Rock, and Central Texas.",
   formReassurance: "No pressure. Rhino can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "San Antonio storm inspection",
   galleryHeading: "Turn Rhino's current proof into a focused storm inspection request path.",

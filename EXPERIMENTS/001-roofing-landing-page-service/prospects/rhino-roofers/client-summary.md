@@ -6,7 +6,7 @@ A focused San Antonio storm inspection page that gives homeowners one clear next
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Book My Free Roof Inspection.
+The homepage already has strong proof around the free 37-point roof inspection, 4.9 Google rating, 1,350+ five-star reviews, and San Antonio/Austin service area. The demo narrows that into a campaign page built around one action: Book My Free Roof Inspection.
 
 ## Demo URL Target
 

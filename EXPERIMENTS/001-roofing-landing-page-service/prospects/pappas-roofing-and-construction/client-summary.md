@@ -6,7 +6,7 @@ A focused Plano storm inspection page that gives homeowners one clear next step 
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Schedule Now.
+The homepage already asks visitors to schedule a hassle-free roof inspection while highlighting storm damage, hail damage, insurance claims, and GAF Master Elite proof. The demo narrows that into a campaign page built around one action: Schedule Now.
 
 ## Demo URL Target
 

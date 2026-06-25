@@ -6,7 +6,7 @@ A focused Fort Worth storm inspection page that gives homeowners one clear next 
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Schedule Free Inspection & Quote.
+The homepage already promotes a free inspection and quote, emergency tarping, financing, and lifetime warranty language. The demo narrows that into a campaign page built around one action: Schedule Free Inspection & Quote.
 
 ## Demo URL Target
 

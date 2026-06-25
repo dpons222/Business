@@ -6,7 +6,7 @@ A focused Fort Worth storm inspection page that gives homeowners one clear next 
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Get a Free Roof Quote.
+The Fort Worth inspection article already explains post-storm inspection timing, photos, and written assessments. The demo narrows that into a campaign page built around one action: Get a Free Roof Quote.
 
 ## Demo URL Target
 

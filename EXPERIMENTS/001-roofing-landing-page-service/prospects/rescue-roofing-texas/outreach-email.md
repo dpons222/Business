@@ -6,7 +6,7 @@
 
 Hi Rescue Roofing Texas,
 
-I was reviewing roofing companies in Dallas County and noticed your current page already has useful material around inspections, storm concerns, and next-step roofing help.
+I was reviewing roofing companies in Dallas County and noticed your Dallas County page already has a clear offer for free roof inspections, storm/tornado/hail repair, and direct insurance-company coordination.
 
 My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
@@ -49,7 +49,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Rescue Roofing Texas, I noticed your current page already has useful inspection and storm-related material. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Rescue?
+Hi Rescue Roofing Texas, I noticed your Dallas County page already has a clear offer for free roof inspections, storm/tornado/hail repair, and direct insurance-company coordination. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Rescue?
 
 Best,
 Diego

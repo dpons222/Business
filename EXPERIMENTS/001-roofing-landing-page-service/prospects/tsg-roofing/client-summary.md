@@ -6,7 +6,7 @@ A focused Texas storm inspection page that gives homeowners one clear next step 
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Schedule Free Roof Inspection.
+The repair/restoration page already highlights free consultations, hail and storm damage inspections, and insurance claim support. The demo narrows that into a campaign page built around one action: Schedule Free Roof Inspection.
 
 ## Demo URL Target
 

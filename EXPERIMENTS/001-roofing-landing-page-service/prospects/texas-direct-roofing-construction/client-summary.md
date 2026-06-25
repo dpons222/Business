@@ -6,7 +6,7 @@ A focused Dallas-Fort Worth storm inspection page that gives homeowners one clea
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Request a Free Inspection.
+The homepage already has strong proof around free inspections, same-day response, 450+ 5-star reviews, lifetime labor warranty, and Owens Corning Platinum Preferred status. The demo narrows that into a campaign page built around one action: Request a Free Inspection.
 
 ## Demo URL Target
 

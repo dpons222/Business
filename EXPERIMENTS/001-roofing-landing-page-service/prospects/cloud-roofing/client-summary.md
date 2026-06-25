@@ -6,7 +6,7 @@ A focused San Antonio storm inspection page that gives homeowners one clear next
 
 ## Why It Helps
 
-The current page already has useful proof and service information. The demo narrows that into a campaign page built around one action: Get Free Quote.
+The emergency roof repair page already has strong proof: service since 1975, free inspections and quotes, plus hail, wind, tree, and leak repair paths. The demo narrows that into a campaign page built around one action: Get Free Quote.
 
 ## Demo URL Target
 
