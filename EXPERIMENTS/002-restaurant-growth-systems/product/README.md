@@ -9,7 +9,7 @@ Use this folder for the reusable restaurant recommendation and implementation mo
 - `solution-copy-deck.md`: reusable copy blocks for recommendations, outreach, and future demos.
 - `personalization-rules.md`: what to personalize before outreach, after reply, and during a paid pilot.
 - `personalized-demo-template.md`: template for future prospect-specific recommendation briefs.
-- `personalized-demos/`: future light recommendation/demo briefs for specific restaurants.
+- `personalized-demos/`: light recommendation/demo briefs for specific restaurants, including the Pizabella audit preview.
 
 ## Product Principle
 

@@ -2,6 +2,16 @@
 
 Do not send until the contact method is verified and the restaurant marketing pre-send checklist is completed.
 
+## Audit Preview
+
+Internal review file:
+
+```text
+EXPERIMENTS/002-restaurant-growth-systems/product/personalized-demos/pizabella-audit-preview.html
+```
+
+Use this only after review. Do not attach or link it until the page state, contact method, and pre-send checklist are verified.
+
 ## Contact Method
 
 Current status:
@@ -45,7 +55,7 @@ My first recommendation would not be a full rebuild. It would be a focused custo
 
 The goal would be to make the guest path clearer before someone orders, without changing your POS or promising anything unrealistic.
 
-Would it be useful if I sent over a short example of what I would clean up first?
+I put together a short preview of what I would clean up first. Would it be useful if I sent that over?
 
 Diego
 ```
@@ -53,7 +63,7 @@ Diego
 ## Short Contact Form Version
 
 ```text
-Hi, I had a practical cleanup idea for Pizza Bella. Your online ordering is active, but the public site around it looks unfinished in a few places, including placeholder About copy. I would start with a focused customer journey cleanup: Home/About/Hours copy, order path review, top menu description/photo recommendations, public order-link cleanup, and a weekly specials workflow. If useful, I can send a short example of what I would clean up first. - Diego
+Hi, I had a practical cleanup idea for Pizza Bella. Your online ordering is active, but the public site around it looks unfinished in a few places, including placeholder About copy. I would start with a focused customer journey cleanup: Home/About/Hours copy, order path review, top menu description/photo recommendations, public order-link cleanup, and a weekly specials workflow. I put together a short preview of what I would clean up first if useful. - Diego
 ```
 
 ## Follow-Up 1
@@ -99,5 +109,6 @@ Before sending:
 - Verify the order URL still loads.
 - Verify the restaurant name, phone, and address.
 - Verify the contact method.
+- Review the audit preview and decide whether to send it as a link, attachment, screenshot, or not at all.
 - Confirm no unapproved claims are made.
 - Update the prospect tracker after sending.
