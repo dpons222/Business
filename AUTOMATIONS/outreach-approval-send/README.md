@@ -48,6 +48,29 @@ outreach_approved_at is not null
 outreach_approved_by is not null
 ```
 
+## Status Field Meanings
+
+`public.prospects.status` tracks the relationship/contact lifecycle:
+
+```text
+not_contacted = no outbound outreach has been sent yet
+contacted = an outbound email or contact form message was actually sent
+```
+
+`public.prospects.outreach_send_status` tracks the automation approval/send lifecycle:
+
+```text
+not_ready = draft, demo, contact method, or checklist evidence is incomplete
+ready_for_review = Codex prepared the draft/demo and Diego needs to review it
+approved = Diego approved the exact draft and demo URL for n8n sending
+queued = n8n picked up the row and is preparing or attempting the send
+sent = the email provider confirmed the message was sent
+failed = n8n or the email provider failed the send attempt
+skipped = n8n or the operator intentionally skipped the row
+```
+
+Rule of thumb: `status` answers whether the prospect has been contacted; `outreach_send_status` answers where the row is in the approval/send workflow.
+
 ## Files
 
 - `workflow-spec.md`: n8n workflow stages, inputs, output updates, and guardrails.

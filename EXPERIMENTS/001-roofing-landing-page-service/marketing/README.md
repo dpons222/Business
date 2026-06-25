@@ -41,3 +41,26 @@ Use this when preparing 3-5 prospects for an approved outreach batch:
 7. n8n may send only approved email rows. Contact-form rows remain manual until a separate workflow exists.
 
 Do not mark a row approved just because a draft exists. Approval means the exact message and demo link are ready to send.
+
+## Supabase Status Meanings
+
+Use `status` for the prospect relationship/contact lifecycle:
+
+```text
+not_contacted = no outbound outreach has been sent yet
+contacted = an outbound email or contact form message was actually sent
+```
+
+Use `outreach_send_status` for the automation approval/send lifecycle:
+
+```text
+not_ready = draft, demo, contact method, or checklist evidence is incomplete
+ready_for_review = Codex prepared the draft/demo and Diego needs to review it
+approved = Diego approved the exact draft and demo URL for n8n sending
+queued = n8n picked up the row and is preparing or attempting the send
+sent = the email provider confirmed the message was sent
+failed = n8n or the email provider failed the send attempt
+skipped = n8n or the operator intentionally skipped the row
+```
+
+Do not set `status = contacted` until outreach was actually sent. Do not set `outreach_send_status = approved` unless `outreach_approved = true` and Diego has approved the exact draft, stable demo URL, and contact method.

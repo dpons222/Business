@@ -27,8 +27,9 @@ alter table public.prospects
   add constraint prospects_outreach_send_channel_check
   check (outreach_send_channel is null or outreach_send_channel in ('email', 'contact_form', 'manual'));
 
-comment on column public.prospects.outreach_send_status is 'Approval-gated automation status for outbound sends: not_ready, ready_for_review, approved, queued, sent, failed, skipped.';
-comment on column public.prospects.outreach_approved is 'True only after Diego explicitly approves the exact draft/demo/contact method for sending.';
+comment on column public.prospects.status is 'Relationship/contact lifecycle for the prospect, such as not_contacted before outreach and contacted only after an outbound message has actually been sent.';
+comment on column public.prospects.outreach_send_status is 'Approval-gated automation lifecycle for outbound outreach: not_ready = draft/demo/contact details are incomplete; ready_for_review = prepared for Diego review; approved = exact draft and demo URL approved for n8n when outreach_approved is true; queued = picked up by automation; sent = provider confirmed send; failed = send attempt failed; skipped = intentionally skipped by guardrail or operator decision.';
+comment on column public.prospects.outreach_approved is 'Human approval gate for automated outreach. Must be true, alongside outreach_send_status = approved and completed pre-send evidence, before n8n may send an email.';
 comment on column public.prospects.outreach_approved_at is 'Timestamp when the outreach draft was approved for sending.';
 comment on column public.prospects.outreach_approved_by is 'Person or operator who approved the outreach draft.';
 comment on column public.prospects.outreach_batch_id is 'Human-readable batch ID for grouped outreach review, e.g. roofing-2026-06-batch-01.';
