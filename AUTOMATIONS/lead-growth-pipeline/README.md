@@ -40,6 +40,160 @@ AUTOMATIONS/lead-growth-pipeline/scripts/Test-ProspectPackage.ps1
 10. Diego reviews the exact draft and contact method before any send.
 ```
 
+## How To Use
+
+Use this package when you want to move from a niche experiment to review-ready prospect outreach.
+
+### 1. Pick The Experiment
+
+Start with one existing growth-system experiment:
+
+```text
+EXPERIMENTS/003-hvac-growth-systems/
+EXPERIMENTS/004-remodeler-growth-systems/
+EXPERIMENTS/005-med-spa-growth-systems/
+EXPERIMENTS/006-dental-implant-cosmetic-growth-systems/
+EXPERIMENTS/007-personal-injury-law-growth-systems/
+```
+
+Example prompt:
+
+```text
+Use lead-growth-pipeline for HVAC prospects in Indianapolis. Do not send outreach. Find and qualify 10 candidates, then create packages only for the strongest 3.
+```
+
+### 2. Source And Qualify Prospects
+
+For each candidate business, collect enough public information to decide whether it is worth a prospect package:
+
+- business name,
+- website,
+- city/state,
+- service focus,
+- contact method,
+- current public customer journey reviewed,
+- observed issue,
+- likely recommendation category.
+
+Add or update rows in:
+
+```text
+<experiment>/marketing/prospect-tracker.csv
+```
+
+Use statuses such as:
+
+```text
+sourced
+researched
+qualified
+bad_fit
+paused
+```
+
+### 3. Diagnose The Public Journey
+
+Use the installed skill:
+
+```text
+C:\Users\Diego\.codex\skills\lead-growth-pipeline\
+```
+
+The diagnosis should choose one best first recommendation and preserve other useful ideas:
+
+```text
+Primary recommendation:
+- replacement_quote_page
+
+Secondary recommendations:
+- missed_lead_followup
+- financing_rebate_clarity
+
+Future opportunities:
+- maintenance_plan_signup after the first pilot
+```
+
+Only build a demo, preview, workflow, copy, or tracker sample for the primary recommendation unless Diego asks for more.
+
+### 4. Generate A Prospect Package
+
+Use the package generator after the primary recommendation is chosen:
+
+```powershell
+.\AUTOMATIONS\lead-growth-pipeline\scripts\New-ProspectPackage.ps1 `
+  -ExperimentPath "EXPERIMENTS\003-hvac-growth-systems" `
+  -BusinessName "Example HVAC Co" `
+  -Website "https://example.com" `
+  -CityState "Indianapolis, IN" `
+  -ServiceFocus "Residential HVAC" `
+  -RecommendationCategory "replacement_quote_page" `
+  -PrimaryRecommendation "Replacement quote page" `
+  -SecondaryRecommendations "missed_lead_followup; financing_rebate_clarity" `
+  -FutureOpportunities "maintenance_plan_signup after first pilot" `
+  -ObservedIssue "Replacement service path is visible but the quote CTA is not specific." `
+  -RecommendedSolution "Create a focused replacement quote path with financing FAQs and tracking." `
+  -OutreachAngle "The first fix is improving replacement quote clarity instead of pitching a full redesign." `
+  -Status "recommendation_created"
+```
+
+This creates:
+
+```text
+prospects/<prospect-slug>/README.md
+prospects/<prospect-slug>/recommendation.md
+prospects/<prospect-slug>/client-summary.md
+prospects/<prospect-slug>/outreach-email.md
+prospects/<prospect-slug>/campaign-tracking-strategy.md
+product/personalized-demos/<prospect-slug>-recommendation.md
+```
+
+It also updates the experiment's `marketing/prospect-tracker.csv` when that file exists.
+
+### 5. Validate The Package
+
+Run:
+
+```powershell
+.\AUTOMATIONS\lead-growth-pipeline\scripts\Test-ProspectPackage.ps1 `
+  -ExperimentPath "EXPERIMENTS\003-hvac-growth-systems" `
+  -Slug "example-hvac-co"
+```
+
+The validator checks that the required prospect files and tracker exist.
+
+### 6. Prepare Draft-Only Outreach
+
+Review:
+
+```text
+prospects/<prospect-slug>/outreach-email.md
+```
+
+Before creating a Gmail draft, verify:
+
+- the contact method is current,
+- the exact draft is approved for draft creation,
+- the recommendation/demo URL opens,
+- the message mentions one observed opportunity,
+- no guaranteed outcomes are promised.
+
+Use `gmail-draft-handoff.md` when wiring this into n8n or the Gmail API.
+
+### 7. Review Before Sending
+
+The safe operating states are:
+
+```text
+email_drafted
+ready_for_review
+approved_to_send
+sent
+```
+
+Do not move a prospect to `approved_to_send` until Diego has reviewed the exact recipient, subject, body, recommendation, and URL.
+
+This package can prepare Gmail drafts later, but sending belongs to a separate approval-gated workflow.
+
 ## Human Approval Boundary
 
 The pipeline may create drafts, but it must not send outreach automatically.
