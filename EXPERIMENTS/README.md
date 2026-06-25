@@ -14,6 +14,11 @@ Example:
 
 - `001-roofing-landing-page-service/`: AI-assisted storm damage and roof inspection landing page service for roofing contractors.
 - `002-restaurant-growth-systems/`: AI-assisted personalized growth recommendations and implementation modules for local restaurants.
+- `003-hvac-growth-systems/`: AI-assisted personalized growth recommendations and implementation modules for residential HVAC companies.
+- `004-remodeler-growth-systems/`: AI-assisted personalized growth recommendations and implementation modules for residential remodelers.
+- `005-med-spa-growth-systems/`: AI-assisted personalized growth recommendations and implementation modules for med spas and aesthetic clinics.
+- `006-dental-implant-cosmetic-growth-systems/`: AI-assisted personalized growth recommendations and implementation modules for implant and cosmetic dental practices.
+- `007-personal-injury-law-growth-systems/`: AI-assisted personalized growth recommendations and implementation modules for personal injury law firms.
 
 ## Expected Experiment Files
 
