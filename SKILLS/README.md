@@ -13,6 +13,7 @@ Use this directory for project-specific Codex/AI skills, instructions, and reusa
 ## Files
 
 - `remote-business-experiment-builder-blueprint.md`: blueprint for a future Codex skill that can recreate the reusable business lab, experiment, prospect, outreach, demo, and tracking workflow.
+- `lead-growth-pipeline-blueprint.md`: blueprint for the installed lead-growth-pipeline skill that qualifies niche prospects, diagnoses growth gaps, creates prospect packages, and prepares draft-only outreach.
 
 ## Rule
 
