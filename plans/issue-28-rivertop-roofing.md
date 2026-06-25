@@ -109,6 +109,21 @@ Free Plano roof inspection after hail, wind, or storm damage.
 https://roof-check-preview-motz2g8ol-dpons222-9388s-projects.vercel.app/rivertop-roofing
 ```
 
+## Stable Review URL
+
+```text
+https://roof-check-preview.vercel.app/rivertop-roofing
+```
+
+## Review Batch Readiness - 2026-06-24
+
+- [x] Live Rivertop page rechecked for current offer, phone, email, proof points, and storm-inspection language.
+- [x] Stable production demo alias verified with HTTP 200.
+- [x] Internal `/prospects/rivertop-roofing` production route verified with HTTP 200.
+- [x] Exact initial outreach email staged in Supabase for Diego review.
+- [x] Supabase row set to `outreach_send_status = ready_for_review`.
+- [x] Supabase row remains `outreach_approved = false`; no email sent.
+
 ## Risks
 
 - Rivertop's existing page may already be strong enough that the demo needs a more nuanced conversion optimization angle.
