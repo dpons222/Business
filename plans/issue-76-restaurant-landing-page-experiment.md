@@ -39,7 +39,7 @@ Out of scope:
 - [x] Create product recommendation framework and solution module docs.
 - [x] Update experiment navigation.
 - [x] Validate docs and conservative claim language after restructure.
-- [ ] Commit, push, and update PR.
+- [x] Commit, push, and update PR.
 
 ## Validation Plan
 
