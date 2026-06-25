@@ -34,16 +34,23 @@ add_prospect_outreach_approval_fields
 
 ## Status Values
 
+`status`:
+
+```text
+not_contacted = no outbound outreach has been sent yet
+contacted = an outbound email or contact form message was actually sent
+```
+
 `outreach_send_status`:
 
 ```text
-not_ready
-ready_for_review
-approved
-queued
-sent
-failed
-skipped
+not_ready = draft, demo, contact method, or checklist evidence is incomplete
+ready_for_review = Codex prepared the draft/demo and Diego needs to review it
+approved = Diego approved the exact draft and demo URL for n8n sending
+queued = n8n picked up the row and is preparing or attempting the send
+sent = the email provider confirmed the message was sent
+failed = n8n or the email provider failed the send attempt
+skipped = n8n or the operator intentionally skipped the row
 ```
 
 `outreach_send_channel`:
@@ -113,3 +120,18 @@ where prospect_slug = 'example-roofing';
 ```
 
 Do not approve records with missing emails or contact-form-only outreach unless the workflow is designed for that channel.
+
+## Supabase Column Comments
+
+Supabase column comments are the in-database reference for these fields:
+
+```sql
+comment on column public.prospects.status is
+  'Relationship/contact lifecycle for the prospect, such as not_contacted before outreach and contacted only after an outbound message has actually been sent.';
+
+comment on column public.prospects.outreach_send_status is
+  'Approval-gated automation lifecycle for outbound outreach: not_ready = draft/demo/contact details are incomplete; ready_for_review = prepared for Diego review; approved = exact draft and demo URL approved for n8n when outreach_approved is true; queued = picked up by automation; sent = provider confirmed send; failed = send attempt failed; skipped = intentionally skipped by guardrail or operator decision.';
+
+comment on column public.prospects.outreach_approved is
+  'Human approval gate for automated outreach. Must be true, alongside outreach_send_status = approved and completed pre-send evidence, before n8n may send an email.';
+```
