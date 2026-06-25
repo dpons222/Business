@@ -32,11 +32,16 @@ The registry stores:
 ```text
 niche
 status
-current focus
+default current focus
 public preview URL
 internal route
 summary copy
 ```
+
+The dashboard can change the current focus from the browser UI. The selected business is stored in
+browser `localStorage` under `local-growth-preview-current-focus`, so it persists for the same browser
+without changing the source-controlled registry default. If the saved slug no longer exists, the
+dashboard falls back to the registry default in `lib/demoRegistry.ts`.
 
 Current generic route examples:
 
@@ -50,7 +55,7 @@ Current generic route examples:
 Vercel project/domain rename note:
 
 ```text
-Keep the deployed Vercel project/domain rename as a follow-up after validating the generic dashboard UI. Charger Roofing is the only prospect contacted so far, and `/charger-roofing` should stay working if feasible.
+The deployed Vercel project is named local-growth-preview. Keep `/charger-roofing` working because Charger Roofing was the first contacted prospect.
 ```
 
 Current demos:

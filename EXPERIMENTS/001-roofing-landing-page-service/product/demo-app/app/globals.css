@@ -1906,6 +1906,39 @@ main.landing-page {
   justify-content: flex-end;
 }
 
+.current-focus-panel {
+  display: grid;
+  gap: 12px;
+  justify-items: stretch;
+}
+
+.focus-select-label {
+  display: grid;
+  gap: 7px;
+  color: var(--primary-dark);
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.focus-select {
+  width: 100%;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 38px 9px 12px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 750;
+}
+
+.focus-select:focus {
+  border-color: var(--primary-dark);
+  outline: 3px solid rgba(29, 78, 216, 0.18);
+  outline-offset: 1px;
+}
+
 .preview-meta-row {
   flex-wrap: wrap;
   gap: 8px;
@@ -2033,6 +2066,14 @@ main.landing-page {
   min-height: 40px;
 }
 
+.active-focus-button {
+  opacity: 0.72;
+}
+
+.active-focus-button:disabled {
+  cursor: default;
+}
+
 @media (min-width: 760px) {
   .active-preview {
     grid-template-columns: minmax(0, 1fr) auto;
@@ -2055,6 +2096,15 @@ main.landing-page {
   .preview-actions {
     justify-content: flex-end;
   }
+
+  .current-focus-panel {
+    min-width: min(330px, 34vw);
+    justify-items: end;
+  }
+
+  .focus-select-label {
+    width: 100%;
+  }
 }
 
 @media (max-width: 640px) {
@@ -2075,6 +2125,10 @@ main.landing-page {
   .preview-actions,
   .preview-row-actions {
     grid-template-columns: 1fr;
+  }
+
+  .current-focus-panel {
+    width: 100%;
   }
 
   .sort-controls {

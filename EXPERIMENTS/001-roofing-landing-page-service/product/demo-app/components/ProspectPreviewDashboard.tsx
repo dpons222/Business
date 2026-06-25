@@ -1,13 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { ArrowUpDown, CalendarDays, ExternalLink, Layers3 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowUpDown, CalendarDays, ExternalLink, Layers3, Star } from "lucide-react";
 import type { DemoEntry, DemoNiche } from "../lib/demoRegistry";
 import { nicheFilters, statusLabels } from "../lib/demoRegistry";
 
 type SortMode = "name" | "date";
 type SortDirection = "asc" | "desc";
 type NicheFilter = "all" | DemoNiche;
+
+const CURRENT_FOCUS_STORAGE_KEY = "local-growth-preview-current-focus";
 
 type ProspectPreviewDashboardProps = {
   currentFocus: DemoEntry;
@@ -29,6 +31,36 @@ export function ProspectPreviewDashboard({
   const [sortMode, setSortMode] = useState<SortMode>("date");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [activeNiche, setActiveNiche] = useState<NicheFilter>("all");
+  const [selectedFocusSlug, setSelectedFocusSlug] = useState(currentFocus.slug);
+  const [hasLoadedSavedFocus, setHasLoadedSavedFocus] = useState(false);
+
+  useEffect(() => {
+    const savedSlug = window.localStorage.getItem(CURRENT_FOCUS_STORAGE_KEY);
+
+    if (savedSlug && entries.some((entry) => entry.slug === savedSlug)) {
+      setSelectedFocusSlug(savedSlug);
+    }
+
+    setHasLoadedSavedFocus(true);
+  }, [entries]);
+
+  const selectedCurrentFocus =
+    entries.find((entry) => entry.slug === selectedFocusSlug) ?? currentFocus;
+
+  useEffect(() => {
+    if (!hasLoadedSavedFocus) {
+      return;
+    }
+
+    const hasSelectedEntry = entries.some((entry) => entry.slug === selectedFocusSlug);
+
+    if (!hasSelectedEntry) {
+      setSelectedFocusSlug(currentFocus.slug);
+      return;
+    }
+
+    window.localStorage.setItem(CURRENT_FOCUS_STORAGE_KEY, selectedFocusSlug);
+  }, [currentFocus.slug, entries, hasLoadedSavedFocus, selectedFocusSlug]);
 
   const nicheCounts = useMemo(() => {
     return entries.reduce<Record<NicheFilter, number>>(
@@ -78,6 +110,9 @@ export function ProspectPreviewDashboard({
   const nameSortLabel = sortMode === "name" && sortDirection === "desc" ? "Z-A" : "A-Z";
   const activeNicheLabel =
     nicheFilters.find((filter) => filter.value === activeNiche)?.label ?? "All";
+  const focusOptions = useMemo(() => {
+    return [...entries].sort((first, second) => first.title.localeCompare(second.title));
+  }, [entries]);
 
   return (
     <main className="preview-dashboard">
@@ -94,25 +129,42 @@ export function ProspectPreviewDashboard({
         <section className="active-preview" aria-labelledby="active-preview-title">
           <div>
             <p className="eyebrow">Current focus</p>
-            <h2 id="active-preview-title">{currentFocus.title}</h2>
-            <p>{currentFocus.observedIssue}</p>
+            <h2 id="active-preview-title">{selectedCurrentFocus.title}</h2>
+            <p>{selectedCurrentFocus.observedIssue}</p>
             <div className="preview-meta-row">
-              <span>{currentFocus.city}</span>
+              <span>{selectedCurrentFocus.city}</span>
               <span>Current active prospect</span>
-              <span>{statusLabels[currentFocus.status]}</span>
-              <span>{currentFocus.primaryService}</span>
+              <span>{statusLabels[selectedCurrentFocus.status]}</span>
+              <span>{selectedCurrentFocus.primaryService}</span>
             </div>
           </div>
-          <div className="preview-actions">
-            <a className="button button-primary" href={currentFocus.href}>
-              Open Current Preview
-              <ExternalLink size={17} aria-hidden="true" />
-            </a>
-            {currentFocus.internalHref ? (
-              <a className="button button-ghost" href={currentFocus.internalHref}>
-                Internal Route
+          <div className="current-focus-panel">
+            <label className="focus-select-label" htmlFor="current-focus-select">
+              Set current focus
+              <select
+                className="focus-select"
+                id="current-focus-select"
+                value={selectedCurrentFocus.slug}
+                onChange={(event) => setSelectedFocusSlug(event.target.value)}
+              >
+                {focusOptions.map((entry) => (
+                  <option key={`${entry.niche}-${entry.slug}`} value={entry.slug}>
+                    {entry.title}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <div className="preview-actions">
+              <a className="button button-primary" href={selectedCurrentFocus.href}>
+                Open Current Preview
+                <ExternalLink size={17} aria-hidden="true" />
               </a>
-            ) : null}
+              {selectedCurrentFocus.internalHref ? (
+                <a className="button button-ghost" href={selectedCurrentFocus.internalHref}>
+                  Internal Route
+                </a>
+              ) : null}
+            </div>
           </div>
         </section>
 
@@ -154,11 +206,11 @@ export function ProspectPreviewDashboard({
         <section className="rename-note" aria-label="Project rename note">
           <div>
             <p className="eyebrow">Project naming</p>
-            <h2>Use local-growth-preview in the app first.</h2>
+            <h2>Use local-growth-preview for every niche demo.</h2>
           </div>
           <p>
-            The UI is now generic. Keep the Vercel project/domain rename as a follow-up after this
-            dashboard is validated, so Charger Roofing's existing shared URL remains easy to protect.
+            The preview hub is now generic and can track roofing, restaurant, HVAC, plumbing, and
+            other local business demos from one dashboard.
           </p>
         </section>
 
@@ -192,7 +244,7 @@ export function ProspectPreviewDashboard({
 
           <div className="preview-list">
             {visibleEntries.map((entry) => {
-              const isCurrentFocus = entry.slug === currentFocus.slug;
+              const isCurrentFocus = entry.slug === selectedCurrentFocus.slug;
 
               return (
                 <article className="preview-row" key={`${entry.niche}-${entry.slug}`}>
@@ -216,6 +268,20 @@ export function ProspectPreviewDashboard({
                     </small>
                   </div>
                   <div className="preview-row-actions">
+                    <button
+                      className={
+                        isCurrentFocus
+                          ? "button button-ghost active-focus-button"
+                          : "button button-ghost"
+                      }
+                      type="button"
+                      onClick={() => setSelectedFocusSlug(entry.slug)}
+                      disabled={isCurrentFocus}
+                      aria-pressed={isCurrentFocus}
+                    >
+                      <Star size={15} aria-hidden="true" />
+                      {isCurrentFocus ? "Current Focus" : "Set Focus"}
+                    </button>
                     <a className="button button-primary" href={entry.href}>
                       Preview
                     </a>
