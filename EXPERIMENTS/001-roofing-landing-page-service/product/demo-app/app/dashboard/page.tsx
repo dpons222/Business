@@ -1,13 +1,11 @@
 import { ProspectPreviewDashboard } from "../../components/ProspectPreviewDashboard";
-import { activeProspectSlug, getProspectBySlug, prospects } from "../../lib/prospects";
+import { currentFocusEntry, demoEntries } from "../../lib/demoRegistry";
 
 export const metadata = {
-  title: "Roof Check Preview Dashboard",
-  description: "Internal preview dashboard for prospect demo pages.",
+  title: "local-growth-preview Dashboard",
+  description: "Internal multi-niche preview dashboard for local growth demo pages.",
 };
 
 export default function DashboardPage() {
-  const activeProspect = getProspectBySlug(activeProspectSlug) ?? prospects[0];
-
-  return <ProspectPreviewDashboard activeProspect={activeProspect} prospects={prospects} />;
+  return <ProspectPreviewDashboard currentFocus={currentFocusEntry} entries={demoEntries} />;
 }
