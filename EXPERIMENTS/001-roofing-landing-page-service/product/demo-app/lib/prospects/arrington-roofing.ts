@@ -43,7 +43,7 @@ export const arringtonRoofing: ProspectData = {
   subheadline:
     "Arrington Roofing can inspect hail, wind, tornado, and debris concerns, document visible damage, and help you understand repair or claim-support next steps.",
   trustLine:
-    "Dallas-Fort Worth roofing team with 42+ years of storm damage experience, free professional inspections, and 24/7 emergency service language on the public page.",
+    "Dallas-Fort Worth roofing team with 42+ years of storm damage experience, free professional inspections, and 24/7 emergency service support.",
   formReassurance:
     "No pressure. Arrington can follow up to confirm what happened, schedule the inspection, and explain visible findings before any repair decision is made.",
   galleryEyebrow: "North Texas storm inspection",
@@ -80,17 +80,17 @@ export const arringtonRoofing: ProspectData = {
     {
       question: "Does Arrington promote free storm damage inspections?",
       answer:
-        "Yes. Arrington's public storm damage guide asks homeowners to schedule a free professional storm damage inspection and lists free professional inspections as part of the offer.",
+        "Yes. Homeowners can start with a free professional storm damage inspection before deciding whether repair, replacement, or emergency service is needed.",
     },
     {
       question: "What does the inspection look for?",
       answer:
-        "The public page describes checks for shingles, ridge caps, flashings, gutters, fascia, vents, skylights, attic areas, ceilings, walls, insulation, and visible storm impact.",
+        "A thorough storm check can review shingles, ridge caps, flashing, gutters, fascia, vents, skylights, attic areas, ceilings, walls, insulation, and visible storm impact.",
     },
     {
       question: "Can the demo mention emergency service?",
       answer:
-        "Yes, carefully. The page lists 24/7 emergency service and emergency tarping, but the demo should not guarantee arrival time or repair availability.",
+        "Yes, carefully. Emergency service and tarping can be mentioned, but the page should avoid guaranteeing arrival time or repair availability.",
     },
     {
       question: "Can the page promise insurance coverage?",

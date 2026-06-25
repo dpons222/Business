@@ -44,7 +44,7 @@ export const onPointRoofing: ProspectData = {
   formReassurance:
     "No pressure. On Point can follow up to confirm your address, inspect the roof, provide photos, and explain clear options before any repair decision.",
   galleryEyebrow: "Plano free inspection",
-  galleryHeading: "Condense On Point's detailed article into a faster inspection request path.",
+  galleryHeading: "A faster inspection request path for Plano homeowners.",
   pageAngle:
     "Start with a free Plano roof inspection so homeowners can get photo proof, honest options, and clear next steps after rain, hail, wind, or Texas heat.",
   damageSigns: [
@@ -77,22 +77,22 @@ export const onPointRoofing: ProspectData = {
     {
       question: "How quickly can On Point inspect a Plano roof?",
       answer:
-        "The public page says most Plano homeowners can get a same-day or next-day inspection, depending on schedule availability.",
+        "Most Plano homeowners can request a same-day or next-day inspection, depending on schedule availability.",
     },
     {
       question: "What does the free inspection include?",
       answer:
-        "The page says inspections cover shingles, flashing, gutters, attic ventilation, drone and ground-level photos, and a clear report within 24-48 hours.",
+        "Inspections can cover shingles, flashing, gutters, attic ventilation, drone and ground-level photos, and a clear report within 24-48 hours.",
     },
     {
       question: "Does On Point inspect after hail?",
       answer:
-        "Yes. The public page says they specialize in post-storm inspections and documentation for insurance purposes.",
+        "Yes. On Point can focus on post-storm inspections and documentation for insurance-related next steps.",
     },
     {
       question: "Will the inspection be high-pressure?",
       answer:
-        "The public page says they provide facts, photos, and options with no scare tactics or pressure.",
+        "Homeowners should get facts, photos, and options without scare tactics or pressure.",
     },
   ],
 };

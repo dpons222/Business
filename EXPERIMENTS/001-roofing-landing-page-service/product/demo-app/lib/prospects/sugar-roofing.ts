@@ -38,7 +38,7 @@ export const sugarRoofing: ProspectData = {
   trustLine: "The Houston service page promotes free roof inspections, storm damage repairs, emergency repair, hail/wind/hurricane damage services, and roof insurance claim assistance.",
   formReassurance: "No pressure. Sugar can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Houston storm inspection",
-  galleryHeading: "Turn Sugar's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Houston homeowners.",
   pageAngle: "Send storm-concerned Houston homeowners to one focused inspection request instead of asking them to choose between several offers.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Houston storm",
@@ -68,8 +68,8 @@ export const sugarRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Sugar's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

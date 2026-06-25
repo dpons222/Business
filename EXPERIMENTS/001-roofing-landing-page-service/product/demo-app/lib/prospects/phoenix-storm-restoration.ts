@@ -44,7 +44,7 @@ export const phoenixStormRestoration: ProspectData = {
   subheadline:
     "Phoenix Storm Restoration can inspect storm damage, document visible concerns, and help Fort Worth homeowners protect the property before repair or restoration decisions.",
   trustLine:
-    "Fort Worth storm restoration team with BBB Accredited, HAAG Certified, 24/7 emergency, and free inspection language on the public service-area page.",
+    "Fort Worth storm restoration team with BBB Accredited proof, HAAG Certified proof, 24/7 emergency positioning, and free inspection language.",
   formReassurance:
     "No pressure. Phoenix can follow up to confirm your Fort Worth property details, understand the storm concern, and schedule the inspection before any restoration decision.",
   galleryEyebrow: "Fort Worth emergency inspection",
@@ -81,22 +81,22 @@ export const phoenixStormRestoration: ProspectData = {
     {
       question: "Does Phoenix offer emergency roofing services in Fort Worth?",
       answer:
-        "The public page describes 24/7 emergency residential roofing services, emergency response, and emergency inspection options for Fort Worth.",
+        "Homeowners can request emergency residential roofing help, emergency response, and inspection options in Fort Worth.",
     },
     {
       question: "Is Phoenix positioned around storm damage?",
       answer:
-        "Yes. The page says Phoenix specializes in storm damage inspections and complete roof restoration for Fort Worth and Tarrant County homeowners.",
+        "Yes. Phoenix can help with storm damage inspections and complete roof restoration for Fort Worth and Tarrant County homeowners.",
     },
     {
       question: "Can this demo mention BBB and HAAG?",
       answer:
-        "Yes, if the live page still shows BBB Accredited and HAAG Certified proof. The demo should not expand those claims beyond what is shown.",
+        "Yes, if those credentials remain current. The page should not expand BBB Accredited or HAAG Certified claims beyond what is displayed.",
     },
     {
       question: "Can the demo promise an arrival time?",
       answer:
-        "No. The live page mentions arrival targets when conditions allow, but outreach should avoid guaranteeing response time.",
+        "No. Response-time language should stay careful and avoid guaranteeing arrival times.",
     },
   ],
 };

@@ -16,7 +16,7 @@ export const edpRoofing: ProspectData = {
   secondaryCta: "Call (972) 274-5277",
   rating: "4.9 Google",
   reviewCount: "22 reviews",
-  trustSignal: "GAF Gold Elite Commercial Contractor and BBB A+ proof shown on the public page",
+  trustSignal: "GAF Gold Elite Commercial Contractor and BBB A+ proof for Dallas homeowners",
   logoUrl: `${assetRoot}/2020/09/logo.png`,
   heroImageUrl: `${assetRoot}/2026/02/new-gaf-class-4-roof-buckner-terracs-dallas.webp`,
   projectImages: [
@@ -46,7 +46,7 @@ export const edpRoofing: ProspectData = {
   subheadline:
     "After hail, leaks, wind, or storm damage, EDP Roofing can review the roof concern, explain what to look at next, and help you understand practical repair or documentation options.",
   trustLine:
-    "Dallas roofing company with 4.9 Google rating, 22 reviews, GAF Gold Elite proof, BBB A+ badge, and local storm-damage content shown publicly.",
+    "Dallas roofing company with 4.9 Google rating, 22 reviews, GAF Gold Elite proof, BBB A+ badge, and local storm-damage experience.",
   formReassurance:
     "No pressure. EDP can follow up to confirm your property details, review what happened during the storm, and help you decide whether an inspection or repair estimate is the next step.",
   galleryEyebrow: "Dallas storm damage proof",
@@ -83,12 +83,12 @@ export const edpRoofing: ProspectData = {
     {
       question: "Why make the page inspection-first?",
       answer:
-        "EDP's current page has useful storm and insurance content, but a campaign page can reduce competing CTAs and center the homeowner on one talk-to-a-roofer action.",
+        "A focused campaign page can reduce competing CTAs and center the homeowner on one talk-to-a-roofer action after storm damage.",
     },
     {
       question: "What proof can the page use?",
       answer:
-        "The live page shows 4.9 Google rating based on 22 reviews, GAF Gold Elite proof, BBB A+ badge, Google review badges, and local Dallas project imagery.",
+        "The page can use 4.9 Google rating proof, 22 reviews, GAF Gold Elite credentials, BBB A+ proof, Google review badges, and local Dallas project imagery.",
     },
     {
       question: "Can the page mention insurance?",

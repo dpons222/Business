@@ -32,11 +32,11 @@ export const dynastyRoofing: ProspectData = {
   subheadline:
     "Dynasty Roofing can inspect hail, wind, rain, and hurricane-related roof concerns, document visible damage, and explain repair or claim-support next steps.",
   trustLine:
-    "Houston-area family-owned roofing company with free roof inspection, A+ BBB rating, and insurance claim assistance language on the public site.",
+    "Houston-area family-owned roofing company with free roof inspections, A+ BBB rating proof, and insurance claim assistance guidance.",
   formReassurance:
     "No pressure. Dynasty can follow up to confirm your property details, review the storm concern, and schedule the free inspection before any repair decision.",
   galleryEyebrow: "Houston post-storm inspection",
-  galleryHeading: "Turn Dynasty's post-storm article into a focused inspection booking path.",
+  galleryHeading: "A focused inspection booking path after Houston storms.",
   pageAngle:
     "Start with a free post-storm inspection so Houston homeowners can understand visible roof concerns before minor damage becomes a larger issue.",
   damageSigns: [
@@ -69,7 +69,7 @@ export const dynastyRoofing: ProspectData = {
     {
       question: "Does Dynasty offer free inspections?",
       answer:
-        "Yes. Dynasty's public site includes free inspections, schedule free roof inspection links, and blog copy saying the post-storm inspection is free.",
+        "Yes. Houston homeowners can schedule a free roof inspection after hail, wind, heavy rain, or other storm concerns.",
     },
     {
       question: "What does the inspection include?",
@@ -79,7 +79,7 @@ export const dynastyRoofing: ProspectData = {
     {
       question: "Can the demo mention A+ BBB?",
       answer:
-        "Yes, if the live page still shows the A+ BBB rating. The demo should not imply BBB endorsement beyond the public rating badge.",
+        "Yes, if the rating remains current. The page should reference BBB proof carefully and avoid implying endorsement beyond the displayed rating.",
     },
     {
       question: "Can this page promise insurance coverage?",

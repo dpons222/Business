@@ -24,10 +24,10 @@ export const houstonRoofingConstruction: ProspectData = {
   observedIssue: "The existing free roof inspection page is relevant, but a storm-specific variant could make severe-weather visitors understand the next step faster.",
   headline: "Houston Roof Hit by Severe Weather? Schedule a No-Cost Inspection.",
   subheadline: "Houston Roofing & Construction can keep the inspection offer clear for homeowners dealing with hail, wind, leaks, or storm concerns before they decide on repairs.",
-  trustLine: "Search results and the public inspection page describe no-cost inspections, free quotes, licensed/certified roofers, and no sales pressure.",
+  trustLine: "No-cost inspections, free quotes, licensed and certified roofers, and a no-pressure process give Houston homeowners a clear first step.",
   formReassurance: "No pressure. Houston Roofing can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Houston storm inspection",
-  galleryHeading: "Turn Houston Roofing's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Houston homeowners.",
   pageAngle: "Keep the free inspection offer, but narrow the context to Houston homeowners looking for answers after hail, wind, or heavy weather.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Houston storm",
@@ -57,8 +57,8 @@ export const houstonRoofingConstruction: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Houston Roofing's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

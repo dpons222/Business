@@ -42,7 +42,7 @@ export const texasDirectRoofingConstruction: ProspectData = {
   trustLine: "The homepage highlights free inspection, same-day response, 450+ 5-star reviews, lifetime labor warranty, RCAT licensing, and 2400+ insurance-claim roof replacements.",
   formReassurance: "No pressure. Texas Direct can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Dallas-Fort Worth storm inspection",
-  galleryHeading: "Turn Texas Direct's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Dallas-Fort Worth homeowners.",
   pageAngle: "Lead with free inspection and verified storm damage proof so DFW homeowners know what to do after hail or wind.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Dallas-Fort Worth storm",
@@ -72,8 +72,8 @@ export const texasDirectRoofingConstruction: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Texas Direct's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

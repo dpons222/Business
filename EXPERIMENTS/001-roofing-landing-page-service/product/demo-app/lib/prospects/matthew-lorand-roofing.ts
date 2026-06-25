@@ -45,7 +45,7 @@ export const matthewLorandRoofing: ProspectData = {
   subheadline:
     "After hail, wind, leaks, or fallen branches, Matthew Lorand Roofing can inspect your roof, document visible damage, and explain practical repair or restoration options.",
   trustLine:
-    "Austin's local 5-star-rated roofing and restoration business with 20 years of experience referenced on the public storm-damage page.",
+    "Austin's local 5-star-rated roofing and restoration business with 20 years of storm-damage experience.",
   formReassurance:
     "No pressure. The team can follow up to confirm your property details, review what happened during the storm, and schedule a complimentary inspection.",
   galleryEyebrow: "Austin storm damage inspection",
@@ -82,22 +82,22 @@ export const matthewLorandRoofing: ProspectData = {
     {
       question: "Is the storm damage inspection complimentary?",
       answer:
-        "Matthew Lorand's public page says the team offers free or complimentary inspections and detailed damage reports for customers impacted by severe weather.",
+        "Yes. Homeowners impacted by severe weather can start with a complimentary inspection and detailed damage report.",
     },
     {
       question: "What storm problems should I watch for?",
       answer:
-        "The public page mentions hail, rain, floods, strong winds, fallen tree branches, water leaks, displaced gutters, cracked shingles, and roof damage that may need professional review.",
+        "Warning signs can include hail, rain, flooding, strong winds, fallen tree branches, water leaks, displaced gutters, cracked shingles, and other roof damage that needs professional review.",
     },
     {
       question: "Can Matthew Lorand help with insurance documentation?",
       answer:
-        "The public page says the team can provide reports, estimates, photo documentation, and communication support. Coverage decisions still depend on the homeowner's policy and insurer.",
+        "The team can provide reports, estimates, photo documentation, and communication support. Coverage decisions still depend on the homeowner's policy and insurer.",
     },
     {
       question: "Why make a shorter page?",
       answer:
-        "The current page has useful storm-repair education. A focused landing page can reduce cognitive load and make the complimentary inspection request easier to act on.",
+        "A focused landing page can reduce cognitive load and make the complimentary inspection request easier to act on after a storm.",
     },
   ],
 };

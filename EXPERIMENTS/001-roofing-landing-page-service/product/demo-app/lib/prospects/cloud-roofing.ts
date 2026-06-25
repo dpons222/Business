@@ -37,7 +37,7 @@ export const cloudRoofing: ProspectData = {
   trustLine: "The emergency page promotes free inspections and quotes, trusted San Antonio service since 1975, and emergency services for hail, wind, tree, leaks, and storm damage.",
   formReassurance: "No pressure. Cloud can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "San Antonio storm inspection",
-  galleryHeading: "Turn Cloud's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for San Antonio homeowners.",
   pageAngle: "Help San Antonio homeowners distinguish urgent roof inspection needs from broader emergency repair quote requests.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a San Antonio storm",
@@ -67,8 +67,8 @@ export const cloudRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Cloud's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

@@ -86,7 +86,7 @@ export const rivertopRoofing: ProspectData = {
     {
       question: "Is the Plano roof inspection free?",
       answer:
-        "Rivertop's public page says their Plano roof inspections are free and include a weather report plus a comprehensive roof condition and damage assessment.",
+        "Yes. Plano roof inspections can include a weather report plus a comprehensive roof condition and damage assessment.",
     },
     {
       question: "What does the inspection look for?",
@@ -96,7 +96,7 @@ export const rivertopRoofing: ProspectData = {
     {
       question: "Do I need an inspection before filing a claim?",
       answer:
-        "Rivertop's public page recommends an experienced roof inspection before filing a claim so homeowners can understand whether visible storm damage may exist. Coverage decisions depend on the homeowner's policy and insurer.",
+        "An experienced roof inspection before filing a claim can help homeowners understand whether visible storm damage may exist. Coverage decisions depend on the homeowner's policy and insurer.",
     },
     {
       question: "What happens after I request the inspection?",

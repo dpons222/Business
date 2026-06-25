@@ -38,7 +38,7 @@ export const proclaimRoofingHouston: ProspectData = {
   trustLine: "Houston residential roofing page references free drone and ground-level inspection, storm damage, and documented findings for homeowners.",
   formReassurance: "No pressure. Proclaim can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Houston storm inspection",
-  galleryHeading: "Turn Proclaim's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Houston homeowners.",
   pageAngle: "Use the Houston residential roofing proof as a focused storm inspection page for homeowners who need clarity after severe weather.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Houston storm",
@@ -68,8 +68,8 @@ export const proclaimRoofingHouston: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Proclaim's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

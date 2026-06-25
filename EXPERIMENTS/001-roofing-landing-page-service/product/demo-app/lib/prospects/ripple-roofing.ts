@@ -59,8 +59,8 @@ export const rippleRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Ripple's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

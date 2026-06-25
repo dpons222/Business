@@ -35,10 +35,10 @@ export const rescueRoofingTexas: ProspectData = {
   observedIssue: "Rescue's Dallas County page lists many services; storm/tornado/hail inspection can be isolated as a faster conversion path.",
   headline: "Dallas County Storm, Tornado, or Hail Damage? Request a Free Roof Inspection.",
   subheadline: "Rescue Roofing Texas can inspect visible roof concerns, document storm-related damage, and help homeowners understand repair, gutter, siding, or insurance-documentation next steps.",
-  trustLine: "The Dallas County page says Rescue offers free roof inspections and repairs roofs damaged by storms, tornadoes, hail, or other damage across DFW counties.",
+  trustLine: "Free roof inspections and repair help for Dallas County roofs damaged by storms, tornadoes, hail, or other severe weather.",
   formReassurance: "No pressure. Rescue can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Dallas County storm inspection",
-  galleryHeading: "Turn Rescue's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Dallas County homeowners.",
   pageAngle: "Use one page to send Dallas County homeowners from storm concern to a free inspection request without sorting through every service.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Dallas County storm",
@@ -68,8 +68,8 @@ export const rescueRoofingTexas: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Rescue's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

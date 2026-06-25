@@ -12,7 +12,7 @@ export const tsgRoofing: ProspectData = {
   primaryService: "Texas storm damage inspection",
   recommendedCta: "Schedule Free Roof Inspection",
   secondaryCta: "Call (888) 831-1005",
-  trustSignal: "Storm damage inspections, repairs, insurance assistance, and Google review proof on the public page",
+  trustSignal: "Storm damage inspections, repairs, insurance assistance, and Google review proof",
   logoUrl: "https://tsgroofing.com/wp-content/uploads/2025/10/TSG-New.webp",
   heroImageUrl: "https://tsgroofing.com/wp-content/uploads/2025/10/TSG-16-1024x631.webp",
   projectImages: [
@@ -42,7 +42,7 @@ export const tsgRoofing: ProspectData = {
   trustLine: "TSG promotes storm damage inspections, roof repairs, insurance assistance, and free consultation language across Texas metros.",
   formReassurance: "No pressure. TSG can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Texas storm inspection",
-  galleryHeading: "Turn TSG's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Texas homeowners.",
   pageAngle: "Lead with one clear inspection request before asking homeowners to decide between repair, restoration, or insurance next steps.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Texas storm",
@@ -72,8 +72,8 @@ export const tsgRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace TSG's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

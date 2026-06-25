@@ -42,7 +42,7 @@ export const pappasRoofingAndConstruction: ProspectData = {
   trustLine: "The homepage references a hassle-free roof inspection, storm damage, hail damage, insurance claim support, licensed/insured proof, and GAF Master Elite certification.",
   formReassurance: "No pressure. Pappas can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Plano storm inspection",
-  galleryHeading: "Turn Pappas's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Plano homeowners.",
   pageAngle: "Turn homepage inspection interest into a Plano-specific storm/hail inspection request path.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Plano storm",
@@ -72,8 +72,8 @@ export const pappasRoofingAndConstruction: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Pappas's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

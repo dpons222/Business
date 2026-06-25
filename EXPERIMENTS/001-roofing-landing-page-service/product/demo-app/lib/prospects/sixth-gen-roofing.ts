@@ -27,7 +27,7 @@ export const sixthGenRoofing: ProspectData = {
   subheadline:
     "Sixth Gen Roofing can provide a detailed, evidence-based roof inspection with photo documentation and honest recommendations after Central Texas storms.",
   trustLine:
-    "Central Texas family-run roofer with free HAAG-certified inspection, roof report, and 24/7 online scheduling language in public search/source text.",
+    "Central Texas family-run roofer with free HAAG-certified inspection, roof report, and 24/7 online scheduling language.",
   formReassurance:
     "No pressure. Sixth Gen can follow up to confirm your inspection details, document visible concerns, and explain honest next steps before any repair decision.",
   galleryEyebrow: "Austin certified inspection",
@@ -64,7 +64,7 @@ export const sixthGenRoofing: ProspectData = {
     {
       question: "Does Sixth Gen promote free certified inspections?",
       answer:
-        "Yes. Public search/source text says Sixth Gen provides free HAAG-certified roof inspections with evidence-based reports, photos, expert analysis, and honest recommendations.",
+        "Yes. Sixth Gen can provide free HAAG-certified roof inspections with evidence-based reports, photos, expert analysis, and honest recommendations.",
     },
     {
       question: "What does the inspection include?",
@@ -74,7 +74,7 @@ export const sixthGenRoofing: ProspectData = {
     {
       question: "Can the demo mention HAAG certification?",
       answer:
-        "Yes, because the public source text repeatedly references HAAG-certified inspectors. The demo should avoid expanding the claim beyond inspection expertise.",
+        "Yes, as long as the copy stays focused on HAAG-certified inspection expertise and avoids expanding the claim beyond that scope.",
     },
     {
       question: "Can this page mention insurance claims?",

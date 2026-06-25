@@ -38,7 +38,7 @@ export const elevatedRoofing: ProspectData = {
   trustLine: "Fort Worth page references a free no-obligation assessment, photo assessment report, GAF proof, Google reviews, and 24/7 emergency services.",
   formReassurance: "No pressure. Elevated can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Fort Worth storm inspection",
-  galleryHeading: "Turn Elevated's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Fort Worth homeowners.",
   pageAngle: "Use a focused page to send Fort Worth storm visitors directly to the free assessment rather than the broader service-area page.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Fort Worth storm",
@@ -68,8 +68,8 @@ export const elevatedRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Elevated's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

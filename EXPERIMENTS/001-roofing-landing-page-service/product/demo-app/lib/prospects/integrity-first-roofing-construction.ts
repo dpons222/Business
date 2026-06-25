@@ -49,7 +49,7 @@ export const integrityFirstRoofingConstruction: ProspectData = {
   subheadline:
     "Integrity First can inspect hail, wind, leak, tornado, or emergency roof damage and explain the next steps for a watertight roof.",
   trustLine:
-    "5.0 Google rating based on 175 reviews, BBB Accredited, Owens Corning Preferred Contractor, RCAT member, and Frisco Chamber member proof shown on the public page.",
+    "5.0 Google rating based on 175 reviews, BBB Accredited, Owens Corning Preferred Contractor, RCAT member, and Frisco Chamber member proof.",
   formReassurance:
     "No pressure. Integrity First can follow up to confirm your property details, inspect visible storm concerns, and explain repair, tarping, or documentation options.",
   galleryEyebrow: "Frisco storm response proof",
@@ -86,12 +86,12 @@ export const integrityFirstRoofingConstruction: ProspectData = {
     {
       question: "Is Integrity First's inspection free?",
       answer:
-        "The public storm damage page repeatedly uses free inspection CTAs, including schedule your free inspection and book your free inspection language.",
+        "Yes. Homeowners can schedule or book a free inspection after hail, wind, leaks, tornado damage, or other storm concerns.",
     },
     {
       question: "What storm services are emphasized?",
       answer:
-        "The live page highlights emergency roof repairs, roof leak repairs, roof tarping, insurance claim documentation support, hail damage, wind damage, and tornado damage.",
+        "Integrity First can help with emergency roof repairs, roof leak repairs, roof tarping, insurance documentation support, hail damage, wind damage, and tornado damage.",
     },
     {
       question: "What proof can the campaign page use?",
@@ -101,7 +101,7 @@ export const integrityFirstRoofingConstruction: ProspectData = {
     {
       question: "What should the pitch avoid?",
       answer:
-        "Because the current page is already strong, the pitch should focus on campaign testing and measurement rather than criticizing the existing site.",
+        "Because homeowners in storm mode need one clear next step, a focused page can test inspection interest without distracting from the full website.",
     },
   ],
 };

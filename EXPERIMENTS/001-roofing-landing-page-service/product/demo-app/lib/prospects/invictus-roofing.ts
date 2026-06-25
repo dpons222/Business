@@ -24,10 +24,10 @@ export const invictusRoofing: ProspectData = {
   observedIssue: "Invictus' Frisco service page has a free inspection and service menu, but storm visitors could use a dedicated page with fewer choices.",
   headline: "Frisco Storm Damage? Request a Free Roof Inspection.",
   subheadline: "Invictus Roofing can give Frisco homeowners one clear path after hail, wind, or leaks: request the inspection, document visible concerns, and review next steps.",
-  trustLine: "The live page lists roof inspection, storm and hail damage, insurance process resources, and asks visitors to read reviews.",
+  trustLine: "Frisco homeowners can start with a roof inspection, storm and hail damage review, insurance process guidance, and trusted local reviews.",
   formReassurance: "No pressure. Invictus can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Frisco storm inspection",
-  galleryHeading: "Turn Invictus's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Frisco homeowners.",
   pageAngle: "Turn a general Frisco service page into one focused storm inspection request path.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Frisco storm",
@@ -57,8 +57,8 @@ export const invictusRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Invictus's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

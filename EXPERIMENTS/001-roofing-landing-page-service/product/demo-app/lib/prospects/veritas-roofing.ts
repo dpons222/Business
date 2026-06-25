@@ -39,10 +39,10 @@ export const veritasRoofing: ProspectData = {
   observedIssue: "Veritas' homepage has broad multi-location positioning, so a Fort Worth storm inspection page can give one local audience a clearer request path.",
   headline: "Fort Worth Storm Damage? Request a Free Inspection & Quote.",
   subheadline: "Veritas Roofing can give Fort Worth homeowners a focused path after hail, wind, or leaks: schedule a free inspection, understand the findings, and review options without sorting through the full homepage.",
-  trustLine: "The public homepage promotes free roof inspections and quotes, financing options, lifetime warranties, and emergency roof tarping when needed.",
+  trustLine: "Free roof inspections and quotes, financing options, lifetime warranties, and emergency roof tarping when needed.",
   formReassurance: "No pressure. Veritas can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Fort Worth storm inspection",
-  galleryHeading: "Turn Veritas's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for Fort Worth homeowners.",
   pageAngle: "Start with Fort Worth homeowners who need a local inspection path after severe weather rather than a full multi-location homepage.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Fort Worth storm",
@@ -72,8 +72,8 @@ export const veritasRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Veritas's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

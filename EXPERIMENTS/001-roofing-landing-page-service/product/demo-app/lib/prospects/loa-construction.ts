@@ -45,11 +45,11 @@ export const loaConstruction: ProspectData = {
   subheadline:
     "If hail, wind, or heavy rain hit your neighborhood, LOA can inspect your roof, document visible concerns, and explain repair or replacement options before small damage becomes a bigger issue.",
   trustLine:
-    "Austin roofing company with a 5.0-star reputation and 1,000+ reviews shown on the public LOA site.",
+    "Austin roofing team with a 5.0-star reputation, 1,000+ reviews, and a free inspection path after hail or storm damage.",
   formReassurance:
     "No pressure. LOA can follow up to confirm the inspection time, review what you are seeing, and explain the next step before any repair decision is needed.",
   galleryEyebrow: "Austin storm response",
-  galleryHeading: "Turn LOA's hail article into a clear inspection request path.",
+  galleryHeading: "A clearer inspection request path after Austin hail damage.",
   pageAngle:
     "Start with a free inspection so you know whether hail damage needs repair, replacement, or continued monitoring.",
   damageSigns: [
@@ -81,7 +81,7 @@ export const loaConstruction: ProspectData = {
     {
       question: "Is the hail inspection free?",
       answer:
-        "LOA's public hail article tells Austin homeowners to call and set up a free inspection after hail. The inspection request should confirm timing and property details before any repair decision.",
+        "Yes. Request a free hail inspection and LOA can confirm timing, property details, and the next step before any repair decision is needed.",
     },
     {
       question: "What if I cannot see damage from the ground?",
@@ -91,12 +91,12 @@ export const loaConstruction: ProspectData = {
     {
       question: "Can LOA help with insurance documentation?",
       answer:
-        "LOA's public page says their team inspects the roof, documents damage, and provides estimates for required repairs or replacement. Coverage decisions still depend on the homeowner's policy and insurer.",
+        "Yes. LOA can inspect the roof, document visible damage, and provide repair or replacement estimates. Coverage decisions still depend on the homeowner's policy and insurer.",
     },
     {
       question: "When should I request an inspection after hail?",
       answer:
-        "LOA's article recommends a thorough roof inspection within seven days after a hail event, especially if you notice granules in gutters, water stains, or other visible storm concerns.",
+        "Request a roof inspection within a few days after hail, especially if you notice granules in gutters, water stains, or other visible storm concerns.",
     },
   ],
 };

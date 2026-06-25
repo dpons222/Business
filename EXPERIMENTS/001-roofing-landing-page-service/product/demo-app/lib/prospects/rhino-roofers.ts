@@ -43,7 +43,7 @@ export const rhinoRoofers: ProspectData = {
   trustLine: "The homepage promotes free roof inspections, a free 37-point inspection, 4.9 Google proof, 1,350+ five-star reviews, and service across San Antonio, Austin, Round Rock, and Central Texas.",
   formReassurance: "No pressure. Rhino can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "San Antonio storm inspection",
-  galleryHeading: "Turn Rhino's current proof into a focused storm inspection request path.",
+  galleryHeading: "A focused storm inspection request path for San Antonio homeowners.",
   pageAngle: "Focus storm visitors on the free 37-point inspection instead of the full homepage service menu.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a San Antonio storm",
@@ -73,8 +73,8 @@ export const rhinoRoofers: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Rhino's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

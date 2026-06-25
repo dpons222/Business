@@ -12,7 +12,7 @@ export const firefighterRoofing: ProspectData = {
   primaryService: "Fort Worth post-storm roof inspection",
   recommendedCta: "Get a Free Roof Quote",
   secondaryCta: "Call (817) 479-8999",
-  trustSignal: "Detailed Fort Worth inspection article with hail, wind, documentation, and written assessment guidance",
+  trustSignal: "Fort Worth inspection guidance for hail, wind, documentation, and written assessment next steps",
   projectImages: [],
   brand: {
     primary: "#B32620",
@@ -24,11 +24,11 @@ export const firefighterRoofing: ProspectData = {
   observedIssue: "Firefighter's article is useful and detailed, but it asks storm-concerned homeowners to read before taking action.",
   headline: "Fort Worth Storm Damage? Turn the Inspection Guide Into Action.",
   subheadline: "Firefighter Roofing can convert educational post-storm inspection content into one clear request path for homeowners after hail, wind, leaks, or visible damage.",
-  trustLine: "The public article explains Fort Worth hail exposure, post-storm inspection timing, roof-system components, photos, and written damage assessment expectations.",
+  trustLine: "Fort Worth homeowners can start with hail exposure, post-storm timing, roof-system checks, photos, and written assessment expectations.",
   formReassurance: "No pressure. Firefighter can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Fort Worth storm inspection",
-  galleryHeading: "Turn Firefighter's current proof into a focused storm inspection request path.",
-  pageAngle: "Move homeowners from useful inspection education to a simple post-storm inspection request without losing the substance of the article.",
+  galleryHeading: "A focused storm inspection request path for Fort Worth homeowners.",
+  pageAngle: "Move homeowners from inspection questions to a simple post-storm inspection request with clear documentation expectations.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Fort Worth storm",
     "Lifted, missing, or wind-creased shingles",
@@ -57,8 +57,8 @@ export const firefighterRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Firefighter's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",

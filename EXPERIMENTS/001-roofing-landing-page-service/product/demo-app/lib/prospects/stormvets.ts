@@ -81,12 +81,12 @@ export const stormvets: ProspectData = {
     {
       question: "Is the StormVets inspection free?",
       answer:
-        "StormVets' public Frisco page describes the inspection as no-cost and no-obligation for homeowners in Frisco and nearby communities.",
+        "Yes. The inspection can be positioned as no-cost and no-obligation for homeowners in Frisco and nearby communities.",
     },
     {
       question: "What does StormVets look for during the inspection?",
       answer:
-        "Their public page says inspections look for wind and hail damage caused by local Texas storms and can include pictures or videos when needed.",
+        "Inspections can look for wind and hail damage caused by local Texas storms and can include pictures or videos when needed.",
     },
     {
       question: "Can StormVets help if insurance is involved?",
@@ -96,7 +96,7 @@ export const stormvets: ProspectData = {
     {
       question: "Why use a focused landing page for this offer?",
       answer:
-        "The current page has useful trust proof and local service information. A focused version can move the free inspection action closer to homeowners who are worried about recent storm damage.",
+        "A focused version can move the free inspection action closer to homeowners who are worried about recent storm damage.",
     },
   ],
 };

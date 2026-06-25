@@ -46,7 +46,7 @@ export const brotherhoodRoofing: ProspectData = {
   subheadline:
     "Brotherhood Roofing can inspect your roof after wind, hail, or flying debris, explain visible concerns, and help you decide whether repair, replacement, or documentation is the practical next step.",
   trustLine:
-    "Dallas / Frisco roofing company serving the Metroplex since October 2002 with free roof inspection CTAs on the public storm-damage page.",
+    "Dallas / Frisco roofing company serving the Metroplex since October 2002 with a clear free roof inspection path for storm damage concerns.",
   formReassurance:
     "No pressure. Brotherhood can follow up to confirm your property details, discuss what you noticed after the storm, and schedule the free inspection.",
   galleryEyebrow: "DFW storm inspection",
@@ -83,17 +83,17 @@ export const brotherhoodRoofing: ProspectData = {
     {
       question: "Is Brotherhood's storm inspection free?",
       answer:
-        "Brotherhood's public hail and storm damage page repeatedly promotes a free roof inspection and asks homeowners to schedule an inspection after storm concerns.",
+        "Yes. Homeowners can schedule a free roof inspection after hail, wind, leaks, missing shingles, or other storm concerns.",
     },
     {
       question: "What are common storm damage signs?",
       answer:
-        "The public page lists missing or broken shingles, shingles on the ground, water leaks, dented gutters, debris, exposed nails, and granules in gutters or downspouts.",
+        "Common warning signs include missing or broken shingles, shingles on the ground, water leaks, dented gutters, debris, exposed nails, and granules in gutters or downspouts.",
     },
     {
       question: "Should I request an inspection if I cannot see damage?",
       answer:
-        "Brotherhood's public page says gutters, siding, and deck damage can suggest roof impact too. A professional inspection can help document visible issues more safely.",
+        "Yes. Gutters, siding, and deck damage can suggest roof impact too. A professional inspection can help document visible issues more safely.",
     },
     {
       question: "Can this page promise insurance approval?",

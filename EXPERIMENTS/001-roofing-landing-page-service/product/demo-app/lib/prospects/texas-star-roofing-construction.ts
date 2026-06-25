@@ -12,7 +12,7 @@ export const texasStarRoofingConstruction: ProspectData = {
   primaryService: "San Antonio free roof inspection and storm damage help",
   recommendedCta: "Schedule Free Roof Inspection",
   secondaryCta: "Call (210) 649-4300",
-  trustSignal: "Live site lists free detailed roof inspections, emergency roof repair, storm damage roof repair, insurance claim support, and San Antonio hail damage guide content",
+  trustSignal: "Free detailed roof inspections, emergency roof repair, storm damage roof repair, insurance claim support, and San Antonio hail damage guidance",
   logoUrl: "https://tsrcinc.com/wp-content/uploads/2025/12/tx-star-roofing-construction-w.png",
   heroImageUrl: "https://tsrcinc.com/wp-content/uploads/2025/12/san-antonio-roofing-company-1.jpg",
   projectImages: [
@@ -39,7 +39,7 @@ export const texasStarRoofingConstruction: ProspectData = {
   observedIssue: "Texas Star has a free roof inspection path plus emergency and storm services, but the homepage splits attention across several roofing and construction paths.",
   headline: "San Antonio Storm Damage? Schedule a Free Roof Inspection.",
   subheadline: "Texas Star Roofing & Construction can help homeowners move from severe-weather concern to a clear free-inspection or emergency-repair conversation.",
-  trustLine: "The live site lists free detailed roof inspections, emergency roof repair, storm damage roof repair, insurance claim support, and the direct San Antonio phone number.",
+  trustLine: "Free detailed roof inspections, emergency roof repair, storm damage repair, insurance claim support, and direct San Antonio phone support.",
   formReassurance: "No pressure. Texas Star can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "San Antonio storm inspection",
   galleryHeading: "Turn Texas Star's free-inspection proof into a focused storm request path.",
@@ -72,8 +72,8 @@ export const texasStarRoofingConstruction: ProspectData = {
   ],
   faqs: [
     {
-      question: "Is this meant to replace Texas Star's current page?",
-      answer: "No. The demo is a focused campaign page that keeps the existing site intact while giving storm-concerned homeowners one clear request path."
+      question: "Why use a focused inspection page?",
+      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
     },
     {
       question: "Can the page mention insurance?",
