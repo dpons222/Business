@@ -10,6 +10,11 @@ Example:
 001-roofing-landing-page-service/
 ```
 
+## Active Experiments
+
+- `001-roofing-landing-page-service/`: AI-assisted storm damage and roof inspection landing page service for roofing contractors.
+- `002-restaurant-growth-systems/`: AI-assisted personalized growth recommendations and implementation modules for local restaurants.
+
 ## Expected Experiment Files
 
 - `README.md`: quick guide to the experiment.
@@ -25,4 +30,3 @@ Example:
 ## Rule
 
 Only create experiment folders for ideas selected for validation.
-
