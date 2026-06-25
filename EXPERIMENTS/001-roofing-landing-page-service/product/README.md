@@ -71,6 +71,52 @@ Proper Roofing uses the focused landing page convention:
 - `/prospects/proper-roofing`: Greater Houston first-step storm inspection page.
 - `/proper-roofing`: clean client-facing alias.
 
+Remaining leads batch 1 uses the focused landing page convention:
+
+- `/prospects/arrington-roofing`: North Texas storm damage inspection page.
+- `/arrington-roofing`: clean client-facing alias.
+- `/prospects/phoenix-storm-restoration`: Fort Worth emergency storm inspection page.
+- `/phoenix-storm-restoration`: clean client-facing alias.
+- `/prospects/dynasty-roofing`: Houston post-storm inspection page.
+- `/dynasty-roofing`: clean client-facing alias.
+- `/prospects/sixth-gen-roofing`: Austin certified inspection page.
+- `/sixth-gen-roofing`: clean client-facing alias.
+- `/prospects/on-point-roofing`: Plano free inspection page.
+- `/on-point-roofing`: clean client-facing alias.
+
+Remaining leads final batch uses the focused landing page convention:
+
+- `/prospects/proclaim-roofing-houston`: Houston storm inspection page for Proclaim Roofing Houston.
+- `/proclaim-roofing-houston`: clean client-facing alias.
+- `/prospects/tsg-roofing`: Texas storm inspection page for TSG Roofing.
+- `/tsg-roofing`: clean client-facing alias.
+- `/prospects/veritas-roofing`: Fort Worth storm inspection page for Veritas Roofing.
+- `/veritas-roofing`: clean client-facing alias.
+- `/prospects/houston-roofing-construction`: Houston storm inspection page for Houston Roofing & Construction.
+- `/houston-roofing-construction`: clean client-facing alias.
+- `/prospects/elevated-roofing`: Fort Worth storm inspection page for Elevated Roofing.
+- `/elevated-roofing`: clean client-facing alias.
+- `/prospects/firefighter-roofing`: Fort Worth storm inspection page for Firefighter Roofing.
+- `/firefighter-roofing`: clean client-facing alias.
+- `/prospects/sugar-roofing`: Houston storm inspection page for Sugar Roofing.
+- `/sugar-roofing`: clean client-facing alias.
+- `/prospects/texas-direct-roofing-construction`: Dallas-Fort Worth storm inspection page for Texas Direct Roofing & Construction.
+- `/texas-direct-roofing-construction`: clean client-facing alias.
+- `/prospects/rescue-roofing-texas`: Dallas County storm inspection page for Rescue Roofing Texas.
+- `/rescue-roofing-texas`: clean client-facing alias.
+- `/prospects/rhino-roofers`: San Antonio storm inspection page for Rhino Roofers.
+- `/rhino-roofers`: clean client-facing alias.
+- `/prospects/texas-star-roofing-construction`: San Antonio storm inspection page for Texas Star Roofing & Construction.
+- `/texas-star-roofing-construction`: clean client-facing alias.
+- `/prospects/invictus-roofing`: Frisco storm inspection page for Invictus Roofing.
+- `/invictus-roofing`: clean client-facing alias.
+- `/prospects/ripple-roofing`: Waco storm inspection page for Ripple Roofing.
+- `/ripple-roofing`: clean client-facing alias.
+- `/prospects/pappas-roofing-and-construction`: Plano storm inspection page for Pappas Roofing and Construction.
+- `/pappas-roofing-and-construction`: clean client-facing alias.
+- `/prospects/cloud-roofing`: San Antonio storm inspection page for Cloud Roofing.
+- `/cloud-roofing`: clean client-facing alias.
+
 Use shadcn/ui for forms, stateful controls, accordions, badges, and assessment UI where it improves quality. Do not use it as a generic skin over the same repeated layout.
 
 ## Rule

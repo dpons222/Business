@@ -972,6 +972,47 @@ details {
   gap: 12px;
 }
 
+.inspection-proof-panel,
+.gallery-proof-grid article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.inspection-proof-panel {
+  display: grid;
+  align-content: center;
+  gap: 18px;
+  min-height: 430px;
+  padding: 34px;
+}
+
+.inspection-proof-panel h3 {
+  max-width: 560px;
+  font-size: 2rem;
+}
+
+.inspection-proof-panel > div {
+  display: grid;
+  gap: 12px;
+}
+
+.inspection-proof-panel span,
+.gallery-proof-grid article {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-weight: 850;
+  line-height: 1.45;
+}
+
+.inspection-proof-panel svg,
+.gallery-proof-grid svg {
+  flex: 0 0 auto;
+  color: var(--accent);
+}
+
 .photo-collage figure,
 .gallery-grid figure {
   position: relative;
@@ -1059,6 +1100,16 @@ details {
 
 .gallery-grid {
   grid-template-columns: repeat(4, 1fr);
+}
+
+.gallery-proof-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.gallery-proof-grid article {
+  padding: 20px;
 }
 
 .gallery-grid img {
@@ -1361,6 +1412,7 @@ main.landing-page {
   }
 
   .gallery-grid,
+  .gallery-proof-grid,
   .service-cards,
   .brand-process {
     grid-template-columns: 1fr 1fr;
@@ -1486,6 +1538,7 @@ main.landing-page {
   .form-grid,
   .brand-feature-grid,
   .gallery-grid,
+  .gallery-proof-grid,
   .service-cards,
   .brand-process,
   .photo-collage {
@@ -1494,6 +1547,11 @@ main.landing-page {
 
   .photo-collage figure:first-child {
     grid-row: auto;
+  }
+
+  .inspection-proof-panel {
+    min-height: auto;
+    padding: 24px;
   }
 
   .insurance-band,

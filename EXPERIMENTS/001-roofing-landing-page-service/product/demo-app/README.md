@@ -19,6 +19,26 @@ Matthew Lorand Roofing
 Integrity First Roofing & Construction
 EDP Roofing
 Proper Roofing
+Arrington Roofing
+Phoenix Storm Restoration
+Dynasty Roofing
+Sixth Gen Roofing
+On Point Roofing
+Proclaim Roofing Houston
+TSG Roofing
+Veritas Roofing
+Houston Roofing & Construction
+Elevated Roofing
+Firefighter Roofing
+Sugar Roofing
+Texas Direct Roofing & Construction
+Rescue Roofing Texas
+Rhino Roofers
+Texas Star Roofing & Construction
+Invictus Roofing
+Ripple Roofing
+Pappas Roofing and Construction
+Cloud Roofing
 ```
 
 The root route now renders a neutral preview-link-required page so a prospect cannot remove their slug and see the internal selector. The internal preview dashboard lives at `/dashboard`. Prospect-specific routes render each company from separate data objects.
@@ -101,6 +121,26 @@ lib/prospects/
   integrity-first-roofing-construction.ts
   edp-roofing.ts
   proper-roofing.ts
+  arrington-roofing.ts
+  phoenix-storm-restoration.ts
+  dynasty-roofing.ts
+  sixth-gen-roofing.ts
+  on-point-roofing.ts
+  proclaim-roofing-houston.ts
+  tsg-roofing.ts
+  veritas-roofing.ts
+  houston-roofing-construction.ts
+  elevated-roofing.ts
+  firefighter-roofing.ts
+  sugar-roofing.ts
+  texas-direct-roofing-construction.ts
+  rescue-roofing-texas.ts
+  rhino-roofers.ts
+  texas-star-roofing-construction.ts
+  invictus-roofing.ts
+  ripple-roofing.ts
+  pappas-roofing-and-construction.ts
+  cloud-roofing.ts
 
 public/prospects/
   final-cut-roofing/
@@ -113,6 +153,11 @@ public/prospects/
   integrity-first-roofing-construction/
   edp-roofing/
   proper-roofing/
+  arrington-roofing/
+  phoenix-storm-restoration/
+  dynasty-roofing/
+  sixth-gen-roofing/
+  on-point-roofing/
 ```
 
 Each prospect can then have its own page:
@@ -144,6 +189,26 @@ Client-facing share URLs should use the clean root-level alias routes:
 /integrity-first
 /edp-roofing
 /proper-roofing
+/arrington-roofing
+/phoenix-storm-restoration
+/dynasty-roofing
+/sixth-gen-roofing
+/on-point-roofing
+/proclaim-roofing-houston
+/tsg-roofing
+/veritas-roofing
+/houston-roofing-construction
+/elevated-roofing
+/firefighter-roofing
+/sugar-roofing
+/texas-direct-roofing-construction
+/rescue-roofing-texas
+/rhino-roofers
+/texas-star-roofing-construction
+/invictus-roofing
+/ripple-roofing
+/pappas-roofing-and-construction
+/cloud-roofing
 ```
 
 For Charger Roofing outreach, use:
@@ -296,6 +361,11 @@ http://localhost:3000/prospects/matthew-lorand-roofing
 http://localhost:3000/prospects/integrity-first
 http://localhost:3000/prospects/edp-roofing
 http://localhost:3000/prospects/proper-roofing
+http://localhost:3000/prospects/arrington-roofing
+http://localhost:3000/prospects/phoenix-storm-restoration
+http://localhost:3000/prospects/dynasty-roofing
+http://localhost:3000/prospects/sixth-gen-roofing
+http://localhost:3000/prospects/on-point-roofing
 http://localhost:3000/charger-roofing
 http://localhost:3000/loa-construction
 http://localhost:3000/rivertop-roofing
@@ -305,6 +375,41 @@ http://localhost:3000/matthew-lorand-roofing
 http://localhost:3000/integrity-first
 http://localhost:3000/edp-roofing
 http://localhost:3000/proper-roofing
+http://localhost:3000/arrington-roofing
+http://localhost:3000/phoenix-storm-restoration
+http://localhost:3000/dynasty-roofing
+http://localhost:3000/sixth-gen-roofing
+http://localhost:3000/on-point-roofing
+http://localhost:3000/prospects/proclaim-roofing-houston
+http://localhost:3000/proclaim-roofing-houston
+http://localhost:3000/prospects/tsg-roofing
+http://localhost:3000/tsg-roofing
+http://localhost:3000/prospects/veritas-roofing
+http://localhost:3000/veritas-roofing
+http://localhost:3000/prospects/houston-roofing-construction
+http://localhost:3000/houston-roofing-construction
+http://localhost:3000/prospects/elevated-roofing
+http://localhost:3000/elevated-roofing
+http://localhost:3000/prospects/firefighter-roofing
+http://localhost:3000/firefighter-roofing
+http://localhost:3000/prospects/sugar-roofing
+http://localhost:3000/sugar-roofing
+http://localhost:3000/prospects/texas-direct-roofing-construction
+http://localhost:3000/texas-direct-roofing-construction
+http://localhost:3000/prospects/rescue-roofing-texas
+http://localhost:3000/rescue-roofing-texas
+http://localhost:3000/prospects/rhino-roofers
+http://localhost:3000/rhino-roofers
+http://localhost:3000/prospects/texas-star-roofing-construction
+http://localhost:3000/texas-star-roofing-construction
+http://localhost:3000/prospects/invictus-roofing
+http://localhost:3000/invictus-roofing
+http://localhost:3000/prospects/ripple-roofing
+http://localhost:3000/ripple-roofing
+http://localhost:3000/prospects/pappas-roofing-and-construction
+http://localhost:3000/pappas-roofing-and-construction
+http://localhost:3000/prospects/cloud-roofing
+http://localhost:3000/cloud-roofing
 http://localhost:3000/prospects/charger-roofing/assessment
 ```
 
@@ -317,7 +422,7 @@ npm run build
 ## Notes
 
 - This is a demo, not a live client page.
-- This local demo uses public Final Cut Roofing, Charger Roofing, LOA Construction, Rivertop Roofing, StormVets, Brotherhood Roofing, Matthew Lorand Roofing, Integrity First Roofing & Construction, EDP Roofing, and Proper Roofing logo/photo references for private visualization only.
+- This local demo uses public Final Cut Roofing, Charger Roofing, LOA Construction, Rivertop Roofing, StormVets, Brotherhood Roofing, Matthew Lorand Roofing, Integrity First Roofing & Construction, EDP Roofing, Proper Roofing, Arrington Roofing, Phoenix Storm Restoration, Dynasty Roofing, Sixth Gen Roofing, On Point Roofing, Proclaim Roofing Houston, TSG Roofing, Veritas Roofing, Houston Roofing & Construction, Elevated Roofing, Firefighter Roofing, Sugar Roofing, Texas Direct Roofing & Construction, Rescue Roofing Texas, Rhino Roofers, Texas Star Roofing & Construction, Invictus Roofing, Ripple Roofing, Pappas Roofing and Construction, Cloud Roofing, and related logo/photo references for private visualization only.
 - Do not publish personalized demos publicly without permission.
 - Do not reuse logos, images, reviews, certifications, or claims in a public/client deliverable without approval.
 - Keep prospect-specific data in `lib/prospects/` so future demos can reuse the same page component.

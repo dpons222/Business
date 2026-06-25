@@ -15,6 +15,7 @@ export const properRoofing: ProspectData = {
   recommendedCta: "Get My Free Inspection Today",
   secondaryCta: "Call (832) 554-7830",
   trustSignal: "Texas-Tough products, trust-over-profits positioning, and detailed documentation process",
+  logoUrl: `${assetRoot}/logo.webp`,
   heroImageUrl: `${assetRoot}/storm-insurance-roofing-greater-houston-proper-roofing.webp`,
   projectImages: [
     {
@@ -80,12 +81,12 @@ export const properRoofing: ProspectData = {
     {
       question: "Is the first inspection free?",
       answer:
-        "Proper's public page uses free inspection and free estimate language and asks homeowners to schedule a free inspection for storm restoration concerns.",
+        "Yes. Homeowners can schedule a free inspection or request a free estimate for storm restoration concerns.",
     },
     {
       question: "What does Proper document?",
       answer:
-        "The public page says Proper documents storm damage with photos, videos, storm details, inspection reports, and repair plans to support next-step conversations.",
+        "Proper can document storm damage with photos, videos, storm details, inspection reports, and repair plans to support next-step conversations.",
     },
     {
       question: "Can the page mention insurance?",
@@ -93,9 +94,9 @@ export const properRoofing: ProspectData = {
         "Yes, carefully. The demo can mention documentation and claims assistance, but it should not promise coverage, claim approval, reimbursement, or restoration outcomes.",
     },
     {
-      question: "Why make this narrower than the current page?",
+      question: "Why start with a focused inspection page?",
       answer:
-        "The current page explains a full restoration journey. A first-step inspection page is easier for a cold homeowner to understand before they are ready to discuss the whole project.",
+        "A first-step inspection page is easier for storm-concerned homeowners to understand before they are ready to discuss a full restoration project.",
     },
   ],
 };

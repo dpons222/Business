@@ -23,6 +23,8 @@ Not a fit
 
 Supabase is the source of truth for approval-gated sending.
 
+The regular `status` field tracks whether the prospect has actually been contacted. The `outreach_send_status` field tracks where that prospect is in the automation approval/send workflow.
+
 Use these fields before any n8n send workflow:
 
 ```text

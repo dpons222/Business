@@ -31,13 +31,13 @@ At the beginning of each chat/session:
    - If Issue creation is unavailable in current tooling, draft title/body/labels/milestone in chat for manual creation before proceeding.
 4. Confirm milestone assignment before implementation.
 
-## 4) Branch Workflow
-- Create one branch per implementation Issue before code changes begin.
-- Use the format `issue-<number>-short-topic`, for example `issue-123-device-asset-links`.
+## 4) Branch and PR Workflow
+- Do not create a new branch for every change by default.
+- Continue on the current appropriate working branch unless the user asks for a new branch, the work is risky, or the change needs isolation for review.
+- If a new branch is useful, use the format `issue-<number>-short-topic`, for example `issue-123-device-asset-links`.
 - Parent/epic Issues are for tracking only; do not create a broad implementation branch for an epic unless explicitly approved.
-- Keep each branch scoped to the Issue acceptance criteria.
-- Link the branch, PR, and commits back to the Issue.
-- Once the Issue is complete, validated, and accurately documented, merge the corresponding branch into `main` through its PR.
+- Link any related branch, PR, and commits back to the Issue when they exist.
+- If work is delivered through a PR, merge it only after the Issue is complete, validated, and accurately documented.
 
 ## 5) Implementation Plan Files
 For large or multi-phase work, create an implementation plan in:
@@ -47,9 +47,9 @@ For large or multi-phase work, create an implementation plan in:
 Use one plan file per implementation Issue. Keep the checklist updated as work progresses, and link the plan file in Issue updates and closeout comments.
 
 ## 6) Rollback Safety
-- Before creating an implementation branch, record the current base commit with `git rev-parse HEAD`.
-- Include the base commit and branch name in the Issue's Session Start comment.
-- Treat the base commit as the restore/comparison point for that Issue's work.
+- Before substantial implementation work, record the current base commit with `git rev-parse HEAD`.
+- Include the base commit and current branch name in the Issue's Session Start comment when practical.
+- Treat the base commit as the restore/comparison point for that work.
 - Prefer revert commits for rollback after work is committed or shared.
 - Do not use destructive rollback commands such as `git reset --hard` unless explicitly requested and approved.
 
@@ -152,8 +152,8 @@ Session start for this issue.
 Base commit:
 - `[commit hash]`
 
-Branch:
-- `[issue-<number>-short-topic]`
+Current branch:
+- `[branch-name]`
 
 Plan:
 1. [step]
@@ -191,7 +191,7 @@ Validation:
 - [test/build/deploy result]
 
 Links:
-- PR: [link]
+- PR: [link or "None"]
 - Deploy: [link]
 - Plan update: [link]
 

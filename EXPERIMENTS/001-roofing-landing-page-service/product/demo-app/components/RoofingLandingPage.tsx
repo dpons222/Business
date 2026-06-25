@@ -48,6 +48,7 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
   const serviceAreaProof = prospect.serviceArea
     ? `Serving ${prospect.serviceArea}.`
     : prospect.trustLine;
+  const hasProjectImages = prospect.projectImages.length > 0;
   const galleryEyebrow = prospect.galleryEyebrow ?? "Project photos";
   const galleryHeading =
     prospect.galleryHeading ??
@@ -233,14 +234,29 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
       </section>
 
       <section className="brand-section photo-split">
-        <div className="photo-collage">
-          {prospect.projectImages.slice(0, 3).map((image) => (
-            <figure key={image.src}>
-              <img src={image.src} alt={image.label} />
-              <figcaption>{image.label}</figcaption>
-            </figure>
-          ))}
-        </div>
+        {hasProjectImages ? (
+          <div className="photo-collage">
+            {prospect.projectImages.slice(0, 3).map((image) => (
+              <figure key={image.src}>
+                <img src={image.src} alt={image.label} />
+                <figcaption>{image.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <div className="inspection-proof-panel" aria-label="Storm inspection proof points">
+            <p className="eyebrow">Inspection focus</p>
+            <h3>What the page helps homeowners check first</h3>
+            <div>
+              {prospect.damageSigns.slice(0, 4).map((item) => (
+                <span key={item}>
+                  <CheckCircle2 size={17} aria-hidden="true" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
         <div>
           <p className="eyebrow">Your problem. Our solution.</p>
           <h2>Your free roof inspection is just a click or phone call away.</h2>
@@ -299,17 +315,28 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
           <p className="eyebrow">{galleryEyebrow}</p>
           <h2>{galleryHeading}</h2>
         </div>
-        <div className="gallery-grid">
-          {prospect.projectImages.map((image) => (
-            <figure key={image.src}>
-              <img src={image.src} alt={image.label} />
-              <figcaption>
-                <Images size={16} aria-hidden="true" />
-                {image.label}
-              </figcaption>
-            </figure>
-          ))}
-        </div>
+        {hasProjectImages ? (
+          <div className="gallery-grid">
+            {prospect.projectImages.map((image) => (
+              <figure key={image.src}>
+                <img src={image.src} alt={image.label} />
+                <figcaption>
+                  <Images size={16} aria-hidden="true" />
+                  {image.label}
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <div className="gallery-proof-grid">
+            {prospect.inspectionIncludes.slice(0, 4).map((item) => (
+              <article key={item}>
+                <ClipboardCheck size={22} aria-hidden="true" />
+                <span>{item}</span>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="review-band">

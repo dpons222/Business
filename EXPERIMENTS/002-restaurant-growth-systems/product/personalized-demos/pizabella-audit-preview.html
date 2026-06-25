@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pizza Bella Customer Journey Audit Preview</title>
+    <style>
+      :root {
+        --red: #A13D31;
+        --black: #000000;
+        --ink: #1f1714;
+        --muted: #6b5a55;
+        --cream: #FCE7CF;
+        --gold: #e6a756;
+        --paper: #fffaf3;
+        --white: #ffffff;
+        --line: #ead8c7;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.5;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        min-height: 100vh;
+      }
+
+      .topbar {
+        background: var(--red);
+        color: var(--white);
+      }
+
+      .topbar-inner {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 14px 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+      }
+
+      .brand img {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+        border-radius: 12px;
+        background: var(--white);
+        padding: 6px;
+      }
+
+      .brand-title {
+        margin: 0;
+        font-size: 20px;
+        line-height: 1.1;
+      }
+
+      .brand-subtitle {
+        margin: 4px 0 0;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 13px;
+      }
+
+      .nav-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 16px;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 14px;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .button-primary {
+        background: var(--gold);
+        color: var(--black);
+      }
+
+      .button-secondary {
+        border-color: rgba(255, 255, 255, 0.45);
+        color: var(--white);
+      }
+
+      .hero {
+        background:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.45)),
+          url("https://recurve-customer-assets.s3.us-east-2.amazonaws.com/Pizza+Bella/Screen+Shot+2024-02-28+at+12.15.56+PM.png");
+        background-position: center;
+        background-size: cover;
+        color: var(--white);
+      }
+
+      .hero-inner {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 72px 0;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 820px;
+        margin: 0;
+        font-size: clamp(38px, 6vw, 68px);
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      .hero-copy {
+        max-width: 720px;
+        margin: 20px 0 0;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 19px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 34px;
+      }
+
+      .hero-stat {
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.42);
+        padding: 16px;
+      }
+
+      .hero-stat strong {
+        display: block;
+        font-size: 21px;
+      }
+
+      .hero-stat span {
+        display: block;
+        margin-top: 4px;
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 13px;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 46px 0 70px;
+      }
+
+      section {
+        margin-top: 42px;
+      }
+
+      section:first-child {
+        margin-top: 0;
+      }
+
+      .section-header {
+        display: grid;
+        grid-template-columns: minmax(0, 0.86fr) minmax(240px, 0.4fr);
+        gap: 24px;
+        align-items: end;
+        margin-bottom: 18px;
+      }
+
+      .section-header h2 {
+        margin: 0;
+        font-size: 34px;
+        line-height: 1.12;
+      }
+
+      .section-header p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--white);
+        box-shadow: 0 12px 32px rgba(31, 23, 20, 0.08);
+      }
+
+      .snapshot {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1px;
+        overflow: hidden;
+        background: var(--line);
+      }
+
+      .snapshot-item {
+        background: var(--white);
+        padding: 22px;
+      }
+
+      .snapshot-item h3 {
+        margin: 0 0 8px;
+        font-size: 17px;
+      }
+
+      .snapshot-item p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+
+      .compare-card {
+        padding: 22px;
+      }
+
+      .compare-card h3 {
+        margin: 0 0 12px;
+        font-size: 17px;
+      }
+
+      .label {
+        display: inline-flex;
+        margin-bottom: 12px;
+        border-radius: 999px;
+        padding: 4px 10px;
+        background: var(--cream);
+        color: var(--red);
+        font-size: 12px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .quote {
+        margin: 0;
+        border-left: 4px solid var(--gold);
+        padding-left: 14px;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .recommendation {
+        border-color: rgba(161, 61, 49, 0.35);
+        background: linear-gradient(180deg, #ffffff, #fff7ed);
+      }
+
+      .recommendation .quote {
+        color: var(--ink);
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .mock-button {
+        display: inline-flex;
+        align-items: center;
+        min-height: 38px;
+        padding: 0 13px;
+        border-radius: 6px;
+        background: var(--black);
+        color: var(--white);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .mock-button.red {
+        background: var(--red);
+      }
+
+      .mock-button.light {
+        border: 1px solid var(--line);
+        background: var(--white);
+        color: var(--ink);
+      }
+
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .menu-card {
+        overflow: hidden;
+      }
+
+      .menu-card img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        background: var(--cream);
+      }
+
+      .menu-card div {
+        padding: 16px;
+      }
+
+      .menu-card h3 {
+        margin: 0 0 6px;
+        font-size: 17px;
+      }
+
+      .menu-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .workflow {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .step {
+        padding: 16px;
+      }
+
+      .step span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: var(--red);
+        color: var(--white);
+        font-weight: 800;
+        font-size: 13px;
+      }
+
+      .step h3 {
+        margin: 12px 0 6px;
+        font-size: 16px;
+      }
+
+      .step p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .checklist {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .check {
+        padding: 16px;
+      }
+
+      .check strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .check p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .offer {
+        display: grid;
+        grid-template-columns: minmax(0, 0.8fr) minmax(260px, 0.42fr);
+        gap: 18px;
+      }
+
+      .offer-main,
+      .offer-side {
+        padding: 24px;
+      }
+
+      .price {
+        margin: 0;
+        font-size: 48px;
+        line-height: 1;
+        font-weight: 900;
+      }
+
+      .small-note {
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .footer-note {
+        margin-top: 36px;
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      @media (max-width: 860px) {
+        .topbar-inner,
+        .section-header,
+        .two-col,
+        .offer {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar-inner {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav-actions {
+          justify-content: flex-start;
+        }
+
+        .hero-grid,
+        .snapshot,
+        .menu-grid,
+        .workflow,
+        .checklist {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-inner {
+          padding: 54px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <div class="brand">
+            <img src="https://recurve-customer-assets.s3.us-east-2.amazonaws.com/Pizza+Bella/Screen+Shot+2024-01-30+at+12.12.03+PM.png" alt="Pizza Bella logo">
+            <div>
+              <p class="brand-title"><strong>Pizza Bella</strong></p>
+              <p class="brand-subtitle">Customer Journey Audit Preview</p>
+            </div>
+          </div>
+          <nav class="nav-actions" aria-label="Preview actions">
+            <a class="button button-secondary" href="tel:5404595363">Call 540-459-5363</a>
+            <a class="button button-primary" href="https://onboarding.arrowpos.com/pizzabella_woodstock">Order Online</a>
+          </nav>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-inner">
+          <p class="eyebrow">Lightweight preview - not a full rebuild</p>
+          <h1>Clean up the public path around Pizza Bella's existing online ordering.</h1>
+          <p class="hero-copy">The ordering system is already live. The quickest first project is to make the homepage, About content, menu merchandising, specials, and public links work harder before a guest clicks order.</p>
+          <div class="hero-grid" aria-label="Observed public facts">
+            <div class="hero-stat">
+              <strong>184</strong>
+              <span>visible menu item navigation records observed</span>
+            </div>
+            <div class="hero-stat">
+              <strong>22</strong>
+              <span>public order categories observed</span>
+            </div>
+            <div class="hero-stat">
+              <strong>1</strong>
+              <span>active online special observed</span>
+            </div>
+            <div class="hero-stat">
+              <strong>30-45 min</strong>
+              <span>pickup/delivery wait times shown in order flow</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <main>
+        <section>
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Current snapshot</p>
+              <h2>What is already working, and what needs cleanup first.</h2>
+            </div>
+            <p>Observed from the public home page and order path on June 25, 2026.</p>
+          </div>
+          <div class="panel snapshot">
+            <div class="snapshot-item">
+              <h3>Ordering is active</h3>
+              <p>Pickup and delivery are available through the ArrowPOS order flow, with future ordering enabled.</p>
+            </div>
+            <div class="snapshot-item">
+              <h3>Public site is thin</h3>
+              <p>The homepage mostly says "Pizza, Pasta, Subs... and More" and does not surface best sellers, specials, or the ordering path clearly enough.</p>
+            </div>
+            <div class="snapshot-item">
+              <h3>Menu has room to sell</h3>
+              <p>The menu is large. The first pass should improve top categories and high-intent items instead of rewriting everything at once.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Homepage direction</p>
+              <h2>Make the first screen answer: what can I get, where, and how do I order?</h2>
+            </div>
+            <p>This is copy direction for owner review, not final approved restaurant copy.</p>
+          </div>
+          <div class="two-col">
+            <article class="panel compare-card">
+              <span class="label">Current</span>
+              <h3>Thin homepage message</h3>
+              <p class="quote">Pizza Bella Pizza, Pasta, Subs... and More</p>
+            </article>
+            <article class="panel compare-card recommendation">
+              <span class="label">Suggested</span>
+              <h3>Clear local order path</h3>
+              <p class="quote">Woodstock's neighborhood spot for pizza, pasta, subs, wings, and easy online ordering.</p>
+              <p class="small-note">Order pickup or delivery, call the shop, or check today's special before you decide.</p>
+              <div class="cta-row" aria-label="Suggested homepage buttons">
+                <span class="mock-button red">Order Online</span>
+                <span class="mock-button">Call Now</span>
+                <span class="mock-button light">Hours & Directions</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">About page direction</p>
+              <h2>Replace placeholder copy with a simple, true restaurant introduction.</h2>
+            </div>
+            <p>Do not invent founding dates, ownership stories, awards, or family history unless Pizza Bella confirms them.</p>
+          </div>
+          <div class="two-col">
+            <article class="panel compare-card">
+              <span class="label">Current risk</span>
+              <h3>Placeholder content hurts trust</h3>
+              <p class="quote">About Header<br>About Paragraph One<br>About Paragraph Two</p>
+            </article>
+            <article class="panel compare-card recommendation">
+              <span class="label">Suggested safe draft</span>
+              <h3>Useful until owner story is confirmed</h3>
+              <p class="quote">Pizza Bella serves Woodstock with pizza, pasta, subs, wings, and familiar Italian favorites for dine-in, pickup, and delivery.</p>
+              <p class="small-note">Owner should confirm the preferred tone, top sellers, founding story, and any community details before publishing.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Order path clarity</p>
+              <h2>Bring the order details guests care about closer to the first click.</h2>
+            </div>
+            <p>These are public facts that should be easier to find from the homepage.</p>
+          </div>
+          <div class="panel snapshot">
+            <div class="snapshot-item">
+              <h3>Address</h3>
+              <p>1013 S Main St., Woodstock, VA 22664</p>
+            </div>
+            <div class="snapshot-item">
+              <h3>Hours</h3>
+              <p>Sun-Thu 11:00 AM-10:00 PM<br>Fri-Sat 11:00 AM-11:00 PM</p>
+            </div>
+            <div class="snapshot-item">
+              <h3>Service types</h3>
+              <p>Pickup and delivery are both visible in the order flow. Show both before the guest starts ordering.</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Menu merchandising</p>
+              <h2>Start with the menu areas most likely to guide a fast order.</h2>
+            </div>
+            <p>The goal is not to rewrite every item. Start with top categories and visible gaps.</p>
+          </div>
+          <div class="menu-grid">
+            <article class="panel menu-card">
+              <img src="https://s3.us-east-2.amazonaws.com/arrowpos-menu-images/00bd14d9-40c0-4056-a354-0c5b7c0a58f2.jpg" alt="New York style pizza menu image">
+              <div>
+                <h3>New York Style Pizza</h3>
+                <p>Add a short category blurb and highlight Cheese, Veggie, Meat Lovers, Supreme, BBQ Chicken, and Buffalo Chicken.</p>
+              </div>
+            </article>
+            <article class="panel menu-card">
+              <img src="https://s3.us-east-2.amazonaws.com/arrowpos-menu-images/2bfaec49-69fb-41ff-a266-810760303014.jpg" alt="Calzones and strombolis menu image">
+              <div>
+                <h3>Calzones & Strombolis</h3>
+                <p>Clarify fillings, portion expectation, and whether these are good solo meals or shareable options.</p>
+              </div>
+            </article>
+            <article class="panel menu-card">
+              <img src="https://s3.us-east-2.amazonaws.com/arrowpos-menu-images/f9793bcf-53dc-46f8-b02d-ddcccc1cfa86.jpg" alt="Buffalo wings menu image">
+              <div>
+                <h3>Buffalo Wings</h3>
+                <p>Make sauces, quantity, and party-order fit easier to scan before adding to cart.</p>
+              </div>
+            </article>
+            <article class="panel menu-card">
+              <img src="https://d2lton1cbsjr4x.cloudfront.net/0714ee58-f9c0-4115-8be2-a0eeb430ba1b.png" alt="Spaghetti special menu image">
+              <div>
+                <h3>Spaghetti Special</h3>
+                <p>Move the active special into a visible homepage and weekly post workflow so guests see it before browsing the full menu.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Specials workflow</p>
+              <h2>Turn the active special into a repeatable weekly routine.</h2>
+            </div>
+            <p>Observed special: spaghetti with meatballs or meat sauce, salad, garlic knots, and a drink for $12.99.</p>
+          </div>
+          <div class="workflow">
+            <article class="panel step">
+              <span>1</span>
+              <h3>Choose</h3>
+              <p>Pick the weekly special, price, days, and order link.</p>
+            </article>
+            <article class="panel step">
+              <span>2</span>
+              <h3>Approve</h3>
+              <p>Owner confirms copy, photo, availability, and any limits.</p>
+            </article>
+            <article class="panel step">
+              <span>3</span>
+              <h3>Publish</h3>
+              <p>Add the blurb to homepage, Google post, Facebook post, and order page notes where possible.</p>
+            </article>
+            <article class="panel step">
+              <span>4</span>
+              <h3>Track</h3>
+              <p>Log post date, link used, special clicks if available, and owner feedback.</p>
+            </article>
+            <article class="panel step">
+              <span>5</span>
+              <h3>Repeat</h3>
+              <p>Keep a simple calendar so promotions do not depend on last-minute posting.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Public link cleanup</p>
+              <h2>Make every public listing send guests to the right place.</h2>
+            </div>
+            <p>Link cleanup should be verified before outreach and again before any paid pilot starts.</p>
+          </div>
+          <div class="checklist">
+            <article class="panel check">
+              <strong>Website link</strong>
+              <p>Keep one best public homepage URL and make sure it sends guests toward order, phone, hours, and directions.</p>
+            </article>
+            <article class="panel check">
+              <strong>Order link</strong>
+              <p>Use one preferred order URL for public profiles so guests do not land on stale or duplicate paths.</p>
+            </article>
+            <article class="panel check">
+              <strong>Google/Facebook/directories</strong>
+              <p>Audit visible links and update only after the owner confirms which URLs should be primary.</p>
+            </article>
+            <article class="panel check">
+              <strong>Tracking notes</strong>
+              <p>Add basic recommendations for order clicks, phone clicks, special clicks, and listing updates without promising outcomes.</p>
+            </article>
+          </div>
+        </section>
+
+        <section>
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Pilot offer</p>
+              <h2>A small cleanup before anything bigger.</h2>
+            </div>
+            <p>This keeps the first offer practical and close to the ordering path.</p>
+          </div>
+          <div class="offer">
+            <article class="panel offer-main recommendation">
+              <span class="label">Recommended first project</span>
+              <h3>Restaurant Customer Journey Cleanup</h3>
+              <p>Fix Home/About/Hours copy, tighten order CTAs, review menu/category presentation, create a weekly specials workflow, and document public link/tracking recommendations.</p>
+              <div class="cta-row">
+                <span class="mock-button red">Home/About cleanup</span>
+                <span class="mock-button red">Menu examples</span>
+                <span class="mock-button red">Specials workflow</span>
+                <span class="mock-button red">Public link check</span>
+              </div>
+            </article>
+            <aside class="panel offer-side">
+              <p class="price">$750</p>
+              <p><strong>Fixed-scope pilot</strong></p>
+              <p class="small-note">Optional support after the pilot: $250/month for specials updates, tracking review, menu copy cleanup, and public link checks.</p>
+            </aside>
+          </div>
+        </section>
+
+        <p class="footer-note">
+          Preview notes: This is an internal outreach preview based on public pages and public order-flow data reviewed on June 25, 2026. Pizza Bella has not approved this copy or design. No claim is made about guaranteed orders, revenue, rankings, leads, review results, or platform outcomes.
+        </p>
+      </main>
+    </div>
+  </body>
+</html>
