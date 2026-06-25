@@ -26,6 +26,7 @@ Status: researched
 - `outreach-email.md`: exact first outreach draft and follow-ups.
 - `campaign-tracking-strategy.md`: pilot tracking and review plan.
 - `pricing-strategy.md`: pilot price, monthly support, add-ons, discount rules, and proposal language.
+- `site-inspiration-research.md`: pizza/local restaurant site patterns to emulate before creating the audit preview.
 
 ## Current Read
 
