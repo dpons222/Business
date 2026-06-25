@@ -43,9 +43,21 @@ browser `localStorage` under `local-growth-preview-current-focus`, so it persist
 without changing the source-controlled registry default. If the saved slug no longer exists, the
 dashboard falls back to the registry default in `lib/demoRegistry.ts`.
 
+The dashboard is protected by the app login at `/login`. Public prospect/demo routes stay open.
+
+Default local credential for now:
+
+```text
+username: digidap
+password: password
+```
+
+Rotate this before treating the dashboard as private beyond lightweight validation.
+
 Current generic route examples:
 
 ```text
+/login
 /dashboard
 /charger-roofing
 /pizabella
@@ -55,7 +67,7 @@ Current generic route examples:
 Vercel project/domain rename note:
 
 ```text
-The deployed Vercel project is named local-growth-preview, but the current public production domain is still roof-check-preview.vercel.app. The clean local-growth-preview.vercel.app alias is behind Vercel Authentication until issue #91 is resolved. Keep `/charger-roofing` working because Charger Roofing was the first contacted prospect.
+The deployed Vercel project and canonical public domain are local-growth-preview. The old roof-check-preview.vercel.app domain redirects to local-growth-preview.vercel.app so older Charger links still land on the current app.
 ```
 
 Current demos:
@@ -402,9 +414,13 @@ app/
 components/
 lib/
 public/
+scripts/
 ```
 
 - `app/page.tsx`: renders the neutral preview-link-required page.
+- `app/login/page.tsx`: renders the dashboard login form.
+- `app/login/actions.ts`: handles dashboard login/logout server actions.
+- `app/dashboard/layout.tsx`: requires a dashboard session for all dashboard routes.
 - `app/dashboard/page.tsx`: renders the internal multi-niche preview dashboard with filtering and sorting.
 - `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
 - `app/pizabella/page.tsx`: renders the first customer-facing restaurant demo route.
@@ -418,9 +434,55 @@ public/
 - `components/ui/`: shadcn/ui primitives owned by this repo.
 - `lib/prospects/`: prospect types, registry, and one data file per prospect.
 - `lib/demoRegistry.ts`: multi-niche demo registry, statuses, filters, and current focus.
+- `lib/dashboardAuth.ts`: signed-cookie dashboard authentication helpers.
 - `lib/designVariants.ts`: template/variant configuration for internal comparison.
 - `app/globals.css`: visual styling.
 - `public/prospects/`: local-only public brand and project image references grouped by prospect.
+- `scripts/Manage-DashboardUsers.ps1`: add, remove, list, and update dashboard users in `.env.local`.
+
+## Dashboard Login Configuration
+
+The dashboard auth layer uses:
+
+```text
+DASHBOARD_AUTH_SECRET
+DASHBOARD_USERS_JSON
+```
+
+`DASHBOARD_AUTH_SECRET` signs the HTTP-only dashboard session cookie.
+`DASHBOARD_USERS_JSON` stores dashboard users as JSON:
+
+```json
+[{"username":"digidap","role":"admin","passwordHash":"sha256:..."}]
+```
+
+Local setup:
+
+```powershell
+Copy-Item .env.example .env.local
+.\scripts\Manage-DashboardUsers.ps1 -Action upsert -Username digidap -Password password -Role admin
+```
+
+Add or update a user:
+
+```powershell
+.\scripts\Manage-DashboardUsers.ps1 -Action upsert -Username newadmin -Password "new-password" -Role admin
+```
+
+Remove a user:
+
+```powershell
+.\scripts\Manage-DashboardUsers.ps1 -Action remove -Username newadmin
+```
+
+List configured users:
+
+```powershell
+.\scripts\Manage-DashboardUsers.ps1 -Action list
+```
+
+For Vercel, copy the resulting `DASHBOARD_AUTH_SECRET` and `DASHBOARD_USERS_JSON` values into the
+`local-growth-preview` project environment variables for Production and Preview.
 
 ## Run Locally
 
@@ -433,6 +495,7 @@ Then open:
 
 ```text
 http://localhost:3000
+http://localhost:3000/login
 http://localhost:3000/dashboard
 http://localhost:3000/prospects
 http://localhost:3000/prospects/final-cut-roofing

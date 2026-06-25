@@ -1722,6 +1722,107 @@ main.landing-page {
   line-height: 1.6;
 }
 
+.auth-page {
+  align-items: center;
+}
+
+.auth-panel {
+  display: grid;
+  gap: 18px;
+}
+
+.auth-panel h1 {
+  margin-bottom: 0;
+}
+
+.auth-panel > p {
+  margin-bottom: 0;
+}
+
+.auth-form {
+  display: grid;
+  gap: 14px;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-weight: 850;
+}
+
+.auth-form input {
+  width: 100%;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #fff;
+  color: var(--ink);
+}
+
+.auth-form input:focus {
+  border-color: var(--primary-dark);
+  outline: 3px solid rgba(15, 95, 122, 0.18);
+  outline-offset: 1px;
+}
+
+.auth-message {
+  border: 1px solid rgba(31, 122, 77, 0.24);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #edf8f2;
+  color: #17593a;
+  font-weight: 800;
+}
+
+.auth-message-error {
+  border-color: rgba(185, 28, 28, 0.24);
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.dashboard-protected-shell {
+  min-height: 100vh;
+  background: #f3f7fb;
+}
+
+.dashboard-auth-bar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--line);
+  padding: 12px clamp(20px, 4vw, 48px);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+}
+
+.dashboard-auth-bar div {
+  display: grid;
+  gap: 2px;
+}
+
+.dashboard-auth-bar span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.dashboard-auth-bar strong {
+  color: var(--ink);
+  font-size: 0.98rem;
+}
+
+.dashboard-auth-bar .button {
+  min-height: 38px;
+  padding: 9px 12px;
+}
+
 .preview-dashboard {
   min-height: 100vh;
   overflow-x: hidden;
@@ -2133,6 +2234,16 @@ main.landing-page {
 
   .sort-controls {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .dashboard-auth-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .dashboard-auth-bar form,
+  .dashboard-auth-bar .button {
+    width: 100%;
   }
 
   .preview-actions .button,
