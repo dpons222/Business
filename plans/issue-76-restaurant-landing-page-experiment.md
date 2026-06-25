@@ -36,7 +36,7 @@ Out of scope:
 - [x] Create product and personalization docs.
 - [x] Update experiment navigation.
 - [x] Validate docs and conservative claim language.
-- [ ] Commit, push, and open PR.
+- [x] Commit, push, and open PR.
 
 ## Validation Plan
 
