@@ -13,7 +13,7 @@ Example:
 ## Active Experiments
 
 - `001-roofing-landing-page-service/`: AI-assisted storm damage and roof inspection landing page service for roofing contractors.
-- `002-restaurant-landing-page-service/`: AI-assisted focused campaign landing page service for local restaurants.
+- `002-restaurant-growth-systems/`: AI-assisted personalized growth recommendations and implementation modules for local restaurants.
 
 ## Expected Experiment Files
 

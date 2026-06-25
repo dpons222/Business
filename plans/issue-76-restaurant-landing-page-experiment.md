@@ -1,8 +1,8 @@
-# Issue 76: Local Restaurant Landing Page Experiment
+# Issue 76: Local Restaurant Growth Systems Experiment
 
 ## Objective
 
-Create a new validation experiment for local restaurants, modeled after the roofing landing page service experiment but tailored to restaurant-specific offers, buying triggers, prospect research, demo content, and outreach.
+Create a new validation experiment for local restaurants, modeled after the roofing experiment's prospect-driven workflow but broadened into personalized restaurant recommendations instead of one fixed deliverable.
 
 ## GitHub Issue
 
@@ -14,10 +14,11 @@ Create a new validation experiment for local restaurants, modeled after the roof
 
 In scope:
 
-- Create `EXPERIMENTS/002-restaurant-landing-page-service/`.
+- Create `EXPERIMENTS/002-restaurant-growth-systems/`.
 - Add experiment planning, offer, validation, research, and finance docs.
 - Add restaurant-specific marketing, prospect tracking, outreach, and discovery call docs.
-- Add product planning docs for a reusable personalized restaurant demo page.
+- Add product planning docs for a personalized recommendation framework and solution module menu.
+- Include landing pages as one possible module, not the default answer for every restaurant.
 - Update `EXPERIMENTS/README.md` navigation.
 
 Out of scope:
@@ -31,33 +32,42 @@ Out of scope:
 
 - [x] Create GitHub issue and issue branch.
 - [x] Create implementation plan.
-- [x] Create restaurant experiment folder and core docs.
+- [x] Create initial restaurant experiment folder and docs.
+- [x] Correct experiment scope from one fixed service to personalized recommendations.
+- [x] Rename experiment folder to `002-restaurant-growth-systems`.
 - [x] Create marketing and prospect tracking docs.
-- [x] Create product and personalization docs.
+- [x] Create product recommendation framework and solution module docs.
 - [x] Update experiment navigation.
-- [x] Validate docs and conservative claim language.
-- [x] Commit, push, and open PR.
+- [x] Validate docs and conservative claim language after restructure.
+- [ ] Commit, push, and update PR.
 
 ## Validation Plan
 
 - Run `git diff --check`.
-- Search new docs for unsafe claims such as guaranteed revenue, reservations, rankings, or leads.
-- Confirm expected experiment files exist.
+- Search new docs for unsafe claims such as guaranteed revenue, reservations, rankings, review ratings, or leads.
+- Confirm expected experiment files exist at the renamed path.
+- Confirm no restaurant docs still describe the experiment as one fixed service.
 
 ## Risks
 
-- Restaurant owners receive many marketing pitches, so outreach needs a specific operational angle.
-- Generic restaurant website redesigns are too broad; the first wedge should focus on a high-value action.
-- The offer must avoid implying guaranteed reservations, orders, event bookings, revenue, or search rankings.
+- A flexible offer can become vague if each recommendation is not specific.
+- Too many modules can create delivery complexity before demand is proven.
+- Restaurant owners receive many marketing pitches, so outreach needs one concrete observed opportunity.
+- The offer must avoid implying guaranteed reservations, orders, event bookings, revenue, review ratings, or search rankings.
 
-## Recommended Wedge
+## Recommendation Model
 
-Start with focused campaign pages for higher-value restaurant actions:
+Start with diagnosis, then choose one module:
 
-- catering inquiries,
-- private dining requests,
-- large-party bookings,
-- seasonal reservation campaigns,
-- online ordering or takeout campaigns.
+- catering or private dining inquiry page,
+- restaurant email/SMS promo automation,
+- Google Business Profile, menu, and ordering link cleanup,
+- online ordering conversion audit,
+- event or private dining lead tracking system,
+- review response and reputation workflow,
+- weekly specials content automation,
+- birthday, loyalty, or lapsed-guest reactivation campaign,
+- restaurant website and menu cleanup package,
+- focused landing page or campaign page when that is the best fit.
 
-Recommended first wedge: private dining, catering, and group event inquiry pages. This targets higher-ticket opportunities and gives the restaurant a clear reason to care about a focused landing page instead of a generic redesign.
+The first outreach batch should assign one recommendation category per restaurant before creating demos or drafts.
