@@ -1,4 +1,4 @@
-# Issue 66: TSG Roofing Demo And Outreach Plan
+﻿# Issue 66: TSG Roofing Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,14 +36,14 @@ Texas storm damage inspection page that separates first-step assessment from bro
 
 ## Implementation Checklist
 
-- [ ] Recheck the live page for current services, CTA, contact path, logo, colors, and storm language.
-- [ ] Confirm the most specific service area before writing localized copy.
-- [ ] Create `prospects/tsg-roofing/` docs if moving forward.
-- [ ] Add `lib/prospects/tsg-roofing.ts`.
-- [ ] Register `/prospects/tsg-roofing` and `/tsg-roofing`.
-- [ ] Draft email and contact-form outreach.
-- [ ] Add or update Supabase only after live recheck.
-- [ ] Keep automation fields unapproved until Diego review.
+- [x] Recheck the live page for current services, CTA, contact path, logo, colors, and storm language.
+- [x] Confirm the most specific service area before writing localized copy.
+- [x] Create `prospects/tsg-roofing/` docs if moving forward.
+- [x] Add `lib/prospects/tsg-roofing.ts`.
+- [x] Register `/prospects/tsg-roofing` and `/tsg-roofing`.
+- [x] Draft email and contact-form outreach.
+- [x] Add or update Supabase only after live recheck.
+- [x] Keep automation fields unapproved until Diego review.
 
 ## Demo Content Requirements
 
@@ -60,11 +60,11 @@ Texas storm damage inspection page that separates first-step assessment from bro
 
 ## Validation Plan
 
-- [ ] `npm run build` passes.
-- [ ] Local `/prospects/tsg-roofing` returns HTTP 200.
-- [ ] Local `/tsg-roofing` returns HTTP 200.
+- [x] `npm run build` passes.
+- [x] Local `/prospects/tsg-roofing` returns HTTP 200.
+- [x] Local `/tsg-roofing` returns HTTP 200.
 - [ ] Production stable aliases return HTTP 200 after deploy.
-- [ ] Supabase status remains `not_contacted` until outreach is actually sent.
+- [x] Supabase status remains `not_contacted` until outreach is actually sent.
 
 ## Risks
 

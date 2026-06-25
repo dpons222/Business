@@ -1,4 +1,4 @@
-# Issue 66: Sugar Roofing Demo And Outreach Plan
+﻿# Issue 66: Sugar Roofing Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ Houston storm damage inspection page with one clear first-step request path.
 
 ## Implementation Checklist
 
-- [ ] Recheck live page for contact path, estimator, phone, logo, colors, storm wording, and financing claims.
-- [ ] Create `prospects/sugar-roofing/` docs if moving forward.
-- [ ] Add `lib/prospects/sugar-roofing.ts`.
-- [ ] Register `/prospects/sugar-roofing` and `/sugar-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach unapproved.
+- [x] Recheck live page for contact path, estimator, phone, logo, colors, storm wording, and financing claims.
+- [x] Create `prospects/sugar-roofing/` docs if moving forward.
+- [x] Add `lib/prospects/sugar-roofing.ts`.
+- [x] Register `/prospects/sugar-roofing` and `/sugar-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach unapproved.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ Houston storm damage inspection page with one clear first-step request path.
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production routes return HTTP 200.
-- [ ] Supabase row remains unapproved.
-- [ ] Copy does not overstate financing, insurance, or pricing.
+- [x] Build passes.
+- [x] Local routes return HTTP 200.
+- [ ] Production routes return HTTP 200 after deployment.
+- [x] Supabase row remains unapproved.
+- [x] Copy does not overstate financing, insurance, or pricing.
 
 ## Risks
 

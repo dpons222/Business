@@ -1,4 +1,4 @@
-# Issue 66: Houston Roofing & Construction Demo And Outreach Plan
+﻿# Issue 66: Houston Roofing & Construction Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ Houston storm inspection page for homeowners who need a no-cost first look after
 
 ## Implementation Checklist
 
-- [ ] Recheck live page for current contact method, phone, logo, colors, and inspection language.
-- [ ] Create `prospects/houston-roofing-construction/` docs if moving forward.
-- [ ] Add `lib/prospects/houston-roofing-construction.ts`.
-- [ ] Register `/prospects/houston-roofing-construction` and `/houston-roofing-construction`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add or update Supabase with verified details.
-- [ ] Keep status unapproved until Diego review.
+- [x] Recheck live page for current contact method, phone, logo, colors, and inspection language.
+- [x] Create `prospects/houston-roofing-construction/` docs if moving forward.
+- [x] Add `lib/prospects/houston-roofing-construction.ts`.
+- [x] Register `/prospects/houston-roofing-construction` and `/houston-roofing-construction`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add or update Supabase with verified details.
+- [x] Keep status unapproved until Diego review.
 
 ## Demo Content Requirements
 
@@ -60,10 +60,11 @@ Houston storm inspection page for homeowners who need a no-cost first look after
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production routes return HTTP 200.
-- [ ] Stable demo URL is used in drafts and Supabase.
-- [ ] Supabase remains unapproved before send.
+- [x] Build passes.
+- [x] Local routes return HTTP 200.
+- [ ] Production routes return HTTP 200 after deployment.
+- [x] Stable demo URL is used in drafts and Supabase.
+- [x] Supabase remains unapproved before send.
 
 ## Risks
 

@@ -1,4 +1,4 @@
-# Issue 66: Cloud Roofing Demo And Outreach Plan
+﻿# Issue 66: Cloud Roofing Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ San Antonio emergency storm inspection page for homeowners deciding whether roof
 
 ## Implementation Checklist
 
-- [ ] Recheck live page for phone, free quote CTA, logo, colors, emergency repair wording, and inspection language.
-- [ ] Create `prospects/cloud-roofing/` docs if moving forward.
-- [ ] Add `lib/prospects/cloud-roofing.ts`.
-- [ ] Register `/prospects/cloud-roofing` and `/cloud-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach unapproved.
+- [x] Recheck live page for phone, free quote CTA, logo, colors, emergency repair wording, and inspection language.
+- [x] Create `prospects/cloud-roofing/` docs if moving forward.
+- [x] Add `lib/prospects/cloud-roofing.ts`.
+- [x] Register `/prospects/cloud-roofing` and `/cloud-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach unapproved.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ San Antonio emergency storm inspection page for homeowners deciding whether roof
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production routes return HTTP 200.
-- [ ] Supabase row contains stable URL and remains unapproved.
-- [ ] Copy avoids guaranteed repair, response-time, insurance, or revenue claims.
+- [x] Build passes.
+- [x] Local routes return HTTP 200.
+- [ ] Production routes return HTTP 200 after deployment.
+- [x] Supabase row contains stable URL and remains unapproved.
+- [x] Copy avoids guaranteed repair, response-time, insurance, or revenue claims.
 
 ## Risks
 

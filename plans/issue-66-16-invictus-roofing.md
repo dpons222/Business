@@ -1,4 +1,4 @@
-# Issue 66: Invictus Roofing Demo And Outreach Plan
+﻿# Issue 66: Invictus Roofing Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -37,13 +37,13 @@ Frisco storm damage inspection page that makes the free roof inspection request 
 
 ## Implementation Checklist
 
-- [ ] Recheck live page for phone, CTA, reviews, logo, colors, and storm language.
-- [ ] Create `prospects/invictus-roofing/` docs if moving forward.
-- [ ] Add `lib/prospects/invictus-roofing.ts`.
-- [ ] Register `/prospects/invictus-roofing` and `/invictus-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach unapproved.
+- [x] Recheck live page for phone, CTA, reviews, logo, colors, and storm language.
+- [x] Create `prospects/invictus-roofing/` docs if moving forward.
+- [x] Add `lib/prospects/invictus-roofing.ts`.
+- [x] Register `/prospects/invictus-roofing` and `/invictus-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach unapproved.
 
 ## Demo Content Requirements
 
@@ -60,10 +60,11 @@ Frisco storm damage inspection page that makes the free roof inspection request 
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production routes return HTTP 200.
-- [ ] Supabase row has stable URL and remains unapproved.
-- [ ] Reviews are not overstated.
+- [x] Build passes.
+- [x] Local routes return HTTP 200.
+- [ ] Production routes return HTTP 200 after deployment.
+- [x] Supabase row has stable URL and remains unapproved.
+- [x] Reviews are not overstated.
 
 ## Risks
 

@@ -1,4 +1,4 @@
-# Issue 66: Proclaim Roofing Houston Demo And Outreach Plan
+﻿# Issue 66: Proclaim Roofing Houston Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,14 +36,14 @@ Houston storm damage inspection page for homeowners who need a clear first step 
 
 ## Implementation Checklist
 
-- [ ] Recheck the live page for current copy, phone, email, form path, logo, site colors, and asset references.
-- [ ] Decide whether this lead deserves a full demo or a lighter outreach-only draft.
-- [ ] Create `prospects/proclaim-roofing-houston/` docs if moving forward.
-- [ ] Add `lib/prospects/proclaim-roofing-houston.ts` with brand-matched content.
-- [ ] Register `/prospects/proclaim-roofing-houston` and `/proclaim-roofing-houston`.
-- [ ] Draft initial outreach email and contact-form version.
-- [ ] Add or update Supabase `public.prospects` only after live recheck.
-- [ ] Set Supabase to `not_ready` or `ready_for_review`, never approved by default.
+- [x] Recheck the live page for current copy, phone, email, form path, logo, site colors, and asset references.
+- [x] Decide whether this lead deserves a full demo or a lighter outreach-only draft.
+- [x] Create `prospects/proclaim-roofing-houston/` docs if moving forward.
+- [x] Add `lib/prospects/proclaim-roofing-houston.ts` with brand-matched content.
+- [x] Register `/prospects/proclaim-roofing-houston` and `/proclaim-roofing-houston`.
+- [x] Draft initial outreach email and contact-form version.
+- [x] Add or update Supabase `public.prospects` only after live recheck.
+- [x] Set Supabase to `not_ready`, never approved by default.
 
 ## Demo Content Requirements
 
@@ -62,12 +62,12 @@ Houston storm damage inspection page for homeowners who need a clear first step 
 
 ## Validation Plan
 
-- [ ] `npm run build` passes in the demo app.
-- [ ] Local `/prospects/proclaim-roofing-houston` returns HTTP 200.
-- [ ] Local `/proclaim-roofing-houston` returns HTTP 200.
+- [x] `npm run build` passes in the demo app.
+- [x] Local `/prospects/proclaim-roofing-houston` returns HTTP 200.
+- [x] Local `/proclaim-roofing-houston` returns HTTP 200.
 - [ ] Production stable aliases return HTTP 200 after deploy.
-- [ ] Supabase row contains the stable demo URL and remains unapproved.
-- [ ] Outreach copy avoids guaranteed leads, rankings, revenue, or claim outcomes.
+- [x] Supabase row contains the stable demo URL and remains unapproved.
+- [x] Outreach copy avoids guaranteed leads, rankings, revenue, or claim outcomes.
 
 ## Risks
 

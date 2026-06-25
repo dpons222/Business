@@ -1,4 +1,4 @@
-# Issue 66: Ripple Roofing Demo And Outreach Plan
+﻿# Issue 66: Ripple Roofing Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ Waco storm damage inspection page for homeowners needing emergency roofing help 
 
 ## Implementation Checklist
 
-- [ ] Recheck live location page for contact details, emergency CTA, free inspection wording, logo, colors, and proof.
-- [ ] Create `prospects/ripple-roofing/` docs if moving forward.
-- [ ] Add `lib/prospects/ripple-roofing.ts`.
-- [ ] Register `/prospects/ripple-roofing` and `/ripple-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach approval false.
+- [x] Recheck live location page for contact details, emergency CTA, free inspection wording, logo, colors, and proof.
+- [x] Create `prospects/ripple-roofing/` docs if moving forward.
+- [x] Add `lib/prospects/ripple-roofing.ts`.
+- [x] Register `/prospects/ripple-roofing` and `/ripple-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach approval false.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ Waco storm damage inspection page for homeowners needing emergency roofing help 
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production aliases return HTTP 200.
-- [ ] Supabase row remains unapproved.
-- [ ] Emergency claims are verified.
+- [x] Build passes.
+- [x] Local aliases return HTTP 200.
+- [ ] Production aliases return HTTP 200 after deployment.
+- [x] Supabase row remains unapproved.
+- [x] Emergency claims are verified.
 
 ## Risks
 

@@ -1,4 +1,4 @@
-# Issue 66: Firefighter Roofing Demo And Outreach Plan
+﻿# Issue 66: Firefighter Roofing Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,14 +36,14 @@ Fort Worth post-storm roof inspection page built from existing educational inspe
 
 ## Implementation Checklist
 
-- [ ] Recheck live article and contact path.
-- [ ] Verify logo, brand colors, phone, form, and inspection CTA.
-- [ ] Create `prospects/firefighter-roofing/` docs if moving forward.
-- [ ] Add `lib/prospects/firefighter-roofing.ts`.
-- [ ] Register `/prospects/firefighter-roofing` and `/firefighter-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row only after verification.
-- [ ] Keep outreach unapproved.
+- [x] Recheck live article and contact path.
+- [x] Verify phone, form, inspection CTA, and use fallback brand treatment where public logo assets are blocked.
+- [x] Create `prospects/firefighter-roofing/` docs if moving forward.
+- [x] Add `lib/prospects/firefighter-roofing.ts`.
+- [x] Register `/prospects/firefighter-roofing` and `/firefighter-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row only after verification.
+- [x] Keep outreach unapproved.
 
 ## Demo Content Requirements
 
@@ -60,10 +60,11 @@ Fort Worth post-storm roof inspection page built from existing educational inspe
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production routes return HTTP 200.
-- [ ] Supabase row remains unapproved.
-- [ ] Outreach copy avoids performance promises.
+- [x] Build passes.
+- [x] Local routes return HTTP 200.
+- [ ] Production routes return HTTP 200 after deployment.
+- [x] Supabase row remains unapproved.
+- [x] Outreach copy avoids performance promises.
 
 ## Risks
 

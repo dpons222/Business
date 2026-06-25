@@ -1,4 +1,4 @@
-# Issue 66: Elevated Roofing Demo And Outreach Plan
+﻿# Issue 66: Elevated Roofing Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ Fort Worth storm inspection page for homeowners who need a free assessment after
 
 ## Implementation Checklist
 
-- [ ] Recheck page, phone, form, logo, colors, proof, and assessment wording.
-- [ ] Create `prospects/elevated-roofing/` docs if moving forward.
-- [ ] Add `lib/prospects/elevated-roofing.ts`.
-- [ ] Register `/prospects/elevated-roofing` and `/elevated-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach unapproved.
+- [x] Recheck page, phone, form, logo, colors, proof, and assessment wording.
+- [x] Create `prospects/elevated-roofing/` docs if moving forward.
+- [x] Add `lib/prospects/elevated-roofing.ts`.
+- [x] Register `/prospects/elevated-roofing` and `/elevated-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach unapproved.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ Fort Worth storm inspection page for homeowners who need a free assessment after
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production aliases return HTTP 200.
-- [ ] Supabase status remains not approved.
-- [ ] Outreach copy avoids guaranteed outcomes.
+- [x] Build passes.
+- [x] Local aliases return HTTP 200.
+- [ ] Production aliases return HTTP 200 after deployment.
+- [x] Supabase status remains not approved.
+- [x] Outreach copy avoids guaranteed outcomes.
 
 ## Risks
 

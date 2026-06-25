@@ -1,4 +1,4 @@
-# Issue 66: Rhino Roofers Demo And Outreach Plan
+﻿# Issue 66: Rhino Roofers Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ San Antonio storm damage inspection page built around a clear assessment request
 
 ## Implementation Checklist
 
-- [ ] Recheck homepage for phone, assessment CTA, 37-point inspection wording, logo, colors, and proof.
-- [ ] Create `prospects/rhino-roofers/` docs if moving forward.
-- [ ] Add `lib/prospects/rhino-roofers.ts`.
-- [ ] Register `/prospects/rhino-roofers` and `/rhino-roofers`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach approval false.
+- [x] Recheck homepage for phone, assessment CTA, 37-point inspection wording, logo, colors, and proof.
+- [x] Create `prospects/rhino-roofers/` docs if moving forward.
+- [x] Add `lib/prospects/rhino-roofers.ts`.
+- [x] Register `/prospects/rhino-roofers` and `/rhino-roofers`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach approval false.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ San Antonio storm damage inspection page built around a clear assessment request
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production aliases return HTTP 200.
-- [ ] Supabase row contains stable URL and remains unapproved.
-- [ ] Inspection claims are accurate and verified.
+- [x] Build passes.
+- [x] Local aliases return HTTP 200.
+- [ ] Production aliases return HTTP 200 after deployment.
+- [x] Supabase row contains stable URL and remains unapproved.
+- [x] Inspection claims are accurate and verified.
 
 ## Risks
 

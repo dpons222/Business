@@ -1,4 +1,4 @@
-# Issue 66: Pappas Roofing And Construction Demo And Outreach Plan
+﻿# Issue 66: Pappas Roofing And Construction Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ Plano storm inspection page that turns homepage inspection interest into a sched
 
 ## Implementation Checklist
 
-- [ ] Recheck live homepage for phone, schedule path, logo, colors, inspection CTA, and storm/hail proof.
-- [ ] Create `prospects/pappas-roofing-and-construction/` docs if moving forward.
-- [ ] Add `lib/prospects/pappas-roofing-and-construction.ts`.
-- [ ] Register `/prospects/pappas-roofing-and-construction` and `/pappas-roofing-and-construction`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach approval false.
+- [x] Recheck live homepage for phone, schedule path, logo, colors, inspection CTA, and storm/hail proof.
+- [x] Create `prospects/pappas-roofing-and-construction/` docs if moving forward.
+- [x] Add `lib/prospects/pappas-roofing-and-construction.ts`.
+- [x] Register `/prospects/pappas-roofing-and-construction` and `/pappas-roofing-and-construction`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach approval false.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ Plano storm inspection page that turns homepage inspection interest into a sched
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production aliases return HTTP 200.
-- [ ] Supabase row remains unapproved.
-- [ ] Copy does not invent trust proof.
+- [x] Build passes.
+- [x] Local aliases return HTTP 200.
+- [ ] Production aliases return HTTP 200 after deployment.
+- [x] Supabase row remains unapproved.
+- [x] Copy does not invent trust proof.
 
 ## Risks
 

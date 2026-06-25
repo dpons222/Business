@@ -1,4 +1,4 @@
-# Issue 66: Rescue Roofing Texas Demo And Outreach Plan
+﻿# Issue 66: Rescue Roofing Texas Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ Dallas County storm damage inspection page focused on free roof checks after sto
 
 ## Implementation Checklist
 
-- [ ] Recheck live page for phone, form, logo, colors, free inspection language, and storm/tornado/hail claims.
-- [ ] Create `prospects/rescue-roofing-texas/` docs if moving forward.
-- [ ] Add `lib/prospects/rescue-roofing-texas.ts`.
-- [ ] Register `/prospects/rescue-roofing-texas` and `/rescue-roofing-texas`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach unapproved.
+- [x] Recheck live page for phone, form, logo, colors, free inspection language, and storm/tornado/hail claims.
+- [x] Create `prospects/rescue-roofing-texas/` docs if moving forward.
+- [x] Add `lib/prospects/rescue-roofing-texas.ts`.
+- [x] Register `/prospects/rescue-roofing-texas` and `/rescue-roofing-texas`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach unapproved.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ Dallas County storm damage inspection page focused on free roof checks after sto
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production routes return HTTP 200.
-- [ ] Supabase row remains unapproved.
-- [ ] Copy avoids broad disaster claims that are not verified.
+- [x] Build passes.
+- [x] Local routes return HTTP 200.
+- [ ] Production routes return HTTP 200 after deployment.
+- [x] Supabase row remains unapproved.
+- [x] Copy avoids broad disaster claims that are not verified.
 
 ## Risks
 

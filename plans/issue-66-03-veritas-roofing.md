@@ -1,4 +1,4 @@
-# Issue 66: Veritas Roofing Demo And Outreach Plan
+﻿# Issue 66: Veritas Roofing Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,14 +36,14 @@ Fort Worth storm inspection landing page built from Veritas' free inspection and
 
 ## Implementation Checklist
 
-- [ ] Recheck the live site and choose the strongest city focus.
-- [ ] Verify phone, form path, logo, colors, trust proof, and inspection wording.
-- [ ] Create `prospects/veritas-roofing/` docs if moving forward.
-- [ ] Add `lib/prospects/veritas-roofing.ts`.
-- [ ] Register `/prospects/veritas-roofing` and `/veritas-roofing`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase prospect row only after confirming current contact details.
-- [ ] Keep outreach approval false.
+- [x] Recheck the live site and choose the strongest city focus.
+- [x] Verify phone, form path, logo, colors, trust proof, and inspection wording.
+- [x] Create `prospects/veritas-roofing/` docs if moving forward.
+- [x] Add `lib/prospects/veritas-roofing.ts`.
+- [x] Register `/prospects/veritas-roofing` and `/veritas-roofing`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase prospect row only after confirming current contact details.
+- [x] Keep outreach approval false.
 
 ## Demo Content Requirements
 
@@ -61,10 +61,11 @@ Fort Worth storm inspection landing page built from Veritas' free inspection and
 
 ## Validation Plan
 
-- [ ] `npm run build` passes.
-- [ ] Local and production routes return HTTP 200.
-- [ ] Supabase row has stable demo URL and unapproved outreach status.
-- [ ] Copy does not overstate warranty, insurance, or service-area claims.
+- [x] `npm run build` passes.
+- [x] Local routes return HTTP 200.
+- [ ] Production routes return HTTP 200 after deployment.
+- [x] Supabase row has stable demo URL and unapproved outreach status.
+- [x] Copy does not overstate warranty, insurance, or service-area claims.
 
 ## Risks
 

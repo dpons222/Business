@@ -1,4 +1,4 @@
-# Issue 66: Texas Star Roofing & Construction Demo And Outreach Plan
+﻿# Issue 66: Texas Star Roofing & Construction Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ San Antonio emergency storm inspection page for homeowners seeing roof wear or d
 
 ## Implementation Checklist
 
-- [ ] Recheck homepage for phone, CTA, logo, colors, storm wear wording, emergency repair language, and free inspection details.
-- [ ] Create `prospects/texas-star-roofing-construction/` docs if moving forward.
-- [ ] Add `lib/prospects/texas-star-roofing-construction.ts`.
-- [ ] Register `/prospects/texas-star-roofing-construction` and `/texas-star-roofing-construction`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach unapproved.
+- [x] Recheck homepage for phone, CTA, logo, colors, storm wear wording, emergency repair language, and free inspection details.
+- [x] Create `prospects/texas-star-roofing-construction/` docs if moving forward.
+- [x] Add `lib/prospects/texas-star-roofing-construction.ts`.
+- [x] Register `/prospects/texas-star-roofing-construction` and `/texas-star-roofing-construction`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach unapproved.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ San Antonio emergency storm inspection page for homeowners seeing roof wear or d
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Routes return HTTP 200 locally and in production.
-- [ ] Supabase remains unapproved.
-- [ ] Emergency and inspection claims are verified.
+- [x] Build passes.
+- [x] Routes return HTTP 200 locally.
+- [ ] Routes return HTTP 200 in production after deployment.
+- [x] Supabase remains unapproved.
+- [x] Emergency and inspection claims are verified.
 
 ## Risks
 

@@ -1,4 +1,4 @@
-# Issue 66: Texas Direct Roofing & Construction Demo And Outreach Plan
+﻿# Issue 66: Texas Direct Roofing & Construction Demo And Outreach Plan
 
 GitHub Issue: https://github.com/dpons222/Business/issues/66
 
@@ -36,13 +36,13 @@ DFW storm damage inspection page that gives homeowners one clear next step after
 
 ## Implementation Checklist
 
-- [ ] Recheck homepage for contact details, logo, colors, storm damage language, inspection wording, and claims experience.
-- [ ] Create `prospects/texas-direct-roofing-construction/` docs if moving forward.
-- [ ] Add `lib/prospects/texas-direct-roofing-construction.ts`.
-- [ ] Register `/prospects/texas-direct-roofing-construction` and `/texas-direct-roofing-construction`.
-- [ ] Draft outreach email and contact-form version.
-- [ ] Add Supabase row after live verification.
-- [ ] Keep outreach approval false.
+- [x] Recheck homepage for contact details, logo, colors, storm damage language, inspection wording, and claims experience.
+- [x] Create `prospects/texas-direct-roofing-construction/` docs if moving forward.
+- [x] Add `lib/prospects/texas-direct-roofing-construction.ts`.
+- [x] Register `/prospects/texas-direct-roofing-construction` and `/texas-direct-roofing-construction`.
+- [x] Draft outreach email and contact-form version.
+- [x] Add Supabase row after live verification.
+- [x] Keep outreach approval false.
 
 ## Demo Content Requirements
 
@@ -59,10 +59,11 @@ DFW storm damage inspection page that gives homeowners one clear next step after
 
 ## Validation Plan
 
-- [ ] Build passes.
-- [ ] Local and production routes return HTTP 200.
-- [ ] Supabase row remains unapproved.
-- [ ] Copy avoids insurance outcome guarantees.
+- [x] Build passes.
+- [x] Local routes return HTTP 200.
+- [ ] Production routes return HTTP 200 after deployment.
+- [x] Supabase row remains unapproved.
+- [x] Copy avoids insurance outcome guarantees.
 
 ## Risks
 
