@@ -55,7 +55,7 @@ Current generic route examples:
 Vercel project/domain rename note:
 
 ```text
-The deployed Vercel project is named local-growth-preview. Keep `/charger-roofing` working because Charger Roofing was the first contacted prospect.
+The deployed Vercel project is named local-growth-preview, but the current public production domain is still roof-check-preview.vercel.app. The clean local-growth-preview.vercel.app alias is behind Vercel Authentication until issue #91 is resolved. Keep `/charger-roofing` working because Charger Roofing was the first contacted prospect.
 ```
 
 Current demos:
@@ -294,6 +294,35 @@ accentSoft
 
 Do not use a generic roofing palette when the prospect has clear brand colors. If the colors cannot be recovered quickly for a lightweight validation demo, use a restrained neutral palette and note that brand matching is pending.
 
+## Public Demo Copy Rule
+
+Public prospect routes should read like customer-facing pages for the business being previewed.
+
+Use public routes for:
+
+```text
+Customer-facing headline and offer
+Business-branded navigation and CTAs
+Guest/homeowner/patient/client-facing service copy
+Menu/service/product highlights
+FAQs and next steps written for the business's customer
+```
+
+Keep these in internal docs, not public demo page copy:
+
+```text
+Audit notes
+Pricing strategy
+Developer instructions
+Implementation tasks
+Observed issue counts
+Before/after critique labels
+"Preview", "demo", or "not a full rebuild" disclaimers
+Internal recommendation category names
+```
+
+If a prospect-facing explanation is needed, put it in `client-summary.md`, `recommendation.md`, or the outreach draft instead of the public route.
+
 ## UI Convention
 
 Use the prospect's conversion problem to choose the demo format:
@@ -378,7 +407,7 @@ public/
 - `app/page.tsx`: renders the neutral preview-link-required page.
 - `app/dashboard/page.tsx`: renders the internal multi-niche preview dashboard with filtering and sorting.
 - `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
-- `app/pizabella/page.tsx`: renders the first restaurant audit preview route.
+- `app/pizabella/page.tsx`: renders the first customer-facing restaurant demo route.
 - `app/prospects/page.tsx`: lists prospect-specific demo pages.
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.
 - `app/prospects/[slug]/assessment/page.tsx`: renders the secondary Charger assessment flow variant.

@@ -160,11 +160,37 @@ Client review cycle
 ## Personalization Guardrails
 
 - Do not imply the restaurant endorsed the recommendation unless they have agreed.
-- Do not publish a personalized visual demo publicly without permission.
 - Do not reuse copyrighted images without permission.
 - Do not fabricate ratings, awards, press, menu items, capacity, hours, policies, list size, or performance results.
 - Do not invent catering, private dining, reservation, ordering, or event availability.
-- Mark demo content clearly if sharing a preview.
+- Public demo pages should read like customer-facing restaurant pages, not internal audits. Keep phrases like "audit preview," "cleanup recommendation," "observed issue," "pilot offer," "pricing," and "not a full rebuild" in internal docs or outreach notes.
+- When sharing a demo link with the prospect, explain in the email that it is a concept preview; do not put developer-facing disclaimers into the public customer-facing page unless Diego asks.
+
+## Public Demo Copy Rule
+
+For a visual restaurant demo, write the page as if a guest is deciding whether to order, reserve, inquire, join a list, buy a gift card, or visit.
+
+Use public demo copy for:
+
+```text
+Guest-facing headline
+Menu/service highlights
+Ordering, reservation, catering, event, special, or loyalty CTA
+Restaurant story and local positioning
+Simple next steps for guests
+```
+
+Keep internal content out of the public page:
+
+```text
+Audit findings
+Developer instructions
+Observed counts
+Before/after critique labels
+Pricing strategy
+Implementation tasks
+Recommendation category names
+```
 
 ## Outreach Use
 

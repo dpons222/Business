@@ -65,11 +65,15 @@ Links involved:
 
 Use the format that fits the module.
 
+For public visual demos, write the page as the restaurant's guest-facing website copy. Do not put
+audit labels, pricing, implementation notes, observed counts, or developer instructions on the public
+page. Keep those details in the recommendation brief or outreach note.
+
 For page-based modules:
 
 ```text
-Headline:
-Support copy:
+Guest-facing headline:
+Guest-facing support copy:
 Primary CTA:
 Secondary CTA:
 Sections:
@@ -94,6 +98,8 @@ Priority:
 Owner action needed:
 Tracking signal:
 ```
+
+The audit/cleanup structure is for internal briefs, not for the public demo route.
 
 ## Outreach Note
 

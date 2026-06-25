@@ -14,7 +14,12 @@ Do not create deeply customized unpaid work before interest. Before a reply, kee
 
 For workflow-heavy modules, prefer a short process outline or tracker sample instead of a full visual page demo.
 
+For public visual demos, write the page as if it is customer-facing copy for the restaurant's guests.
+Do not put audit labels, pricing, developer instructions, observed issue counts, or implementation
+recommendations on the public route. Keep those details in the recommendation brief and outreach
+materials.
+
 ## Current Prospect Files
 
 - `pizabella-recommendation.md`: lightweight recommendation brief for Pizabella / Pizza Bella.
-- `pizabella-audit-preview.html`: visual audit preview for the Pizabella customer journey cleanup.
+- Deployed public route: `/pizabella` in the `local-growth-preview` demo app. This is the customer-facing restaurant preview.
