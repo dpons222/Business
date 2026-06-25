@@ -20,6 +20,10 @@ Use:
 - `outreach-email.md` for the exact first message and follow-ups.
 - `campaign-tracking-strategy.md` for how the restaurant could test the recommendation.
 
+## Active Prospect Packages
+
+- `pizabella/`: Pizabella / Pizza Bella customer journey cleanup recommendation.
+
 ## Rules
 
 - Start with the restaurant's actual public customer journey.
