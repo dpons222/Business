@@ -9,9 +9,9 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Roofing Landing Page Demo System",
+  title: "local-growth-preview",
   description:
-    "Reusable roofing landing page demo system with prospect-specific data and assets.",
+    "Reusable multi-niche local growth demo hub with prospect-specific data and assets.",
 };
 
 export default function RootLayout({

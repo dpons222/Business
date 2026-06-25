@@ -1,14 +1,62 @@
-# Roofing Landing Page Demo App
+# local-growth-preview Demo App
 
-Reusable local demo app for the roofing landing page experiment.
+Reusable local growth preview hub for roofing, restaurants, and future niche demo experiments.
 
 ## Purpose
 
-This app renders personalized storm damage / roof inspection demos from reusable components and prospect data objects.
+This app renders personalized prospect demos from reusable components, prospect data objects, and a multi-niche demo registry.
+
+The app still lives inside the original roofing experiment folder for now, but the UI and package name are now generic. Use `local-growth-preview` as the product/project name for the dashboard and future docs.
+
+## Multi-Niche Dashboard
+
+The internal preview dashboard lives at `/dashboard` and supports:
+
+```text
+All
+Roofing
+Restaurants
+HVAC
+Plumbing
+Other / Testing
+```
+
+Dashboard entries are registered in:
+
+```text
+lib/demoRegistry.ts
+```
+
+The registry stores:
+
+```text
+niche
+status
+current focus
+public preview URL
+internal route
+summary copy
+```
+
+Current generic route examples:
+
+```text
+/dashboard
+/charger-roofing
+/pizabella
+/prospects
+```
+
+Vercel project/domain rename note:
+
+```text
+Keep the deployed Vercel project/domain rename as a follow-up after validating the generic dashboard UI. Charger Roofing is the only prospect contacted so far, and `/charger-roofing` should stay working if feasible.
+```
 
 Current demos:
 
 ```text
+Pizabella / Pizza Bella
 Final Cut Roofing
 Charger Roofing
 LOA Construction
@@ -103,7 +151,7 @@ RoofingLandingPage(chargerRoofing)
 RoofingLandingPage(loaConstruction)
 ```
 
-This avoids creating a separate app for every business. The demo app is the reusable system, and each business gets its own data, assets, and route.
+This avoids creating a separate app for every business. The demo app is the reusable system, and each business gets its own data, assets, route, niche metadata, and status metadata.
 
 Prospect data and assets are split into prospect-specific files and folders:
 
@@ -323,8 +371,9 @@ public/
 ```
 
 - `app/page.tsx`: renders the neutral preview-link-required page.
-- `app/dashboard/page.tsx`: renders the internal preview dashboard with prospect sorting.
+- `app/dashboard/page.tsx`: renders the internal multi-niche preview dashboard with filtering and sorting.
 - `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
+- `app/pizabella/page.tsx`: renders the first restaurant audit preview route.
 - `app/prospects/page.tsx`: lists prospect-specific demo pages.
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.
 - `app/prospects/[slug]/assessment/page.tsx`: renders the secondary Charger assessment flow variant.
@@ -334,6 +383,7 @@ public/
 - `components/VariantLandingPage.tsx`: alternate design branch renderer.
 - `components/ui/`: shadcn/ui primitives owned by this repo.
 - `lib/prospects/`: prospect types, registry, and one data file per prospect.
+- `lib/demoRegistry.ts`: multi-niche demo registry, statuses, filters, and current focus.
 - `lib/designVariants.ts`: template/variant configuration for internal comparison.
 - `app/globals.css`: visual styling.
 - `public/prospects/`: local-only public brand and project image references grouped by prospect.
