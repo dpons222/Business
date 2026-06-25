@@ -49,7 +49,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               autoComplete="username"
               autoFocus
               name="username"
-              placeholder="digidap"
+              placeholder="Enter username"
               required
               type="text"
             />
