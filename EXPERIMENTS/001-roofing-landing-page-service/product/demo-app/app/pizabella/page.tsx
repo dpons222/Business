@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { PizabellaAuditPreview } from "../../components/PizabellaAuditPreview";
+import { PizabellaCustomerPreview } from "../../components/PizabellaCustomerPreview";
 
 export const metadata: Metadata = {
-  title: "Pizza Bella Customer Journey Audit Preview",
+  title: "Pizza Bella Woodstock | Pizza, Pasta, Subs & Wings",
   description:
-    "Restaurant customer journey cleanup preview for Pizza Bella in Woodstock, Virginia.",
+    "Customer-facing restaurant preview for Pizza Bella in Woodstock, Virginia.",
 };
 
 export default function PizabellaPage() {
-  return <PizabellaAuditPreview />;
+  return <PizabellaCustomerPreview />;
 }

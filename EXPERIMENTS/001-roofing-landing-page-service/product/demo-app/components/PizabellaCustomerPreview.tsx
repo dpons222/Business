@@ -7,27 +7,27 @@ const heroImageUrl =
 const menuCards = [
   {
     title: "New York Style Pizza",
-    note: "Add a short category blurb and feature the first few high-intent pizza choices before the full menu list.",
+    note: "Classic pies with the toppings guests expect for an easy pickup, delivery, or family dinner order.",
     image: "https://s3.us-east-2.amazonaws.com/arrowpos-menu-images/00bd14d9-40c0-4056-a354-0c5b7c0a58f2.jpg",
   },
   {
     title: "Calzones & Strombolis",
-    note: "Clarify fillings, portion expectations, and whether these are solo meals or shareable options.",
+    note: "Warm, filling favorites for lunch, dinner, or sharing at the table.",
     image: "https://s3.us-east-2.amazonaws.com/arrowpos-menu-images/2bfaec49-69fb-41ff-a266-810760303014.jpg",
   },
   {
     title: "Buffalo Wings",
-    note: "Make sauce choices, quantity, and group-order fit easier to scan before the guest adds wings to cart.",
+    note: "Add wings to round out pizza night, game day, or a group order.",
     image: "https://s3.us-east-2.amazonaws.com/arrowpos-menu-images/f9793bcf-53dc-46f8-b02d-ddcccc1cfa86.jpg",
   },
   {
     title: "Spaghetti Special",
-    note: "Move the active lunch special into a visible homepage and weekly posting workflow.",
+    note: "Check the latest specials before you order lunch or dinner.",
     image: "https://d2lton1cbsjr4x.cloudfront.net/0714ee58-f9c0-4115-8be2-a0eeb430ba1b.png",
   },
 ];
 
-export function PizabellaAuditPreview() {
+export function PizabellaCustomerPreview() {
   return (
     <main className="min-h-screen bg-[#fffaf3] text-[#1f1714]">
       <header className="bg-[#A13D31] text-white">
@@ -40,7 +40,7 @@ export function PizabellaAuditPreview() {
             />
             <div>
               <p className="text-xl font-black leading-tight">Pizza Bella</p>
-              <p className="text-sm text-white/75">Customer Journey Audit Preview</p>
+              <p className="text-sm text-white/75">Pizza, pasta, subs, wings & more</p>
             </div>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -65,22 +65,21 @@ export function PizabellaAuditPreview() {
       >
         <div className="mx-auto w-full max-w-[1120px] px-4 py-16 md:py-24">
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#e6a756]">
-            Lightweight preview - not a full rebuild
+            Woodstock pizza, pasta, subs and wings
           </p>
           <h1 className="max-w-4xl text-[clamp(2.4rem,7vw,4.9rem)] font-black leading-none text-white">
-            Clean up the public path around Pizza Bella&apos;s existing online ordering.
+            Pizza Bella Pizza, Pasta, Subs... and More
           </h1>
           <p className="mt-5 max-w-3xl text-lg leading-8 text-white/85">
-            The ordering system is already live. The first practical project is to make the
-            homepage, About content, menu merchandising, specials, and public links work harder
-            before a guest clicks order.
+            Order online for pickup or delivery, call the shop, or browse favorites before
+            your next lunch, dinner, or family pizza night.
           </p>
           <div className="mt-8 grid gap-3 md:grid-cols-4">
             {[
-              ["184", "visible menu item navigation records observed"],
-              ["22", "public order categories observed"],
-              ["1", "active online special observed"],
-              ["30-45 min", "pickup/delivery wait times shown in order flow"],
+              ["Pickup", "order online and pick up at the shop"],
+              ["Delivery", "have Pizza Bella brought to your door"],
+              ["30-45 min", "typical wait time shown online"],
+              ["Specials", "check current offers before you order"],
             ].map(([value, label]) => (
               <div className="rounded-lg border border-white/20 bg-black/45 p-4" key={label}>
                 <strong className="block text-2xl">{value}</strong>
@@ -94,24 +93,24 @@ export function PizabellaAuditPreview() {
       <div className="mx-auto grid w-full max-w-[1120px] gap-10 px-4 py-12">
         <section>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#A13D31]">
-            Current snapshot
+            Easy ordering
           </p>
           <h2 className="max-w-3xl text-4xl font-black leading-tight">
-            What is already working, and what needs cleanup first.
+            Start with pizza, add a favorite, and choose pickup or delivery.
           </h2>
           <div className="mt-5 grid overflow-hidden rounded-lg border border-[#ead8c7] bg-[#ead8c7] md:grid-cols-3">
             {[
               [
-                "Ordering is active",
-                "Pickup and delivery are available through the ArrowPOS order flow, with future ordering enabled.",
+                "Order online",
+                "Browse the menu, choose pickup or delivery, and place your order when it is convenient.",
               ],
               [
-                "Public site is thin",
-                "The homepage does not yet surface best sellers, specials, ordering clarity, or a stronger local reason to order.",
+                "Call the shop",
+                "Prefer to talk through your order? Call Pizza Bella directly and the team can help.",
               ],
               [
-                "Menu has room to sell",
-                "The first pass should improve top categories and high-intent items instead of rewriting everything at once.",
+                "Feed the table",
+                "Pizza, pasta, subs, wings, calzones, strombolis, and specials make it easy to build a full meal.",
               ],
             ].map(([title, copy]) => (
               <article className="bg-white p-6" key={title}>
@@ -125,35 +124,34 @@ export function PizabellaAuditPreview() {
         <section className="grid gap-5 md:grid-cols-2">
           <article className="rounded-lg border border-[#ead8c7] bg-white p-6 shadow-sm">
             <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#A13D31]">
-              Current
+              Local favorite
             </p>
-            <h2 className="text-2xl font-black">Thin homepage message</h2>
+            <h2 className="text-2xl font-black">Pizza Bella in Woodstock</h2>
             <p className="mt-4 border-l-4 border-[#e6a756] pl-4 text-lg text-[#6b5a55]">
-              Pizza Bella Pizza, Pasta, Subs... and More
+              Pizza, pasta, subs, wings, and comfort-food favorites for lunch, dinner, pickup,
+              and delivery.
             </p>
           </article>
           <article className="rounded-lg border border-[#d8a298] bg-[#fff7ed] p-6 shadow-sm">
             <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#A13D31]">
-              Suggested
+              Quick next step
             </p>
-            <h2 className="text-2xl font-black">Clear local order path</h2>
+            <h2 className="text-2xl font-black">Ready to order?</h2>
             <p className="mt-4 border-l-4 border-[#e6a756] pl-4 text-lg">
-              Woodstock&apos;s neighborhood spot for pizza, pasta, subs, wings, and easy online
-              ordering.
+              Choose online ordering for pickup or delivery, or call Pizza Bella at 540-459-5363.
             </p>
             <p className="mt-3 text-[#6b5a55]">
-              Order pickup or delivery, call the shop, or check today&apos;s special before you
-              decide.
+              Check specials before you order so you do not miss a current offer.
             </p>
           </article>
         </section>
 
         <section>
           <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#A13D31]">
-            Menu merchandising
+            Menu favorites
           </p>
           <h2 className="max-w-3xl text-4xl font-black leading-tight">
-            Start with the menu areas most likely to guide a fast order.
+            Build your order around the classics.
           </h2>
           <div className="mt-5 grid gap-4 md:grid-cols-4">
             {menuCards.map((card) => (
@@ -169,33 +167,34 @@ export function PizabellaAuditPreview() {
         </section>
 
         <section className="rounded-lg border border-[#ead8c7] bg-white p-6">
-          <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#A13D31]">
-            Pilot offer
-          </p>
           <div className="grid gap-5 md:grid-cols-[1fr_280px]">
             <div>
-              <h2 className="text-3xl font-black">Restaurant Customer Journey Cleanup</h2>
+              <p className="mb-3 text-xs font-black uppercase tracking-normal text-[#A13D31]">
+                Order today
+              </p>
+              <h2 className="text-3xl font-black">Lunch, dinner, or pizza night is a few clicks away.</h2>
               <p className="mt-3 text-[#6b5a55]">
-                Fix Home/About/Hours copy, tighten order CTAs, review menu/category presentation,
-                create a weekly specials workflow, and document public link/tracking recommendations.
+                Order online when you know what you want, or call Pizza Bella if you have a
+                question before placing your order.
               </p>
             </div>
             <aside className="rounded-lg bg-[#FCE7CF] p-5">
-              <p className="text-5xl font-black">$750</p>
-              <p className="mt-2 font-bold">Fixed-scope pilot</p>
-              <p className="mt-2 text-sm text-[#6b5a55]">
-                Optional support after the pilot: $250/month for specials updates, tracking review,
-                menu copy cleanup, and public link checks.
-              </p>
+              <p className="text-3xl font-black">Pizza Bella</p>
+              <p className="mt-2 font-bold">Woodstock, VA</p>
+              <div className="mt-4 grid gap-2">
+                <a
+                  className="button bg-[#A13D31] text-white"
+                  href="https://onboarding.arrowpos.com/pizzabella_woodstock"
+                >
+                  Order Online
+                </a>
+                <a className="button border-[#A13D31] bg-white text-[#A13D31]" href="tel:5404595363">
+                  Call the Shop
+                </a>
+              </div>
             </aside>
           </div>
         </section>
-
-        <p className="border-t border-[#ead8c7] pt-5 text-sm text-[#6b5a55]">
-          Preview notes: This page is based on public pages and public order-flow data reviewed on
-          June 25, 2026. Pizza Bella has not approved this copy or design. No claim is made about
-          guaranteed orders, revenue, rankings, leads, review results, or platform outcomes.
-        </p>
       </div>
     </main>
   );

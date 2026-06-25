@@ -78,10 +78,10 @@ const restaurantEntries: DemoEntry[] = [
     city: "Woodstock, VA",
     niche: "restaurant",
     status: "ready_for_review",
-    stageLabel: "Restaurant audit preview prepared",
-    primaryService: "Restaurant Customer Journey Cleanup",
+    stageLabel: "Customer-facing restaurant demo prepared",
+    primaryService: "Restaurant website and ordering path preview",
     observedIssue:
-      "Online ordering is active, but the public Home/About path, menu merchandising, specials workflow, and public order links need cleanup before outreach.",
+      "Customer-facing Pizza Bella preview is prepared; internal notes still track the website, menu, specials, and public link cleanup opportunity.",
     href: "/pizabella",
     internalHref: "/pizabella",
     logoUrl:

@@ -2,15 +2,21 @@
 
 Do not send until the contact method is verified and the restaurant marketing pre-send checklist is completed.
 
-## Audit Preview
+## Demo / Recommendation
 
-Internal review file:
+Public customer-facing concept route:
 
 ```text
-EXPERIMENTS/002-restaurant-growth-systems/product/personalized-demos/pizabella-audit-preview.html
+/pizabella
 ```
 
-Use this only after review. Do not attach or link it until the page state, contact method, and pre-send checklist are verified.
+Internal recommendation brief:
+
+```text
+EXPERIMENTS/002-restaurant-growth-systems/product/personalized-demos/pizabella-recommendation.md
+```
+
+Use the public route only after review. The email should explain that it is a concept preview; the public page itself should read like a Pizza Bella customer-facing page, not an audit.
 
 ## Contact Method
 
@@ -109,6 +115,7 @@ Before sending:
 - Verify the order URL still loads.
 - Verify the restaurant name, phone, and address.
 - Verify the contact method.
-- Review the audit preview and decide whether to send it as a link, attachment, screenshot, or not at all.
+- Review the customer-facing demo route and decide whether to send it as a link, screenshot, or not at all.
+- Keep audit notes, pricing, and implementation recommendations in internal docs or the email body, not on the public route.
 - Confirm no unapproved claims are made.
 - Update the prospect tracker after sending.
