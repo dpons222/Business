@@ -12,7 +12,13 @@ Recommended demo direction:
 Light personalized version of the existing roofing landing page structure.
 ```
 
-Do not build a heavier custom demo until LOA replies or shows interest.
+A lightweight, customer-facing demo is now prepared at:
+
+```text
+https://local-growth-preview.vercel.app/loa-construction
+```
+
+Do not expand it into a heavier custom build until LOA replies or shows interest.
 
 ## 1. Current Page Strengths
 
@@ -122,3 +128,15 @@ The page is designed to make free inspection requests easier to complete and eas
 
 Avoid promising guaranteed leads, rankings, revenue, claim outcomes, or booked jobs.
 
+## 7. Contact Verification
+
+Verified public contact paths reviewed June 26, 2026:
+
+- Hail article phone: `512-375-3654`.
+- Contact page phones: `855-661-3431` and `512-645-1687`.
+- Address: `706 W. Ben White Blvd Suite 200B Austin, TX 78704`.
+- Hours: Monday-Friday, 8AM to 6PM; available 24/7 for emergency calls.
+- Contact page: `https://www.loaconstruction.com/contact/`.
+- Request appointment path: `https://www.loaconstruction.com/request-an-appointment/`.
+
+No direct business email has been verified. Outreach should stay manual until a proper recipient email is found.
