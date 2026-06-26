@@ -22,8 +22,9 @@ Do not claim guaranteed leads, rankings, revenue, or insurance outcomes.
 Before sending any outreach email or contact form message:
 
 - Re-open the prospect draft and read the exact message that will be sent.
-- Verify every demo link uses the stable production alias: `https://roof-check-preview.vercel.app/...`.
-- Do not send immutable Vercel deployment URLs such as `https://roof-check-preview-[random]-dpons222-9388s-projects.vercel.app/...`.
+- Verify every demo link uses the stable production alias: `https://local-growth-preview.vercel.app/...`.
+- Do not send old `https://roof-check-preview.vercel.app/...` links for new outreach.
+- Do not send immutable Vercel deployment URLs such as `https://roof-check-preview-[random]-dpons222-9388s-projects.vercel.app/...` or `https://local-growth-preview-[random]-dpons222-9388s-projects.vercel.app/...`.
 - Open the demo link and confirm it loads the current prospect page.
 - Confirm the message still matches the prospect's current site, offer, phone number, and brand colors.
 - Confirm the recipient/contact method is current.

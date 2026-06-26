@@ -18,6 +18,7 @@ Project: Diego digidaps@gmail.com <digidaps@gmail.com>
 Status: draft/manual dry run only
 Last pinned test execution: 677
 Last real-data dry-run execution: 679
+Local-growth-preview guardrail retest execution: 692
 ```
 
 The current workflow does not include Gmail, email-provider, Supabase update, schedule, or publish steps. It only reads candidate Supabase rows, validates guardrails, and returns a dry-run review payload.
@@ -33,6 +34,7 @@ Status: draft/manual internal-send test only
 Pinned test execution: 681
 Live internal send execution: 682
 Gmail message ID: 19efaf543aae87db
+Pinned local-growth-preview guardrail retest execution: 694
 ```
 
 The internal send workflow fetches only `prospect_slug = internal-test-digidap-dashboard` and `contact_email = digidaps@gmail.com`, then sends the exact stored subject/body to `digidaps@gmail.com`. It is not a real prospect sender.
@@ -50,9 +52,12 @@ Supports noLimit: true via Sender Config
 Pinned success-path test execution: 684
 Pinned guardrail-failure test execution: 685
 Pinned no-limit branch test execution: 686
+Pinned local-growth-preview guardrail retest execution: 693
 ```
 
 The manual approved sender has not been executed against live prospect rows. It must be run only after Diego approves rows in Supabase and the dry-run workflow passes.
+
+June 26, 2026 retest: guardrails now require `https://local-growth-preview.vercel.app/...`, block old `https://roof-check-preview.vercel.app/...` URLs, and block generated Vercel deployment URLs. Retests used pinned data only and did not send real prospect emails.
 
 ## Trigger
 
@@ -89,7 +94,7 @@ where outreach_approved = true
   and contact_email is not null
   and outreach_draft_subject is not null
   and outreach_draft_body is not null
-  and demo_url like 'https://roof-check-preview.vercel.app/%'
+  and demo_url like 'https://local-growth-preview.vercel.app/%'
 order by outreach_approved_at asc
 limit 5;
 ```
@@ -146,7 +151,7 @@ outreach_send_channel is email
 contact_email is present
 outreach_draft_subject is present
 outreach_draft_body is present
-demo_url starts with https://roof-check-preview.vercel.app/
+demo_url starts with https://local-growth-preview.vercel.app/
 outreach_pre_send_checked_at is present
 outreach_pre_send_checklist.copy_reviewed is true
 outreach_pre_send_checklist.demo_url_verified is true
@@ -244,5 +249,6 @@ Use `noLimit = true` only after checking the dry-run output and confirming every
 - Never generate new copy inside n8n.
 - Never rewrite approved drafts during send.
 - Never send immutable Vercel deployment URLs.
+- Never send old `roof-check-preview.vercel.app` URLs for new outreach; use `https://local-growth-preview.vercel.app/...`.
 - Never send rows without explicit approval.
 - Never send follow-ups without a separate approval rule or follow-up workflow.

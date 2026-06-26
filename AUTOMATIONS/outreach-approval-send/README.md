@@ -20,6 +20,7 @@ It is not an autonomous cold-email sender. The purpose is to let Codex prepare s
 - Approved sender workflow ID: `5cyJ9A7RaQ1ZGBtJ`.
 - Approved sender workflow URL: `https://digidap.dpons.duckdns.org/workflow/5cyJ9A7RaQ1ZGBtJ`.
 - Sender default batch limit is `3`; set `noLimit = true` in `Sender Config` only for an intentional all-approved-row run.
+- Sender guardrails now require `https://local-growth-preview.vercel.app/...` demo URLs and were retested with pinned data on June 26, 2026.
 - All workflows are manual-trigger only and are not published or scheduled.
 - No real prospect emails are sent by this automation yet.
 

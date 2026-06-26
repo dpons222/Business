@@ -92,7 +92,7 @@ where outreach_approved = true
   and contact_email is not null
   and outreach_draft_subject is not null
   and outreach_draft_body is not null
-  and demo_url like 'https://roof-check-preview.vercel.app/%';
+  and demo_url like 'https://local-growth-preview.vercel.app/%';
 ```
 
 ## Example Approval Update

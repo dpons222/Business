@@ -101,7 +101,7 @@ Current first prospect:
 Charger Roofing
 status: contacted
 reply_status: contact_form_sent
-demo: https://roof-check-preview.vercel.app/charger-roofing
+demo: https://local-growth-preview.vercel.app/charger-roofing
 ```
 
 ## Prospect Columns
@@ -194,7 +194,7 @@ contact_form
 manual
 ```
 
-The n8n sender may only send rows where `outreach_approved = true`, `outreach_send_status = approved`, `outreach_send_channel = email`, required draft fields are present, and `demo_url` uses the stable production alias.
+The n8n sender may only send rows where `outreach_approved = true`, `outreach_send_status = approved`, `outreach_send_channel = email`, required draft fields are present, and `demo_url` uses the stable production alias: `https://local-growth-preview.vercel.app/...`.
 
 ## Prospect Security
 
