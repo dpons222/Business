@@ -186,7 +186,7 @@ I am testing a focused growth package where I inspect the public customer journe
 
 For $BusinessName, I would start with $PrimaryRecommendation because $RecommendedSolution.
 
-Would it be useful if I sent over a short recommendation outline?
+Would it be useful if I sent over a short recommendation outline? If another site priority would be more useful to look at first, I can focus there instead.
 
 {{sender_name}}
 

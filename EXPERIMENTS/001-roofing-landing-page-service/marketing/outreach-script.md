@@ -13,7 +13,7 @@ I am testing a focused landing page offer for roofers: a storm damage / roof ins
 
 The idea is simple: one page, clear trust proof, strong mobile layout, and a direct call/request-inspection flow.
 
-Would you be open to seeing a quick example or a short audit of what I would improve on your current page?
+Would you be open to seeing a quick example or a short audit of what I would improve on your current page? If another site priority would be more useful to look at first, I can focus there instead.
 
 Best,
 [Your Name]
@@ -56,14 +56,22 @@ Use one specific observation in the first message, such as:
 - Form is buried too low.
 - Page talks about services but does not ask for an inspection.
 
+The first message may include one short alternate-priority sentence after the main ask:
+
+```text
+If another site priority would be more useful to look at first, I can focus there instead.
+```
+
+Use this to invite redirection without turning the outreach into a generic "anything we can help with" pitch.
+
 ## Pre-Send Draft Check
 
 Run this check before every outbound send:
 
 ```text
 1. Read the final draft exactly as it will be sent.
-2. Confirm every demo link uses https://roof-check-preview.vercel.app/... .
-3. Reject any roof-check-preview-[random]-dpons222-9388s-projects.vercel.app URL.
+2. Confirm every demo link uses the current stable production preview alias, such as https://local-growth-preview.vercel.app/... .
+3. Reject any generated deployment URL such as roof-check-preview-[random]-dpons222-9388s-projects.vercel.app or local-growth-preview-[random]-dpons222-9388s-projects.vercel.app.
 4. Open the demo link and confirm the current prospect page loads.
 5. Confirm the draft still matches the prospect's site, offer, phone number, and brand colors.
 6. Confirm recipient/contact method.

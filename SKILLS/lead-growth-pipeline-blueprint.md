@@ -56,6 +56,7 @@ demo_or_recommendation_url
 - Preserve other recommendations as future notes.
 - Prevent generic outreach.
 - Keep outreach draft-only.
+- Allow one concise alternate-priority sentence after the main ask so prospects can redirect the recommendation without weakening the specific first idea.
 - Enforce pre-send checks.
 
 ## Script Responsibilities

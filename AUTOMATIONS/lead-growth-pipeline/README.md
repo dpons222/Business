@@ -175,6 +175,7 @@ Before creating a Gmail draft, verify:
 - the exact draft is approved for draft creation,
 - the recommendation/demo URL opens,
 - the message mentions one observed opportunity,
+- the message may include one short alternate-priority sentence after the main ask, for example: "If another site priority would be more useful to look at first, I can focus there instead.",
 - no guaranteed outcomes are promised.
 
 Use `gmail-draft-handoff.md` when wiring this into n8n or the Gmail API.
