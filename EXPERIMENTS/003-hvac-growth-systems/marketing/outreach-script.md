@@ -6,6 +6,8 @@ Subject: Quick HVAC customer journey note
 
 Hi {{first_name_or_team}},
 
+My name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths.
+
 I was reviewing {{business_name}} and noticed one practical opportunity around {{observed_issue}}.
 
 For HVAC companies, I am testing a focused growth package where I inspect the public customer journey and implement one improvement tied to repair calls, replacement quotes, tune-ups, financing clarity, or lead follow-up.

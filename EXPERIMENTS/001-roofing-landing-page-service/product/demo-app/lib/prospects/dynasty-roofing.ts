@@ -74,17 +74,17 @@ export const dynastyRoofing: ProspectData = {
     {
       question: "What does the inspection include?",
       answer:
-        "The article describes exterior review, interior inspection for water intrusion, storm damage documentation, and transparent recommendations.",
+        "Dynasty can review the exterior, check for interior water intrusion when needed, document storm damage, and explain repair or replacement recommendations.",
     },
     {
-      question: "Can the demo mention A+ BBB?",
+      question: "Why mention Dynasty's BBB rating?",
       answer:
-        "Yes, if the rating remains current. The page should reference BBB proof carefully and avoid implying endorsement beyond the displayed rating.",
+        "The A+ BBB rating is a useful trust signal for homeowners comparing roofers after a storm, as long as the rating remains current.",
     },
     {
-      question: "Can this page promise insurance coverage?",
+      question: "Can Dynasty help with insurance documentation?",
       answer:
-        "No. It can mention documentation and claim assistance, but the insurer and policy control coverage decisions.",
+        "Yes. Dynasty can document visible storm concerns and provide claim-assistance guidance. Coverage decisions still depend on the homeowner's policy and insurer.",
     },
   ],
 };

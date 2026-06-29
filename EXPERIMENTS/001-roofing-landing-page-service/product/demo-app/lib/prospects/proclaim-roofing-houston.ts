@@ -35,11 +35,11 @@ export const proclaimRoofingHouston: ProspectData = {
   observedIssue: "Proclaim's Houston city service page has strong residential and storm inspection language, but it is broader than a single storm-damage request path.",
   headline: "Houston Storm Damage? Start With a Free Roof Inspection.",
   subheadline: "Proclaim can give Houston homeowners a simpler first step after hail, wind, humidity-driven wear, or storm damage: request an inspection, get findings documented, and review practical next steps.",
-  trustLine: "Houston residential roofing page references free drone and ground-level inspection, storm damage, and documented findings for homeowners.",
+  trustLine: "Free drone and ground-level inspections, storm damage review, and documented findings for Houston homeowners.",
   formReassurance: "No pressure. Proclaim can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Houston storm inspection",
   galleryHeading: "A focused storm inspection request path for Houston homeowners.",
-  pageAngle: "Use the Houston residential roofing proof as a focused storm inspection page for homeowners who need clarity after severe weather.",
+  pageAngle: "Start with a focused Houston storm inspection for homeowners who need clarity after severe weather.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Houston storm",
     "Lifted, missing, or wind-creased shingles",
@@ -68,20 +68,20 @@ export const proclaimRoofingHouston: ProspectData = {
   ],
   faqs: [
     {
-      question: "Why use a focused inspection page?",
-      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
+      question: "Why start with an inspection?",
+      answer: "An inspection helps you confirm visible roof concerns first, then choose repair, replacement, emergency service, or claim-support next steps with better information."
     },
     {
-      question: "Can the page mention insurance?",
-      answer: "Yes, carefully. It can mention documentation and claim-support guidance, but it should not promise coverage, approval, reimbursement, or claim results."
+      question: "Can the inspection help with insurance documentation?",
+      answer: "Yes. The inspection can document visible roof concerns and provide claim-support guidance. Coverage, approval, reimbursement, and claim results still depend on your policy and insurer."
     },
     {
       question: "What is the first action for a homeowner?",
       answer: "The first action is to request the free Houston storm damage roof inspection, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
     },
     {
-      question: "Why keep the page this focused?",
-      answer: "Cold storm traffic usually needs a fast answer and one next step. A narrower page reduces decisions before the homeowner has even scheduled an inspection."
+      question: "Why request an inspection before choosing repairs?",
+      answer: "After severe weather, the first step is understanding what happened. An inspection gives you clearer information before you decide whether repairs, emergency protection, replacement, or claim-support next steps are needed."
     }
   ]
 };

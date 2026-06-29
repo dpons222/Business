@@ -12,7 +12,24 @@ Applied migration:
 
 ```text
 add_prospect_outreach_approval_fields
+create_prospect_email_drafts_view
+add_urls_to_prospect_email_drafts_view
+add_contact_status_to_prospect_email_drafts_view
 ```
+
+## Views
+
+`public.prospect_email_drafts` is a review-only helper view for the Supabase Table Editor.
+
+| View Column | Source Column | Purpose |
+| --- | --- | --- |
+| `business_name` | `prospects.business_name` | Prospect business name |
+| `business_email` | `prospects.contact_email` | Public business email / outreach target |
+| `website` | `prospects.website` | Prospect's current website |
+| `demo_url` | `prospects.demo_url` | DigiDap demo preview page |
+| `email_draft_subject` | `prospects.outreach_draft_subject` | Stored email draft subject |
+| `email_draft_body` | `prospects.outreach_draft_body` | Stored email draft body |
+| `contact_status` | `prospects.status` | Relationship/contact lifecycle, such as `not_contacted` or `contacted` |
 
 ## Added Columns
 

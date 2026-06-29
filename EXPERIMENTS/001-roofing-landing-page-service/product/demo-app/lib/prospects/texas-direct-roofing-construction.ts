@@ -12,7 +12,7 @@ export const texasDirectRoofingConstruction: ProspectData = {
   primaryService: "DFW storm damage inspection",
   recommendedCta: "Request a Free Inspection",
   secondaryCta: "Use Website Contact",
-  trustSignal: "Homepage promotes free inspection, same-day response, 450+ 5-star reviews, lifetime labor warranty, Owens Corning Platinum Preferred, and 2400+ insurance-claim roof replacements",
+  trustSignal: "Free inspections, same-day response, 450+ 5-star reviews, lifetime labor warranty, Owens Corning Platinum Preferred, and 2400+ insurance-claim roof replacements",
   logoUrl: "https://txdroofing.com/wp-content/uploads/2023/02/TXD-Logo-1.png",
   heroImageUrl: "https://txdroofing.com/wp-content/uploads/2024/09/DSC6117.jpg",
   projectImages: [
@@ -38,8 +38,8 @@ export const texasDirectRoofingConstruction: ProspectData = {
   sourceWebsite: "https://txdroofing.com/",
   observedIssue: "Texas Direct's homepage is proof-heavy and broad; a focused DFW storm page can make the free inspection path stand out.",
   headline: "DFW Storm Damage? Request a Free Roof Inspection.",
-  subheadline: "Texas Direct can inspect hail and wind concerns, document visible roof damage, and help DFW homeowners understand repair or claim-related next steps without starting on a broad homepage.",
-  trustLine: "The homepage highlights free inspection, same-day response, 450+ 5-star reviews, lifetime labor warranty, RCAT licensing, and 2400+ insurance-claim roof replacements.",
+  subheadline: "Texas Direct can inspect hail and wind concerns, document visible roof damage, and help DFW homeowners understand repair or claim-related next steps without sorting through unrelated services.",
+  trustLine: "Free inspections, same-day response, 450+ 5-star reviews, lifetime labor warranty, RCAT licensing, and 2400+ insurance-claim roof replacements.",
   formReassurance: "No pressure. Texas Direct can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Dallas-Fort Worth storm inspection",
   galleryHeading: "A focused storm inspection request path for Dallas-Fort Worth homeowners.",
@@ -72,20 +72,20 @@ export const texasDirectRoofingConstruction: ProspectData = {
   ],
   faqs: [
     {
-      question: "Why use a focused inspection page?",
-      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
+      question: "Why start with an inspection?",
+      answer: "An inspection helps you confirm visible roof concerns first, then choose repair, replacement, emergency service, or claim-support next steps with better information."
     },
     {
-      question: "Can the page mention insurance?",
-      answer: "Yes, carefully. It can mention documentation and claim-support guidance, but it should not promise coverage, approval, reimbursement, or claim results."
+      question: "Can the inspection help with insurance documentation?",
+      answer: "Yes. The inspection can document visible roof concerns and provide claim-support guidance. Coverage, approval, reimbursement, and claim results still depend on your policy and insurer."
     },
     {
       question: "What is the first action for a homeowner?",
       answer: "The first action is to request the DFW storm damage inspection, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
     },
     {
-      question: "Why keep the page this focused?",
-      answer: "Cold storm traffic usually needs a fast answer and one next step. A narrower page reduces decisions before the homeowner has even scheduled an inspection."
+      question: "Why request an inspection before choosing repairs?",
+      answer: "After severe weather, the first step is understanding what happened. An inspection gives you clearer information before you decide whether repairs, emergency protection, replacement, or claim-support next steps are needed."
     }
   ]
 };

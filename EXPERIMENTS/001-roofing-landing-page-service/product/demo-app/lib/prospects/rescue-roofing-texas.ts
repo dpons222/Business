@@ -12,7 +12,7 @@ export const rescueRoofingTexas: ProspectData = {
   primaryService: "free Dallas County storm damage roof inspection",
   recommendedCta: "Request Free Roof Inspection",
   secondaryCta: "Call (817) 550-7271",
-  trustSignal: "Free roof inspections, storm/tornado/hail repair, insurance-company coordination, testimonials, and BBB A+ link on the page",
+  trustSignal: "Free roof inspections, storm/tornado/hail repair, insurance-company coordination, testimonials, and BBB A+ proof",
   logoUrl: "https://rescueroofingtexas.com/wp-content/uploads/thegem/logos/logo_8463d58ea70fb463908d3be6c70a8f48_1x.jpg",
   heroImageUrl: "https://rescueroofingtexas.com/wp-content/uploads/thegem/logos/logo_27ed00cd8d424252e8593600ce17928f_1x.jpg",
   projectImages: [
@@ -39,7 +39,7 @@ export const rescueRoofingTexas: ProspectData = {
   formReassurance: "No pressure. Rescue can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Dallas County storm inspection",
   galleryHeading: "A focused storm inspection request path for Dallas County homeowners.",
-  pageAngle: "Use one page to send Dallas County homeowners from storm concern to a free inspection request without sorting through every service.",
+  pageAngle: "Send Dallas County homeowners from storm concern to a free inspection request before sorting through repair, replacement, or emergency options.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Dallas County storm",
     "Lifted, missing, or wind-creased shingles",
@@ -68,20 +68,20 @@ export const rescueRoofingTexas: ProspectData = {
   ],
   faqs: [
     {
-      question: "Why use a focused inspection page?",
-      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
+      question: "Why start with an inspection?",
+      answer: "An inspection helps you confirm visible roof concerns first, then choose repair, replacement, emergency service, or claim-support next steps with better information."
     },
     {
-      question: "Can the page mention insurance?",
-      answer: "Yes, carefully. It can mention documentation and claim-support guidance, but it should not promise coverage, approval, reimbursement, or claim results."
+      question: "Can the inspection help with insurance documentation?",
+      answer: "Yes. The inspection can document visible roof concerns and provide claim-support guidance. Coverage, approval, reimbursement, and claim results still depend on your policy and insurer."
     },
     {
       question: "What is the first action for a homeowner?",
       answer: "The first action is to request the free Dallas County storm damage roof inspection, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
     },
     {
-      question: "Why keep the page this focused?",
-      answer: "Cold storm traffic usually needs a fast answer and one next step. A narrower page reduces decisions before the homeowner has even scheduled an inspection."
+      question: "Why request an inspection before choosing repairs?",
+      answer: "After severe weather, the first step is understanding what happened. An inspection gives you clearer information before you decide whether repairs, emergency protection, replacement, or claim-support next steps are needed."
     }
   ]
 };

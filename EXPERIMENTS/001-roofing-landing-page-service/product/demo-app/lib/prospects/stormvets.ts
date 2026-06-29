@@ -94,9 +94,9 @@ export const stormvets: ProspectData = {
         "StormVets says they can work with homeowners and their insurance company after an inspection. Any coverage decision still depends on the policy and insurer.",
     },
     {
-      question: "Why use a focused landing page for this offer?",
+      question: "Why request the inspection after a storm?",
       answer:
-        "A focused version can move the free inspection action closer to homeowners who are worried about recent storm damage.",
+        "A no-cost inspection gives homeowners a clearer view of wind, hail, or leak concerns before deciding whether repair, replacement, or insurance next steps are needed.",
     },
   ],
 };

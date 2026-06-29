@@ -73,7 +73,7 @@ export function RoofingLandingPage({ prospect, variant }: RoofingLandingPageProp
 
   return (
     <main
-      className={`landing-page landing-${variantId}`}
+      className={`landing-page landing-${variantId} prospect-${prospect.slug}`}
       style={
         {
           "--primary": prospect.brand.primary,

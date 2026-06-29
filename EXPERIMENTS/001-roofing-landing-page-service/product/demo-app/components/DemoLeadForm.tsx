@@ -57,8 +57,8 @@ export function DemoLeadForm({ companyName, formTitle, formNote, ctaLabel }: Dem
       <small>{formNote}</small>
       {submitted ? (
         <p className="demo-confirmation" role="status">
-          Demo confirmation: this preview would send the inspection request to {companyName}. No
-          information was sent from this demo.
+          Thanks. This sample form did not send information, but the live request would go directly
+          to {companyName}.
         </p>
       ) : null}
     </form>

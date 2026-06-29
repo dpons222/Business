@@ -22,13 +22,13 @@ export async function generateMetadata({
 
   if (!prospect) {
     return {
-      title: "Roof Inspection Preview",
+      title: "Roof Inspection",
     };
   }
 
   return {
-    title: `${prospect.companyName} Roof Inspection Preview`,
-    description: `Focused storm damage and free roof inspection page preview for ${prospect.companyName}.`,
+    title: `${prospect.companyName} Roof Inspection`,
+    description: `Storm damage and free roof inspection page for ${prospect.companyName}.`,
   };
 }
 

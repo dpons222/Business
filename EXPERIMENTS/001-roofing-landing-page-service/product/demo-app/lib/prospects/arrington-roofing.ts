@@ -31,10 +31,10 @@ export const arringtonRoofing: ProspectData = {
     },
   ],
   brand: {
-    primary: "#183B63",
-    primaryDark: "#0B1E33",
-    accent: "#B72E2E",
-    accentSoft: "#F4DADA",
+    primary: "#487814",
+    primaryDark: "#284706",
+    accent: "#90B753",
+    accentSoft: "#EFF7E7",
   },
   sourceWebsite: "https://arringtonroofing.com/blog/storm-damage-roof-repair-north-texas",
   observedIssue:
@@ -88,14 +88,14 @@ export const arringtonRoofing: ProspectData = {
         "A thorough storm check can review shingles, ridge caps, flashing, gutters, fascia, vents, skylights, attic areas, ceilings, walls, insulation, and visible storm impact.",
     },
     {
-      question: "Can the demo mention emergency service?",
+      question: "Can Arrington help with emergency roof protection?",
       answer:
-        "Yes, carefully. Emergency service and tarping can be mentioned, but the page should avoid guaranteeing arrival time or repair availability.",
+        "Yes. If the roof needs urgent protection, Arrington can discuss emergency service or tarping options after reviewing the situation.",
     },
     {
-      question: "Can the page promise insurance coverage?",
+      question: "Can the inspection help with insurance documentation?",
       answer:
-        "No. The demo can mention documentation and claim-support guidance, but coverage decisions depend on the homeowner's policy and insurer.",
+        "Yes. Arrington can document visible roof concerns and provide claim-support guidance. Coverage decisions still depend on the homeowner's policy and insurer.",
     },
   ],
 };

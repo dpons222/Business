@@ -12,7 +12,7 @@ export const elevatedRoofing: ProspectData = {
   primaryService: "free Fort Worth roof assessment",
   recommendedCta: "Request a Free Roof Inspection",
   secondaryCta: "Call (469) 305-0010",
-  trustSignal: "Free no-obligation assessment, photo report, Google review language, GAF proof, and storm/hail services on the page",
+  trustSignal: "Free no-obligation assessments, photo reports, Google review proof, GAF proof, and storm or hail services",
   logoUrl: "https://elevatedroofing.com/wp-content/uploads/ElevatedRoofing-Logo_Color_white.webp",
   heroImageUrl: "https://elevatedroofing.com/wp-content/uploads/2025/12/Mega-Menu-Comprehensive-Residential-Roofing-Services-in-DFW-Elevated-Roofing-1-1.jpg",
   projectImages: [
@@ -35,11 +35,11 @@ export const elevatedRoofing: ProspectData = {
   observedIssue: "Elevated's Fort Worth page has strong proof and free assessment language, but storm inspection visitors still have to parse a full service-area page.",
   headline: "Fort Worth Storm Damage? Get a Free Roof Assessment.",
   subheadline: "Elevated Roofing can inspect hail, wind, leak, or storm concerns, document visible issues with a photo report, and explain practical next steps without pressure.",
-  trustLine: "Fort Worth page references a free no-obligation assessment, photo assessment report, GAF proof, Google reviews, and 24/7 emergency services.",
+  trustLine: "Free no-obligation assessments, photo assessment reports, GAF proof, Google reviews, and 24/7 emergency services for Fort Worth homeowners.",
   formReassurance: "No pressure. Elevated can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Fort Worth storm inspection",
   galleryHeading: "A focused storm inspection request path for Fort Worth homeowners.",
-  pageAngle: "Use a focused page to send Fort Worth storm visitors directly to the free assessment rather than the broader service-area page.",
+  pageAngle: "Start with a free Fort Worth assessment before deciding whether repair, replacement, emergency service, or documentation support is needed.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Fort Worth storm",
     "Lifted, missing, or wind-creased shingles",
@@ -68,20 +68,20 @@ export const elevatedRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Why use a focused inspection page?",
-      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
+      question: "Why start with an inspection?",
+      answer: "An inspection helps you confirm visible roof concerns first, then choose repair, replacement, emergency service, or claim-support next steps with better information."
     },
     {
-      question: "Can the page mention insurance?",
-      answer: "Yes, carefully. It can mention documentation and claim-support guidance, but it should not promise coverage, approval, reimbursement, or claim results."
+      question: "Can the inspection help with insurance documentation?",
+      answer: "Yes. The inspection can document visible roof concerns and provide claim-support guidance. Coverage, approval, reimbursement, and claim results still depend on your policy and insurer."
     },
     {
       question: "What is the first action for a homeowner?",
       answer: "The first action is to request the free Fort Worth roof assessment, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
     },
     {
-      question: "Why keep the page this focused?",
-      answer: "Cold storm traffic usually needs a fast answer and one next step. A narrower page reduces decisions before the homeowner has even scheduled an inspection."
+      question: "Why request an inspection before choosing repairs?",
+      answer: "After severe weather, the first step is understanding what happened. An inspection gives you clearer information before you decide whether repairs, emergency protection, replacement, or claim-support next steps are needed."
     }
   ]
 };

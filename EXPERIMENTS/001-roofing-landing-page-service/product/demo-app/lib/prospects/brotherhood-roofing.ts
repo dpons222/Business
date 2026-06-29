@@ -96,9 +96,9 @@ export const brotherhoodRoofing: ProspectData = {
         "Yes. Gutters, siding, and deck damage can suggest roof impact too. A professional inspection can help document visible issues more safely.",
     },
     {
-      question: "Can this page promise insurance approval?",
+      question: "Can Brotherhood help with insurance documentation?",
       answer:
-        "No. The demo can mention documentation and insurance assistance, but coverage decisions depend on the homeowner's policy and insurer.",
+        "Yes. Brotherhood can document visible roof concerns and provide insurance assistance. Coverage decisions still depend on the homeowner's policy and insurer.",
     },
   ],
 };

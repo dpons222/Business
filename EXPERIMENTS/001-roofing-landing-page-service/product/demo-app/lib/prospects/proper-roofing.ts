@@ -48,7 +48,7 @@ export const properRoofing: ProspectData = {
   formReassurance:
     "No pressure. Proper can follow up to confirm your ZIP code, understand what happened during the storm, and schedule a free inspection before any restoration decision is needed.",
   galleryEyebrow: "Greater Houston storm documentation",
-  galleryHeading: "Turn Proper's broad restoration page into a clear first-step inspection request.",
+  galleryHeading: "Start with a clear first-step inspection request after Greater Houston storms.",
   pageAngle:
     "Start with a free inspection and documentation review so Greater Houston homeowners know what storm damage exists before discussing full restoration.",
   damageSigns: [
@@ -89,14 +89,14 @@ export const properRoofing: ProspectData = {
         "Proper can document storm damage with photos, videos, storm details, inspection reports, and repair plans to support next-step conversations.",
     },
     {
-      question: "Can the page mention insurance?",
+      question: "Can the inspection help with insurance documentation?",
       answer:
-        "Yes, carefully. The demo can mention documentation and claims assistance, but it should not promise coverage, claim approval, reimbursement, or restoration outcomes.",
+        "Yes. Proper can document visible storm concerns and provide claims-assistance guidance. Coverage, claim approval, reimbursement, and restoration outcomes still depend on the policy and insurer.",
     },
     {
-      question: "Why start with a focused inspection page?",
+      question: "Why start with a free inspection?",
       answer:
-        "A first-step inspection page is easier for storm-concerned homeowners to understand before they are ready to discuss a full restoration project.",
+        "A free inspection helps identify storm damage first, so you can understand whether repair, restoration, financing, or claim-support next steps are worth discussing.",
     },
   ],
 };

@@ -12,7 +12,7 @@ export const sugarRoofing: ProspectData = {
   primaryService: "free Houston storm damage inspection",
   recommendedCta: "Get Free Estimate",
   secondaryCta: "Call (713) 843-7204",
-  trustSignal: "Houston page promotes free roof inspections, emergency repair, hail damage repair, wind damage repair, hurricane damage, and claim assistance",
+  trustSignal: "Free Houston roof inspections, emergency repair, hail damage repair, wind damage repair, hurricane damage, and claim assistance",
   logoUrl: "https://cdn.prod.website-files.com/67ec4d93d7fd97bcc3e70fb4/67ed667518891cb4e2b3b948_Sugar%20Roofing%20Website%20Logo%403x.webp",
   heroImageUrl: "https://cdn.prod.website-files.com/67ec4d93d7fd97bcc3e70fb4/67ffc3214d8ebde90c61fa7e_Sugar%20Roofing%404x%20(1).webp",
   projectImages: [
@@ -35,7 +35,7 @@ export const sugarRoofing: ProspectData = {
   observedIssue: "Sugar's Houston page has many offers, financing messages, estimator paths, and storm services, so a single storm inspection page could reduce decision friction.",
   headline: "Houston Storm Damage? Start With a Free Roof Inspection.",
   subheadline: "Sugar Roofing can give Houston homeowners one clear first step after hail, wind, hurricanes, leaks, or storm damage before they sort through estimator or financing options.",
-  trustLine: "The Houston service page promotes free roof inspections, storm damage repairs, emergency repair, hail/wind/hurricane damage services, and roof insurance claim assistance.",
+  trustLine: "Free roof inspections, storm damage repairs, emergency repair, hail/wind/hurricane damage services, and roof insurance claim assistance in Houston.",
   formReassurance: "No pressure. Sugar can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Houston storm inspection",
   galleryHeading: "A focused storm inspection request path for Houston homeowners.",
@@ -68,20 +68,20 @@ export const sugarRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Why use a focused inspection page?",
-      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
+      question: "Why start with an inspection?",
+      answer: "An inspection helps you confirm visible roof concerns first, then choose repair, replacement, emergency service, or claim-support next steps with better information."
     },
     {
-      question: "Can the page mention insurance?",
-      answer: "Yes, carefully. It can mention documentation and claim-support guidance, but it should not promise coverage, approval, reimbursement, or claim results."
+      question: "Can the inspection help with insurance documentation?",
+      answer: "Yes. The inspection can document visible roof concerns and provide claim-support guidance. Coverage, approval, reimbursement, and claim results still depend on your policy and insurer."
     },
     {
       question: "What is the first action for a homeowner?",
       answer: "The first action is to request the free Houston storm damage inspection, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
     },
     {
-      question: "Why keep the page this focused?",
-      answer: "Cold storm traffic usually needs a fast answer and one next step. A narrower page reduces decisions before the homeowner has even scheduled an inspection."
+      question: "Why request an inspection before choosing repairs?",
+      answer: "After severe weather, the first step is understanding what happened. An inspection gives you clearer information before you decide whether repairs, emergency protection, replacement, or claim-support next steps are needed."
     }
   ]
 };

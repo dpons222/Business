@@ -20,13 +20,13 @@ export async function generateMetadata({ params }: ProspectPageProps): Promise<M
 
   if (!prospect) {
     return {
-      title: "Roofing Landing Page Demo",
+      title: "Roof Inspection",
     };
   }
 
   return {
-    title: `${prospect.companyName} Free Roof Inspection Demo`,
-    description: `Focused storm damage and free roof inspection landing page demo for ${prospect.companyName}.`,
+    title: `${prospect.companyName} Free Roof Inspection`,
+    description: `Storm damage and free roof inspection page for ${prospect.companyName}.`,
   };
 }
 

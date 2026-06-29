@@ -13,6 +13,8 @@ Body:
 ```text
 Hi [Name],
 
+My name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths.
+
 I was looking at [Restaurant Name] and noticed [specific public detail: menu/order link, private dining, catering, reviews, weekly specials, Google link, events, etc.].
 
 One practical idea: [one-sentence recommendation].
@@ -38,6 +40,8 @@ Body:
 
 ```text
 Hi [Name],
+
+My name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths.
 
 I noticed [specific public detail].
 
@@ -87,7 +91,7 @@ Diego
 Use this when the contact form is short.
 
 ```text
-Hi, I had a practical idea for [Restaurant Name]: [one-sentence recommendation]. I am testing a fixed-scope service where I review a local restaurant's public guest journey and implement one focused improvement, such as order link cleanup, an inquiry flow, a campaign page, review workflow, weekly specials content, or simple follow-up automation. If useful, I can send a quick example direction. - Diego
+Hi, my name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths. I had a practical idea for [Restaurant Name]: [one-sentence recommendation]. I am testing a fixed-scope service where I review a local restaurant's public guest journey and implement one focused improvement, such as order link cleanup, an inquiry flow, a campaign page, review workflow, weekly specials content, or simple follow-up automation. If useful, I can send a quick example direction. - Diego
 ```
 
 ## Guardrails

@@ -12,7 +12,7 @@ export const pappasRoofingAndConstruction: ProspectData = {
   primaryService: "Plano hassle-free roof inspection",
   recommendedCta: "Schedule Now",
   secondaryCta: "Call (972) 806-9791",
-  trustSignal: "Homepage promotes schedule your hassle-free roof inspection, storm damage, hail damage, insurance claim support, licensed/insured proof, and GAF Master Elite status",
+  trustSignal: "Hassle-free roof inspections, storm and hail damage support, insurance claim guidance, licensed and insured proof, and GAF Master Elite status",
   logoUrl: "https://www.pappasroofingandconstruction.com/images/brand/logo-dark.2505271455422.png",
   heroImageUrl: "https://www.pappasroofingandconstruction.com/images/services/roof-inspections.2506100911137.jpg",
   projectImages: [
@@ -39,11 +39,11 @@ export const pappasRoofingAndConstruction: ProspectData = {
   observedIssue: "Pappas has a clear homepage inspection CTA and broad service menu; a Plano storm/hail page can make the inspection ask more specific.",
   headline: "Plano Hail or Storm Damage? Schedule a Hassle-Free Roof Inspection.",
   subheadline: "Pappas Roofing and Construction can give Plano homeowners a focused path after hail, wind, or leaks with inspection, storm damage, and claim-support proof close to the CTA.",
-  trustLine: "The homepage references a hassle-free roof inspection, storm damage, hail damage, insurance claim support, licensed/insured proof, and GAF Master Elite certification.",
+  trustLine: "Hassle-free roof inspections, storm and hail damage support, licensed and insured proof, insurance claim guidance, and GAF Master Elite certification.",
   formReassurance: "No pressure. Pappas can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Plano storm inspection",
   galleryHeading: "A focused storm inspection request path for Plano homeowners.",
-  pageAngle: "Turn homepage inspection interest into a Plano-specific storm/hail inspection request path.",
+  pageAngle: "Start with a Plano-specific storm or hail inspection request before choosing repair, replacement, or documentation next steps.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Plano storm",
     "Lifted, missing, or wind-creased shingles",
@@ -72,20 +72,20 @@ export const pappasRoofingAndConstruction: ProspectData = {
   ],
   faqs: [
     {
-      question: "Why use a focused inspection page?",
-      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
+      question: "Why start with an inspection?",
+      answer: "An inspection helps you confirm visible roof concerns first, then choose repair, replacement, emergency service, or claim-support next steps with better information."
     },
     {
-      question: "Can the page mention insurance?",
-      answer: "Yes, carefully. It can mention documentation and claim-support guidance, but it should not promise coverage, approval, reimbursement, or claim results."
+      question: "Can the inspection help with insurance documentation?",
+      answer: "Yes. The inspection can document visible roof concerns and provide claim-support guidance. Coverage, approval, reimbursement, and claim results still depend on your policy and insurer."
     },
     {
       question: "What is the first action for a homeowner?",
       answer: "The first action is to request the Plano hassle-free roof inspection, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
     },
     {
-      question: "Why keep the page this focused?",
-      answer: "Cold storm traffic usually needs a fast answer and one next step. A narrower page reduces decisions before the homeowner has even scheduled an inspection."
+      question: "Why request an inspection before choosing repairs?",
+      answer: "After severe weather, the first step is understanding what happened. An inspection gives you clearer information before you decide whether repairs, emergency protection, replacement, or claim-support next steps are needed."
     }
   ]
 };

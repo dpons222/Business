@@ -53,9 +53,9 @@ export const integrityFirstRoofingConstruction: ProspectData = {
   formReassurance:
     "No pressure. Integrity First can follow up to confirm your property details, inspect visible storm concerns, and explain repair, tarping, or documentation options.",
   galleryEyebrow: "Frisco storm response proof",
-  galleryHeading: "Package Integrity First's strong proof into a compact campaign page.",
+  galleryHeading: "Integrity First's storm-response proof in one clear inspection path.",
   pageAngle:
-    "Use a focused storm-response page for Frisco homeowners who need a fast free inspection after hail, wind, leaks, or emergency damage.",
+    "Start with a fast free inspection after hail, wind, leaks, or emergency roof damage in Frisco.",
   damageSigns: [
     "Hail damage or shattered shingles",
     "Wind damage, loose shingles, or torn-off roofing",
@@ -94,14 +94,14 @@ export const integrityFirstRoofingConstruction: ProspectData = {
         "Integrity First can help with emergency roof repairs, roof leak repairs, roof tarping, insurance documentation support, hail damage, wind damage, and tornado damage.",
     },
     {
-      question: "What proof can the campaign page use?",
+      question: "What trust proof does Integrity First show?",
       answer:
-        "The page shows 5-star Google and Facebook proof, BBB Accredited Business, Owens Corning Preferred Contractor, RCAT membership, Frisco Chamber membership, and a 5.0 Google rating based on 175 reviews.",
+        "Integrity First shows 5-star Google and Facebook proof, BBB Accredited Business, Owens Corning Preferred Contractor, RCAT membership, Frisco Chamber membership, and a 5.0 Google rating based on 175 reviews.",
     },
     {
-      question: "What should the pitch avoid?",
+      question: "Why start with one clear next step?",
       answer:
-        "Because homeowners in storm mode need one clear next step, a focused page can test inspection interest without distracting from the full website.",
+        "Homeowners in storm mode usually need a fast inspection path before sorting through repair, tarping, restoration, or documentation options.",
     },
   ],
 };

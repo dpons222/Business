@@ -66,7 +66,7 @@ const issueTypes = [
 const contactFields = [
   { id: "name", label: "Name", placeholder: "Your name" },
   { id: "phone", label: "Phone", placeholder: "Best phone number" },
-  { id: "zip", label: "Property ZIP", placeholder: "San Antonio ZIP code" },
+  { id: "zip", label: "Property ZIP", placeholder: "Property ZIP code" },
 ] as const;
 
 const mobileInspectionSummary = [
@@ -156,10 +156,10 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
           </Badge>
           <h1 className="mb-5 max-w-3xl break-words text-3xl font-black leading-[1.06] text-[#202124] sm:text-4xl md:text-5xl xl:text-6xl">
             <span className="hidden sm:inline">
-              Check whether your San Antonio roof should be inspected after hail.
+              Check whether your {prospect.city} roof should be inspected after a storm.
             </span>
             <span className="sm:hidden">
-              Hail hit San Antonio?
+              Storm near {prospect.city}?
               <br />
               Book a free roof check.
             </span>
@@ -167,8 +167,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
           <p className="max-w-2xl text-lg leading-8 text-[#666666]">
             <span className="hidden sm:inline">
               Answer a few storm-damage questions, then request a free roof checkup from{" "}
-              {prospect.companyName}. This demo turns Charger&apos;s educational hail page into a
-              faster inspection-intake flow.
+              {prospect.companyName}.
             </span>
             <span className="sm:hidden">
               Answer a few questions.
@@ -234,7 +233,7 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
                     <CardTitle className="text-2xl">What happened?</CardTitle>
                   </div>
                   <Badge variant="outline" className="w-fit rounded-md border-[#ded8d3]">
-                    San Antonio hail intake
+                    {prospect.city} storm intake
                   </Badge>
                 </div>
               </CardHeader>
@@ -338,8 +337,8 @@ export function StormAssessmentDemo({ prospect }: StormAssessmentDemoProps) {
                 </form>
                 {submitted ? (
                   <div className="mt-4 rounded-lg border border-[#e7b4b8] bg-[#fff3f4] p-4 text-sm font-bold text-[#6f1018]">
-                    Demo confirmation: this preview would send the inspection request to{" "}
-                    {prospect.companyName}. No information was sent from this demo.
+                    Thanks. This sample form did not send information, but the live request would go
+                    directly to {prospect.companyName}.
                   </div>
                 ) : null}
               </CardContent>

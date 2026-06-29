@@ -21,13 +21,13 @@ export async function generateMetadata({
 
   if (!prospect || prospect.slug !== "charger-roofing") {
     return {
-      title: "Roofing Landing Page Demo",
+      title: "Storm Response",
     };
   }
 
   return {
-    title: `${prospect.companyName} Storm Response Landing Page Demo`,
-    description: `Urgent storm response landing page variant for ${prospect.companyName}.`,
+    title: `${prospect.companyName} Storm Response`,
+    description: `Urgent storm response inspection page for ${prospect.companyName}.`,
   };
 }
 

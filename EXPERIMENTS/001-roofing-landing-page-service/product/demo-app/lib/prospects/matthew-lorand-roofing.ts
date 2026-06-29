@@ -49,7 +49,7 @@ export const matthewLorandRoofing: ProspectData = {
   formReassurance:
     "No pressure. The team can follow up to confirm your property details, review what happened during the storm, and schedule a complimentary inspection.",
   galleryEyebrow: "Austin storm damage inspection",
-  galleryHeading: "Reduce the long storm-repair page into one clear inspection request.",
+  galleryHeading: "One clear inspection request after Austin storm damage.",
   pageAngle:
     "Start with a complimentary inspection and clear damage report so Austin homeowners know what their roof needs after severe weather.",
   damageSigns: [
@@ -95,9 +95,9 @@ export const matthewLorandRoofing: ProspectData = {
         "The team can provide reports, estimates, photo documentation, and communication support. Coverage decisions still depend on the homeowner's policy and insurer.",
     },
     {
-      question: "Why make a shorter page?",
+      question: "Why start with the inspection request?",
       answer:
-        "A focused landing page can reduce cognitive load and make the complimentary inspection request easier to act on after a storm.",
+        "After a storm, the most useful first step is confirming what happened to the roof. A complimentary inspection makes that next step easier to take.",
     },
   ],
 };

@@ -7,6 +7,8 @@ Subject: Quick idea for your storm damage / roof inspection page
 
 Hi [Name],
 
+My name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths.
+
 I was looking at roofing companies in [City] and noticed [specific observation about their site/page].
 
 I am testing a focused landing page offer for roofers: a storm damage / roof inspection page designed to turn more visitors into calls or inspection requests.
@@ -63,6 +65,14 @@ If another site priority would be more useful to look at first, I can focus ther
 ```
 
 Use this to invite redirection without turning the outreach into a generic "anything we can help with" pitch.
+
+Default intro line for first-touch emails:
+
+```text
+My name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths.
+```
+
+Keep this line short and factual. If the niche is not a service business, lightly adjust it while preserving the same meaning.
 
 ## Pre-Send Draft Check
 

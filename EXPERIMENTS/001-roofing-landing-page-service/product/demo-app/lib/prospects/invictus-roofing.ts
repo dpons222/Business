@@ -12,7 +12,7 @@ export const invictusRoofing: ProspectData = {
   primaryService: "Frisco free roof inspection",
   recommendedCta: "Request Free Roof Inspection",
   secondaryCta: "Call (469) 649-0288",
-  trustSignal: "Frisco service page references reviews, roof inspection, storm and hail damage, and insurance process resources",
+  trustSignal: "Frisco roofing team with reviews, roof inspection guidance, storm and hail damage service, and insurance process resources",
   projectImages: [],
   brand: {
     primary: "#1D3557",
@@ -28,7 +28,7 @@ export const invictusRoofing: ProspectData = {
   formReassurance: "No pressure. Invictus can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Frisco storm inspection",
   galleryHeading: "A focused storm inspection request path for Frisco homeowners.",
-  pageAngle: "Turn a general Frisco service page into one focused storm inspection request path.",
+  pageAngle: "Start with one focused storm inspection request after hail, wind, leaks, or visible roof concerns in Frisco.",
   damageSigns: [
     "Hail bruising, cracked shingles, or granule loss after a Frisco storm",
     "Lifted, missing, or wind-creased shingles",
@@ -57,20 +57,20 @@ export const invictusRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Why use a focused inspection page?",
-      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
+      question: "Why start with an inspection?",
+      answer: "An inspection helps you confirm visible roof concerns first, then choose repair, replacement, emergency service, or claim-support next steps with better information."
     },
     {
-      question: "Can the page mention insurance?",
-      answer: "Yes, carefully. It can mention documentation and claim-support guidance, but it should not promise coverage, approval, reimbursement, or claim results."
+      question: "Can the inspection help with insurance documentation?",
+      answer: "Yes. The inspection can document visible roof concerns and provide claim-support guidance. Coverage, approval, reimbursement, and claim results still depend on your policy and insurer."
     },
     {
       question: "What is the first action for a homeowner?",
       answer: "The first action is to request the Frisco free roof inspection, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
     },
     {
-      question: "Why keep the page this focused?",
-      answer: "Cold storm traffic usually needs a fast answer and one next step. A narrower page reduces decisions before the homeowner has even scheduled an inspection."
+      question: "Why request an inspection before choosing repairs?",
+      answer: "After severe weather, the first step is understanding what happened. An inspection gives you clearer information before you decide whether repairs, emergency protection, replacement, or claim-support next steps are needed."
     }
   ]
 };

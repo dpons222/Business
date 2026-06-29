@@ -56,6 +56,7 @@ demo_or_recommendation_url
 - Preserve other recommendations as future notes.
 - Prevent generic outreach.
 - Keep outreach draft-only.
+- Include this default first-touch intro unless it would make the message too long: "My name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths."
 - Allow one concise alternate-priority sentence after the main ask so prospects can redirect the recommendation without weakening the specific first idea.
 - Enforce pre-send checks.
 

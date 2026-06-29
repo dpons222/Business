@@ -4,7 +4,7 @@ import { PizabellaCustomerPreview } from "../../components/PizabellaCustomerPrev
 export const metadata: Metadata = {
   title: "Pizza Bella Woodstock | Pizza, Pasta, Subs & Wings",
   description:
-    "Customer-facing restaurant preview for Pizza Bella in Woodstock, Virginia.",
+    "Pizza Bella restaurant page for pizza, pasta, subs, wings, pickup, and delivery in Woodstock, Virginia.",
 };
 
 export default function PizabellaPage() {

@@ -12,7 +12,7 @@ export const rippleRoofing: ProspectData = {
   primaryService: "free Waco storm inspection and 24/7 emergency service",
   recommendedCta: "Schedule Free Inspection Today",
   secondaryCta: "Call (512) 763-5277",
-  trustSignal: "Free roof inspections, 24/7 emergency service, 5.0 Google rating, 63 reviews, CertainTeed certification, and 50-point inspection language on Waco page",
+  trustSignal: "Free roof inspections, 24/7 emergency service, 5.0 Google rating, 63 reviews, CertainTeed certification, and 50-point inspections in Waco",
   rating: "5.0 Google",
   reviewCount: "63 reviews",
   projectImages: [],
@@ -26,7 +26,7 @@ export const rippleRoofing: ProspectData = {
   observedIssue: "Ripple's Waco location page has strong storm and emergency content, but a tight landing page can focus only on inspection requests after severe weather.",
   headline: "Waco Storm Damage or Active Leak? Schedule a Free Inspection.",
   subheadline: "Ripple Roofing can help Waco homeowners after hail, wind, emergency leaks, or recent severe weather with a free inspection, detailed photo report, and clear next steps.",
-  trustLine: "The Waco page promotes free roof inspections, 24/7 emergency service, CertainTeed certification, 5.0 Google rating, 63 reviews, same-day availability, and 50-point inspections.",
+  trustLine: "Free roof inspections, 24/7 emergency service, CertainTeed certification, 5.0 Google rating, 63 reviews, same-day availability, and 50-point inspections in Waco.",
   formReassurance: "No pressure. Ripple can confirm the property, review what happened, and explain practical next steps before any repair decision is made.",
   galleryEyebrow: "Waco storm inspection",
   galleryHeading: "Turn Ripple's 5.0-rated Waco proof into a focused storm inspection request path.",
@@ -59,20 +59,20 @@ export const rippleRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Why use a focused inspection page?",
-      answer: "A focused page gives storm-concerned homeowners one clear request path while the main website can continue covering the full service menu."
+      question: "Why start with an inspection?",
+      answer: "An inspection helps you confirm visible roof concerns first, then choose repair, replacement, emergency service, or claim-support next steps with better information."
     },
     {
-      question: "Can the page mention insurance?",
-      answer: "Yes, carefully. It can mention documentation and claim-support guidance, but it should not promise coverage, approval, reimbursement, or claim results."
+      question: "Can the inspection help with insurance documentation?",
+      answer: "Yes. The inspection can document visible roof concerns and provide claim-support guidance. Coverage, approval, reimbursement, and claim results still depend on your policy and insurer."
     },
     {
       question: "What is the first action for a homeowner?",
       answer: "The first action is to request the free Waco storm inspection and 24/7 emergency service, then review visible findings before deciding whether repair, replacement, emergency service, or quote next steps are needed."
     },
     {
-      question: "Why keep the page this focused?",
-      answer: "Cold storm traffic usually needs a fast answer and one next step. A narrower page reduces decisions before the homeowner has even scheduled an inspection."
+      question: "Why request an inspection before choosing repairs?",
+      answer: "After severe weather, the first step is understanding what happened. An inspection gives you clearer information before you decide whether repairs, emergency protection, replacement, or claim-support next steps are needed."
     }
   ]
 };

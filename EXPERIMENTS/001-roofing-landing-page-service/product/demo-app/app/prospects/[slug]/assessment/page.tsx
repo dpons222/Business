@@ -21,12 +21,12 @@ export async function generateMetadata({
 
   if (!prospect || prospect.slug !== "charger-roofing") {
     return {
-      title: "Roofing Landing Page Demo",
+      title: "Roof Assessment",
     };
   }
 
   return {
-    title: `${prospect.companyName} Assessment Flow Demo`,
+    title: `${prospect.companyName} Storm Assessment`,
     description: `Storm damage assessment and inspection intake variant for ${prospect.companyName}.`,
   };
 }

@@ -50,7 +50,7 @@ export const edpRoofing: ProspectData = {
   formReassurance:
     "No pressure. EDP can follow up to confirm your property details, review what happened during the storm, and help you decide whether an inspection or repair estimate is the next step.",
   galleryEyebrow: "Dallas storm damage proof",
-  galleryHeading: "Simplify EDP's dense storm page into one inspection-first action.",
+  galleryHeading: "One inspection-first action after Dallas storm damage.",
   pageAngle:
     "Use one direct talk-to-a-roofer path for Dallas homeowners after hail, roof leaks, wind damage, or storm concerns.",
   damageSigns: [
@@ -81,17 +81,17 @@ export const edpRoofing: ProspectData = {
   ],
   faqs: [
     {
-      question: "Why make the page inspection-first?",
+      question: "Why talk to a roofer first?",
       answer:
-        "A focused campaign page can reduce competing CTAs and center the homeowner on one talk-to-a-roofer action after storm damage.",
+        "A quick roofer conversation can confirm whether the storm concern needs an inspection, an estimate, a repair discussion, or documentation support.",
     },
     {
-      question: "What proof can the page use?",
+      question: "What trust proof does EDP show?",
       answer:
-        "The page can use 4.9 Google rating proof, 22 reviews, GAF Gold Elite credentials, BBB A+ proof, Google review badges, and local Dallas project imagery.",
+        "EDP shows a 4.9 Google rating, 22 reviews, GAF Gold Elite credentials, BBB A+ proof, Google review badges, and local Dallas project imagery.",
     },
     {
-      question: "Can the page mention insurance?",
+      question: "Can the inspection help with insurance documentation?",
       answer:
         "Yes, but cautiously. It can mention documentation and claim-support discussion without implying coverage approval, claim outcomes, or payment guarantees.",
     },

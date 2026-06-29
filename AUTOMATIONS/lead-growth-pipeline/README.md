@@ -175,6 +175,7 @@ Before creating a Gmail draft, verify:
 - the exact draft is approved for draft creation,
 - the recommendation/demo URL opens,
 - the message mentions one observed opportunity,
+- first-touch outreach includes the default DigiDap intro unless it would make the message too long: "My name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths.",
 - the message may include one short alternate-priority sentence after the main ask, for example: "If another site priority would be more useful to look at first, I can focus there instead.",
 - no guaranteed outcomes are promised.
 

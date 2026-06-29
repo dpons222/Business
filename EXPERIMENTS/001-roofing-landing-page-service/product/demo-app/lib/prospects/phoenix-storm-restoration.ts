@@ -89,14 +89,14 @@ export const phoenixStormRestoration: ProspectData = {
         "Yes. Phoenix can help with storm damage inspections and complete roof restoration for Fort Worth and Tarrant County homeowners.",
     },
     {
-      question: "Can this demo mention BBB and HAAG?",
+      question: "Why mention BBB and HAAG credentials?",
       answer:
-        "Yes, if those credentials remain current. The page should not expand BBB Accredited or HAAG Certified claims beyond what is displayed.",
+        "BBB Accredited and HAAG Certified credentials can help homeowners understand Phoenix's storm restoration experience, as long as those credentials remain current.",
     },
     {
-      question: "Can the demo promise an arrival time?",
+      question: "How quickly can Phoenix respond?",
       answer:
-        "No. Response-time language should stay careful and avoid guaranteeing arrival times.",
+        "Phoenix can review the emergency concern and discuss response options. Exact timing depends on availability, storm volume, and the property situation.",
     },
   ],
 };
