@@ -11,6 +11,7 @@ export const brotherhoodRoofing: ProspectData = {
   serviceArea: "Dallas, Frisco, and the Dallas-Fort Worth metro area",
   phone: "972-742-5332",
   phoneHref: "tel:9727425332",
+  contactEmail: "info@brotherhoodroofing.com",
   primaryService: "free DFW hail and storm damage roof inspection",
   recommendedCta: "Schedule Free Inspection",
   secondaryCta: "Call 972-742-5332",

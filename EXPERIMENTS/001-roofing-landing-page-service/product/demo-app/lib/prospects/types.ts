@@ -12,6 +12,7 @@ export type ProspectData = {
   serviceArea: string;
   phone: string;
   phoneHref: string;
+  contactEmail?: string;
   alternatePhone?: string;
   alternatePhoneHref?: string;
   primaryService: string;

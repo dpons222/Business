@@ -24,6 +24,8 @@ export type DemoEntry = {
   observedIssue: string;
   href: string;
   internalHref?: string;
+  sourceUrl?: string;
+  contactEmail?: string;
   logoUrl?: string;
   isCurrentFocus?: boolean;
 };
@@ -66,6 +68,8 @@ const roofingEntries: DemoEntry[] = prospects.map((prospect) => ({
   observedIssue: prospect.observedIssue,
   href: `/${prospect.slug}`,
   internalHref: `/prospects/${prospect.slug}`,
+  sourceUrl: prospect.sourceWebsite,
+  contactEmail: prospect.contactEmail,
   logoUrl: prospect.logoUrl,
   isCurrentFocus: prospect.slug === currentFocusSlug,
 }));
@@ -85,6 +89,7 @@ const restaurantEntries: DemoEntry[] = [
       "Customer-facing Pizza Bella preview is prepared; internal notes still track the website, menu, specials, and public link cleanup opportunity.",
     href: "/pizabella",
     internalHref: "/pizabella",
+    sourceUrl: "https://landing.arrowpos.com/home/pizzabella",
     logoUrl:
       "https://recurve-customer-assets.s3.us-east-2.amazonaws.com/Pizza+Bella/Screen+Shot+2024-01-30+at+12.12.03+PM.png",
     isCurrentFocus: currentFocusSlug === "pizabella",

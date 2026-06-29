@@ -2249,6 +2249,14 @@ main.landing-page {
   object-fit: contain;
 }
 
+.logo-slot-brotherhood-roofing {
+  background: #111a2b;
+}
+
+.logo-slot-brotherhood-roofing img {
+  max-width: 82px;
+}
+
 .preview-logo-slot span {
   color: var(--primary-dark);
   font-size: 0.8rem;
@@ -2275,6 +2283,176 @@ main.landing-page {
 
 .active-focus-button:disabled {
   cursor: default;
+}
+
+.draft-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(15, 23, 42, 0.36);
+}
+
+.draft-drawer {
+  display: flex;
+  width: min(560px, 100%);
+  height: 100%;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  border-left: 1px solid var(--line);
+  background: #fff;
+  padding: 22px;
+  box-shadow: -18px 0 60px rgba(15, 23, 42, 0.22);
+}
+
+.draft-drawer-header,
+.draft-field > div,
+.draft-drawer-actions,
+.draft-link-row,
+.draft-status-row {
+  display: flex;
+  align-items: center;
+}
+
+.draft-drawer-header {
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.draft-drawer-header h2 {
+  margin: 0;
+  font-size: 1.55rem;
+  line-height: 1.15;
+}
+
+.icon-button {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--primary-dark);
+  cursor: pointer;
+}
+
+.draft-status-row,
+.draft-link-row {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.draft-status-row span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 10px;
+  background: #f8fafc;
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.draft-link-row a {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 10px;
+  background: #fff;
+  color: var(--primary-dark);
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.draft-field {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: #f8fafc;
+}
+
+.draft-field > div {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.draft-field label {
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.draft-field p,
+.draft-field pre {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+.draft-field pre {
+  max-height: 390px;
+  overflow: auto;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 0.94rem;
+}
+
+.copy-button {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 9px;
+  background: #fff;
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.copy-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.draft-drawer-actions {
+  min-height: 44px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.draft-drawer-actions span,
+.draft-loading,
+.draft-empty p {
+  color: var(--muted);
+}
+
+.draft-loading,
+.draft-empty {
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: #f8fafc;
+}
+
+.draft-empty h3 {
+  margin-bottom: 6px;
 }
 
 @media (min-width: 760px) {
@@ -2353,6 +2531,10 @@ main.landing-page {
   .sort-button {
     flex: 1 1 0;
     justify-content: center;
+  }
+
+  .draft-drawer {
+    padding: 18px;
   }
 }
 

@@ -11,6 +11,7 @@ export const sixthGenRoofing: ProspectData = {
   serviceArea: "Austin, Georgetown, Round Rock, and Central Texas",
   phone: "512-645-2416",
   phoneHref: "tel:5126452416",
+  contactEmail: "hello@sixthgenroofing.com",
   primaryService: "free HAAG-certified Austin roof inspection",
   recommendedCta: "Schedule Free Roof Inspection",
   secondaryCta: "Call or Text 512-645-2416",

@@ -34,7 +34,8 @@ niche
 status
 default current focus
 public preview URL
-internal route
+source URL
+contact email
 summary copy
 ```
 
@@ -42,6 +43,17 @@ The dashboard can change the current focus from the browser UI. The selected bus
 browser `localStorage` under `local-growth-preview-current-focus`, so it persists for the same browser
 without changing the source-controlled registry default. If the saved slug no longer exists, the
 dashboard falls back to the registry default in `lib/demoRegistry.ts`.
+
+Dashboard card actions:
+
+```text
+Preview = public customer-facing demo URL
+Source = original company/source page reviewed for the recommendation
+Email Draft = read-only drawer with contact email, subject, body, source URL, demo URL, and status
+```
+
+The `Email Draft` drawer reads Supabase when server-side env vars are configured. If Supabase is not
+configured, it falls back to local registry/draft data where available.
 
 The dashboard is protected by the app login at `/login`. Public prospect/demo routes stay open.
 
@@ -420,6 +432,7 @@ scripts/
 - `app/page.tsx`: renders the neutral preview-link-required page.
 - `app/login/page.tsx`: renders the dashboard login form.
 - `app/login/actions.ts`: handles dashboard login/logout server actions.
+- `app/api/prospect-drafts/[slug]/route.ts`: returns read-only outreach draft data for the dashboard drawer.
 - `app/dashboard/layout.tsx`: requires a dashboard session for all dashboard routes.
 - `app/dashboard/page.tsx`: renders the internal multi-niche preview dashboard with filtering and sorting.
 - `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
@@ -434,6 +447,7 @@ scripts/
 - `components/ui/`: shadcn/ui primitives owned by this repo.
 - `lib/prospects/`: prospect types, registry, and one data file per prospect.
 - `lib/demoRegistry.ts`: multi-niche demo registry, statuses, filters, and current focus.
+- `lib/prospectDrafts.ts`: server-side Supabase draft lookup with local fallback draft data.
 - `lib/dashboardAuth.ts`: signed-cookie dashboard authentication helpers.
 - `lib/designVariants.ts`: template/variant configuration for internal comparison.
 - `app/globals.css`: visual styling.
@@ -483,6 +497,20 @@ List configured users:
 
 For Vercel, copy the resulting `DASHBOARD_AUTH_SECRET` and `DASHBOARD_USERS_JSON` values into the
 `local-growth-preview` project environment variables for Production and Preview.
+
+## Dashboard Draft Data Configuration
+
+The dashboard email draft drawer can read from Supabase `public.prospects` through the app's
+server-side API route:
+
+```text
+SUPABASE_URL=https://uwukaydnmwiwggqoemtc.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=...
+```
+
+Use `SUPABASE_SERVICE_ROLE_KEY` only as a server-side Vercel/local environment variable. Do not expose
+it with a `NEXT_PUBLIC_` prefix. The app has a local fallback for selected prospects, but Supabase is
+the preferred source because it reflects draft/status updates without requiring a new code commit.
 
 ## Run Locally
 

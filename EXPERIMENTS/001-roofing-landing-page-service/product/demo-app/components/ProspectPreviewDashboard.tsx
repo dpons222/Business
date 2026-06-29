@@ -1,7 +1,18 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowUpDown, CalendarDays, ExternalLink, Layers3, Star } from "lucide-react";
+import {
+  ArrowUpDown,
+  CalendarDays,
+  Copy,
+  ExternalLink,
+  FileText,
+  Layers3,
+  Link as LinkIcon,
+  Mail,
+  Star,
+  X,
+} from "lucide-react";
 import type { DemoEntry, DemoNiche } from "../lib/demoRegistry";
 import { nicheFilters, statusLabels } from "../lib/demoRegistry";
 
@@ -10,6 +21,19 @@ type SortDirection = "asc" | "desc";
 type NicheFilter = "all" | DemoNiche;
 
 const CURRENT_FOCUS_STORAGE_KEY = "local-growth-preview-current-focus";
+
+type ProspectDraft = {
+  businessName: string;
+  businessEmail: string | null;
+  contactStatus: string | null;
+  outreachSendStatus: string | null;
+  outreachSendChannel: string | null;
+  subject: string | null;
+  body: string | null;
+  website: string | null;
+  demoUrl: string | null;
+  source: "supabase" | "local";
+};
 
 type ProspectPreviewDashboardProps = {
   currentFocus: DemoEntry;
@@ -33,6 +57,11 @@ export function ProspectPreviewDashboard({
   const [activeNiche, setActiveNiche] = useState<NicheFilter>("all");
   const [selectedFocusSlug, setSelectedFocusSlug] = useState(currentFocus.slug);
   const [hasLoadedSavedFocus, setHasLoadedSavedFocus] = useState(false);
+  const [draftEntry, setDraftEntry] = useState<DemoEntry | null>(null);
+  const [draft, setDraft] = useState<ProspectDraft | null>(null);
+  const [draftError, setDraftError] = useState<string | null>(null);
+  const [isDraftLoading, setIsDraftLoading] = useState(false);
+  const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
 
   useEffect(() => {
     const savedSlug = window.localStorage.getItem(CURRENT_FOCUS_STORAGE_KEY);
@@ -114,6 +143,57 @@ export function ProspectPreviewDashboard({
     return [...entries].sort((first, second) => first.title.localeCompare(second.title));
   }, [entries]);
 
+  async function openDraft(entry: DemoEntry) {
+    setDraftEntry(entry);
+    setDraft(null);
+    setDraftError(null);
+    setCopiedLabel(null);
+    setIsDraftLoading(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${entry.slug}`);
+
+      if (!response.ok) {
+        throw new Error("Draft is not available yet.");
+      }
+
+      const nextDraft = (await response.json()) as ProspectDraft;
+      setDraft(nextDraft);
+    } catch (error) {
+      setDraftError(error instanceof Error ? error.message : "Draft could not be loaded.");
+    } finally {
+      setIsDraftLoading(false);
+    }
+  }
+
+  function closeDraft() {
+    setDraftEntry(null);
+    setDraft(null);
+    setDraftError(null);
+    setCopiedLabel(null);
+    setIsDraftLoading(false);
+  }
+
+  async function copyText(label: string, value: string | null | undefined) {
+    if (!value) {
+      return;
+    }
+
+    await navigator.clipboard.writeText(value);
+    setCopiedLabel(label);
+    window.setTimeout(() => setCopiedLabel(null), 1500);
+  }
+
+  const draftEmailBlock = draft
+    ? [
+        draft.businessEmail ? `To: ${draft.businessEmail}` : null,
+        draft.subject ? `Subject: ${draft.subject}` : null,
+        draft.body,
+      ]
+        .filter(Boolean)
+        .join("\n\n")
+    : "";
+
   return (
     <main className="preview-dashboard">
       <section className="preview-dashboard-inner">
@@ -159,11 +239,25 @@ export function ProspectPreviewDashboard({
                 Open Current Preview
                 <ExternalLink size={17} aria-hidden="true" />
               </a>
-              {selectedCurrentFocus.internalHref ? (
-                <a className="button button-ghost" href={selectedCurrentFocus.internalHref}>
-                  Internal Route
+              {selectedCurrentFocus.sourceUrl ? (
+                <a
+                  className="button button-ghost"
+                  href={selectedCurrentFocus.sourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Source
+                  <LinkIcon size={16} aria-hidden="true" />
                 </a>
               ) : null}
+              <button
+                className="button button-ghost"
+                type="button"
+                onClick={() => openDraft(selectedCurrentFocus)}
+              >
+                Email Draft
+                <Mail size={16} aria-hidden="true" />
+              </button>
             </div>
           </div>
         </section>
@@ -248,7 +342,7 @@ export function ProspectPreviewDashboard({
 
               return (
                 <article className="preview-row" key={`${entry.niche}-${entry.slug}`}>
-                  <div className="preview-logo-slot">
+                  <div className={`preview-logo-slot logo-slot-${entry.slug}`}>
                     {entry.logoUrl ? (
                       <img src={entry.logoUrl} alt={`${entry.title} logo`} />
                     ) : (
@@ -285,11 +379,25 @@ export function ProspectPreviewDashboard({
                     <a className="button button-primary" href={entry.href}>
                       Preview
                     </a>
-                    {entry.internalHref ? (
-                      <a className="button button-ghost" href={entry.internalHref}>
-                        Internal
+                    {entry.sourceUrl ? (
+                      <a
+                        className="button button-ghost"
+                        href={entry.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Source
+                        <LinkIcon size={15} aria-hidden="true" />
                       </a>
                     ) : null}
+                    <button
+                      className="button button-ghost"
+                      type="button"
+                      onClick={() => openDraft(entry)}
+                    >
+                      Email Draft
+                      <Mail size={15} aria-hidden="true" />
+                    </button>
                   </div>
                 </article>
               );
@@ -303,6 +411,125 @@ export function ProspectPreviewDashboard({
           </div>
         </section>
       </section>
+      {draftEntry ? (
+        <div className="draft-drawer-backdrop" role="presentation" onClick={closeDraft}>
+          <aside
+            className="draft-drawer"
+            aria-label={`${draftEntry.title} email draft`}
+            aria-modal="true"
+            role="dialog"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="draft-drawer-header">
+              <div>
+                <p className="eyebrow">Email Draft</p>
+                <h2>{draftEntry.title}</h2>
+              </div>
+              <button
+                className="icon-button"
+                type="button"
+                onClick={closeDraft}
+                aria-label="Close email draft"
+              >
+                <X size={18} aria-hidden="true" />
+              </button>
+            </div>
+
+            {isDraftLoading ? (
+              <div className="draft-loading">Loading draft...</div>
+            ) : draftError ? (
+              <div className="draft-empty">
+                <h3>Draft unavailable</h3>
+                <p>{draftError}</p>
+              </div>
+            ) : draft ? (
+              <>
+                <div className="draft-status-row">
+                  <span>{draft.source === "supabase" ? "Supabase" : "Local fallback"}</span>
+                  <span>{draft.contactStatus ?? "No contact status"}</span>
+                  {draft.outreachSendStatus ? <span>{draft.outreachSendStatus}</span> : null}
+                </div>
+
+                <div className="draft-link-row">
+                  {draft.website ? (
+                    <a href={draft.website} target="_blank" rel="noreferrer">
+                      Source
+                      <ExternalLink size={14} aria-hidden="true" />
+                    </a>
+                  ) : null}
+                  {draft.demoUrl ? (
+                    <a href={draft.demoUrl} target="_blank" rel="noreferrer">
+                      Preview
+                      <ExternalLink size={14} aria-hidden="true" />
+                    </a>
+                  ) : null}
+                </div>
+
+                <section className="draft-field">
+                  <div>
+                    <label>To</label>
+                    <button
+                      className="copy-button"
+                      type="button"
+                      onClick={() => copyText("email", draft.businessEmail)}
+                      disabled={!draft.businessEmail}
+                    >
+                      <Copy size={14} aria-hidden="true" />
+                      Copy
+                    </button>
+                  </div>
+                  <p>{draft.businessEmail ?? "No verified email stored yet."}</p>
+                </section>
+
+                <section className="draft-field">
+                  <div>
+                    <label>Subject</label>
+                    <button
+                      className="copy-button"
+                      type="button"
+                      onClick={() => copyText("subject", draft.subject)}
+                      disabled={!draft.subject}
+                    >
+                      <Copy size={14} aria-hidden="true" />
+                      Copy
+                    </button>
+                  </div>
+                  <p>{draft.subject ?? "No subject draft stored yet."}</p>
+                </section>
+
+                <section className="draft-field draft-body-field">
+                  <div>
+                    <label>Body</label>
+                    <button
+                      className="copy-button"
+                      type="button"
+                      onClick={() => copyText("body", draft.body)}
+                      disabled={!draft.body}
+                    >
+                      <Copy size={14} aria-hidden="true" />
+                      Copy
+                    </button>
+                  </div>
+                  <pre>{draft.body ?? "No body draft stored yet."}</pre>
+                </section>
+
+                <div className="draft-drawer-actions">
+                  <button
+                    className="button button-primary"
+                    type="button"
+                    onClick={() => copyText("full email", draftEmailBlock)}
+                    disabled={!draftEmailBlock}
+                  >
+                    <FileText size={16} aria-hidden="true" />
+                    Copy Email
+                  </button>
+                  {copiedLabel ? <span>Copied {copiedLabel}</span> : null}
+                </div>
+              </>
+            ) : null}
+          </aside>
+        </div>
+      ) : null}
     </main>
   );
 }
