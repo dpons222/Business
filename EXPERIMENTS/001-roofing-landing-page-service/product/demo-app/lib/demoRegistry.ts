@@ -48,6 +48,7 @@ export const statusLabels: Record<DemoStatus, string> = {
 };
 
 const currentFocusSlug = "pizabella";
+const contactedRoofingSlugs = new Set([chargerRoofing.slug, "sixth-gen-roofing"]);
 
 const roofingEntries: DemoEntry[] = prospects.map((prospect) => ({
   slug: prospect.slug,
@@ -56,9 +57,9 @@ const roofingEntries: DemoEntry[] = prospects.map((prospect) => ({
   createdAt: prospect.createdAt,
   city: prospect.city,
   niche: "roofing",
-  status: prospect.slug === chargerRoofing.slug ? "contacted" : "ready_for_review",
+  status: contactedRoofingSlugs.has(prospect.slug) ? "contacted" : "ready_for_review",
   stageLabel:
-    prospect.slug === chargerRoofing.slug
+    contactedRoofingSlugs.has(prospect.slug)
       ? "Outreach sent, wait mode"
       : "Roofing demo prepared",
   primaryService: prospect.primaryService,

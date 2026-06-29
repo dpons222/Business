@@ -38,3 +38,10 @@ Tracking: visits, form submissions, click-to-call activity, and booked inspectio
 We should own tracking setup and a short performance summary.
 
 Brotherhood should own lead quality feedback, booked inspections, and closed jobs, because only they know what happens after someone calls or submits the form.
+
+## Current Outreach Status
+
+- Relationship status: not contacted.
+- Review status: ready for Diego review.
+- Stable demo URL: `https://local-growth-preview.vercel.app/brotherhood-roofing`.
+- Contact method: `info@brotherhoodroofing.com`.

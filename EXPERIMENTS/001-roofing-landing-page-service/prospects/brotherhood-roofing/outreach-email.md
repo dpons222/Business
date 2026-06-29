@@ -6,6 +6,8 @@
 
 Hi Brotherhood Roofing,
 
+My name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths.
+
 I was reviewing DFW roofing companies and noticed your hail and storm damage page already has strong homeowner education plus a clear free inspection offer.
 
 My thought was that the same content could work well as a shorter storm-specific landing page built around one action: helping homeowners schedule a free roof inspection after hail, wind, leaks, missing shingles, or gutter damage.
@@ -15,10 +17,10 @@ The idea is not to replace your full website. It would be a focused page you cou
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/brotherhood-roofing
+https://local-growth-preview.vercel.app/brotherhood-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Brotherhood?
+If another site priority would be more useful to look at first, I can focus there instead.
 
 Best,
 
@@ -37,7 +39,7 @@ The main idea is simple: send storm-concerned homeowners to one focused page wit
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/brotherhood-roofing
+https://local-growth-preview.vercel.app/brotherhood-roofing
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -49,16 +51,17 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Brotherhood Roofing, I noticed your hail and storm damage page already has strong homeowner education plus a clear free inspection offer. My thought was that the same content could work well as a shorter storm-specific landing page built around one action: helping homeowners schedule a free roof inspection after hail, wind, leaks, missing shingles, or gutter damage. Would you be open to seeing a quick example of what that page could look like for Brotherhood?
+Hi Brotherhood Roofing, my name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths. I noticed your hail and storm damage page already has strong homeowner education plus a clear free inspection offer. My thought was that the same content could work well as a shorter storm-specific landing page built around one action: helping homeowners schedule a free roof inspection after hail, wind, leaks, missing shingles, or gutter damage. If another site priority would be more useful to look at first, I can focus there instead.
 
 Best,
 Diego
-https://digidap.vercel.app
+https://local-growth-preview.vercel.app/brotherhood-roofing
 ```
 
 ## Notes
 
-- Verified production URL: `https://roof-check-preview.vercel.app/brotherhood-roofing`.
-- Send the initial email or contact form version only after explicit approval.
+- Verified production URL: `https://local-growth-preview.vercel.app/brotherhood-roofing`.
+- Updated 2026-06-29 with standardized DigiDap intro, stable production URL, and alternate-priority sentence.
+- Send the initial email or contact form version only after Diego approves the exact draft and contact method.
 - Use the follow-up only if there is no response after 3-5 business days.
 - Log the send date, reply status, and next follow-up date in Supabase and the prospect tracker.

@@ -232,7 +232,7 @@ City/area: Austin, TX
 Contact method: Call 512-645-2416 / online scheduling
 Reviews: Not captured
 Page reviewed: Austin roofing companies page
-Status: Not contacted
+Status: Contacted 2026-06-29 at 12:30 PM ET by email
 ```
 
 Observed issue:
@@ -246,6 +246,7 @@ Outreach angle:
 Source notes:
 
 - Page mentions free evidence-based inspections and HAAG-certified inspectors.
+- Email sent manually by Diego to `hello@sixthgenroofing.com`; first follow-up due 2026-07-06 at 12:30 PM ET if no reply.
 
 ### 9. Sugar Roofing
 
