@@ -4,9 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import {
   ArrowUpDown,
   CalendarDays,
+  Check,
   Copy,
   ExternalLink,
   FileText,
+  SlidersHorizontal,
   Layers3,
   Link as LinkIcon,
   Mail,
@@ -19,6 +21,7 @@ import { nicheFilters, statusLabels } from "../lib/demoRegistry";
 type SortMode = "name" | "date";
 type SortDirection = "asc" | "desc";
 type NicheFilter = "all" | DemoNiche;
+type ContactFilter = "all" | "contacted" | "not_contacted";
 
 const CURRENT_FOCUS_STORAGE_KEY = "local-growth-preview-current-focus";
 
@@ -48,6 +51,27 @@ function formatDate(date: string) {
   }).format(new Date(`${date}T00:00:00`));
 }
 
+function getActiveFilterLabel(
+  nicheLabel: string,
+  contactLabel: string,
+  nicheFilter: NicheFilter,
+  contactFilter: ContactFilter,
+) {
+  if (nicheFilter === "all" && contactFilter === "all") {
+    return "All demos";
+  }
+
+  if (nicheFilter === "all") {
+    return contactLabel;
+  }
+
+  if (contactFilter === "all") {
+    return nicheLabel;
+  }
+
+  return `${nicheLabel} / ${contactLabel}`;
+}
+
 export function ProspectPreviewDashboard({
   currentFocus,
   entries,
@@ -55,6 +79,7 @@ export function ProspectPreviewDashboard({
   const [sortMode, setSortMode] = useState<SortMode>("date");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [activeNiche, setActiveNiche] = useState<NicheFilter>("all");
+  const [activeContactFilter, setActiveContactFilter] = useState<ContactFilter>("all");
   const [selectedFocusSlug, setSelectedFocusSlug] = useState(currentFocus.slug);
   const [hasLoadedSavedFocus, setHasLoadedSavedFocus] = useState(false);
   const [draftEntry, setDraftEntry] = useState<DemoEntry | null>(null);
@@ -109,9 +134,32 @@ export function ProspectPreviewDashboard({
     );
   }, [entries]);
 
+  const contactFilters: Array<{ value: ContactFilter; label: string; count: number }> =
+    useMemo(() => {
+      const contactedCount = entries.filter((entry) => entry.status === "contacted").length;
+      const notContactedCount = entries.length - contactedCount;
+
+      return [
+        { value: "all", label: "All contact statuses", count: entries.length },
+        { value: "contacted", label: "Contacted", count: contactedCount },
+        { value: "not_contacted", label: "Not contacted", count: notContactedCount },
+      ];
+    }, [entries]);
+
   const visibleEntries = useMemo(() => {
-    const filteredEntries =
+    const nicheFilteredEntries =
       activeNiche === "all" ? entries : entries.filter((entry) => entry.niche === activeNiche);
+    const filteredEntries = nicheFilteredEntries.filter((entry) => {
+      if (activeContactFilter === "all") {
+        return true;
+      }
+
+      if (activeContactFilter === "contacted") {
+        return entry.status === "contacted";
+      }
+
+      return entry.status !== "contacted";
+    });
 
     return [...filteredEntries].sort((first, second) => {
       const direction = sortDirection === "asc" ? 1 : -1;
@@ -122,7 +170,7 @@ export function ProspectPreviewDashboard({
 
       return first.createdAt.localeCompare(second.createdAt) * direction;
     });
-  }, [activeNiche, entries, sortDirection, sortMode]);
+  }, [activeContactFilter, activeNiche, entries, sortDirection, sortMode]);
 
   function updateSort(nextSortMode: SortMode) {
     if (nextSortMode === sortMode) {
@@ -139,6 +187,15 @@ export function ProspectPreviewDashboard({
   const nameSortLabel = sortMode === "name" && sortDirection === "desc" ? "Z-A" : "A-Z";
   const activeNicheLabel =
     nicheFilters.find((filter) => filter.value === activeNiche)?.label ?? "All";
+  const activeContactLabel =
+    contactFilters.find((filter) => filter.value === activeContactFilter)?.label ??
+    "All contact statuses";
+  const activeFilterLabel = getActiveFilterLabel(
+    activeNicheLabel,
+    activeContactLabel,
+    activeNiche,
+    activeContactFilter,
+  );
   const focusOptions = useMemo(() => {
     return [...entries].sort((first, second) => first.title.localeCompare(second.title));
   }, [entries]);
@@ -262,22 +319,6 @@ export function ProspectPreviewDashboard({
           </div>
         </section>
 
-        <section className="niche-filter-section" aria-label="Filter demos by niche">
-          {nicheFilters.map((filter) => (
-            <button
-              className={activeNiche === filter.value ? "niche-filter active" : "niche-filter"}
-              key={filter.value}
-              type="button"
-              onClick={() => setActiveNiche(filter.value)}
-              aria-pressed={activeNiche === filter.value}
-            >
-              <Layers3 size={16} aria-hidden="true" />
-              <span>{filter.label}</span>
-              <strong>{nicheCounts[filter.value]}</strong>
-            </button>
-          ))}
-        </section>
-
         <section className="pipeline-summary" aria-label="Pipeline summary">
           <article>
             <span>{entries.length}</span>
@@ -311,28 +352,89 @@ export function ProspectPreviewDashboard({
         <section className="preview-list-section" aria-labelledby="preview-list-title">
           <div className="preview-list-toolbar">
             <div>
-              <p className="eyebrow">{activeNicheLabel}</p>
+              <p className="eyebrow">{activeFilterLabel}</p>
               <h2 id="preview-list-title">Available prospect previews</h2>
             </div>
-            <div className="sort-controls" aria-label="Sort prospect previews">
-              <button
-                className={sortMode === "date" ? "sort-button active" : "sort-button"}
-                type="button"
-                onClick={() => updateSort("date")}
-                aria-pressed={sortMode === "date"}
-              >
-                <CalendarDays size={16} aria-hidden="true" />
-                {dateSortLabel}
-              </button>
-              <button
-                className={sortMode === "name" ? "sort-button active" : "sort-button"}
-                type="button"
-                onClick={() => updateSort("name")}
-                aria-pressed={sortMode === "name"}
-              >
-                <ArrowUpDown size={16} aria-hidden="true" />
-                {nameSortLabel}
-              </button>
+            <div className="toolbar-controls">
+              <details className="filter-menu">
+                <summary className="filter-summary">
+                  <SlidersHorizontal size={16} aria-hidden="true" />
+                  Filters
+                  <span>{visibleEntries.length}</span>
+                </summary>
+                <div className="filter-menu-panel">
+                  <div className="filter-group">
+                    <p>Niche</p>
+                    {nicheFilters.map((filter) => (
+                      <button
+                        className={
+                          activeNiche === filter.value ? "filter-option active" : "filter-option"
+                        }
+                        key={filter.value}
+                        type="button"
+                        onClick={() => setActiveNiche(filter.value)}
+                        aria-pressed={activeNiche === filter.value}
+                      >
+                        <span>
+                          {activeNiche === filter.value ? (
+                            <Check size={14} aria-hidden="true" />
+                          ) : (
+                            <Layers3 size={14} aria-hidden="true" />
+                          )}
+                          {filter.label}
+                        </span>
+                        <strong>{nicheCounts[filter.value]}</strong>
+                      </button>
+                    ))}
+                  </div>
+                  <div className="filter-group">
+                    <p>Contact status</p>
+                    {contactFilters.map((filter) => (
+                      <button
+                        className={
+                          activeContactFilter === filter.value
+                            ? "filter-option active"
+                            : "filter-option"
+                        }
+                        key={filter.value}
+                        type="button"
+                        onClick={() => setActiveContactFilter(filter.value)}
+                        aria-pressed={activeContactFilter === filter.value}
+                      >
+                        <span>
+                          {activeContactFilter === filter.value ? (
+                            <Check size={14} aria-hidden="true" />
+                          ) : (
+                            <Mail size={14} aria-hidden="true" />
+                          )}
+                          {filter.label}
+                        </span>
+                        <strong>{filter.count}</strong>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </details>
+              <div className="sort-controls" aria-label="Sort prospect previews">
+                <button
+                  className={sortMode === "date" ? "sort-button active" : "sort-button"}
+                  type="button"
+                  onClick={() => updateSort("date")}
+                  aria-pressed={sortMode === "date"}
+                >
+                  <CalendarDays size={16} aria-hidden="true" />
+                  {dateSortLabel}
+                </button>
+                <button
+                  className={sortMode === "name" ? "sort-button active" : "sort-button"}
+                  type="button"
+                  onClick={() => updateSort("name")}
+                  aria-pressed={sortMode === "name"}
+                >
+                  <ArrowUpDown size={16} aria-hidden="true" />
+                  {nameSortLabel}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -404,8 +506,8 @@ export function ProspectPreviewDashboard({
             })}
             {visibleEntries.length === 0 ? (
               <div className="empty-filter-state">
-                <h3>No demos in this niche yet.</h3>
-                <p>Add the next prospect demo and register it with this niche to make it appear here.</p>
+                <h3>No demos match these filters.</h3>
+                <p>Adjust the niche or contact status filter to show more prospect demos.</p>
               </div>
             ) : null}
           </div>

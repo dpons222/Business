@@ -1978,57 +1978,6 @@ main.landing-page {
   border-top: 6px solid var(--accent);
 }
 
-.niche-filter-section {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 22px;
-}
-
-.niche-filter {
-  display: flex;
-  min-width: 0;
-  min-height: 48px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 10px 12px;
-  background: #fff;
-  color: var(--primary-dark);
-  font-weight: 900;
-  cursor: pointer;
-}
-
-.niche-filter span {
-  min-width: 0;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-.niche-filter strong {
-  display: grid;
-  min-width: 28px;
-  height: 28px;
-  place-items: center;
-  border-radius: 999px;
-  background: #eef4f8;
-  color: var(--ink);
-  font-size: 0.78rem;
-}
-
-.niche-filter.active {
-  border-color: var(--primary-dark);
-  background: var(--primary-dark);
-  color: #fff;
-}
-
-.niche-filter.active strong {
-  background: #fff;
-  color: var(--primary-dark);
-}
-
 .pipeline-summary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2091,6 +2040,7 @@ main.landing-page {
 
 .preview-actions,
 .preview-row-actions,
+.toolbar-controls,
 .sort-controls,
 .preview-meta-row,
 .preview-title-row {
@@ -2100,6 +2050,7 @@ main.landing-page {
 
 .preview-actions,
 .preview-row-actions,
+.toolbar-controls,
 .sort-controls {
   gap: 10px;
 }
@@ -2183,6 +2134,131 @@ main.landing-page {
   gap: 16px;
   align-items: stretch;
   margin-bottom: 18px;
+}
+
+.toolbar-controls {
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.filter-menu {
+  position: relative;
+}
+
+.filter-summary {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  gap: 7px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 9px 12px;
+  background: #fff;
+  color: var(--primary-dark);
+  font-weight: 900;
+  list-style: none;
+  cursor: pointer;
+}
+
+.filter-summary::-webkit-details-marker {
+  display: none;
+}
+
+.filter-summary span {
+  display: grid;
+  min-width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 999px;
+  background: #eef4f8;
+  color: var(--ink);
+  font-size: 0.74rem;
+}
+
+.filter-menu[open] .filter-summary {
+  border-color: var(--primary-dark);
+  background: var(--primary-dark);
+  color: #fff;
+}
+
+.filter-menu[open] .filter-summary span {
+  background: #fff;
+  color: var(--primary-dark);
+}
+
+.filter-menu-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 20;
+  display: grid;
+  width: min(360px, calc(100vw - 40px));
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: #fff;
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.18);
+}
+
+.filter-group {
+  display: grid;
+  gap: 7px;
+}
+
+.filter-group p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.filter-option {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #fff;
+  color: var(--primary-dark);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 850;
+  text-align: left;
+  cursor: pointer;
+}
+
+.filter-option span {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 7px;
+}
+
+.filter-option strong {
+  display: grid;
+  min-width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 999px;
+  background: #eef4f8;
+  color: var(--ink);
+  font-size: 0.74rem;
+}
+
+.filter-option.active {
+  border-color: var(--primary-dark);
+  background: #f0f7fb;
+}
+
+.filter-option.active span {
+  color: var(--primary-dark);
 }
 
 .sort-button {
@@ -2489,7 +2565,6 @@ main.landing-page {
 }
 
 @media (max-width: 640px) {
-  .niche-filter-section,
   .pipeline-summary,
   .rename-note {
     grid-template-columns: 1fr;
@@ -2497,6 +2572,7 @@ main.landing-page {
 
   .preview-actions,
   .preview-row-actions,
+  .toolbar-controls,
   .sort-controls {
     width: 100%;
     display: grid;
@@ -2516,6 +2592,21 @@ main.landing-page {
     grid-template-columns: 1fr 1fr;
   }
 
+  .filter-menu,
+  .filter-summary {
+    width: 100%;
+  }
+
+  .filter-summary {
+    justify-content: center;
+  }
+
+  .filter-menu-panel {
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
+
   .dashboard-auth-bar {
     align-items: stretch;
     flex-direction: column;
@@ -2528,6 +2619,7 @@ main.landing-page {
 
   .preview-actions .button,
   .preview-row-actions .button,
+  .filter-summary,
   .sort-button {
     flex: 1 1 0;
     justify-content: center;
