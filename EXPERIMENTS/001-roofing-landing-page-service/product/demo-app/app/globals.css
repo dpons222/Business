@@ -182,6 +182,12 @@ textarea {
   color: var(--primary-dark);
 }
 
+.button-danger {
+  border-color: #fecaca;
+  background: #b91c1c;
+  color: #fff;
+}
+
 .mobile-copy {
   display: none;
 }
@@ -2568,6 +2574,118 @@ main.landing-page {
 .copy-button:disabled {
   cursor: not-allowed;
   opacity: 0.45;
+}
+
+.draft-approval-panel {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+  background: #fff;
+}
+
+.draft-approval-heading,
+.draft-approval-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.draft-approval-heading {
+  justify-content: space-between;
+}
+
+.draft-approval-heading h3 {
+  margin: 2px 0 0;
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+.draft-approval-heading svg {
+  flex: 0 0 auto;
+  color: var(--primary-dark);
+}
+
+.draft-approval-checks {
+  display: grid;
+  gap: 8px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.draft-approval-checks strong,
+.draft-confirmation-panel dt {
+  color: var(--primary-dark);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.draft-approval-checks ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.approval-ready-copy,
+.approval-error,
+.draft-confirmation-panel p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.approval-error {
+  color: #b91c1c;
+  font-weight: 800;
+}
+
+.draft-confirmation-panel {
+  display: grid;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  background: #f8fafc;
+}
+
+.draft-confirmation-panel dl {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.draft-confirmation-panel div {
+  min-width: 0;
+}
+
+.draft-confirmation-panel dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+}
+
+.approval-check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.approval-check-label input {
+  margin-top: 3px;
+}
+
+.draft-approval-actions {
+  flex-wrap: wrap;
 }
 
 .draft-drawer-actions {

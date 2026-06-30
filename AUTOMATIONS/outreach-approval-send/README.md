@@ -1,8 +1,8 @@
 # Outreach Approval Send Automation
 
-This automation is the planned human-approved send workflow for outbound prospect outreach.
+This automation is the planned human-approved Gmail draft workflow for outbound prospect outreach.
 
-It is not an autonomous cold-email sender. The purpose is to let Codex prepare small batches, let Diego review the exact demos and drafts, and then allow n8n to send only approved records.
+It is not an autonomous cold-email sender. The purpose is to let Codex prepare small batches, let Diego review the exact demos and drafts, and then allow n8n to create Gmail drafts only for approved records.
 
 ## Current Status
 
@@ -31,23 +31,26 @@ It is not an autonomous cold-email sender. The purpose is to let Codex prepare s
 2. Codex completes the pre-send checklist for each prospect.
 3. Diego reviews the live demo, draft, recipient/contact method, and fit.
 4. Diego approves specific rows in Supabase.
-5. n8n dry-run workflow validates only approved email rows and outputs the would-send payload.
-6. n8n internal-send test proves Gmail can send the exact stored subject/body to Diego only.
-7. n8n approved sender sends only approved email rows, then writes sent/failed status back to Supabase.
+5. n8n draft workflow validates only approved email rows and creates Gmail drafts.
+6. n8n writes `draft_created` after the Gmail draft exists.
+7. Diego sends, edits, or deletes the Gmail draft manually.
+8. Only after a real outbound send, Supabase is updated to `status = contacted` and `outreach_send_status = sent`.
 ```
 
 ## Human Approval Boundary
 
-The system must not send outreach until Diego explicitly approves the exact draft and demo link.
+The system must not create a Gmail draft until Diego explicitly approves the exact draft and demo link. It must not send outreach automatically.
 
 Approval is represented in Supabase by:
 
 ```text
 outreach_approved = true
-outreach_send_status = approved
+outreach_send_status = approved_for_draft
 outreach_approved_at is not null
 outreach_approved_by is not null
 ```
+
+The `approved` status is reserved for a future direct-send workflow. Do not use it for the first Gmail draft workflow.
 
 ## Status Field Meanings
 
@@ -63,7 +66,9 @@ contacted = an outbound email or contact form message was actually sent
 ```text
 not_ready = draft, demo, contact method, or checklist evidence is incomplete
 ready_for_review = Codex prepared the draft/demo and Diego needs to review it
-approved = Diego approved the exact draft and demo URL for n8n sending
+approved_for_draft = Diego approved the exact draft and demo URL for Gmail draft creation
+draft_created = n8n created the Gmail draft, but no outreach was sent yet
+approved = reserved for future direct-send approval
 queued = n8n picked up the row and is preparing or attempting the send
 sent = the email provider confirmed the message was sent
 failed = n8n or the email provider failed the send attempt
@@ -87,4 +92,4 @@ Rule of thumb: `status` answers whether the prospect has been contacted; `outrea
 
 ## Rule
 
-No autonomous sending. n8n may send only records that pass the approval gate and pre-send checklist.
+No autonomous sending. n8n may create Gmail drafts only for records that pass the approval gate and pre-send checklist.
