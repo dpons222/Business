@@ -188,6 +188,14 @@ textarea {
   color: #fff;
 }
 
+.button:disabled {
+  border-color: #cbd5e1;
+  background: #e2e8f0;
+  box-shadow: none;
+  color: #64748b;
+  cursor: not-allowed;
+}
+
 .mobile-copy {
   display: none;
 }

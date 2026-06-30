@@ -913,6 +913,11 @@ export function ProspectPreviewDashboard({
                         type="button"
                         onClick={() => setApprovalIntent("approve")}
                         disabled={!canApproveForDraft || isApprovalSaving}
+                        title={
+                          canApproveForDraft
+                            ? undefined
+                            : "Approval is unavailable until this is a complete Supabase draft marked ready for review."
+                        }
                       >
                         Review Approval
                       </button>
