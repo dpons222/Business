@@ -26,6 +26,7 @@ export type DemoEntry = {
   internalHref?: string;
   sourceUrl?: string;
   contactEmail?: string;
+  hasEmailDraft?: boolean;
   logoUrl?: string;
   isCurrentFocus?: boolean;
 };
@@ -70,6 +71,7 @@ const roofingEntries: DemoEntry[] = prospects.map((prospect) => ({
   internalHref: `/prospects/${prospect.slug}`,
   sourceUrl: prospect.sourceWebsite,
   contactEmail: prospect.contactEmail,
+  hasEmailDraft: true,
   logoUrl: prospect.logoUrl,
   isCurrentFocus: prospect.slug === currentFocusSlug,
 }));
@@ -90,6 +92,7 @@ const restaurantEntries: DemoEntry[] = [
     href: "/pizabella",
     internalHref: "/pizabella",
     sourceUrl: "https://landing.arrowpos.com/home/pizzabella",
+    hasEmailDraft: true,
     logoUrl:
       "https://recurve-customer-assets.s3.us-east-2.amazonaws.com/Pizza+Bella/Screen+Shot+2024-01-30+at+12.12.03+PM.png",
     isCurrentFocus: currentFocusSlug === "pizabella",

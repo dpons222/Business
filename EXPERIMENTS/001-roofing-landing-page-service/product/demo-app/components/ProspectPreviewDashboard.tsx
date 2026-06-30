@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ArrowUpDown,
   CalendarDays,
@@ -15,15 +15,36 @@ import {
   Star,
   X,
 } from "lucide-react";
-import type { DemoEntry, DemoNiche } from "../lib/demoRegistry";
+import type { DemoEntry, DemoNiche, DemoStatus } from "../lib/demoRegistry";
 import { nicheFilters, statusLabels } from "../lib/demoRegistry";
 
 type SortMode = "name" | "date";
 type SortDirection = "asc" | "desc";
-type NicheFilter = "all" | DemoNiche;
-type ContactFilter = "all" | "contacted" | "not_contacted";
+type ContactFilter = "contacted" | "not_contacted" | "has_email" | "has_email_draft";
+type DemoStatusFilter = Extract<
+  DemoStatus,
+  "ready_for_review" | "outreach_ready" | "follow_up" | "building_demo"
+>;
 
 const CURRENT_FOCUS_STORAGE_KEY = "local-growth-preview-current-focus";
+
+const nicheFilterOptions = nicheFilters.filter(
+  (filter): filter is { value: DemoNiche; label: string } => filter.value !== "all",
+);
+
+const contactFilterOptions: Array<{ value: ContactFilter; label: string }> = [
+  { value: "contacted", label: "Contacted" },
+  { value: "not_contacted", label: "Not contacted" },
+  { value: "has_email", label: "Has email" },
+  { value: "has_email_draft", label: "Has email draft" },
+];
+
+const demoStatusFilterOptions: Array<{ value: DemoStatusFilter; label: string }> = [
+  { value: "ready_for_review", label: "Ready for review" },
+  { value: "outreach_ready", label: "Outreach ready" },
+  { value: "follow_up", label: "Follow-up" },
+  { value: "building_demo", label: "Building demo" },
+];
 
 type ProspectDraft = {
   businessName: string;
@@ -51,25 +72,26 @@ function formatDate(date: string) {
   }).format(new Date(`${date}T00:00:00`));
 }
 
-function getActiveFilterLabel(
-  nicheLabel: string,
-  contactLabel: string,
-  nicheFilter: NicheFilter,
-  contactFilter: ContactFilter,
-) {
-  if (nicheFilter === "all" && contactFilter === "all") {
-    return "All demos";
+function toggleSelectedValue<T extends string>(selectedValues: T[], value: T) {
+  return selectedValues.includes(value)
+    ? selectedValues.filter((selectedValue) => selectedValue !== value)
+    : [...selectedValues, value];
+}
+
+function entryMatchesContactFilter(entry: DemoEntry, filter: ContactFilter) {
+  if (filter === "contacted") {
+    return entry.status === "contacted";
   }
 
-  if (nicheFilter === "all") {
-    return contactLabel;
+  if (filter === "not_contacted") {
+    return entry.status !== "contacted";
   }
 
-  if (contactFilter === "all") {
-    return nicheLabel;
+  if (filter === "has_email") {
+    return Boolean(entry.contactEmail);
   }
 
-  return `${nicheLabel} / ${contactLabel}`;
+  return Boolean(entry.hasEmailDraft);
 }
 
 export function ProspectPreviewDashboard({
@@ -78,8 +100,10 @@ export function ProspectPreviewDashboard({
 }: ProspectPreviewDashboardProps) {
   const [sortMode, setSortMode] = useState<SortMode>("date");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
-  const [activeNiche, setActiveNiche] = useState<NicheFilter>("all");
-  const [activeContactFilter, setActiveContactFilter] = useState<ContactFilter>("all");
+  const [isFilterRailOpen, setIsFilterRailOpen] = useState(true);
+  const [selectedNiches, setSelectedNiches] = useState<DemoNiche[]>([]);
+  const [selectedContactFilters, setSelectedContactFilters] = useState<ContactFilter[]>([]);
+  const [selectedDemoStatuses, setSelectedDemoStatuses] = useState<DemoStatusFilter[]>([]);
   const [selectedFocusSlug, setSelectedFocusSlug] = useState(currentFocus.slug);
   const [hasLoadedSavedFocus, setHasLoadedSavedFocus] = useState(false);
   const [draftEntry, setDraftEntry] = useState<DemoEntry | null>(null);
@@ -87,7 +111,6 @@ export function ProspectPreviewDashboard({
   const [draftError, setDraftError] = useState<string | null>(null);
   const [isDraftLoading, setIsDraftLoading] = useState(false);
   const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
-  const filterMenuRef = useRef<HTMLDetailsElement | null>(null);
 
   useEffect(() => {
     const savedSlug = window.localStorage.getItem(CURRENT_FOCUS_STORAGE_KEY);
@@ -117,28 +140,8 @@ export function ProspectPreviewDashboard({
     window.localStorage.setItem(CURRENT_FOCUS_STORAGE_KEY, selectedFocusSlug);
   }, [currentFocus.slug, entries, hasLoadedSavedFocus, selectedFocusSlug]);
 
-  useEffect(() => {
-    function closeFilterMenuOnOutsideClick(event: PointerEvent) {
-      const filterMenu = filterMenuRef.current;
-
-      if (!filterMenu?.open) {
-        return;
-      }
-
-      if (event.target instanceof Node && !filterMenu.contains(event.target)) {
-        filterMenu.open = false;
-      }
-    }
-
-    document.addEventListener("pointerdown", closeFilterMenuOnOutsideClick);
-
-    return () => {
-      document.removeEventListener("pointerdown", closeFilterMenuOnOutsideClick);
-    };
-  }, []);
-
   const nicheCounts = useMemo(() => {
-    return entries.reduce<Record<NicheFilter, number>>(
+    return entries.reduce<Record<"all" | DemoNiche, number>>(
       (counts, entry) => {
         counts.all += 1;
         counts[entry.niche] += 1;
@@ -155,31 +158,18 @@ export function ProspectPreviewDashboard({
     );
   }, [entries]);
 
-  const contactFilters: Array<{ value: ContactFilter; label: string; count: number }> =
-    useMemo(() => {
-      const contactedCount = entries.filter((entry) => entry.status === "contacted").length;
-      const notContactedCount = entries.length - contactedCount;
-
-      return [
-        { value: "all", label: "All contact statuses", count: entries.length },
-        { value: "contacted", label: "Contacted", count: contactedCount },
-        { value: "not_contacted", label: "Not contacted", count: notContactedCount },
-      ];
-    }, [entries]);
-
   const visibleEntries = useMemo(() => {
-    const nicheFilteredEntries =
-      activeNiche === "all" ? entries : entries.filter((entry) => entry.niche === activeNiche);
-    const filteredEntries = nicheFilteredEntries.filter((entry) => {
-      if (activeContactFilter === "all") {
-        return true;
-      }
+    const filteredEntries = entries.filter((entry) => {
+      const matchesNiche =
+        selectedNiches.length === 0 || selectedNiches.includes(entry.niche);
+      const matchesContactStatus =
+        selectedContactFilters.length === 0 ||
+        selectedContactFilters.some((filter) => entryMatchesContactFilter(entry, filter));
+      const matchesDemoStatus =
+        selectedDemoStatuses.length === 0 ||
+        selectedDemoStatuses.some((status) => entry.status === status);
 
-      if (activeContactFilter === "contacted") {
-        return entry.status === "contacted";
-      }
-
-      return entry.status !== "contacted";
+      return matchesNiche && matchesContactStatus && matchesDemoStatus;
     });
 
     return [...filteredEntries].sort((first, second) => {
@@ -191,7 +181,7 @@ export function ProspectPreviewDashboard({
 
       return first.createdAt.localeCompare(second.createdAt) * direction;
     });
-  }, [activeContactFilter, activeNiche, entries, sortDirection, sortMode]);
+  }, [entries, selectedContactFilters, selectedDemoStatuses, selectedNiches, sortDirection, sortMode]);
 
   function updateSort(nextSortMode: SortMode) {
     if (nextSortMode === sortMode) {
@@ -206,20 +196,21 @@ export function ProspectPreviewDashboard({
   const dateSortLabel =
     sortMode === "date" && sortDirection === "asc" ? "Oldest First" : "Newest First";
   const nameSortLabel = sortMode === "name" && sortDirection === "desc" ? "Z-A" : "A-Z";
-  const activeNicheLabel =
-    nicheFilters.find((filter) => filter.value === activeNiche)?.label ?? "All";
-  const activeContactLabel =
-    contactFilters.find((filter) => filter.value === activeContactFilter)?.label ??
-    "All contact statuses";
-  const activeFilterLabel = getActiveFilterLabel(
-    activeNicheLabel,
-    activeContactLabel,
-    activeNiche,
-    activeContactFilter,
-  );
+  const activeFilterCount =
+    selectedNiches.length + selectedContactFilters.length + selectedDemoStatuses.length;
+  const activeFilterLabel =
+    activeFilterCount > 0
+      ? `${activeFilterCount} active filter${activeFilterCount === 1 ? "" : "s"}`
+      : "All demos";
   const focusOptions = useMemo(() => {
     return [...entries].sort((first, second) => first.title.localeCompare(second.title));
   }, [entries]);
+
+  function resetFilters() {
+    setSelectedNiches([]);
+    setSelectedContactFilters([]);
+    setSelectedDemoStatuses([]);
+  }
 
   async function openDraft(entry: DemoEntry) {
     setDraftEntry(entry);
@@ -377,65 +368,22 @@ export function ProspectPreviewDashboard({
               <h2 id="preview-list-title">Available prospect previews</h2>
             </div>
             <div className="toolbar-controls">
-              <details className="filter-menu" ref={filterMenuRef}>
-                <summary className="filter-summary">
-                  <SlidersHorizontal size={16} aria-hidden="true" />
-                  Filters
-                  <span>{visibleEntries.length}</span>
-                </summary>
-                <div className="filter-menu-panel">
-                  <div className="filter-group">
-                    <p>Niche</p>
-                    {nicheFilters.map((filter) => (
-                      <button
-                        className={
-                          activeNiche === filter.value ? "filter-option active" : "filter-option"
-                        }
-                        key={filter.value}
-                        type="button"
-                        onClick={() => setActiveNiche(filter.value)}
-                        aria-pressed={activeNiche === filter.value}
-                      >
-                        <span>
-                          {activeNiche === filter.value ? (
-                            <Check size={14} aria-hidden="true" />
-                          ) : (
-                            <Layers3 size={14} aria-hidden="true" />
-                          )}
-                          {filter.label}
-                        </span>
-                        <strong>{nicheCounts[filter.value]}</strong>
-                      </button>
-                    ))}
-                  </div>
-                  <div className="filter-group">
-                    <p>Contact status</p>
-                    {contactFilters.map((filter) => (
-                      <button
-                        className={
-                          activeContactFilter === filter.value
-                            ? "filter-option active"
-                            : "filter-option"
-                        }
-                        key={filter.value}
-                        type="button"
-                        onClick={() => setActiveContactFilter(filter.value)}
-                        aria-pressed={activeContactFilter === filter.value}
-                      >
-                        <span>
-                          {activeContactFilter === filter.value ? (
-                            <Check size={14} aria-hidden="true" />
-                          ) : (
-                            <Mail size={14} aria-hidden="true" />
-                          )}
-                          {filter.label}
-                        </span>
-                        <strong>{filter.count}</strong>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </details>
+              <button
+                className={isFilterRailOpen ? "filter-toggle active" : "filter-toggle"}
+                type="button"
+                onClick={() => setIsFilterRailOpen((isOpen) => !isOpen)}
+                aria-expanded={isFilterRailOpen}
+                aria-controls="prospect-filter-rail"
+              >
+                <SlidersHorizontal size={16} aria-hidden="true" />
+                Filter
+                {activeFilterCount > 0 ? <span>{activeFilterCount}</span> : null}
+              </button>
+              {activeFilterCount > 0 ? (
+                <button className="filter-reset-button" type="button" onClick={resetFilters}>
+                  Reset
+                </button>
+              ) : null}
               <div className="sort-controls" aria-label="Sort prospect previews">
                 <button
                   className={sortMode === "date" ? "sort-button active" : "sort-button"}
@@ -459,78 +407,205 @@ export function ProspectPreviewDashboard({
             </div>
           </div>
 
-          <div className="preview-list">
-            {visibleEntries.map((entry) => {
-              const isCurrentFocus = entry.slug === selectedCurrentFocus.slug;
-
-              return (
-                <article className="preview-row" key={`${entry.niche}-${entry.slug}`}>
-                  <div className={`preview-logo-slot logo-slot-${entry.slug}`}>
-                    {entry.logoUrl ? (
-                      <img src={entry.logoUrl} alt={`${entry.title} logo`} />
-                    ) : (
-                      <span>{entry.shortName}</span>
-                    )}
-                  </div>
+          <div
+            className={
+              isFilterRailOpen ? "prospect-browser" : "prospect-browser filters-collapsed"
+            }
+          >
+            {isFilterRailOpen ? (
+              <aside className="filter-rail" id="prospect-filter-rail" aria-label="Prospect filters">
+                <div className="filter-rail-header">
                   <div>
-                    <div className="preview-title-row">
-                      <h3>{entry.title}</h3>
-                      {isCurrentFocus ? <span className="active-pill">Current</span> : null}
-                      <span className="niche-pill">{entry.niche}</span>
-                      <span className="status-pill">{statusLabels[entry.status]}</span>
-                    </div>
-                    <p>{entry.city}</p>
-                    <small>
-                      {entry.stageLabel} - Created {formatDate(entry.createdAt)}
-                    </small>
+                    <p className="eyebrow">Filters</p>
+                    <strong>{visibleEntries.length} shown</strong>
                   </div>
-                  <div className="preview-row-actions">
-                    <button
-                      className={
-                        isCurrentFocus
-                          ? "button button-ghost active-focus-button"
-                          : "button button-ghost"
-                      }
-                      type="button"
-                      onClick={() => setSelectedFocusSlug(entry.slug)}
-                      disabled={isCurrentFocus}
-                      aria-pressed={isCurrentFocus}
-                    >
-                      <Star size={15} aria-hidden="true" />
-                      {isCurrentFocus ? "Current Focus" : "Set Focus"}
+                  {activeFilterCount > 0 ? (
+                    <button className="filter-reset-button" type="button" onClick={resetFilters}>
+                      Reset
                     </button>
-                    <a className="button button-primary" href={entry.href}>
-                      Preview
-                    </a>
-                    {entry.sourceUrl ? (
-                      <a
-                        className="button button-ghost"
-                        href={entry.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Source
-                        <LinkIcon size={15} aria-hidden="true" />
-                      </a>
-                    ) : null}
-                    <button
-                      className="button button-ghost"
-                      type="button"
-                      onClick={() => openDraft(entry)}
-                    >
-                      Email Draft
-                      <Mail size={15} aria-hidden="true" />
-                    </button>
+                  ) : null}
+                </div>
+
+                <details className="filter-rail-group" open>
+                  <summary>Niche</summary>
+                  <div className="filter-rail-options">
+                    {nicheFilterOptions.map((filter) => {
+                      const isSelected = selectedNiches.includes(filter.value);
+
+                      return (
+                        <button
+                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                          key={filter.value}
+                          type="button"
+                          onClick={() =>
+                            setSelectedNiches((current) =>
+                              toggleSelectedValue(current, filter.value),
+                            )
+                          }
+                          aria-pressed={isSelected}
+                        >
+                          <span>
+                            {isSelected ? (
+                              <Check size={14} aria-hidden="true" />
+                            ) : (
+                              <Layers3 size={14} aria-hidden="true" />
+                            )}
+                            {filter.label}
+                          </span>
+                          <strong>{nicheCounts[filter.value]}</strong>
+                        </button>
+                      );
+                    })}
                   </div>
-                </article>
-              );
-            })}
-            {visibleEntries.length === 0 ? (
-              <div className="empty-filter-state">
-                <h3>No demos match these filters.</h3>
-                <p>Adjust the niche or contact status filter to show more prospect demos.</p>
-              </div>
+                </details>
+
+                <details className="filter-rail-group" open>
+                  <summary>Contact status</summary>
+                  <div className="filter-rail-options">
+                    {contactFilterOptions.map((filter) => {
+                      const isSelected = selectedContactFilters.includes(filter.value);
+                      const count = entries.filter((entry) =>
+                        entryMatchesContactFilter(entry, filter.value),
+                      ).length;
+
+                      return (
+                        <button
+                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                          key={filter.value}
+                          type="button"
+                          onClick={() =>
+                            setSelectedContactFilters((current) =>
+                              toggleSelectedValue(current, filter.value),
+                            )
+                          }
+                          aria-pressed={isSelected}
+                        >
+                          <span>
+                            {isSelected ? (
+                              <Check size={14} aria-hidden="true" />
+                            ) : (
+                              <Mail size={14} aria-hidden="true" />
+                            )}
+                            {filter.label}
+                          </span>
+                          <strong>{count}</strong>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </details>
+
+                <details className="filter-rail-group" open>
+                  <summary>Demo status</summary>
+                  <div className="filter-rail-options">
+                    {demoStatusFilterOptions.map((filter) => {
+                      const isSelected = selectedDemoStatuses.includes(filter.value);
+                      const count = entries.filter((entry) => entry.status === filter.value).length;
+
+                      return (
+                        <button
+                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                          key={filter.value}
+                          type="button"
+                          onClick={() =>
+                            setSelectedDemoStatuses((current) =>
+                              toggleSelectedValue(current, filter.value),
+                            )
+                          }
+                          aria-pressed={isSelected}
+                        >
+                          <span>
+                            {isSelected ? (
+                              <Check size={14} aria-hidden="true" />
+                            ) : (
+                              <FileText size={14} aria-hidden="true" />
+                            )}
+                            {filter.label}
+                          </span>
+                          <strong>{count}</strong>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </details>
+              </aside>
             ) : null}
+
+            <div className="prospect-results">
+              <div className="preview-list">
+                {visibleEntries.map((entry) => {
+                  const isCurrentFocus = entry.slug === selectedCurrentFocus.slug;
+
+                  return (
+                    <article className="preview-row" key={`${entry.niche}-${entry.slug}`}>
+                      <div className={`preview-logo-slot logo-slot-${entry.slug}`}>
+                        {entry.logoUrl ? (
+                          <img src={entry.logoUrl} alt={`${entry.title} logo`} />
+                        ) : (
+                          <span>{entry.shortName}</span>
+                        )}
+                      </div>
+                      <div>
+                        <div className="preview-title-row">
+                          <h3>{entry.title}</h3>
+                          {isCurrentFocus ? <span className="active-pill">Current</span> : null}
+                          <span className="niche-pill">{entry.niche}</span>
+                          <span className="status-pill">{statusLabels[entry.status]}</span>
+                        </div>
+                        <p>{entry.city}</p>
+                        <small>
+                          {entry.stageLabel} - Created {formatDate(entry.createdAt)}
+                        </small>
+                      </div>
+                      <div className="preview-row-actions">
+                        <button
+                          className={
+                            isCurrentFocus
+                              ? "button button-ghost active-focus-button"
+                              : "button button-ghost"
+                          }
+                          type="button"
+                          onClick={() => setSelectedFocusSlug(entry.slug)}
+                          disabled={isCurrentFocus}
+                          aria-pressed={isCurrentFocus}
+                        >
+                          <Star size={15} aria-hidden="true" />
+                          {isCurrentFocus ? "Current Focus" : "Set Focus"}
+                        </button>
+                        <a className="button button-primary" href={entry.href}>
+                          Preview
+                        </a>
+                        {entry.sourceUrl ? (
+                          <a
+                            className="button button-ghost"
+                            href={entry.sourceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Source
+                            <LinkIcon size={15} aria-hidden="true" />
+                          </a>
+                        ) : null}
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => openDraft(entry)}
+                        >
+                          Email Draft
+                          <Mail size={15} aria-hidden="true" />
+                        </button>
+                      </div>
+                    </article>
+                  );
+                })}
+                {visibleEntries.length === 0 ? (
+                  <div className="empty-filter-state">
+                    <h3>No demos match these filters.</h3>
+                    <p>Adjust the niche, contact status, or demo status filter to show more demos.</p>
+                  </div>
+                ) : null}
+              </div>
+            </div>
           </div>
         </section>
       </section>
