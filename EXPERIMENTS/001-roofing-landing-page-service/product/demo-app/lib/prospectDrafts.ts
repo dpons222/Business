@@ -28,6 +28,14 @@ export type ProspectDraft = {
   source: "supabase" | "local";
 };
 
+export type ProspectDraftSummary = {
+  businessEmail: string | null;
+  contactStatus: string | null;
+  hasEmailDraft: boolean;
+  outreachSendStatus: OutreachSendStatus | null;
+  source: "supabase";
+};
+
 type SupabaseProspectRow = {
   business_name: string;
   contact_email: string | null;
@@ -41,6 +49,15 @@ type SupabaseProspectRow = {
   outreach_draft_body: string | null;
   website: string | null;
   demo_url: string | null;
+};
+
+type SupabaseProspectSummaryRow = {
+  prospect_slug: string | null;
+  contact_email: string | null;
+  status: string | null;
+  outreach_send_status: OutreachSendStatus | null;
+  outreach_draft_subject: string | null;
+  outreach_draft_body: string | null;
 };
 
 type SupabaseUpdateResponse = SupabaseProspectRow & {
@@ -237,6 +254,55 @@ async function fetchSupabaseProspectDraft(slug: string, config = getSupabaseConf
   const rows = (await response.json()) as SupabaseProspectRow[];
 
   return rows[0] ?? null;
+}
+
+export async function getProspectDraftSummaries(slugs: string[]) {
+  const config = getSupabaseConfig();
+
+  if (!config || slugs.length === 0) {
+    return {};
+  }
+
+  const uniqueSlugs = [...new Set(slugs)];
+  const params = new URLSearchParams({
+    prospect_slug: `in.(${uniqueSlugs.join(",")})`,
+    select:
+      "prospect_slug,contact_email,status,outreach_send_status,outreach_draft_subject,outreach_draft_body",
+  });
+
+  try {
+    const response = await fetch(`${config.url}/rest/v1/prospects?${params}`, {
+      headers: {
+        apikey: config.key,
+        Authorization: `Bearer ${config.key}`,
+      },
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      return {};
+    }
+
+    const rows = (await response.json()) as SupabaseProspectSummaryRow[];
+
+    return rows.reduce<Record<string, ProspectDraftSummary>>((summaries, row) => {
+      if (!row.prospect_slug) {
+        return summaries;
+      }
+
+      summaries[row.prospect_slug] = {
+        businessEmail: row.contact_email,
+        contactStatus: row.status,
+        hasEmailDraft: hasText(row.outreach_draft_subject) && hasText(row.outreach_draft_body),
+        outreachSendStatus: row.outreach_send_status,
+        source: "supabase",
+      };
+
+      return summaries;
+    }, {});
+  } catch {
+    return {};
+  }
 }
 
 export async function getProspectDraft(slug: string): Promise<ProspectDraft | null> {

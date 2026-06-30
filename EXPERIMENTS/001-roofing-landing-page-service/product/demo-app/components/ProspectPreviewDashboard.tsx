@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { DemoEntry, DemoNiche, DemoStatus } from "../lib/demoRegistry";
 import { nicheFilters, statusLabels } from "../lib/demoRegistry";
+import type { ProspectDraftSummary } from "../lib/prospectDrafts";
 
 type SortMode = "name" | "date";
 type SortDirection = "asc" | "desc";
@@ -68,6 +69,7 @@ type ProspectDraft = {
 type ProspectPreviewDashboardProps = {
   currentFocus: DemoEntry;
   entries: DemoEntry[];
+  prospectDraftSummaries: Record<string, ProspectDraftSummary>;
 };
 
 function formatDate(date: string) {
@@ -84,20 +86,36 @@ function toggleSelectedValue<T extends string>(selectedValues: T[], value: T) {
     : [...selectedValues, value];
 }
 
-function entryMatchesContactFilter(entry: DemoEntry, filter: ContactFilter) {
+function getEntryContactStatus(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
+  return summaries[entry.slug]?.contactStatus ?? entry.status;
+}
+
+function entryHasEmail(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
+  return Boolean(summaries[entry.slug]?.businessEmail ?? entry.contactEmail);
+}
+
+function entryHasEmailDraft(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
+  return summaries[entry.slug]?.hasEmailDraft ?? Boolean(entry.hasEmailDraft);
+}
+
+function entryMatchesContactFilter(
+  entry: DemoEntry,
+  filter: ContactFilter,
+  summaries: Record<string, ProspectDraftSummary>,
+) {
   if (filter === "contacted") {
-    return entry.status === "contacted";
+    return getEntryContactStatus(entry, summaries) === "contacted";
   }
 
   if (filter === "not_contacted") {
-    return entry.status !== "contacted";
+    return getEntryContactStatus(entry, summaries) !== "contacted";
   }
 
   if (filter === "has_email") {
-    return Boolean(entry.contactEmail);
+    return entryHasEmail(entry, summaries);
   }
 
-  return Boolean(entry.hasEmailDraft);
+  return entryHasEmailDraft(entry, summaries);
 }
 
 const lockedOutreachStatuses = new Set(["approved_for_draft", "draft_created", "approved", "queued", "sent"]);
@@ -125,6 +143,7 @@ function draftStatusLabel(status: string | null) {
 export function ProspectPreviewDashboard({
   currentFocus,
   entries,
+  prospectDraftSummaries,
 }: ProspectPreviewDashboardProps) {
   const [sortMode, setSortMode] = useState<SortMode>("date");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
@@ -196,7 +215,9 @@ export function ProspectPreviewDashboard({
         selectedNiches.length === 0 || selectedNiches.includes(entry.niche);
       const matchesContactStatus =
         selectedContactFilters.length === 0 ||
-        selectedContactFilters.some((filter) => entryMatchesContactFilter(entry, filter));
+        selectedContactFilters.some((filter) =>
+          entryMatchesContactFilter(entry, filter, prospectDraftSummaries),
+        );
       const matchesDemoStatus =
         selectedDemoStatuses.length === 0 ||
         selectedDemoStatuses.some((status) => entry.status === status);
@@ -213,7 +234,15 @@ export function ProspectPreviewDashboard({
 
       return first.createdAt.localeCompare(second.createdAt) * direction;
     });
-  }, [entries, selectedContactFilters, selectedDemoStatuses, selectedNiches, sortDirection, sortMode]);
+  }, [
+    entries,
+    prospectDraftSummaries,
+    selectedContactFilters,
+    selectedDemoStatuses,
+    selectedNiches,
+    sortDirection,
+    sortMode,
+  ]);
 
   function updateSort(nextSortMode: SortMode) {
     if (nextSortMode === sortMode) {
@@ -565,7 +594,7 @@ export function ProspectPreviewDashboard({
                       {contactFilterOptions.map((filter) => {
                         const isSelected = selectedContactFilters.includes(filter.value);
                         const count = entries.filter((entry) =>
-                          entryMatchesContactFilter(entry, filter.value),
+                          entryMatchesContactFilter(entry, filter.value, prospectDraftSummaries),
                         ).length;
 
                         return (
