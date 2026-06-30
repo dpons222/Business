@@ -4,6 +4,8 @@ import {
   getProspectDraft,
   hasLocalDemoEntry,
   updateProspectDraftApproval,
+  updateProspectManualContact,
+  type ManualContactMethod,
   type ProspectDraftApprovalAction,
 } from "@/lib/prospectDrafts";
 
@@ -33,6 +35,17 @@ function isApprovalAction(value: unknown): value is ProspectDraftApprovalAction 
   return value === "approve_for_draft" || value === "revoke_draft_approval";
 }
 
+function isManualContactMethod(value: unknown): value is ManualContactMethod {
+  return (
+    value === "contact_form" ||
+    value === "phone" ||
+    value === "facebook" ||
+    value === "instagram" ||
+    value === "linkedin" ||
+    value === "other"
+  );
+}
+
 export async function PATCH(request: Request, context: ProspectDraftRouteContext) {
   const session = await getDashboardSession();
 
@@ -46,13 +59,48 @@ export async function PATCH(request: Request, context: ProspectDraftRouteContext
     return NextResponse.json({ error: "Prospect not found" }, { status: 404 });
   }
 
-  const payload = (await request.json().catch(() => null)) as { action?: unknown } | null;
+  const payload = (await request.json().catch(() => null)) as
+    | {
+        action?: unknown;
+        method?: unknown;
+        note?: unknown;
+        followUpDays?: unknown;
+      }
+    | null;
 
-  if (!payload || !isApprovalAction(payload.action)) {
-    return NextResponse.json({ error: "Invalid approval action" }, { status: 400 });
+  if (!payload) {
+    return NextResponse.json({ error: "Invalid prospect draft action" }, { status: 400 });
   }
 
-  const result = await updateProspectDraftApproval(slug, payload.action);
+  if (isApprovalAction(payload.action)) {
+    const result = await updateProspectDraftApproval(slug, payload.action);
+
+    if (result.error) {
+      return NextResponse.json(
+        {
+          error: result.error,
+          draft: result.draft,
+        },
+        { status: result.status },
+      );
+    }
+
+    return NextResponse.json(result.draft);
+  }
+
+  if (payload.action !== "record_manual_contact") {
+    return NextResponse.json({ error: "Invalid prospect draft action" }, { status: 400 });
+  }
+
+  if (!isManualContactMethod(payload.method)) {
+    return NextResponse.json({ error: "Manual contact method is invalid" }, { status: 400 });
+  }
+
+  const result = await updateProspectManualContact(slug, {
+    method: payload.method,
+    note: typeof payload.note === "string" ? payload.note : "",
+    followUpDays: typeof payload.followUpDays === "number" ? payload.followUpDays : undefined,
+  });
 
   if (result.error) {
     return NextResponse.json(

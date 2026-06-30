@@ -24,6 +24,13 @@ import type { ProspectDraftSummary } from "../lib/prospectDrafts";
 type SortMode = "name" | "date";
 type SortDirection = "asc" | "desc";
 type ContactFilter = "contacted" | "not_contacted" | "has_email" | "has_email_draft";
+type ManualContactMethod =
+  | "contact_form"
+  | "phone"
+  | "facebook"
+  | "instagram"
+  | "linkedin"
+  | "other";
 type DemoStatusFilter = Extract<
   DemoStatus,
   "ready_for_review" | "outreach_ready" | "follow_up" | "building_demo"
@@ -49,6 +56,15 @@ const demoStatusFilterOptions: Array<{ value: DemoStatusFilter; label: string }>
   { value: "building_demo", label: "Building demo" },
 ];
 
+const manualContactMethodOptions: Array<{ value: ManualContactMethod; label: string }> = [
+  { value: "contact_form", label: "Contact form" },
+  { value: "phone", label: "Phone" },
+  { value: "facebook", label: "Facebook" },
+  { value: "instagram", label: "Instagram" },
+  { value: "linkedin", label: "LinkedIn" },
+  { value: "other", label: "Other" },
+];
+
 type ProspectDraft = {
   businessName: string;
   businessEmail: string | null;
@@ -62,6 +78,7 @@ type ProspectDraft = {
   body: string | null;
   website: string | null;
   demoUrl: string | null;
+  notes: string | null;
   approvalBlockers: string[];
   source: "supabase" | "local";
 };
@@ -140,11 +157,24 @@ function draftStatusLabel(status: string | null) {
   return outreachStatusLabels[status] ?? status;
 }
 
+function summaryFromDraft(draft: ProspectDraft): ProspectDraftSummary {
+  return {
+    businessEmail: draft.businessEmail,
+    contactStatus: draft.contactStatus,
+    hasEmailDraft: Boolean(draft.subject?.trim() && draft.body?.trim()),
+    outreachSendStatus: draft.outreachSendStatus as ProspectDraftSummary["outreachSendStatus"],
+    source: "supabase",
+  };
+}
+
 export function ProspectPreviewDashboard({
   currentFocus,
   entries,
-  prospectDraftSummaries,
+  prospectDraftSummaries: initialProspectDraftSummaries,
 }: ProspectPreviewDashboardProps) {
+  const [prospectDraftSummaries, setProspectDraftSummaries] = useState(
+    initialProspectDraftSummaries,
+  );
   const [sortMode, setSortMode] = useState<SortMode>("date");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [isFilterRailOpen, setIsFilterRailOpen] = useState(true);
@@ -158,10 +188,21 @@ export function ProspectPreviewDashboard({
   const [draftError, setDraftError] = useState<string | null>(null);
   const [isDraftLoading, setIsDraftLoading] = useState(false);
   const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
-  const [approvalIntent, setApprovalIntent] = useState<"approve" | "revoke" | null>(null);
+  const [approvalIntent, setApprovalIntent] = useState<
+    "approve" | "revoke" | "manual_contact" | null
+  >(null);
   const [isApprovalChecked, setIsApprovalChecked] = useState(false);
   const [approvalError, setApprovalError] = useState<string | null>(null);
   const [isApprovalSaving, setIsApprovalSaving] = useState(false);
+  const [manualContactMethod, setManualContactMethod] =
+    useState<ManualContactMethod>("contact_form");
+  const [manualContactNote, setManualContactNote] = useState("");
+  const [manualFollowUpDays, setManualFollowUpDays] = useState(7);
+  const [isManualContactChecked, setIsManualContactChecked] = useState(false);
+
+  useEffect(() => {
+    setProspectDraftSummaries(initialProspectDraftSummaries);
+  }, [initialProspectDraftSummaries]);
 
   useEffect(() => {
     const savedSlug = window.localStorage.getItem(CURRENT_FOCUS_STORAGE_KEY);
@@ -281,6 +322,10 @@ export function ProspectPreviewDashboard({
     setApprovalIntent(null);
     setIsApprovalChecked(false);
     setApprovalError(null);
+    setManualContactMethod("contact_form");
+    setManualContactNote("");
+    setManualFollowUpDays(7);
+    setIsManualContactChecked(false);
     setIsDraftLoading(true);
 
     try {
@@ -308,7 +353,22 @@ export function ProspectPreviewDashboard({
     setIsApprovalChecked(false);
     setApprovalError(null);
     setIsApprovalSaving(false);
+    setManualContactMethod("contact_form");
+    setManualContactNote("");
+    setManualFollowUpDays(7);
+    setIsManualContactChecked(false);
     setIsDraftLoading(false);
+  }
+
+  function syncDraftSummary(slug: string, nextDraft: ProspectDraft) {
+    if (nextDraft.source !== "supabase") {
+      return;
+    }
+
+    setProspectDraftSummaries((currentSummaries) => ({
+      ...currentSummaries,
+      [slug]: summaryFromDraft(nextDraft),
+    }));
   }
 
   async function submitApprovalAction(action: "approve_for_draft" | "revoke_draft_approval") {
@@ -345,10 +405,63 @@ export function ProspectPreviewDashboard({
       }
 
       setDraft(payload as ProspectDraft);
+      syncDraftSummary(draftEntry.slug, payload as ProspectDraft);
       setApprovalIntent(null);
       setIsApprovalChecked(false);
     } catch (error) {
       setApprovalError(error instanceof Error ? error.message : "Approval update failed.");
+    } finally {
+      setIsApprovalSaving(false);
+    }
+  }
+
+  async function submitManualContactAction() {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "record_manual_contact",
+          method: manualContactMethod,
+          note: manualContactNote,
+          followUpDays: manualFollowUpDays,
+        }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+          syncDraftSummary(draftEntry.slug, payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Manual contact update failed.",
+        );
+      }
+
+      const nextDraft = payload as ProspectDraft;
+      setDraft(nextDraft);
+      syncDraftSummary(draftEntry.slug, nextDraft);
+      setApprovalIntent(null);
+      setIsManualContactChecked(false);
+      setManualContactNote("");
+    } catch (error) {
+      setApprovalError(error instanceof Error ? error.message : "Manual contact update failed.");
     } finally {
       setIsApprovalSaving(false);
     }
@@ -380,6 +493,16 @@ export function ProspectPreviewDashboard({
     !lockedOutreachStatuses.has(draft.outreachSendStatus ?? "");
   const canRevokeDraftApproval =
     draft?.source === "supabase" && draft.outreachSendStatus === "approved_for_draft";
+  const canRecordManualContact =
+    draft?.source === "supabase" &&
+    draft.contactStatus !== "contacted" &&
+    draft.outreachSendStatus !== "sent";
+  const manualContactUnavailableReason =
+    draft?.source !== "supabase"
+      ? "Manual contact can only be recorded for Supabase-backed prospects."
+      : draft.contactStatus === "contacted" || draft.outreachSendStatus === "sent"
+        ? "This prospect is already marked contacted."
+        : undefined;
 
   return (
     <main className="preview-dashboard">
@@ -952,7 +1075,10 @@ export function ProspectPreviewDashboard({
                       <button
                         className="button button-primary"
                         type="button"
-                        onClick={() => setApprovalIntent("approve")}
+                        onClick={() => {
+                          setApprovalIntent("approve");
+                          setIsManualContactChecked(false);
+                        }}
                         disabled={!canApproveForDraft || isApprovalSaving}
                         title={
                           canApproveForDraft
@@ -972,6 +1098,120 @@ export function ProspectPreviewDashboard({
                           Revoke
                         </button>
                       ) : null}
+                    </div>
+                  ) : null}
+                </section>
+
+                <section className="draft-approval-panel" aria-label="Manual outreach tracking">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">Manual Outreach</p>
+                      <h3>{draft.contactStatus === "contacted" ? "Contacted" : "Not contacted"}</h3>
+                    </div>
+                    {draft.contactStatus === "contacted" || draft.outreachSendStatus === "sent" ? (
+                      <CheckCircle2 size={22} aria-hidden="true" />
+                    ) : (
+                      <Mail size={22} aria-hidden="true" />
+                    )}
+                  </div>
+
+                  <p className="approval-ready-copy">
+                    Use this after you contact the business outside the email automation.
+                  </p>
+
+                  {manualContactUnavailableReason ? (
+                    <div className="draft-approval-checks">
+                      <strong>Manual contact checks</strong>
+                      <p>{manualContactUnavailableReason}</p>
+                    </div>
+                  ) : null}
+
+                  {approvalIntent === "manual_contact" ? (
+                    <div className="draft-confirmation-panel">
+                      <div className="manual-contact-grid">
+                        <label>
+                          Method
+                          <select
+                            value={manualContactMethod}
+                            onChange={(event) =>
+                              setManualContactMethod(event.target.value as ManualContactMethod)
+                            }
+                          >
+                            {manualContactMethodOptions.map((option) => (
+                              <option key={option.value} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                        <label>
+                          Follow-up days
+                          <input
+                            type="number"
+                            min="1"
+                            max="30"
+                            value={manualFollowUpDays}
+                            onChange={(event) =>
+                              setManualFollowUpDays(Number(event.target.value) || 7)
+                            }
+                          />
+                        </label>
+                      </div>
+                      <label className="manual-contact-note-label">
+                        Note
+                        <textarea
+                          rows={3}
+                          value={manualContactNote}
+                          onChange={(event) => setManualContactNote(event.target.value)}
+                          placeholder="Optional context, such as form page used or contact name."
+                        />
+                      </label>
+                      <label className="approval-check-label">
+                        <input
+                          type="checkbox"
+                          checked={isManualContactChecked}
+                          onChange={(event) => setIsManualContactChecked(event.target.checked)}
+                        />
+                        I already contacted this business manually.
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-primary"
+                          type="button"
+                          onClick={submitManualContactAction}
+                          disabled={!isManualContactChecked || isApprovalSaving}
+                        >
+                          Save Manual Contact
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setIsManualContactChecked(false);
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-ghost"
+                        type="button"
+                        onClick={() => {
+                          setApprovalIntent("manual_contact");
+                          setIsApprovalChecked(false);
+                        }}
+                        disabled={!canRecordManualContact || isApprovalSaving}
+                        title={manualContactUnavailableReason}
+                      >
+                        Contacted Manually
+                      </button>
                     </div>
                   ) : null}
                 </section>

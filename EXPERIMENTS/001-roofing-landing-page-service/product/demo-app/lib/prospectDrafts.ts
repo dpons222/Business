@@ -24,6 +24,7 @@ export type ProspectDraft = {
   body: string | null;
   website: string | null;
   demoUrl: string | null;
+  notes: string | null;
   approvalBlockers: string[];
   source: "supabase" | "local";
 };
@@ -49,6 +50,7 @@ type SupabaseProspectRow = {
   outreach_draft_body: string | null;
   website: string | null;
   demo_url: string | null;
+  notes: string | null;
 };
 
 type SupabaseProspectSummaryRow = {
@@ -65,6 +67,28 @@ type SupabaseUpdateResponse = SupabaseProspectRow & {
 };
 
 export type ProspectDraftApprovalAction = "approve_for_draft" | "revoke_draft_approval";
+export type ManualContactMethod =
+  | "contact_form"
+  | "phone"
+  | "facebook"
+  | "instagram"
+  | "linkedin"
+  | "other";
+
+export type ManualContactInput = {
+  method: ManualContactMethod;
+  note?: string;
+  followUpDays?: number;
+};
+
+const manualContactMethodLabels: Record<ManualContactMethod, string> = {
+  contact_form: "contact form",
+  phone: "phone",
+  facebook: "Facebook",
+  instagram: "Instagram",
+  linkedin: "LinkedIn",
+  other: "other manual method",
+};
 
 const stableDemoUrlPrefix = "https://local-growth-preview.vercel.app/";
 
@@ -175,6 +199,7 @@ function rowToProspectDraft(row: SupabaseProspectRow): ProspectDraft {
     body: normalizeDraftText(row.outreach_draft_body),
     website: row.website,
     demoUrl: row.demo_url,
+    notes: row.notes,
     approvalBlockers: [],
     source: "supabase" as const,
   };
@@ -223,6 +248,7 @@ export function getLocalProspectDraft(slug: string): ProspectDraft | null {
     body: normalizeDraftText(localDraft?.body ?? null),
     website: entry.sourceUrl ?? null,
     demoUrl: absoluteDemoUrl(entry.href),
+    notes: null,
     approvalBlockers: ["Local fallback drafts cannot be approved for n8n."],
     source: "local",
   };
@@ -236,7 +262,7 @@ async function fetchSupabaseProspectDraft(slug: string, config = getSupabaseConf
   const params = new URLSearchParams({
     prospect_slug: `eq.${slug}`,
     select:
-      "business_name,contact_email,status,outreach_send_status,outreach_send_channel,outreach_approved,outreach_approved_at,outreach_approved_by,outreach_draft_subject,outreach_draft_body,website,demo_url",
+      "business_name,contact_email,status,outreach_send_status,outreach_send_channel,outreach_approved,outreach_approved_at,outreach_approved_by,outreach_draft_subject,outreach_draft_body,website,demo_url,notes",
     limit: "1",
   });
   const response = await fetch(`${config.url}/rest/v1/prospects?${params}`, {
@@ -421,6 +447,133 @@ export async function updateProspectDraftApproval(slug: string, action: Prospect
     return {
       draft,
       error: "Supabase rejected the approval update.",
+      status: response.status,
+    };
+  }
+
+  const rows = (await response.json()) as SupabaseUpdateResponse[];
+  const updatedRow = rows[0];
+
+  if (!updatedRow) {
+    return {
+      draft,
+      error: "Supabase update succeeded but returned no row.",
+      status: 500,
+    };
+  }
+
+  return {
+    draft: rowToProspectDraft(updatedRow),
+    error: null,
+    status: 200,
+  };
+}
+
+function clampFollowUpDays(value: number | undefined) {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    return 7;
+  }
+
+  return Math.min(Math.max(Math.round(value), 1), 30);
+}
+
+function appendManualContactNote(
+  currentNotes: string | null,
+  input: Required<ManualContactInput>,
+  contactedAt: Date,
+  followUpAt: Date,
+) {
+  const noteParts = [
+    `Dashboard manual contact recorded ${contactedAt.toISOString()}.`,
+    `Method: ${manualContactMethodLabels[input.method]}.`,
+    `Next follow-up due: ${followUpAt.toISOString()}.`,
+    input.note.trim() ? `Note: ${input.note.trim()}` : null,
+  ].filter(Boolean);
+  const nextNote = noteParts.join(" ");
+
+  return [currentNotes?.trim(), nextNote].filter(Boolean).join("\n\n");
+}
+
+export async function updateProspectManualContact(slug: string, input: ManualContactInput) {
+  const config = getSupabaseConfig({ requireServiceRole: true });
+
+  if (!config) {
+    return {
+      draft: null,
+      error: "Supabase is not configured for manual contact updates.",
+      status: 503,
+    };
+  }
+
+  const row = await fetchSupabaseProspectDraft(slug, config);
+
+  if (!row) {
+    return {
+      draft: null,
+      error: "Prospect draft was not found in Supabase.",
+      status: 404,
+    };
+  }
+
+  const draft = rowToProspectDraft(row);
+
+  if (draft.contactStatus === "contacted" || draft.outreachSendStatus === "sent") {
+    return {
+      draft,
+      error: "This prospect is already marked contacted.",
+      status: 409,
+    };
+  }
+
+  const method = input.method;
+
+  if (!manualContactMethodLabels[method]) {
+    return {
+      draft,
+      error: "Manual contact method is invalid.",
+      status: 400,
+    };
+  }
+
+  const followUpDays = clampFollowUpDays(input.followUpDays);
+  const contactedAt = new Date();
+  const followUpAt = new Date(contactedAt);
+  followUpAt.setDate(followUpAt.getDate() + followUpDays);
+
+  const manualContactInput: Required<ManualContactInput> = {
+    method,
+    note: input.note ?? "",
+    followUpDays,
+  };
+
+  const update = {
+    status: "contacted",
+    outreach_send_channel: method === "contact_form" ? "contact_form" : "manual",
+    outreach_send_status: "sent",
+    outreach_last_error: null,
+    date_contacted: contactedAt.toISOString(),
+    last_contacted_at: contactedAt.toISOString(),
+    follow_up_1_due_at: followUpAt.toISOString(),
+    next_follow_up_at: followUpAt.toISOString(),
+    notes: appendManualContactNote(row.notes, manualContactInput, contactedAt, followUpAt),
+  };
+
+  const response = await fetch(`${config.url}/rest/v1/prospects?prospect_slug=eq.${slug}`, {
+    method: "PATCH",
+    headers: {
+      apikey: config.key,
+      Authorization: `Bearer ${config.key}`,
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(update),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return {
+      draft,
+      error: "Supabase rejected the manual contact update.",
       status: response.status,
     };
   }
