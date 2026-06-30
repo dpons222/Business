@@ -9,7 +9,7 @@ Add explicit prospect relationship statuses for prospects Diego should not conta
 - [x] Update Supabase schema constraints and status documentation.
 - [x] Mark Final Cut Roofing as `do_not_contact`.
 - [x] Validate the app and Supabase state.
-- [ ] Commit, push, deploy, and close issue.
+- [x] Commit, push, deploy, and close issue.
 
 ## Status Semantics
 - `not_contacted`: eligible prospect; no outbound message has been sent yet.
@@ -26,3 +26,4 @@ Add explicit prospect relationship statuses for prospects Diego should not conta
 - `npm run lint` did not run because this project script calls `next lint`, which the installed Next CLI treats as an invalid `lint` directory.
 - Supabase `prospects_status_check` now accepts `do_not_contact` and `not_interested`.
 - Final Cut Roofing is set to `status = do_not_contact`, `outreach_send_status = skipped`, and `outreach_approved = false`.
+- Production deploy completed and aliased to `https://local-growth-preview.vercel.app`.
