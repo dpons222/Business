@@ -39,10 +39,11 @@ Use this when preparing 3-5 prospects for an approved outreach batch:
 3. Store the exact reviewed subject/body, draft path, channel, batch ID, and checklist evidence in Supabase.
 4. Mark the row `outreach_send_status = ready_for_review`.
 5. Diego reviews the live demo, exact draft, recipient/contact method, and fit.
-6. Only after approval, mark `outreach_approved = true` and `outreach_send_status = approved`.
-7. n8n may send only approved email rows. Contact-form rows remain manual until a separate workflow exists.
+6. Only after approval for Gmail draft creation, mark `outreach_approved = true` and `outreach_send_status = approved_for_draft`.
+7. n8n may create Gmail drafts only for approved email rows, then write `outreach_send_status = draft_created`.
+8. Diego sends, edits, or deletes the Gmail draft manually. Contact-form rows remain manual until a separate workflow exists.
 
-Do not mark a row approved just because a draft exists. Approval means the exact message and demo link are ready to send.
+Do not approve a row just because a draft exists. Approval means the exact message and demo link are ready for Gmail draft creation, not that outreach was sent.
 
 ## Supabase Status Meanings
 
@@ -58,11 +59,13 @@ Use `outreach_send_status` for the automation approval/send lifecycle:
 ```text
 not_ready = draft, demo, contact method, or checklist evidence is incomplete
 ready_for_review = Codex prepared the draft/demo and Diego needs to review it
-approved = Diego approved the exact draft and demo URL for n8n sending
+approved_for_draft = Diego approved the exact draft and demo URL for Gmail draft creation
+draft_created = n8n created the Gmail draft, but no outreach was sent yet
+approved = reserved for future direct-send approval
 queued = n8n picked up the row and is preparing or attempting the send
 sent = the email provider confirmed the message was sent
 failed = n8n or the email provider failed the send attempt
 skipped = n8n or the operator intentionally skipped the row
 ```
 
-Do not set `status = contacted` until outreach was actually sent. Do not set `outreach_send_status = approved` unless `outreach_approved = true` and Diego has approved the exact draft, stable demo URL, and contact method.
+Do not set `status = contacted` until outreach was actually sent. Do not set `outreach_send_status = approved_for_draft` unless `outreach_approved = true` and Diego has approved the exact draft, stable demo URL, and contact method. Do not use `approved` unless a future direct-send workflow has a separate explicit approval gate.

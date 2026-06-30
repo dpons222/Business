@@ -2,9 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
+  AlertTriangle,
   ArrowUpDown,
   CalendarDays,
   Check,
+  CheckCircle2,
   Copy,
   ExternalLink,
   FileText,
@@ -52,10 +54,14 @@ type ProspectDraft = {
   contactStatus: string | null;
   outreachSendStatus: string | null;
   outreachSendChannel: string | null;
+  outreachApproved: boolean;
+  outreachApprovedAt: string | null;
+  outreachApprovedBy: string | null;
   subject: string | null;
   body: string | null;
   website: string | null;
   demoUrl: string | null;
+  approvalBlockers: string[];
   source: "supabase" | "local";
 };
 
@@ -94,6 +100,28 @@ function entryMatchesContactFilter(entry: DemoEntry, filter: ContactFilter) {
   return Boolean(entry.hasEmailDraft);
 }
 
+const lockedOutreachStatuses = new Set(["approved_for_draft", "draft_created", "approved", "queued", "sent"]);
+
+const outreachStatusLabels: Record<string, string> = {
+  not_ready: "Not ready",
+  ready_for_review: "Ready for review",
+  approved_for_draft: "Approved for Gmail draft",
+  draft_created: "Gmail draft created",
+  approved: "Approved for send",
+  queued: "Queued",
+  sent: "Sent",
+  failed: "Failed",
+  skipped: "Skipped",
+};
+
+function draftStatusLabel(status: string | null) {
+  if (!status) {
+    return "No outreach status";
+  }
+
+  return outreachStatusLabels[status] ?? status;
+}
+
 export function ProspectPreviewDashboard({
   currentFocus,
   entries,
@@ -111,6 +139,10 @@ export function ProspectPreviewDashboard({
   const [draftError, setDraftError] = useState<string | null>(null);
   const [isDraftLoading, setIsDraftLoading] = useState(false);
   const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
+  const [approvalIntent, setApprovalIntent] = useState<"approve" | "revoke" | null>(null);
+  const [isApprovalChecked, setIsApprovalChecked] = useState(false);
+  const [approvalError, setApprovalError] = useState<string | null>(null);
+  const [isApprovalSaving, setIsApprovalSaving] = useState(false);
 
   useEffect(() => {
     const savedSlug = window.localStorage.getItem(CURRENT_FOCUS_STORAGE_KEY);
@@ -217,6 +249,9 @@ export function ProspectPreviewDashboard({
     setDraft(null);
     setDraftError(null);
     setCopiedLabel(null);
+    setApprovalIntent(null);
+    setIsApprovalChecked(false);
+    setApprovalError(null);
     setIsDraftLoading(true);
 
     try {
@@ -240,7 +275,54 @@ export function ProspectPreviewDashboard({
     setDraft(null);
     setDraftError(null);
     setCopiedLabel(null);
+    setApprovalIntent(null);
+    setIsApprovalChecked(false);
+    setApprovalError(null);
+    setIsApprovalSaving(false);
     setIsDraftLoading(false);
+  }
+
+  async function submitApprovalAction(action: "approve_for_draft" | "revoke_draft_approval") {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Approval update failed.",
+        );
+      }
+
+      setDraft(payload as ProspectDraft);
+      setApprovalIntent(null);
+      setIsApprovalChecked(false);
+    } catch (error) {
+      setApprovalError(error instanceof Error ? error.message : "Approval update failed.");
+    } finally {
+      setIsApprovalSaving(false);
+    }
   }
 
   async function copyText(label: string, value: string | null | undefined) {
@@ -262,6 +344,13 @@ export function ProspectPreviewDashboard({
         .filter(Boolean)
         .join("\n\n")
     : "";
+  const canApproveForDraft =
+    draft?.source === "supabase" &&
+    draft.approvalBlockers.length === 0 &&
+    draft.outreachSendStatus === "ready_for_review" &&
+    !lockedOutreachStatuses.has(draft.outreachSendStatus ?? "");
+  const canRevokeDraftApproval =
+    draft?.source === "supabase" && draft.outreachSendStatus === "approved_for_draft";
 
   return (
     <main className="preview-dashboard">
@@ -368,17 +457,6 @@ export function ProspectPreviewDashboard({
               <h2 id="preview-list-title">Available prospect previews</h2>
             </div>
             <div className="toolbar-controls">
-              <button
-                className={isFilterRailOpen ? "filter-toggle active" : "filter-toggle"}
-                type="button"
-                onClick={() => setIsFilterRailOpen((isOpen) => !isOpen)}
-                aria-expanded={isFilterRailOpen}
-                aria-controls="prospect-filter-rail"
-              >
-                <SlidersHorizontal size={16} aria-hidden="true" />
-                Filter
-                {activeFilterCount > 0 ? <span>{activeFilterCount}</span> : null}
-              </button>
               {activeFilterCount > 0 ? (
                 <button className="filter-reset-button" type="button" onClick={resetFilters}>
                   Reset
@@ -412,124 +490,147 @@ export function ProspectPreviewDashboard({
               isFilterRailOpen ? "prospect-browser" : "prospect-browser filters-collapsed"
             }
           >
-            {isFilterRailOpen ? (
-              <aside className="filter-rail" id="prospect-filter-rail" aria-label="Prospect filters">
-                <div className="filter-rail-header">
+            <aside
+              className={isFilterRailOpen ? "filter-rail" : "filter-rail collapsed"}
+              id="prospect-filter-rail"
+              aria-label="Prospect filters"
+            >
+              <div className="filter-rail-header">
+                <button
+                  className="filter-rail-toggle"
+                  type="button"
+                  onClick={() => setIsFilterRailOpen((isOpen) => !isOpen)}
+                  aria-expanded={isFilterRailOpen}
+                  aria-controls="prospect-filter-panel"
+                  title={isFilterRailOpen ? "Collapse filters" : "Open filters"}
+                >
+                  <SlidersHorizontal size={16} aria-hidden="true" />
+                  {isFilterRailOpen ? <span>Filters</span> : null}
+                  {activeFilterCount > 0 ? <strong>{activeFilterCount}</strong> : null}
+                </button>
+                {isFilterRailOpen ? (
                   <div>
-                    <p className="eyebrow">Filters</p>
                     <strong>{visibleEntries.length} shown</strong>
                   </div>
+                ) : null}
+                {isFilterRailOpen && activeFilterCount > 0 ? (
+                  <button className="filter-reset-button" type="button" onClick={resetFilters}>
+                    Reset
+                  </button>
+                ) : null}
+              </div>
+
+              {isFilterRailOpen ? (
+                <div className="filter-rail-panel" id="prospect-filter-panel">
                   {activeFilterCount > 0 ? (
-                    <button className="filter-reset-button" type="button" onClick={resetFilters}>
-                      Reset
-                    </button>
+                    <div className="active-filter-count">{activeFilterCount} active</div>
                   ) : null}
+
+                  <details className="filter-rail-group">
+                    <summary>Niche</summary>
+                    <div className="filter-rail-options">
+                      {nicheFilterOptions.map((filter) => {
+                        const isSelected = selectedNiches.includes(filter.value);
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedNiches((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <Layers3 size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{nicheCounts[filter.value]}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
+
+                  <details className="filter-rail-group">
+                    <summary>Contact status</summary>
+                    <div className="filter-rail-options">
+                      {contactFilterOptions.map((filter) => {
+                        const isSelected = selectedContactFilters.includes(filter.value);
+                        const count = entries.filter((entry) =>
+                          entryMatchesContactFilter(entry, filter.value),
+                        ).length;
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedContactFilters((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <Mail size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{count}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
+
+                  <details className="filter-rail-group">
+                    <summary>Demo status</summary>
+                    <div className="filter-rail-options">
+                      {demoStatusFilterOptions.map((filter) => {
+                        const isSelected = selectedDemoStatuses.includes(filter.value);
+                        const count = entries.filter((entry) => entry.status === filter.value).length;
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedDemoStatuses((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <FileText size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{count}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
                 </div>
-
-                <details className="filter-rail-group" open>
-                  <summary>Niche</summary>
-                  <div className="filter-rail-options">
-                    {nicheFilterOptions.map((filter) => {
-                      const isSelected = selectedNiches.includes(filter.value);
-
-                      return (
-                        <button
-                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                          key={filter.value}
-                          type="button"
-                          onClick={() =>
-                            setSelectedNiches((current) =>
-                              toggleSelectedValue(current, filter.value),
-                            )
-                          }
-                          aria-pressed={isSelected}
-                        >
-                          <span>
-                            {isSelected ? (
-                              <Check size={14} aria-hidden="true" />
-                            ) : (
-                              <Layers3 size={14} aria-hidden="true" />
-                            )}
-                            {filter.label}
-                          </span>
-                          <strong>{nicheCounts[filter.value]}</strong>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </details>
-
-                <details className="filter-rail-group" open>
-                  <summary>Contact status</summary>
-                  <div className="filter-rail-options">
-                    {contactFilterOptions.map((filter) => {
-                      const isSelected = selectedContactFilters.includes(filter.value);
-                      const count = entries.filter((entry) =>
-                        entryMatchesContactFilter(entry, filter.value),
-                      ).length;
-
-                      return (
-                        <button
-                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                          key={filter.value}
-                          type="button"
-                          onClick={() =>
-                            setSelectedContactFilters((current) =>
-                              toggleSelectedValue(current, filter.value),
-                            )
-                          }
-                          aria-pressed={isSelected}
-                        >
-                          <span>
-                            {isSelected ? (
-                              <Check size={14} aria-hidden="true" />
-                            ) : (
-                              <Mail size={14} aria-hidden="true" />
-                            )}
-                            {filter.label}
-                          </span>
-                          <strong>{count}</strong>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </details>
-
-                <details className="filter-rail-group" open>
-                  <summary>Demo status</summary>
-                  <div className="filter-rail-options">
-                    {demoStatusFilterOptions.map((filter) => {
-                      const isSelected = selectedDemoStatuses.includes(filter.value);
-                      const count = entries.filter((entry) => entry.status === filter.value).length;
-
-                      return (
-                        <button
-                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                          key={filter.value}
-                          type="button"
-                          onClick={() =>
-                            setSelectedDemoStatuses((current) =>
-                              toggleSelectedValue(current, filter.value),
-                            )
-                          }
-                          aria-pressed={isSelected}
-                        >
-                          <span>
-                            {isSelected ? (
-                              <Check size={14} aria-hidden="true" />
-                            ) : (
-                              <FileText size={14} aria-hidden="true" />
-                            )}
-                            {filter.label}
-                          </span>
-                          <strong>{count}</strong>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </details>
-              </aside>
-            ) : null}
+              ) : null}
+            </aside>
 
             <div className="prospect-results">
               <div className="preview-list">
@@ -645,7 +746,8 @@ export function ProspectPreviewDashboard({
                 <div className="draft-status-row">
                   <span>{draft.source === "supabase" ? "Supabase" : "Local fallback"}</span>
                   <span>{draft.contactStatus ?? "No contact status"}</span>
-                  {draft.outreachSendStatus ? <span>{draft.outreachSendStatus}</span> : null}
+                  <span>{draftStatusLabel(draft.outreachSendStatus)}</span>
+                  {draft.outreachApproved ? <span>Reviewed by Diego</span> : null}
                 </div>
 
                 <div className="draft-link-row">
@@ -709,6 +811,140 @@ export function ProspectPreviewDashboard({
                     </button>
                   </div>
                   <pre>{draft.body ?? "No body draft stored yet."}</pre>
+                </section>
+
+                <section className="draft-approval-panel" aria-label="Gmail draft approval">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">Gmail Draft Approval</p>
+                      <h3>{draftStatusLabel(draft.outreachSendStatus)}</h3>
+                    </div>
+                    {canRevokeDraftApproval ? (
+                      <CheckCircle2 size={22} aria-hidden="true" />
+                    ) : (
+                      <AlertTriangle size={22} aria-hidden="true" />
+                    )}
+                  </div>
+
+                  {draft.approvalBlockers.length > 0 ? (
+                    <div className="draft-approval-checks">
+                      <strong>Approval checks</strong>
+                      <ul>
+                        {draft.approvalBlockers.map((blocker) => (
+                          <li key={blocker}>{blocker}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <p className="approval-ready-copy">
+                      Recipient, subject, body, and stable demo URL are ready for Gmail draft
+                      creation.
+                    </p>
+                  )}
+
+                  {approvalError ? <p className="approval-error">{approvalError}</p> : null}
+
+                  {approvalIntent === "approve" ? (
+                    <div className="draft-confirmation-panel">
+                      <dl>
+                        <div>
+                          <dt>To</dt>
+                          <dd>{draft.businessEmail}</dd>
+                        </div>
+                        <div>
+                          <dt>Subject</dt>
+                          <dd>{draft.subject}</dd>
+                        </div>
+                        <div>
+                          <dt>Demo</dt>
+                          <dd>{draft.demoUrl}</dd>
+                        </div>
+                      </dl>
+                      <label className="approval-check-label">
+                        <input
+                          type="checkbox"
+                          checked={isApprovalChecked}
+                          onChange={(event) => setIsApprovalChecked(event.target.checked)}
+                        />
+                        I reviewed the exact recipient, subject, body, and stable demo link.
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-primary"
+                          type="button"
+                          onClick={() => submitApprovalAction("approve_for_draft")}
+                          disabled={!isApprovalChecked || isApprovalSaving}
+                        >
+                          Approve Gmail Draft
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setIsApprovalChecked(false);
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {approvalIntent === "revoke" ? (
+                    <div className="draft-confirmation-panel">
+                      <p>
+                        This removes Gmail draft approval and returns the row to ready for review.
+                      </p>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-danger"
+                          type="button"
+                          onClick={() => submitApprovalAction("revoke_draft_approval")}
+                          disabled={isApprovalSaving}
+                        >
+                          Revoke Approval
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => setApprovalIntent(null)}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-primary"
+                        type="button"
+                        onClick={() => setApprovalIntent("approve")}
+                        disabled={!canApproveForDraft || isApprovalSaving}
+                        title={
+                          canApproveForDraft
+                            ? undefined
+                            : "Approval is unavailable until this is a complete Supabase draft marked ready for review."
+                        }
+                      >
+                        Review Approval
+                      </button>
+                      {canRevokeDraftApproval ? (
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => setApprovalIntent("revoke")}
+                          disabled={isApprovalSaving}
+                        >
+                          Revoke
+                        </button>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </section>
 
                 <div className="draft-drawer-actions">
