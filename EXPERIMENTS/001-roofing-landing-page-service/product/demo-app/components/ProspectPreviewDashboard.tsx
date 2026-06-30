@@ -19,11 +19,18 @@ import {
 } from "lucide-react";
 import type { DemoEntry, DemoNiche, DemoStatus } from "../lib/demoRegistry";
 import { nicheFilters, statusLabels } from "../lib/demoRegistry";
+import { relationshipStatusLabel } from "../lib/prospectDrafts";
 import type { ProspectDraftSummary } from "../lib/prospectDrafts";
 
 type SortMode = "name" | "date";
 type SortDirection = "asc" | "desc";
-type ContactFilter = "contacted" | "not_contacted" | "has_email" | "has_email_draft";
+type ContactFilter =
+  | "contacted"
+  | "not_contacted"
+  | "do_not_contact"
+  | "not_interested"
+  | "has_email"
+  | "has_email_draft";
 type ManualContactMethod =
   | "contact_form"
   | "phone"
@@ -45,6 +52,8 @@ const nicheFilterOptions = nicheFilters.filter(
 const contactFilterOptions: Array<{ value: ContactFilter; label: string }> = [
   { value: "contacted", label: "Contacted" },
   { value: "not_contacted", label: "Not contacted" },
+  { value: "do_not_contact", label: "Do not contact" },
+  { value: "not_interested", label: "Not interested" },
   { value: "has_email", label: "Has email" },
   { value: "has_email_draft", label: "Has email draft" },
 ];
@@ -104,7 +113,7 @@ function toggleSelectedValue<T extends string>(selectedValues: T[], value: T) {
 }
 
 function getEntryContactStatus(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
-  return summaries[entry.slug]?.contactStatus ?? entry.status;
+  return summaries[entry.slug]?.contactStatus ?? (entry.status === "contacted" ? "contacted" : "not_contacted");
 }
 
 function entryHasEmail(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
@@ -125,7 +134,15 @@ function entryMatchesContactFilter(
   }
 
   if (filter === "not_contacted") {
-    return getEntryContactStatus(entry, summaries) !== "contacted";
+    return getEntryContactStatus(entry, summaries) === "not_contacted";
+  }
+
+  if (filter === "do_not_contact") {
+    return getEntryContactStatus(entry, summaries) === "do_not_contact";
+  }
+
+  if (filter === "not_interested") {
+    return getEntryContactStatus(entry, summaries) === "not_interested";
   }
 
   if (filter === "has_email") {
@@ -155,6 +172,10 @@ function draftStatusLabel(status: string | null) {
   }
 
   return outreachStatusLabels[status] ?? status;
+}
+
+function relationshipPillClass(status: string | null | undefined) {
+  return status ? `relationship-pill relationship-pill-${status}` : "relationship-pill";
 }
 
 function summaryFromDraft(draft: ProspectDraft): ProspectDraftSummary {
@@ -189,7 +210,7 @@ export function ProspectPreviewDashboard({
   const [isDraftLoading, setIsDraftLoading] = useState(false);
   const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
   const [approvalIntent, setApprovalIntent] = useState<
-    "approve" | "revoke" | "manual_contact" | null
+    "approve" | "revoke" | "manual_contact" | "do_not_contact" | "not_interested" | null
   >(null);
   const [isApprovalChecked, setIsApprovalChecked] = useState(false);
   const [approvalError, setApprovalError] = useState<string | null>(null);
@@ -197,6 +218,7 @@ export function ProspectPreviewDashboard({
   const [manualContactMethod, setManualContactMethod] =
     useState<ManualContactMethod>("contact_form");
   const [manualContactNote, setManualContactNote] = useState("");
+  const [relationshipNote, setRelationshipNote] = useState("");
   const [manualFollowUpDays, setManualFollowUpDays] = useState(7);
   const [isManualContactChecked, setIsManualContactChecked] = useState(false);
 
@@ -324,6 +346,7 @@ export function ProspectPreviewDashboard({
     setApprovalError(null);
     setManualContactMethod("contact_form");
     setManualContactNote("");
+    setRelationshipNote("");
     setManualFollowUpDays(7);
     setIsManualContactChecked(false);
     setIsDraftLoading(true);
@@ -355,6 +378,7 @@ export function ProspectPreviewDashboard({
     setIsApprovalSaving(false);
     setManualContactMethod("contact_form");
     setManualContactNote("");
+    setRelationshipNote("");
     setManualFollowUpDays(7);
     setIsManualContactChecked(false);
     setIsDraftLoading(false);
@@ -467,6 +491,57 @@ export function ProspectPreviewDashboard({
     }
   }
 
+  async function submitRelationshipAction(action: "mark_do_not_contact" | "mark_not_interested") {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action,
+          note: relationshipNote,
+        }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+          syncDraftSummary(draftEntry.slug, payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Relationship status update failed.",
+        );
+      }
+
+      const nextDraft = payload as ProspectDraft;
+      setDraft(nextDraft);
+      syncDraftSummary(draftEntry.slug, nextDraft);
+      setApprovalIntent(null);
+      setRelationshipNote("");
+    } catch (error) {
+      setApprovalError(
+        error instanceof Error ? error.message : "Relationship status update failed.",
+      );
+    } finally {
+      setIsApprovalSaving(false);
+    }
+  }
+
   async function copyText(label: string, value: string | null | undefined) {
     if (!value) {
       return;
@@ -495,13 +570,17 @@ export function ProspectPreviewDashboard({
     draft?.source === "supabase" && draft.outreachSendStatus === "approved_for_draft";
   const canRecordManualContact =
     draft?.source === "supabase" &&
-    draft.contactStatus !== "contacted" &&
+    draft.contactStatus === "not_contacted" &&
     draft.outreachSendStatus !== "sent";
   const manualContactUnavailableReason =
     draft?.source !== "supabase"
       ? "Manual contact can only be recorded for Supabase-backed prospects."
       : draft.contactStatus === "contacted" || draft.outreachSendStatus === "sent"
         ? "This prospect is already marked contacted."
+        : draft.contactStatus !== "not_contacted"
+          ? `Manual contact can only be recorded for not contacted prospects. Current status: ${relationshipStatusLabel(
+              draft.contactStatus,
+            )}.`
         : undefined;
 
   return (
@@ -788,6 +867,7 @@ export function ProspectPreviewDashboard({
               <div className="preview-list">
                 {visibleEntries.map((entry) => {
                   const isCurrentFocus = entry.slug === selectedCurrentFocus.slug;
+                  const contactStatus = getEntryContactStatus(entry, prospectDraftSummaries);
 
                   return (
                     <article className="preview-row" key={`${entry.niche}-${entry.slug}`}>
@@ -804,6 +884,9 @@ export function ProspectPreviewDashboard({
                           {isCurrentFocus ? <span className="active-pill">Current</span> : null}
                           <span className="niche-pill">{entry.niche}</span>
                           <span className="status-pill">{statusLabels[entry.status]}</span>
+                          <span className={relationshipPillClass(contactStatus)}>
+                            {relationshipStatusLabel(contactStatus)}
+                          </span>
                         </div>
                         <p>{entry.city}</p>
                         <small>
@@ -897,7 +980,9 @@ export function ProspectPreviewDashboard({
               <>
                 <div className="draft-status-row">
                   <span>{draft.source === "supabase" ? "Supabase" : "Local fallback"}</span>
-                  <span>{draft.contactStatus ?? "No contact status"}</span>
+                  <span className={relationshipPillClass(draft.contactStatus)}>
+                    {relationshipStatusLabel(draft.contactStatus)}
+                  </span>
                   <span>{draftStatusLabel(draft.outreachSendStatus)}</span>
                   {draft.outreachApproved ? <span>Reviewed by Diego</span> : null}
                 </div>
@@ -1106,7 +1191,7 @@ export function ProspectPreviewDashboard({
                   <div className="draft-approval-heading">
                     <div>
                       <p className="eyebrow">Manual Outreach</p>
-                      <h3>{draft.contactStatus === "contacted" ? "Contacted" : "Not contacted"}</h3>
+                      <h3>{relationshipStatusLabel(draft.contactStatus)}</h3>
                     </div>
                     {draft.contactStatus === "contacted" || draft.outreachSendStatus === "sent" ? (
                       <CheckCircle2 size={22} aria-hidden="true" />
@@ -1211,6 +1296,97 @@ export function ProspectPreviewDashboard({
                         title={manualContactUnavailableReason}
                       >
                         Contacted Manually
+                      </button>
+                    </div>
+                  ) : null}
+                </section>
+
+                <section className="draft-approval-panel" aria-label="Prospect outcome tracking">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">Prospect Outcome</p>
+                      <h3>{relationshipStatusLabel(draft.contactStatus)}</h3>
+                    </div>
+                    <AlertTriangle size={22} aria-hidden="true" />
+                  </div>
+
+                  <p className="approval-ready-copy">
+                    Use these when this prospect should leave the active outreach queue.
+                  </p>
+
+                  {approvalIntent === "do_not_contact" || approvalIntent === "not_interested" ? (
+                    <div className="draft-confirmation-panel">
+                      <p>
+                        {approvalIntent === "do_not_contact"
+                          ? "Mark this as an internal decision not to contact the business."
+                          : "Mark this when the prospect has indicated they are not interested."}
+                      </p>
+                      <label className="manual-contact-note-label">
+                        Note
+                        <textarea
+                          rows={3}
+                          value={relationshipNote}
+                          onChange={(event) => setRelationshipNote(event.target.value)}
+                          placeholder="Optional reason or context for this status."
+                        />
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-danger"
+                          type="button"
+                          onClick={() =>
+                            submitRelationshipAction(
+                              approvalIntent === "do_not_contact"
+                                ? "mark_do_not_contact"
+                                : "mark_not_interested",
+                            )
+                          }
+                          disabled={isApprovalSaving}
+                        >
+                          {approvalIntent === "do_not_contact"
+                            ? "Save Do Not Contact"
+                            : "Save Not Interested"}
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setRelationshipNote("");
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-ghost"
+                        type="button"
+                        onClick={() => setApprovalIntent("do_not_contact")}
+                        disabled={
+                          draft.source !== "supabase" ||
+                          draft.contactStatus === "do_not_contact" ||
+                          isApprovalSaving
+                        }
+                      >
+                        Do Not Contact
+                      </button>
+                      <button
+                        className="button button-ghost"
+                        type="button"
+                        onClick={() => setApprovalIntent("not_interested")}
+                        disabled={
+                          draft.source !== "supabase" ||
+                          draft.contactStatus === "not_interested" ||
+                          isApprovalSaving
+                        }
+                      >
+                        Not Interested
                       </button>
                     </div>
                   ) : null}

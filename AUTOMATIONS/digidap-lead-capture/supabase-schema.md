@@ -159,6 +159,8 @@ demo: https://local-growth-preview.vercel.app/charger-roofing
 ```text
 not_contacted
 contacted
+do_not_contact
+not_interested
 follow_up_1_due
 follow_up_1_sent
 follow_up_2_due
@@ -171,6 +173,9 @@ won
 lost
 not_fit
 ```
+
+Use `do_not_contact` when Diego internally decides not to pursue a prospect before outreach.
+Use `not_interested` when a prospect indicates no interest after outreach.
 
 ## Prospect Outreach Automation Status Values
 

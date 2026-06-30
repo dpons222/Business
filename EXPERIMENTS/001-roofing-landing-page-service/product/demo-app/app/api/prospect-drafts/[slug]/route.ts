@@ -3,10 +3,12 @@ import { getDashboardSession } from "@/lib/dashboardAuth";
 import {
   getProspectDraft,
   hasLocalDemoEntry,
+  updateProspectRelationshipStatus,
   updateProspectDraftApproval,
   updateProspectManualContact,
   type ManualContactMethod,
   type ProspectDraftApprovalAction,
+  type ProspectRelationshipAction,
 } from "@/lib/prospectDrafts";
 
 type ProspectDraftRouteContext = {
@@ -33,6 +35,10 @@ export async function GET(_request: Request, context: ProspectDraftRouteContext)
 
 function isApprovalAction(value: unknown): value is ProspectDraftApprovalAction {
   return value === "approve_for_draft" || value === "revoke_draft_approval";
+}
+
+function isRelationshipAction(value: unknown): value is ProspectRelationshipAction {
+  return value === "mark_do_not_contact" || value === "mark_not_interested";
 }
 
 function isManualContactMethod(value: unknown): value is ManualContactMethod {
@@ -74,6 +80,26 @@ export async function PATCH(request: Request, context: ProspectDraftRouteContext
 
   if (isApprovalAction(payload.action)) {
     const result = await updateProspectDraftApproval(slug, payload.action);
+
+    if (result.error) {
+      return NextResponse.json(
+        {
+          error: result.error,
+          draft: result.draft,
+        },
+        { status: result.status },
+      );
+    }
+
+    return NextResponse.json(result.draft);
+  }
+
+  if (isRelationshipAction(payload.action)) {
+    const result = await updateProspectRelationshipStatus(
+      slug,
+      payload.action,
+      typeof payload.note === "string" ? payload.note : "",
+    );
 
     if (result.error) {
       return NextResponse.json(

@@ -11,10 +11,27 @@ export type OutreachSendStatus =
   | "failed"
   | "skipped";
 
+export type ProspectRelationshipStatus =
+  | "not_contacted"
+  | "contacted"
+  | "do_not_contact"
+  | "not_interested"
+  | "follow_up_1_due"
+  | "follow_up_1_sent"
+  | "follow_up_2_due"
+  | "follow_up_2_sent"
+  | "positive_reply"
+  | "neutral_reply"
+  | "negative_reply"
+  | "call_booked"
+  | "won"
+  | "lost"
+  | "not_fit";
+
 export type ProspectDraft = {
   businessName: string;
   businessEmail: string | null;
-  contactStatus: string | null;
+  contactStatus: ProspectRelationshipStatus | string | null;
   outreachSendStatus: OutreachSendStatus | null;
   outreachSendChannel: string | null;
   outreachApproved: boolean;
@@ -31,7 +48,7 @@ export type ProspectDraft = {
 
 export type ProspectDraftSummary = {
   businessEmail: string | null;
-  contactStatus: string | null;
+  contactStatus: ProspectRelationshipStatus | string | null;
   hasEmailDraft: boolean;
   outreachSendStatus: OutreachSendStatus | null;
   source: "supabase";
@@ -40,7 +57,7 @@ export type ProspectDraftSummary = {
 type SupabaseProspectRow = {
   business_name: string;
   contact_email: string | null;
-  status: string | null;
+  status: ProspectRelationshipStatus | string | null;
   outreach_send_status: OutreachSendStatus | null;
   outreach_send_channel: string | null;
   outreach_approved: boolean | null;
@@ -56,7 +73,7 @@ type SupabaseProspectRow = {
 type SupabaseProspectSummaryRow = {
   prospect_slug: string | null;
   contact_email: string | null;
-  status: string | null;
+  status: ProspectRelationshipStatus | string | null;
   outreach_send_status: OutreachSendStatus | null;
   outreach_draft_subject: string | null;
   outreach_draft_body: string | null;
@@ -67,6 +84,7 @@ type SupabaseUpdateResponse = SupabaseProspectRow & {
 };
 
 export type ProspectDraftApprovalAction = "approve_for_draft" | "revoke_draft_approval";
+export type ProspectRelationshipAction = "mark_do_not_contact" | "mark_not_interested";
 export type ManualContactMethod =
   | "contact_form"
   | "phone"
@@ -89,6 +107,26 @@ const manualContactMethodLabels: Record<ManualContactMethod, string> = {
   linkedin: "LinkedIn",
   other: "other manual method",
 };
+
+export const relationshipStatusLabels: Record<string, string> = {
+  not_contacted: "Not contacted",
+  contacted: "Contacted",
+  do_not_contact: "Do not contact",
+  not_interested: "Not interested",
+  follow_up_1_due: "Follow-up 1 due",
+  follow_up_1_sent: "Follow-up 1 sent",
+  follow_up_2_due: "Follow-up 2 due",
+  follow_up_2_sent: "Follow-up 2 sent",
+  positive_reply: "Positive reply",
+  neutral_reply: "Neutral reply",
+  negative_reply: "Negative reply",
+  call_booked: "Call booked",
+  won: "Won",
+  lost: "Lost",
+  not_fit: "Not fit",
+};
+
+const terminalRelationshipStatuses = new Set(["do_not_contact", "not_interested", "lost", "not_fit"]);
 
 const stableDemoUrlPrefix = "https://local-growth-preview.vercel.app/";
 
@@ -159,11 +197,23 @@ function hasText(value: string | null) {
   return Boolean(value?.trim());
 }
 
+export function relationshipStatusLabel(status: string | null) {
+  if (!status) {
+    return "No contact status";
+  }
+
+  return relationshipStatusLabels[status] ?? status;
+}
+
 function getApprovalBlockers(draft: Pick<ProspectDraft, "businessEmail" | "body" | "contactStatus" | "demoUrl" | "subject">) {
   const blockers: string[] = [];
 
   if (draft.contactStatus !== "not_contacted") {
     blockers.push("Prospect relationship status must be not_contacted.");
+  }
+
+  if (draft.contactStatus && terminalRelationshipStatuses.has(draft.contactStatus)) {
+    blockers.push(`${relationshipStatusLabel(draft.contactStatus)} rows are not eligible for outreach approval.`);
   }
 
   if (!hasText(draft.businessEmail)) {
@@ -494,6 +544,23 @@ function appendManualContactNote(
   return [currentNotes?.trim(), nextNote].filter(Boolean).join("\n\n");
 }
 
+function appendRelationshipStatusNote(
+  currentNotes: string | null,
+  action: ProspectRelationshipAction,
+  note: string | undefined,
+  changedAt: Date,
+) {
+  const statusLabel =
+    action === "mark_do_not_contact" ? "Do not contact" : "Not interested";
+  const noteParts = [
+    `Dashboard relationship status updated ${changedAt.toISOString()}.`,
+    `Status: ${statusLabel}.`,
+    note?.trim() ? `Note: ${note.trim()}` : null,
+  ].filter(Boolean);
+
+  return [currentNotes?.trim(), noteParts.join(" ")].filter(Boolean).join("\n\n");
+}
+
 export async function updateProspectManualContact(slug: string, input: ManualContactInput) {
   const config = getSupabaseConfig({ requireServiceRole: true });
 
@@ -517,10 +584,10 @@ export async function updateProspectManualContact(slug: string, input: ManualCon
 
   const draft = rowToProspectDraft(row);
 
-  if (draft.contactStatus === "contacted" || draft.outreachSendStatus === "sent") {
+  if (draft.contactStatus !== "not_contacted" || draft.outreachSendStatus === "sent") {
     return {
       draft,
-      error: "This prospect is already marked contacted.",
+      error: "Manual contact can only be recorded for not_contacted prospects.",
       status: 409,
     };
   }
@@ -574,6 +641,86 @@ export async function updateProspectManualContact(slug: string, input: ManualCon
     return {
       draft,
       error: "Supabase rejected the manual contact update.",
+      status: response.status,
+    };
+  }
+
+  const rows = (await response.json()) as SupabaseUpdateResponse[];
+  const updatedRow = rows[0];
+
+  if (!updatedRow) {
+    return {
+      draft,
+      error: "Supabase update succeeded but returned no row.",
+      status: 500,
+    };
+  }
+
+  return {
+    draft: rowToProspectDraft(updatedRow),
+    error: null,
+    status: 200,
+  };
+}
+
+export async function updateProspectRelationshipStatus(
+  slug: string,
+  action: ProspectRelationshipAction,
+  note?: string,
+) {
+  const config = getSupabaseConfig({ requireServiceRole: true });
+
+  if (!config) {
+    return {
+      draft: null,
+      error: "Supabase is not configured for relationship status updates.",
+      status: 503,
+    };
+  }
+
+  const row = await fetchSupabaseProspectDraft(slug, config);
+
+  if (!row) {
+    return {
+      draft: null,
+      error: "Prospect draft was not found in Supabase.",
+      status: 404,
+    };
+  }
+
+  const draft = rowToProspectDraft(row);
+  const changedAt = new Date();
+  const nextStatus = action === "mark_do_not_contact" ? "do_not_contact" : "not_interested";
+  const nextOutreachSendStatus =
+    action === "mark_not_interested" && draft.outreachSendStatus === "sent" ? "sent" : "skipped";
+
+  const update = {
+    status: nextStatus,
+    outreach_approved: false,
+    outreach_approved_at: null,
+    outreach_approved_by: null,
+    outreach_send_status: nextOutreachSendStatus,
+    outreach_last_error: null,
+    next_follow_up_at: null,
+    notes: appendRelationshipStatusNote(row.notes, action, note, changedAt),
+  };
+
+  const response = await fetch(`${config.url}/rest/v1/prospects?prospect_slug=eq.${slug}`, {
+    method: "PATCH",
+    headers: {
+      apikey: config.key,
+      Authorization: `Bearer ${config.key}`,
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(update),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    return {
+      draft,
+      error: "Supabase rejected the relationship status update.",
       status: response.status,
     };
   }

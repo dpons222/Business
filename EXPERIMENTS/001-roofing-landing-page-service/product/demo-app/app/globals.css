@@ -2128,7 +2128,8 @@ main.landing-page {
 .preview-meta-row span,
 .active-pill,
 .niche-pill,
-.status-pill {
+.status-pill,
+.relationship-pill {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 7px 10px;
@@ -2147,6 +2148,27 @@ main.landing-page {
 .status-pill {
   background: #edf8f2;
   color: #17593a;
+}
+
+.relationship-pill {
+  background: #f8fafc;
+  color: var(--muted);
+}
+
+.relationship-pill-not_contacted {
+  background: #edf8f2;
+  color: #17593a;
+}
+
+.relationship-pill-contacted {
+  background: #eef2ff;
+  color: #1e3a8a;
+}
+
+.relationship-pill-do_not_contact,
+.relationship-pill-not_interested {
+  background: #fff7ed;
+  color: #9a3412;
 }
 
 .preview-list-section {

@@ -15,6 +15,7 @@ add_prospect_outreach_approval_fields
 create_prospect_email_drafts_view
 add_urls_to_prospect_email_drafts_view
 add_contact_status_to_prospect_email_drafts_view
+add_prospect_relationship_outcome_statuses
 ```
 
 ## Views
@@ -56,6 +57,8 @@ add_contact_status_to_prospect_email_drafts_view
 ```text
 not_contacted = no outbound outreach has been sent yet
 contacted = an outbound email or contact form message was actually sent
+do_not_contact = internal decision not to pursue before outreach
+not_interested = prospect indicated no interest after outreach
 ```
 
 `outreach_send_status`:
@@ -144,7 +147,7 @@ Supabase column comments are the in-database reference for these fields:
 
 ```sql
 comment on column public.prospects.status is
-  'Relationship/contact lifecycle for the prospect, such as not_contacted before outreach and contacted only after an outbound message has actually been sent.';
+  'Relationship/contact lifecycle for the prospect: not_contacted = eligible and unsent; contacted = outbound message sent; do_not_contact = internal decision not to pursue; not_interested = prospect indicated no interest; other values track follow-up and pipeline outcomes.';
 
 comment on column public.prospects.outreach_send_status is
   'Approval-gated automation lifecycle for outbound outreach: not_ready = draft/demo/contact details are incomplete; ready_for_review = prepared for Diego review; approved = exact draft and demo URL approved for n8n when outreach_approved is true; queued = picked up by automation; sent = provider confirmed send; failed = send attempt failed; skipped = intentionally skipped by guardrail or operator decision.';
