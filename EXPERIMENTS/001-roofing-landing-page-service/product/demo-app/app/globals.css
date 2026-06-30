@@ -2243,8 +2243,8 @@ main.landing-page {
 
 .prospect-browser {
   display: grid;
-  grid-template-columns: minmax(220px, 250px) minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: minmax(188px, 214px) minmax(0, 1fr);
+  gap: 16px;
   align-items: start;
   transition: grid-template-columns 180ms ease;
 }
@@ -2260,10 +2260,13 @@ main.landing-page {
   gap: 14px;
   align-self: start;
   max-height: calc(100vh - 202px);
+  width: 100%;
   min-width: 0;
+  max-width: 214px;
+  overflow-x: hidden;
   overflow-y: auto;
   border-right: 1px solid var(--line);
-  padding-right: 18px;
+  padding-right: 14px;
   background: #fff;
 }
 
@@ -2276,9 +2279,14 @@ main.landing-page {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
+  min-width: 0;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
+}
+
+.filter-rail-header > div {
+  min-width: 0;
 }
 
 .filter-rail.collapsed .filter-rail-header {
@@ -2289,19 +2297,23 @@ main.landing-page {
 .filter-rail-header strong {
   display: block;
   margin-top: 4px;
+  overflow: hidden;
   color: var(--ink);
   font-size: 0.94rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .filter-rail-toggle {
   display: inline-flex;
   min-height: 40px;
+  max-width: 100%;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 7px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 9px 11px;
+  padding: 9px 10px;
   background: #fff;
   color: var(--primary-dark);
   font-size: 0.82rem;
@@ -2310,7 +2322,11 @@ main.landing-page {
 }
 
 .filter-rail-toggle span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .filter-rail-toggle strong {
@@ -2342,6 +2358,8 @@ main.landing-page {
 }
 
 .active-filter-count {
+  max-width: 100%;
+  overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 6px 9px;
@@ -2349,6 +2367,8 @@ main.landing-page {
   color: var(--primary-dark);
   font-size: 0.76rem;
   font-weight: 900;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .filter-rail-group {
@@ -2389,11 +2409,14 @@ main.landing-page {
 .filter-rail-options {
   display: grid;
   gap: 4px;
+  min-width: 0;
   padding-top: 7px;
 }
 
 .rail-filter-option {
   display: flex;
+  width: 100%;
+  min-width: 0;
   min-height: 34px;
   align-items: center;
   justify-content: space-between;
@@ -2424,9 +2447,17 @@ main.landing-page {
   min-width: 0;
   align-items: center;
   gap: 7px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rail-filter-option svg {
+  flex: 0 0 auto;
 }
 
 .rail-filter-option strong {
+  flex: 0 0 auto;
   color: var(--muted);
   font-size: 0.78rem;
   font-weight: 850;
