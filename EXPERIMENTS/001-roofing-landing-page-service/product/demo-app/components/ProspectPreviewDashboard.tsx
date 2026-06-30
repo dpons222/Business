@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowUpDown,
   CalendarDays,
@@ -87,6 +87,7 @@ export function ProspectPreviewDashboard({
   const [draftError, setDraftError] = useState<string | null>(null);
   const [isDraftLoading, setIsDraftLoading] = useState(false);
   const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
+  const filterMenuRef = useRef<HTMLDetailsElement | null>(null);
 
   useEffect(() => {
     const savedSlug = window.localStorage.getItem(CURRENT_FOCUS_STORAGE_KEY);
@@ -115,6 +116,26 @@ export function ProspectPreviewDashboard({
 
     window.localStorage.setItem(CURRENT_FOCUS_STORAGE_KEY, selectedFocusSlug);
   }, [currentFocus.slug, entries, hasLoadedSavedFocus, selectedFocusSlug]);
+
+  useEffect(() => {
+    function closeFilterMenuOnOutsideClick(event: PointerEvent) {
+      const filterMenu = filterMenuRef.current;
+
+      if (!filterMenu?.open) {
+        return;
+      }
+
+      if (event.target instanceof Node && !filterMenu.contains(event.target)) {
+        filterMenu.open = false;
+      }
+    }
+
+    document.addEventListener("pointerdown", closeFilterMenuOnOutsideClick);
+
+    return () => {
+      document.removeEventListener("pointerdown", closeFilterMenuOnOutsideClick);
+    };
+  }, []);
 
   const nicheCounts = useMemo(() => {
     return entries.reduce<Record<NicheFilter, number>>(
@@ -356,7 +377,7 @@ export function ProspectPreviewDashboard({
               <h2 id="preview-list-title">Available prospect previews</h2>
             </div>
             <div className="toolbar-controls">
-              <details className="filter-menu">
+              <details className="filter-menu" ref={filterMenuRef}>
                 <summary className="filter-summary">
                   <SlidersHorizontal size={16} aria-hidden="true" />
                   Filters
