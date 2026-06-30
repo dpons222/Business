@@ -215,7 +215,7 @@ export function ProspectPreviewDashboard({
         selectedNiches.length === 0 || selectedNiches.includes(entry.niche);
       const matchesContactStatus =
         selectedContactFilters.length === 0 ||
-        selectedContactFilters.some((filter) =>
+        selectedContactFilters.every((filter) =>
           entryMatchesContactFilter(entry, filter, prospectDraftSummaries),
         );
       const matchesDemoStatus =
