@@ -100,6 +100,16 @@ Validation Evidence:
 - Playwright screenshots were captured for LOA Construction, Pizabella, Rivertop Roofing, StormVets, Invictus Roofing, Houston Roofing & Construction, and EDP Roofing at desktop and mobile viewports.
 - Browser/source manual follow-up is still needed before approving rows with bot checks, missing contacts, or incomplete drafts.
 
+## Follow-Up Fixes
+
+Date: 2026-06-30
+
+- Fixed the dashboard email draft drawer data path so literal escaped newline sequences from Supabase draft fields, such as `\n` and `\r\n`, are normalized into real line breaks before rendering or copying.
+- Scope: `product/demo-app/lib/prospectDrafts.ts`.
+- Reason: some Supabase `outreach_draft_body` values contained literal backslash-newline text near the signoff, causing the dashboard body panel and copy action to show `\n\nBest,` instead of a clean blank line before `Best,`.
+- Validation: `npm.cmd run build` passed after allowing network access for Next/font Google font fetching; local string normalization check confirmed `instead.\n\nBest,` becomes a real blank line in the returned draft body.
+- Supabase outreach statuses were not changed.
+
 ## Implementation Update
 
 Date updated: 2026-06-30

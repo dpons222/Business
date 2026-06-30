@@ -80,6 +80,14 @@ function absoluteDemoUrl(path: string | undefined) {
   return `https://local-growth-preview.vercel.app${path}`;
 }
 
+function normalizeDraftText(value: string | null) {
+  if (!value) {
+    return value;
+  }
+
+  return value.replace(/\\r\\n/g, "\n").replace(/\\n/g, "\n").replace(/\\r/g, "\n");
+}
+
 function getSupabaseConfig() {
   const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_ANON_KEY;
@@ -109,8 +117,8 @@ export function getLocalProspectDraft(slug: string): ProspectDraft | null {
     contactStatus: entry.status,
     outreachSendStatus: null,
     outreachSendChannel: null,
-    subject: localDraft?.subject ?? null,
-    body: localDraft?.body ?? null,
+    subject: normalizeDraftText(localDraft?.subject ?? null),
+    body: normalizeDraftText(localDraft?.body ?? null),
     website: entry.sourceUrl ?? null,
     demoUrl: absoluteDemoUrl(entry.href),
     source: "local",
@@ -156,8 +164,8 @@ export async function getProspectDraft(slug: string): Promise<ProspectDraft | nu
       contactStatus: row.status,
       outreachSendStatus: row.outreach_send_status,
       outreachSendChannel: row.outreach_send_channel,
-      subject: row.outreach_draft_subject,
-      body: row.outreach_draft_body,
+      subject: normalizeDraftText(row.outreach_draft_subject),
+      body: normalizeDraftText(row.outreach_draft_body),
       website: row.website,
       demoUrl: row.demo_url,
       source: "supabase",
