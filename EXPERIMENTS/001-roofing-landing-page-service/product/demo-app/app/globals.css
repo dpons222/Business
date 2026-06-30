@@ -2155,11 +2155,17 @@ main.landing-page {
 }
 
 .preview-list-toolbar {
+  position: sticky;
+  top: 64px;
+  z-index: 12;
   display: grid;
   justify-content: stretch;
   gap: 16px;
   align-items: stretch;
   margin-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+  padding: 0 0 14px;
+  background: #fff;
 }
 
 .toolbar-controls {
@@ -2226,7 +2232,7 @@ main.landing-page {
 
 .filter-rail {
   position: sticky;
-  top: 16px;
+  top: 112px;
   display: grid;
   gap: 14px;
   min-width: 0;
