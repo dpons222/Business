@@ -15,7 +15,7 @@ The idea is not to replace your current site. It would be a focused page you cou
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/firefighter-roofing
+https://local-growth-preview.vercel.app/firefighter-roofing
 ```
 
 Best,
@@ -35,7 +35,7 @@ The main idea is simple: send storm-concerned homeowners to one focused page wit
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/firefighter-roofing
+https://local-growth-preview.vercel.app/firefighter-roofing
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -56,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL target: `https://roof-check-preview.vercel.app/firefighter-roofing`.
+- Verified production URL target: `https://local-growth-preview.vercel.app/firefighter-roofing`.
 - Current contact method checked on 2026-06-24: Phone / get a free quote CTA.
 - Send only after explicit approval.
 - Log send status in Supabase and the prospect tracker.

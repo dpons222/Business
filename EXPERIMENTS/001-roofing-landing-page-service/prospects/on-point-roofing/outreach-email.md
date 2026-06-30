@@ -15,7 +15,7 @@ The idea is not to replace your full page. It would be a focused page you could 
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/on-point-roofing
+https://local-growth-preview.vercel.app/on-point-roofing
 ```
 
 Best,
@@ -35,7 +35,7 @@ The main idea is simple: send homeowners to one focused page with your free insp
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/on-point-roofing
+https://local-growth-preview.vercel.app/on-point-roofing
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -56,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL target: `https://roof-check-preview.vercel.app/on-point-roofing`.
+- Verified production URL target: `https://local-growth-preview.vercel.app/on-point-roofing`.
 - Current contact method verified on 2026-06-24: `(817) 904-9423` and website schedule service path.
 - Send only after explicit approval.
 - Log send status in Supabase and the prospect tracker.

@@ -40,7 +40,7 @@ Demo:
 https://local-growth-preview.vercel.app/loa-construction
 ```
 
-If this is useful, I can put together a quick example and show what it would track.
+If another site priority would be more useful to look at first, I can focus there instead.
 
 Best,
 

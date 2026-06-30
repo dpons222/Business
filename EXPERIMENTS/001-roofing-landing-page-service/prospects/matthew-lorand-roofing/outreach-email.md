@@ -15,7 +15,7 @@ The idea is not to replace your full website. It would be a focused page you cou
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/matthew-lorand-roofing
+https://local-growth-preview.vercel.app/matthew-lorand-roofing
 ```
 
 Best,
@@ -35,7 +35,7 @@ The main idea is simple: send storm-concerned homeowners to one focused page wit
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/matthew-lorand-roofing
+https://local-growth-preview.vercel.app/matthew-lorand-roofing
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -56,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL: `https://roof-check-preview.vercel.app/matthew-lorand-roofing`.
+- Verified production URL: `https://local-growth-preview.vercel.app/matthew-lorand-roofing`.
 - Send the initial email or contact form version only after explicit approval.
 - Use the follow-up only if there is no response after 3-5 business days.
 - Log the send date, reply status, and next follow-up date in Supabase and the prospect tracker.
