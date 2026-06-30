@@ -2233,12 +2233,16 @@ main.landing-page {
 
 .filter-rail {
   position: sticky;
-  top: 112px;
+  top: 184px;
   display: grid;
   gap: 14px;
+  align-self: start;
+  max-height: calc(100vh - 202px);
   min-width: 0;
+  overflow-y: auto;
   border-right: 1px solid var(--line);
   padding-right: 18px;
+  background: #fff;
 }
 
 .filter-rail.collapsed {

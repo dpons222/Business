@@ -526,7 +526,7 @@ export function ProspectPreviewDashboard({
                     <div className="active-filter-count">{activeFilterCount} active</div>
                   ) : null}
 
-                  <details className="filter-rail-group" open>
+                  <details className="filter-rail-group">
                     <summary>Niche</summary>
                     <div className="filter-rail-options">
                       {nicheFilterOptions.map((filter) => {
@@ -559,7 +559,7 @@ export function ProspectPreviewDashboard({
                     </div>
                   </details>
 
-                  <details className="filter-rail-group" open>
+                  <details className="filter-rail-group">
                     <summary>Contact status</summary>
                     <div className="filter-rail-options">
                       {contactFilterOptions.map((filter) => {
@@ -595,7 +595,7 @@ export function ProspectPreviewDashboard({
                     </div>
                   </details>
 
-                  <details className="filter-rail-group" open>
+                  <details className="filter-rail-group">
                     <summary>Demo status</summary>
                     <div className="filter-rail-options">
                       {demoStatusFilterOptions.map((filter) => {
