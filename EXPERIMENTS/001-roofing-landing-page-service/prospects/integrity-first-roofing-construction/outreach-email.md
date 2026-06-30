@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/integrity-first
 ```
 
-Would you be open to seeing a quick example of what that campaign page could look like for Integrity First?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Integrity First, I noticed your Frisco storm damage page already has strong proof: free inspection CTAs, a 5.0 Google rating, certifications, local reviews, and clear storm repair services. My thought was not to replace that page. It was to create a compact campaign version built around one measurable action: helping Frisco homeowners schedule a free roof inspection after hail, wind, leaks, or emergency roof damage. Would you be open to seeing a quick example of what that campaign page could look like for Integrity First?
+Hi Integrity First, I noticed your Frisco storm damage page already has strong proof: free inspection CTAs, a 5.0 Google rating, certifications, local reviews, and clear storm repair services. My thought was not to replace that page. It was to create a compact campaign version built around one measurable action: helping Frisco homeowners schedule a free roof inspection after hail, wind, leaks, or emergency roof damage.
 
 Best,
 Diego

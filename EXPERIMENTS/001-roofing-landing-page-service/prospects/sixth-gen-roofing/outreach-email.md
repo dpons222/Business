@@ -51,7 +51,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Sixth Gen Roofing, I noticed your Austin page already has strong inspection proof: free HAAG-certified inspections, evidence-based reports, photo documentation, and honest recommendations. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping Austin homeowners schedule a free certified roof inspection after hail or wind. Would you be open to seeing a quick example of what that page could look like for Sixth Gen?
+Hi Sixth Gen Roofing, I noticed your Austin page already has strong inspection proof: free HAAG-certified inspections, evidence-based reports, photo documentation, and honest recommendations. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping Austin homeowners schedule a free certified roof inspection after hail or wind.
 
 Best,
 Diego

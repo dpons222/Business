@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/on-point-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for On Point?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi On Point Roofing, I noticed your Plano free inspection page already has strong proof: same-day inspection language, photo documentation, drone-ready reports, reviews, and a no-pressure tone. My thought was that the same content could work well as a shorter landing page built around one action: helping Plano homeowners schedule a free inspection or quote after hail, wind, leaks, or roof concerns. Would you be open to seeing a quick example of what that page could look like for On Point?
+Hi On Point Roofing, I noticed your Plano free inspection page already has strong proof: same-day inspection language, photo documentation, drone-ready reports, reviews, and a no-pressure tone. My thought was that the same content could work well as a shorter landing page built around one action: helping Plano homeowners schedule a free inspection or quote after hail, wind, leaks, or roof concerns.
 
 Best,
 Diego

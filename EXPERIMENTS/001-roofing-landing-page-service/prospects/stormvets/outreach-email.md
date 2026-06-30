@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/stormvets
 ```
 
-Would you be open to seeing a quick example of what that page could look like for StormVets?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi StormVets, I noticed your Frisco free roof inspection page already has a strong offer: no-cost inspections, veteran-owned trust, and clear storm-damage language. My thought was that the same offer could work well as a shorter storm-specific landing page built around one action: helping Frisco homeowners request a free roof inspection after hail or wind. Would you be open to seeing a quick example of what that page could look like for StormVets?
+Hi StormVets, I noticed your Frisco free roof inspection page already has a strong offer: no-cost inspections, veteran-owned trust, and clear storm-damage language. My thought was that the same offer could work well as a shorter storm-specific landing page built around one action: helping Frisco homeowners request a free roof inspection after hail or wind.
 
 Best,
 Diego

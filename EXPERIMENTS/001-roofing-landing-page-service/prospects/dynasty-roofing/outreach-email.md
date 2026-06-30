@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/dynasty-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Dynasty?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Dynasty Roofing, I noticed your Houston post-storm inspection article already has a strong message: free inspections, A+ BBB proof, and clear inspection steps after hail, wind, or heavy rain. My thought was that the same content could work well as a shorter landing page built around one action: helping Houston homeowners schedule a free roof inspection after severe weather. Would you be open to seeing a quick example of what that page could look like for Dynasty?
+Hi Dynasty Roofing, I noticed your Houston post-storm inspection article already has a strong message: free inspections, A+ BBB proof, and clear inspection steps after hail, wind, or heavy rain. My thought was that the same content could work well as a shorter landing page built around one action: helping Houston homeowners schedule a free roof inspection after severe weather.
 
 Best,
 Diego

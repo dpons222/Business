@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/arrington-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Arrington?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Arrington Roofing, I noticed your North Texas storm damage guide already has strong content: free inspections, storm documentation, emergency service language, and decades of DFW experience. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners schedule a free storm damage inspection after hail, wind, debris, or leaks. Would you be open to seeing a quick example of what that page could look like for Arrington?
+Hi Arrington Roofing, I noticed your North Texas storm damage guide already has strong content: free inspections, storm documentation, emergency service language, and decades of DFW experience. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners schedule a free storm damage inspection after hail, wind, debris, or leaks.
 
 Best,
 Diego

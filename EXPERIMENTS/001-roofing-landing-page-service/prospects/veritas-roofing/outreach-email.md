@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/veritas-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Veritas?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Veritas Roofing, I noticed your homepage already has a clear free inspection and quote offer, plus emergency tarping, financing, and lifetime warranty language. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Veritas?
+Hi Veritas Roofing, I noticed your homepage already has a clear free inspection and quote offer, plus emergency tarping, financing, and lifetime warranty language. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
 Best,
 Diego

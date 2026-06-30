@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/rivertop-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Rivertop?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Rivertop Roofing, I noticed your Plano roof inspection page already has a strong offer: free inspections, a detailed checklist, weather history, and a color photo report. My thought was that the same offer could work well as a shorter storm-specific landing page built around one action: helping Plano homeowners book a free roof inspection after hail or wind damage. Would you be open to seeing a quick example of what that page could look like for Rivertop?
+Hi Rivertop Roofing, I noticed your Plano roof inspection page already has a strong offer: free inspections, a detailed checklist, weather history, and a color photo report. My thought was that the same offer could work well as a shorter storm-specific landing page built around one action: helping Plano homeowners book a free roof inspection after hail or wind damage.
 
 Best,
 Diego

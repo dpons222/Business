@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/matthew-lorand-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Matthew Lorand?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Matthew Lorand Roofing, I noticed your Austin storm damage page already has a strong offer: complimentary inspections, detailed damage reports, clear estimates, and 20 years of local roof and restoration experience. My thought was that the same message could work well as a shorter storm-specific landing page built around one action: helping Austin homeowners book a complimentary inspection after hail, wind, leaks, or fallen branches. Would you be open to seeing a quick example of what that page could look like for Matthew Lorand?
+Hi Matthew Lorand Roofing, I noticed your Austin storm damage page already has a strong offer: complimentary inspections, detailed damage reports, clear estimates, and 20 years of local roof and restoration experience. My thought was that the same message could work well as a shorter storm-specific landing page built around one action: helping Austin homeowners book a complimentary inspection after hail, wind, leaks, or fallen branches.
 
 Best,
 Diego

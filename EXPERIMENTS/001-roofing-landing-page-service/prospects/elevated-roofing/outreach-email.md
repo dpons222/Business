@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/elevated-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Elevated?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Elevated Roofing, I noticed your Fort Worth page already has strong proof around free no-obligation assessments, photo assessment reports, Google review proof, GAF credentials, and storm/hail services. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Elevated?
+Hi Elevated Roofing, I noticed your Fort Worth page already has strong proof around free no-obligation assessments, photo assessment reports, Google review proof, GAF credentials, and storm/hail services. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
 Best,
 Diego

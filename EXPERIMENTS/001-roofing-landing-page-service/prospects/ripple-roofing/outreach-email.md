@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/ripple-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Ripple?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Ripple Roofing, I noticed your Waco page already has a strong storm-response offer: free inspections, 24/7 emergency service, 5.0 Google rating, 63 reviews, CertainTeed certification, and 50-point inspection language. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Ripple?
+Hi Ripple Roofing, I noticed your Waco page already has a strong storm-response offer: free inspections, 24/7 emergency service, 5.0 Google rating, 63 reviews, CertainTeed certification, and 50-point inspection language. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
 Best,
 Diego

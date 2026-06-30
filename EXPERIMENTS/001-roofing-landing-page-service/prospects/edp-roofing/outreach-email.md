@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/edp-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for EDP?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi EDP Roofing, I noticed your Dallas storm damage page already has strong proof: GAF Gold Elite, BBB A+, Google review badges, local roof project photos, and a clear Talk To A Roofer CTA. My thought was that the same message could work well as a shorter inspection-first landing page built around one action: helping Dallas homeowners talk to a roofer after hail, leaks, wind, or storm damage. Would you be open to seeing a quick example of what that page could look like for EDP?
+Hi EDP Roofing, I noticed your Dallas storm damage page already has strong proof: GAF Gold Elite, BBB A+, Google review badges, local roof project photos, and a clear Talk To A Roofer CTA. My thought was that the same message could work well as a shorter inspection-first landing page built around one action: helping Dallas homeowners talk to a roofer after hail, leaks, wind, or storm damage.
 
 Best,
 Diego

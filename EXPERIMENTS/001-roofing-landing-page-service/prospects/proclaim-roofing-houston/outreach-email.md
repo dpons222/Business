@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/proclaim-roofing-houston
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Proclaim?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Proclaim Roofing Houston, I noticed your Houston page already has a strong inspection offer: free drone inspection, a written report, and same-day estimate language. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Proclaim?
+Hi Proclaim Roofing Houston, I noticed your Houston page already has a strong inspection offer: free drone inspection, a written report, and same-day estimate language. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
 Best,
 Diego

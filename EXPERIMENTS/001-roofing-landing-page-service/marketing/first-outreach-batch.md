@@ -513,8 +513,6 @@ I am testing a focused landing page offer for roofers: a storm damage / roof ins
 
 For your site, my first thought was: [personalized improvement idea].
 
-Would you be open to seeing a quick example of what that page could look like for [Company Name]?
-
 Best,
 [Your Name]
 ```

@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/pappas-roofing-and-construction
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Pappas?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Pappas Roofing and Construction, I noticed your homepage already asks visitors to schedule a hassle-free roof inspection while also highlighting storm damage, hail damage, insurance claims, and GAF Master Elite proof. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Pappas?
+Hi Pappas Roofing and Construction, I noticed your homepage already asks visitors to schedule a hassle-free roof inspection while also highlighting storm damage, hail damage, insurance claims, and GAF Master Elite proof. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
 Best,
 Diego

@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/cloud-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Cloud?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Cloud Roofing, I noticed your emergency roof repair page already has strong proof: service since 1975, free inspections and quotes, plus hail, wind, tree, and leak repair paths. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Cloud?
+Hi Cloud Roofing, I noticed your emergency roof repair page already has strong proof: service since 1975, free inspections and quotes, plus hail, wind, tree, and leak repair paths. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
 Best,
 Diego

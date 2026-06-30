@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/proper-roofing
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Proper Roofing?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Proper Roofing, I noticed your Greater Houston storm restoration page already has a strong process: comprehensive inspections, full documentation, repair plans, and claims assistance language. My thought was that the same message could work well as a shorter first-step landing page built around one action: helping homeowners request a free storm inspection and documentation review before they are ready to discuss a full restoration project. Would you be open to seeing a quick example of what that page could look like for Proper Roofing?
+Hi Proper Roofing, I noticed your Greater Houston storm restoration page already has a strong process: comprehensive inspections, full documentation, repair plans, and claims assistance language. My thought was that the same message could work well as a shorter first-step landing page built around one action: helping homeowners request a free storm inspection and documentation review before they are ready to discuss a full restoration project.
 
 Best,
 Diego

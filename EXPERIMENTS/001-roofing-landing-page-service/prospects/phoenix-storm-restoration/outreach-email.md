@@ -18,8 +18,6 @@ Demo:
 https://roof-check-preview.vercel.app/phoenix-storm-restoration
 ```
 
-Would you be open to seeing a quick example of what that page could look like for Phoenix?
-
 Best,
 
 Diego
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Phoenix Storm Restoration, I noticed your Fort Worth page already has strong emergency storm positioning: 24/7 response language, BBB Accredited and HAAG Certified proof, and a clear schedule inspection path. My thought was that the same proof could work well as a shorter emergency storm inspection page built around one action: helping Fort Worth homeowners schedule an inspection after roof damage, leaks, or storm debris. Would you be open to seeing a quick example of what that page could look like for Phoenix?
+Hi Phoenix Storm Restoration, I noticed your Fort Worth page already has strong emergency storm positioning: 24/7 response language, BBB Accredited and HAAG Certified proof, and a clear schedule inspection path. My thought was that the same proof could work well as a shorter emergency storm inspection page built around one action: helping Fort Worth homeowners schedule an inspection after roof damage, leaks, or storm debris.
 
 Best,
 Diego
