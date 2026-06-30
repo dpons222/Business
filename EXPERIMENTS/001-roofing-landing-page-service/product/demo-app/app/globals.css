@@ -676,6 +676,9 @@ details p {
 .brand-logo {
   width: 118px;
   height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-actions {
@@ -767,7 +770,8 @@ details p {
 
 .brand-proof-row > span {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
+  flex: 0 1 auto;
   gap: 8px;
   max-width: 100%;
   min-width: 0;
@@ -777,19 +781,27 @@ details p {
   background: rgba(255, 255, 255, 0.12);
   color: #fff;
   font-weight: 850;
-  line-height: 1.25;
+  line-height: 1.35;
   overflow-wrap: anywhere;
   backdrop-filter: blur(10px);
+}
+
+.brand-proof-row > span:last-child {
+  flex-basis: min(100%, 640px);
+  border-radius: 14px;
 }
 
 .brand-proof-row strong {
   display: inline-block;
   min-width: 0;
   padding-left: 2px;
+  line-height: 1.35;
 }
 
 .brand-proof-row svg {
+  flex: 0 0 auto;
   margin-right: 2px;
+  margin-top: 1px;
 }
 
 .hero-estimate-form {
