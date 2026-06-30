@@ -1953,7 +1953,7 @@ main.landing-page {
 
 .preview-dashboard {
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: #f3f7fb;
   color: var(--ink);
 }
@@ -2150,6 +2150,7 @@ main.landing-page {
 }
 
 .preview-list-section {
+  overflow: visible;
   margin-top: 22px;
   padding: 22px;
 }
