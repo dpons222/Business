@@ -457,17 +457,6 @@ export function ProspectPreviewDashboard({
               <h2 id="preview-list-title">Available prospect previews</h2>
             </div>
             <div className="toolbar-controls">
-              <button
-                className={isFilterRailOpen ? "filter-toggle active" : "filter-toggle"}
-                type="button"
-                onClick={() => setIsFilterRailOpen((isOpen) => !isOpen)}
-                aria-expanded={isFilterRailOpen}
-                aria-controls="prospect-filter-rail"
-              >
-                <SlidersHorizontal size={16} aria-hidden="true" />
-                Filter
-                {activeFilterCount > 0 ? <span>{activeFilterCount}</span> : null}
-              </button>
               {activeFilterCount > 0 ? (
                 <button className="filter-reset-button" type="button" onClick={resetFilters}>
                   Reset
@@ -501,124 +490,147 @@ export function ProspectPreviewDashboard({
               isFilterRailOpen ? "prospect-browser" : "prospect-browser filters-collapsed"
             }
           >
-            {isFilterRailOpen ? (
-              <aside className="filter-rail" id="prospect-filter-rail" aria-label="Prospect filters">
-                <div className="filter-rail-header">
+            <aside
+              className={isFilterRailOpen ? "filter-rail" : "filter-rail collapsed"}
+              id="prospect-filter-rail"
+              aria-label="Prospect filters"
+            >
+              <div className="filter-rail-header">
+                <button
+                  className="filter-rail-toggle"
+                  type="button"
+                  onClick={() => setIsFilterRailOpen((isOpen) => !isOpen)}
+                  aria-expanded={isFilterRailOpen}
+                  aria-controls="prospect-filter-panel"
+                  title={isFilterRailOpen ? "Collapse filters" : "Open filters"}
+                >
+                  <SlidersHorizontal size={16} aria-hidden="true" />
+                  {isFilterRailOpen ? <span>Filters</span> : null}
+                  {activeFilterCount > 0 ? <strong>{activeFilterCount}</strong> : null}
+                </button>
+                {isFilterRailOpen ? (
                   <div>
-                    <p className="eyebrow">Filters</p>
                     <strong>{visibleEntries.length} shown</strong>
                   </div>
+                ) : null}
+                {isFilterRailOpen && activeFilterCount > 0 ? (
+                  <button className="filter-reset-button" type="button" onClick={resetFilters}>
+                    Reset
+                  </button>
+                ) : null}
+              </div>
+
+              {isFilterRailOpen ? (
+                <div className="filter-rail-panel" id="prospect-filter-panel">
                   {activeFilterCount > 0 ? (
-                    <button className="filter-reset-button" type="button" onClick={resetFilters}>
-                      Reset
-                    </button>
+                    <div className="active-filter-count">{activeFilterCount} active</div>
                   ) : null}
+
+                  <details className="filter-rail-group" open>
+                    <summary>Niche</summary>
+                    <div className="filter-rail-options">
+                      {nicheFilterOptions.map((filter) => {
+                        const isSelected = selectedNiches.includes(filter.value);
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedNiches((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <Layers3 size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{nicheCounts[filter.value]}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
+
+                  <details className="filter-rail-group" open>
+                    <summary>Contact status</summary>
+                    <div className="filter-rail-options">
+                      {contactFilterOptions.map((filter) => {
+                        const isSelected = selectedContactFilters.includes(filter.value);
+                        const count = entries.filter((entry) =>
+                          entryMatchesContactFilter(entry, filter.value),
+                        ).length;
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedContactFilters((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <Mail size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{count}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
+
+                  <details className="filter-rail-group" open>
+                    <summary>Demo status</summary>
+                    <div className="filter-rail-options">
+                      {demoStatusFilterOptions.map((filter) => {
+                        const isSelected = selectedDemoStatuses.includes(filter.value);
+                        const count = entries.filter((entry) => entry.status === filter.value).length;
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedDemoStatuses((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <FileText size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{count}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
                 </div>
-
-                <details className="filter-rail-group" open>
-                  <summary>Niche</summary>
-                  <div className="filter-rail-options">
-                    {nicheFilterOptions.map((filter) => {
-                      const isSelected = selectedNiches.includes(filter.value);
-
-                      return (
-                        <button
-                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                          key={filter.value}
-                          type="button"
-                          onClick={() =>
-                            setSelectedNiches((current) =>
-                              toggleSelectedValue(current, filter.value),
-                            )
-                          }
-                          aria-pressed={isSelected}
-                        >
-                          <span>
-                            {isSelected ? (
-                              <Check size={14} aria-hidden="true" />
-                            ) : (
-                              <Layers3 size={14} aria-hidden="true" />
-                            )}
-                            {filter.label}
-                          </span>
-                          <strong>{nicheCounts[filter.value]}</strong>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </details>
-
-                <details className="filter-rail-group" open>
-                  <summary>Contact status</summary>
-                  <div className="filter-rail-options">
-                    {contactFilterOptions.map((filter) => {
-                      const isSelected = selectedContactFilters.includes(filter.value);
-                      const count = entries.filter((entry) =>
-                        entryMatchesContactFilter(entry, filter.value),
-                      ).length;
-
-                      return (
-                        <button
-                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                          key={filter.value}
-                          type="button"
-                          onClick={() =>
-                            setSelectedContactFilters((current) =>
-                              toggleSelectedValue(current, filter.value),
-                            )
-                          }
-                          aria-pressed={isSelected}
-                        >
-                          <span>
-                            {isSelected ? (
-                              <Check size={14} aria-hidden="true" />
-                            ) : (
-                              <Mail size={14} aria-hidden="true" />
-                            )}
-                            {filter.label}
-                          </span>
-                          <strong>{count}</strong>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </details>
-
-                <details className="filter-rail-group" open>
-                  <summary>Demo status</summary>
-                  <div className="filter-rail-options">
-                    {demoStatusFilterOptions.map((filter) => {
-                      const isSelected = selectedDemoStatuses.includes(filter.value);
-                      const count = entries.filter((entry) => entry.status === filter.value).length;
-
-                      return (
-                        <button
-                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                          key={filter.value}
-                          type="button"
-                          onClick={() =>
-                            setSelectedDemoStatuses((current) =>
-                              toggleSelectedValue(current, filter.value),
-                            )
-                          }
-                          aria-pressed={isSelected}
-                        >
-                          <span>
-                            {isSelected ? (
-                              <Check size={14} aria-hidden="true" />
-                            ) : (
-                              <FileText size={14} aria-hidden="true" />
-                            )}
-                            {filter.label}
-                          </span>
-                          <strong>{count}</strong>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </details>
-              </aside>
-            ) : null}
+              ) : null}
+            </aside>
 
             <div className="prospect-results">
               <div className="preview-list">
