@@ -159,7 +159,7 @@ const outreachStatusLabels: Record<string, string> = {
   ready_for_review: "Ready for review",
   approved_for_draft: "Approved for Gmail draft",
   draft_created: "Gmail draft created",
-  approved: "Approved for send",
+  approved: "Approved for n8n send",
   queued: "Queued",
   sent: "Sent",
   failed: "Failed",
@@ -395,7 +395,7 @@ export function ProspectPreviewDashboard({
     }));
   }
 
-  async function submitApprovalAction(action: "approve_for_draft" | "revoke_draft_approval") {
+  async function submitApprovalAction(action: "approve_for_send" | "revoke_send_approval") {
     if (!draftEntry) {
       return;
     }
@@ -561,13 +561,13 @@ export function ProspectPreviewDashboard({
         .filter(Boolean)
         .join("\n\n")
     : "";
-  const canApproveForDraft =
+  const canApproveForSend =
     draft?.source === "supabase" &&
     draft.approvalBlockers.length === 0 &&
     draft.outreachSendStatus === "ready_for_review" &&
     !lockedOutreachStatuses.has(draft.outreachSendStatus ?? "");
-  const canRevokeDraftApproval =
-    draft?.source === "supabase" && draft.outreachSendStatus === "approved_for_draft";
+  const canRevokeSendApproval =
+    draft?.source === "supabase" && draft.outreachSendStatus === "approved";
   const canRecordManualContact =
     draft?.source === "supabase" &&
     draft.contactStatus === "not_contacted" &&
@@ -984,7 +984,9 @@ export function ProspectPreviewDashboard({
                     {relationshipStatusLabel(draft.contactStatus)}
                   </span>
                   <span>{draftStatusLabel(draft.outreachSendStatus)}</span>
-                  {draft.outreachApproved ? <span>Reviewed by Diego</span> : null}
+                  {draft.outreachApproved ? (
+                    <span>Approved by {draft.outreachApprovedBy ?? "dashboard user"}</span>
+                  ) : null}
                 </div>
 
                 <div className="draft-link-row">
@@ -1050,13 +1052,13 @@ export function ProspectPreviewDashboard({
                   <pre>{draft.body ?? "No body draft stored yet."}</pre>
                 </section>
 
-                <section className="draft-approval-panel" aria-label="Gmail draft approval">
+                <section className="draft-approval-panel" aria-label="n8n send approval">
                   <div className="draft-approval-heading">
                     <div>
-                      <p className="eyebrow">Gmail Draft Approval</p>
+                      <p className="eyebrow">n8n Send Approval</p>
                       <h3>{draftStatusLabel(draft.outreachSendStatus)}</h3>
                     </div>
-                    {canRevokeDraftApproval ? (
+                    {canRevokeSendApproval ? (
                       <CheckCircle2 size={22} aria-hidden="true" />
                     ) : (
                       <AlertTriangle size={22} aria-hidden="true" />
@@ -1074,8 +1076,7 @@ export function ProspectPreviewDashboard({
                     </div>
                   ) : (
                     <p className="approval-ready-copy">
-                      Recipient, subject, body, and stable demo URL are ready for Gmail draft
-                      creation.
+                      Recipient, subject, body, and stable demo URL are ready for n8n sending.
                     </p>
                   )}
 
@@ -1103,16 +1104,17 @@ export function ProspectPreviewDashboard({
                           checked={isApprovalChecked}
                           onChange={(event) => setIsApprovalChecked(event.target.checked)}
                         />
-                        I reviewed the exact recipient, subject, body, and stable demo link.
+                        I reviewed the exact recipient, subject, body, and stable demo link, and
+                        approve n8n to send this email.
                       </label>
                       <div className="draft-approval-actions">
                         <button
                           className="button button-primary"
                           type="button"
-                          onClick={() => submitApprovalAction("approve_for_draft")}
+                          onClick={() => submitApprovalAction("approve_for_send")}
                           disabled={!isApprovalChecked || isApprovalSaving}
                         >
-                          Approve Gmail Draft
+                          Approve for n8n Send
                         </button>
                         <button
                           className="button button-ghost"
@@ -1132,13 +1134,13 @@ export function ProspectPreviewDashboard({
                   {approvalIntent === "revoke" ? (
                     <div className="draft-confirmation-panel">
                       <p>
-                        This removes Gmail draft approval and returns the row to ready for review.
+                        This removes n8n send approval and returns the row to ready for review.
                       </p>
                       <div className="draft-approval-actions">
                         <button
                           className="button button-danger"
                           type="button"
-                          onClick={() => submitApprovalAction("revoke_draft_approval")}
+                          onClick={() => submitApprovalAction("revoke_send_approval")}
                           disabled={isApprovalSaving}
                         >
                           Revoke Approval
@@ -1164,16 +1166,16 @@ export function ProspectPreviewDashboard({
                           setApprovalIntent("approve");
                           setIsManualContactChecked(false);
                         }}
-                        disabled={!canApproveForDraft || isApprovalSaving}
+                        disabled={!canApproveForSend || isApprovalSaving}
                         title={
-                          canApproveForDraft
+                          canApproveForSend
                             ? undefined
-                            : "Approval is unavailable until this is a complete Supabase draft marked ready for review."
+                            : "Approval is unavailable until this is a complete Supabase email row marked ready for review."
                         }
                       >
-                        Review Approval
+                        Approve for n8n Send
                       </button>
-                      {canRevokeDraftApproval ? (
+                      {canRevokeSendApproval ? (
                         <button
                           className="button button-ghost"
                           type="button"

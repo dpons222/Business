@@ -34,7 +34,7 @@ export async function GET(_request: Request, context: ProspectDraftRouteContext)
 }
 
 function isApprovalAction(value: unknown): value is ProspectDraftApprovalAction {
-  return value === "approve_for_draft" || value === "revoke_draft_approval";
+  return value === "approve_for_send" || value === "revoke_send_approval";
 }
 
 function isRelationshipAction(value: unknown): value is ProspectRelationshipAction {
@@ -79,7 +79,7 @@ export async function PATCH(request: Request, context: ProspectDraftRouteContext
   }
 
   if (isApprovalAction(payload.action)) {
-    const result = await updateProspectDraftApproval(slug, payload.action);
+    const result = await updateProspectDraftApproval(slug, payload.action, session.username);
 
     if (result.error) {
       return NextResponse.json(

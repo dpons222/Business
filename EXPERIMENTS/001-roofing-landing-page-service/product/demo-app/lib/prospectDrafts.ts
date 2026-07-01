@@ -83,7 +83,7 @@ type SupabaseUpdateResponse = SupabaseProspectRow & {
   prospect_slug: string | null;
 };
 
-export type ProspectDraftApprovalAction = "approve_for_draft" | "revoke_draft_approval";
+export type ProspectDraftApprovalAction = "approve_for_send" | "revoke_send_approval";
 export type ProspectRelationshipAction = "mark_do_not_contact" | "mark_not_interested";
 export type ManualContactMethod =
   | "contact_form"
@@ -401,7 +401,11 @@ export async function getProspectDraft(slug: string): Promise<ProspectDraft | nu
   }
 }
 
-export async function updateProspectDraftApproval(slug: string, action: ProspectDraftApprovalAction) {
+export async function updateProspectDraftApproval(
+  slug: string,
+  action: ProspectDraftApprovalAction,
+  approvedBy: string,
+) {
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {
@@ -424,7 +428,7 @@ export async function updateProspectDraftApproval(slug: string, action: Prospect
 
   const draft = rowToProspectDraft(row);
 
-  if (action === "approve_for_draft") {
+  if (action === "approve_for_send") {
     if (draft.approvalBlockers.length > 0) {
       return {
         draft,
@@ -449,28 +453,28 @@ export async function updateProspectDraftApproval(slug: string, action: Prospect
     if (draft.outreachSendStatus !== "ready_for_review") {
       return {
         draft,
-        error: "Only ready_for_review rows can be approved for Gmail draft creation.",
+        error: "Only ready_for_review rows can be approved for n8n sending.",
         status: 409,
       };
     }
   }
 
-  if (action === "revoke_draft_approval" && draft.outreachSendStatus !== "approved_for_draft") {
+  if (action === "revoke_send_approval" && draft.outreachSendStatus !== "approved") {
     return {
       draft,
-      error: "Only approved_for_draft rows can be revoked from the dashboard.",
+      error: "Only approved rows can be revoked from the dashboard.",
       status: 409,
     };
   }
 
   const update =
-    action === "approve_for_draft"
+    action === "approve_for_send"
       ? {
           outreach_approved: true,
           outreach_approved_at: new Date().toISOString(),
-          outreach_approved_by: "Diego",
+          outreach_approved_by: approvedBy,
           outreach_send_channel: "email",
-          outreach_send_status: "approved_for_draft",
+          outreach_send_status: "approved",
           outreach_last_error: null,
         }
       : {

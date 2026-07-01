@@ -1,8 +1,8 @@
 # Outreach Approval Send Automation
 
-This automation is the planned human-approved Gmail draft workflow for outbound prospect outreach.
+This automation is the human-approved n8n email send workflow for outbound prospect outreach.
 
-It is not an autonomous cold-email sender. The purpose is to let Codex prepare small batches, let Diego review the exact demos and drafts, and then allow n8n to create Gmail drafts only for approved records.
+It is not an autonomous cold-email sender. The purpose is to let Codex prepare small batches, let the dashboard user review the exact demos and drafts, and then allow the manual n8n sender to send only approved records.
 
 ## Current Status
 
@@ -22,35 +22,34 @@ It is not an autonomous cold-email sender. The purpose is to let Codex prepare s
 - Sender default batch limit is `3`; set `noLimit = true` in `Sender Config` only for an intentional all-approved-row run.
 - Sender guardrails now require `https://local-growth-preview.vercel.app/...` demo URLs and were retested with pinned data on June 26, 2026.
 - All workflows are manual-trigger only and are not published or scheduled.
-- No real prospect emails are sent by this automation yet.
+- Real prospect emails are sent only when the manual approved sender workflow is run against dashboard-approved rows.
 
 ## Intended Operating Model
 
 ```text
 1. Codex prepares a batch of 3-5 prospects.
 2. Codex completes the pre-send checklist for each prospect.
-3. Diego reviews the live demo, draft, recipient/contact method, and fit.
-4. Diego approves specific rows in Supabase.
-5. n8n draft workflow validates only approved email rows and creates Gmail drafts.
-6. n8n writes `draft_created` after the Gmail draft exists.
-7. Diego sends, edits, or deletes the Gmail draft manually.
-8. Only after a real outbound send, Supabase is updated to `status = contacted` and `outreach_send_status = sent`.
+3. The dashboard user reviews the live demo, draft, recipient/contact method, and fit.
+4. The dashboard user clicks `Approve for n8n Send`, which approves specific rows in Supabase.
+5. n8n validates only approved email rows and sends the email.
+6. After a real outbound send, n8n updates Supabase to `status = contacted` and `outreach_send_status = sent`.
 ```
 
 ## Human Approval Boundary
 
-The system must not create a Gmail draft until Diego explicitly approves the exact draft and demo link. It must not send outreach automatically.
+The system must not send an email until a dashboard user explicitly approves the exact draft and demo link. n8n workflows remain manual-trigger only unless the operating model is intentionally changed.
 
 Approval is represented in Supabase by:
 
 ```text
 outreach_approved = true
-outreach_send_status = approved_for_draft
+outreach_send_status = approved
+outreach_send_channel = email
 outreach_approved_at is not null
 outreach_approved_by is not null
 ```
 
-The `approved` status is reserved for a future direct-send workflow. Do not use it for the first Gmail draft workflow.
+The dashboard records the logged-in username in `outreach_approved_by`.
 
 ## Status Field Meanings
 
@@ -65,10 +64,10 @@ contacted = an outbound email or contact form message was actually sent
 
 ```text
 not_ready = draft, demo, contact method, or checklist evidence is incomplete
-ready_for_review = Codex prepared the draft/demo and Diego needs to review it
-approved_for_draft = Diego approved the exact draft and demo URL for Gmail draft creation
-draft_created = n8n created the Gmail draft, but no outreach was sent yet
-approved = reserved for future direct-send approval
+ready_for_review = Codex prepared the draft/demo and a dashboard user needs to review it
+approved = dashboard user approved the exact draft and demo URL for n8n email sending
+approved_for_draft = legacy/reserved state for a draft-only Gmail workflow
+draft_created = legacy/reserved state for a draft-only Gmail workflow
 queued = n8n picked up the row and is preparing or attempting the send
 sent = the email provider confirmed the message was sent
 failed = n8n or the email provider failed the send attempt
@@ -92,4 +91,4 @@ Rule of thumb: `status` answers whether the prospect has been contacted; `outrea
 
 ## Rule
 
-No autonomous sending. n8n may create Gmail drafts only for records that pass the approval gate and pre-send checklist.
+No autonomous sending. The manual n8n sender may send email only for records that pass the approval gate and pre-send checklist.

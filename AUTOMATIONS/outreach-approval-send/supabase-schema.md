@@ -65,8 +65,8 @@ not_interested = prospect indicated no interest after outreach
 
 ```text
 not_ready = draft, demo, contact method, or checklist evidence is incomplete
-ready_for_review = Codex prepared the draft/demo and Diego needs to review it
-approved = Diego approved the exact draft and demo URL for n8n sending
+ready_for_review = Codex prepared the draft/demo and the dashboard user needs to review it
+approved = dashboard user approved the exact draft and demo URL for n8n sending
 queued = n8n picked up the row and is preparing or attempting the send
 sent = the email provider confirmed the message was sent
 failed = n8n or the email provider failed the send attempt
@@ -94,7 +94,7 @@ Recommended `outreach_pre_send_checklist`:
   "contact_method_verified": true,
   "brand_colors_verified": true,
   "supabase_update_ready": true,
-  "reviewed_by": "Diego",
+  "reviewed_by": "dashboard user",
   "reviewed_at": "2026-06-24T00:00:00Z"
 }
 ```
@@ -122,7 +122,7 @@ update public.prospects
 set outreach_send_status = 'approved',
     outreach_approved = true,
     outreach_approved_at = now(),
-    outreach_approved_by = 'Diego',
+    outreach_approved_by = '<logged-in dashboard username>',
     outreach_batch_id = 'roofing-2026-06-batch-01',
     outreach_send_channel = 'email',
     outreach_pre_send_checked_at = now(),
@@ -150,7 +150,7 @@ comment on column public.prospects.status is
   'Relationship/contact lifecycle for the prospect: not_contacted = eligible and unsent; contacted = outbound message sent; do_not_contact = internal decision not to pursue; not_interested = prospect indicated no interest; other values track follow-up and pipeline outcomes.';
 
 comment on column public.prospects.outreach_send_status is
-  'Approval-gated automation lifecycle for outbound outreach: not_ready = draft/demo/contact details are incomplete; ready_for_review = prepared for Diego review; approved = exact draft and demo URL approved for n8n when outreach_approved is true; queued = picked up by automation; sent = provider confirmed send; failed = send attempt failed; skipped = intentionally skipped by guardrail or operator decision.';
+  'Approval-gated automation lifecycle for outbound outreach: not_ready = draft/demo/contact details are incomplete; ready_for_review = prepared for dashboard review; approved = exact draft and demo URL approved for n8n when outreach_approved is true; queued = picked up by automation; sent = provider confirmed send; failed = send attempt failed; skipped = intentionally skipped by guardrail or operator decision.';
 
 comment on column public.prospects.outreach_approved is
   'Human approval gate for automated outreach. Must be true, alongside outreach_send_status = approved and completed pre-send evidence, before n8n may send an email.';

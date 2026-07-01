@@ -141,7 +141,7 @@ demo: https://local-growth-preview.vercel.app/charger-roofing
 | `loss_reason` | `text` | no | Reason the opportunity was lost, if known |
 | `decision_notes` | `text` | no | Additional decision context from replies, calls, or follow-up |
 | `outreach_send_status` | `text` | yes | Approval-gated draft/send status for n8n outreach automation |
-| `outreach_approved` | `boolean` | yes | True only after Diego approves the exact draft/demo/contact method |
+| `outreach_approved` | `boolean` | yes | True only after a dashboard user approves the exact draft/demo/contact method |
 | `outreach_approved_at` | `timestamptz` | no | Approval timestamp |
 | `outreach_approved_by` | `text` | no | Approver/operator |
 | `outreach_batch_id` | `text` | no | Batch label for grouped outreach review |
@@ -201,9 +201,9 @@ contact_form
 manual
 ```
 
-For the Gmail draft workflow, n8n may only create Gmail drafts for rows where `outreach_approved = true`, `outreach_send_status = approved_for_draft`, `outreach_send_channel = email`, required draft fields are present, and `demo_url` uses the stable production alias: `https://local-growth-preview.vercel.app/...`. After creating the Gmail draft, n8n should write `outreach_send_status = draft_created`.
+For the active n8n email sender workflow, n8n may only send rows where `outreach_approved = true`, `outreach_send_status = approved`, `outreach_send_channel = email`, required draft fields are present, and `demo_url` uses the stable production alias: `https://local-growth-preview.vercel.app/...`. After sending the email, n8n should write `outreach_send_status = sent` and update the prospect relationship `status = contacted`.
 
-The `approved` status is reserved for a future direct-send workflow and should not be used for Gmail draft creation.
+The `approved_for_draft` and `draft_created` statuses are reserved for a future or legacy Gmail draft-only workflow and are not used by the current dashboard approval action.
 
 ## Prospect Security
 
