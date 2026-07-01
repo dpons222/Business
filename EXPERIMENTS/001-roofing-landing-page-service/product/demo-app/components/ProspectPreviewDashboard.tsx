@@ -33,6 +33,7 @@ type ContactFilter =
   | "has_email_draft";
 type ManualContactMethod =
   | "contact_form"
+  | "email"
   | "phone"
   | "facebook"
   | "instagram"
@@ -67,6 +68,7 @@ const demoStatusFilterOptions: Array<{ value: DemoStatusFilter; label: string }>
 
 const manualContactMethodOptions: Array<{ value: ManualContactMethod; label: string }> = [
   { value: "contact_form", label: "Contact form" },
+  { value: "email", label: "Email" },
   { value: "phone", label: "Phone" },
   { value: "facebook", label: "Facebook" },
   { value: "instagram", label: "Instagram" },

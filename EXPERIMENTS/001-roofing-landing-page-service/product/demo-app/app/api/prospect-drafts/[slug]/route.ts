@@ -44,6 +44,7 @@ function isRelationshipAction(value: unknown): value is ProspectRelationshipActi
 function isManualContactMethod(value: unknown): value is ManualContactMethod {
   return (
     value === "contact_form" ||
+    value === "email" ||
     value === "phone" ||
     value === "facebook" ||
     value === "instagram" ||

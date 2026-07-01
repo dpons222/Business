@@ -87,6 +87,7 @@ export type ProspectDraftApprovalAction = "approve_for_send" | "revoke_send_appr
 export type ProspectRelationshipAction = "mark_do_not_contact" | "mark_not_interested";
 export type ManualContactMethod =
   | "contact_form"
+  | "email"
   | "phone"
   | "facebook"
   | "instagram"
@@ -101,6 +102,7 @@ export type ManualContactInput = {
 
 const manualContactMethodLabels: Record<ManualContactMethod, string> = {
   contact_form: "contact form",
+  email: "email",
   phone: "phone",
   facebook: "Facebook",
   instagram: "Instagram",
@@ -619,7 +621,8 @@ export async function updateProspectManualContact(slug: string, input: ManualCon
 
   const update = {
     status: "contacted",
-    outreach_send_channel: method === "contact_form" ? "contact_form" : "manual",
+    outreach_send_channel:
+      method === "contact_form" ? "contact_form" : method === "email" ? "email" : "manual",
     outreach_send_status: "sent",
     outreach_last_error: null,
     date_contacted: contactedAt.toISOString(),
