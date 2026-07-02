@@ -194,9 +194,11 @@ Validation:
 - [x] Email row shows approval controls.
 - [x] Contact-form row does not show an active automated send approval button.
 - [x] Manual row does not show an active automated send approval button.
-- [ ] Text fits and does not overlap in desktop/mobile dashboard views.
+- [x] Text fits and does not overlap in desktop/mobile dashboard views.
 
 Validation note: browser automation was attempted against desktop and mobile dashboard viewports on 2026-07-02, but the Playwright-run server could not reach Supabase from that environment and rendered fallback local data instead of the staged channel-policy row. `npm.cmd run build` passed, and the local API checks verified the channel-specific dashboard/API payloads.
+
+Follow-up validation note: mobile portrait overlap in the follow-up queue was fixed on 2026-07-02 by stacking `.follow-up-row` content and making the row action button full-width below the text at narrow widths. `npm.cmd run build` passed, and local production screenshots at 393x852 and 852x393 confirmed the follow-up queue rows no longer overlap or squeeze the date text.
 
 ### Phase 3 - API And n8n Guardrails
 Objective: Prevent accidental automated sends for non-email channels even if UI or data is wrong.

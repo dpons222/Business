@@ -3164,9 +3164,38 @@ main.landing-page {
     grid-template-columns: 1fr;
   }
 
+  .follow-up-queue {
+    padding: 16px;
+  }
+
   .follow-up-queue-heading {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .follow-up-card {
+    padding: 12px;
+  }
+
+  .follow-up-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .follow-up-row strong {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .follow-up-row small {
+    overflow-wrap: anywhere;
+  }
+
+  .follow-up-row .button {
+    width: 100%;
+    justify-content: center;
   }
 
   .preview-actions,
