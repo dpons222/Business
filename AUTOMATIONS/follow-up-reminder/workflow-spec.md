@@ -185,6 +185,11 @@ Live execution `727` confirmed this expected result on 2026-07-02.
 - Temporary helper execution `725` created internal Supabase test row `internal-test-follow-up-reminder` and confirmed it is due for follow-up reminder testing.
 - Live execution `727` succeeded with `candidateCount = 1`, included `internal-test-follow-up-reminder`, sent the internal Gmail reminder to `digidaps@gmail.com`, and returned Gmail message ID `19f237422bb8c987`.
 - The reminder email copy was updated after execution `727` to remove the sentence `This workflow does not send prospect-facing email.` and clarify that `Record Follow-up` is used after Diego sends a follow-up manually.
+- Supabase candidate-filter validation on 2026-07-02 used `internal-test-follow-up-reminder` and returned:
+  - `candidate_count = 1` when the row was eligible/due with `status = contacted` and `reply_status = null`.
+  - `candidate_count = 0` when the same due row had `status = do_not_contact`.
+  - `candidate_count = 0` when the same due row had `reply_status = positive_reply`.
+  - The row was restored to completed `follow_up_2_sent` state after the test.
 
 ## Next Validation Step
 

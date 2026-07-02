@@ -136,11 +136,11 @@ limit 10;
 
 ### Validation
 - [x] Dry-run returns only due contacted prospects.
-- [ ] Dry-run excludes stopped or replied prospects.
+- [x] Dry-run excludes stopped or replied prospects.
 - [x] Reminder output includes enough context to decide what to do next.
 - [x] No prospect-facing Gmail/send node exists in this workflow.
 
-Validation note: n8n node configs and full Workflow SDK code validated successfully, and the workflow was created. Manual execution `720` succeeded with no due candidates and no email. Pinned positive-path execution `721` confirmed the internal reminder branch. Live execution `727` confirmed the internal reminder email path against Supabase test row `internal-test-follow-up-reminder`.
+Validation note: n8n node configs and full Workflow SDK code validated successfully, and the workflow was created. Manual execution `720` succeeded with no due candidates and no email. Pinned positive-path execution `721` confirmed the internal reminder branch. Live execution `727` confirmed the internal reminder email path against Supabase test row `internal-test-follow-up-reminder`. Supabase candidate-filter validation on 2026-07-02 confirmed the internal row returns one candidate when eligible/due, zero candidates when `status = do_not_contact`, and zero candidates when `reply_status = positive_reply`; the row was restored to completed `follow_up_2_sent` state afterward.
 
 ## Phase 3 - Dashboard Approval Path For Follow-Up Sends
 
