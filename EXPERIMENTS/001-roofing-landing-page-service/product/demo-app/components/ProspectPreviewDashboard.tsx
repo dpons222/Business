@@ -20,7 +20,7 @@ import {
 import type { DemoEntry, DemoNiche, DemoStatus } from "../lib/demoRegistry";
 import { nicheFilters, statusLabels } from "../lib/demoRegistry";
 import { relationshipStatusLabel } from "../lib/prospectDrafts";
-import type { ProspectDraftSummary } from "../lib/prospectDrafts";
+import type { FollowUpChannelPolicy, ProspectDraftSummary } from "../lib/prospectDrafts";
 
 type SortMode = "name" | "date";
 type SortDirection = "asc" | "desc";
@@ -104,6 +104,7 @@ type ProspectDraft = {
   followUpSubject: string | null;
   followUpBody: string | null;
   followUpLastError: string | null;
+  followUpChannelPolicy: FollowUpChannelPolicy;
   replyStatus: string | null;
   notes: string | null;
   approvalBlockers: string[];
@@ -903,10 +904,18 @@ export function ProspectPreviewDashboard({
   const followUpApprovalStep = draft?.followUpStep ?? manualFollowUpStep;
   const followUpApprovalLabel =
     followUpApprovalStep === "follow_up_2" ? "Follow-up 2" : "Follow-up 1";
+  const followUpChannelPolicy = draft?.followUpChannelPolicy;
+  const isManualOnlyFollowUp =
+    Boolean(followUpChannelPolicy) && !followUpChannelPolicy?.canAutoSendFollowUps;
+  const visibleFollowUpApprovalBlockers =
+    draft?.followUpApprovalBlockers.filter(
+      (blocker) => blocker !== draft.followUpChannelPolicy.approvalBlocker,
+    ) ?? [];
   const canApproveFollowUpSend =
     draft?.source === "supabase" &&
     draft.followUpApprovalBlockers.length === 0 &&
-    draft.followUpSendStatus === "ready_for_review";
+    draft.followUpSendStatus === "ready_for_review" &&
+    draft.followUpChannelPolicy.canAutoSendFollowUps;
   const canRevokeFollowUpApproval =
     draft?.source === "supabase" && draft.followUpSendStatus === "approved";
 
@@ -1377,6 +1386,7 @@ export function ProspectPreviewDashboard({
                     {relationshipStatusLabel(draft.contactStatus)}
                   </span>
                   <span>{draftStatusLabel(draft.outreachSendStatus)}</span>
+                  <span>{draft.followUpChannelPolicy.label}</span>
                   <span>{followUpStatusLabel(draft.followUpSendStatus)}</span>
                   {draft.outreachApproved ? (
                     <span>Approved by {draft.outreachApprovedBy ?? "dashboard user"}</span>
@@ -1772,21 +1782,31 @@ export function ProspectPreviewDashboard({
                     </section>
                   </div>
 
-                  {draft.followUpApprovalBlockers.length > 0 ? (
+                  {isManualOnlyFollowUp ? (
+                    <div className="draft-approval-checks">
+                      <strong>Manual follow-up required</strong>
+                      <p>
+                        {draft.followUpChannelPolicy.label} follow-ups are reminder-only. Send this
+                        follow-up manually, then use Record Follow-up to update the sequence.
+                      </p>
+                    </div>
+                  ) : null}
+
+                  {visibleFollowUpApprovalBlockers.length > 0 ? (
                     <div className="draft-approval-checks">
                       <strong>Follow-up approval checks</strong>
                       <ul>
-                        {draft.followUpApprovalBlockers.map((blocker) => (
+                        {visibleFollowUpApprovalBlockers.map((blocker) => (
                           <li key={blocker}>{blocker}</li>
                         ))}
                       </ul>
                     </div>
-                  ) : (
+                  ) : !isManualOnlyFollowUp ? (
                     <p className="approval-ready-copy">
                       Stored follow-up copy, recipient, step, and stable demo URL are ready for
                       n8n sending.
                     </p>
-                  )}
+                  ) : null}
 
                   {approvalError &&
                   (approvalIntent === "approve_follow_up" ||
@@ -1889,7 +1909,9 @@ export function ProspectPreviewDashboard({
                         title={
                           canApproveFollowUpSend
                             ? undefined
-                            : "Follow-up approval is unavailable until stored copy and readiness checks pass."
+                            : isManualOnlyFollowUp
+                              ? "Automated follow-up send approval is only available for email-channel prospects."
+                              : "Follow-up approval is unavailable until stored copy and readiness checks pass."
                         }
                       >
                         Approve Follow-up Send

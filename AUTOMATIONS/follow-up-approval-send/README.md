@@ -14,11 +14,14 @@ This automation sends prospect-facing follow-up emails only after Diego approves
 - Database migration applied: `20260702163026_add_follow_up_approval_fields`.
 - Live internal validation: execution `729` sent follow-up 1 for `internal-test-follow-up-reminder` to `digidaps@gmail.com` and stored Gmail message ID `19f23abf832dc6dd`.
 - Live internal validation: execution `731` sent follow-up 2 for `internal-test-follow-up-reminder` to `digidaps@gmail.com`, stored Gmail message ID `19f23c3c6de92594`, and cleared `next_follow_up_at`.
+- Pinned channel-policy validation: execution `732` allowed an email-channel row and blocked a contact-form row; execution `733` blocked a manual-channel row.
+- Local dashboard API channel-policy validation passed on 2026-07-02: contact-form, manual, and missing-channel staged internal rows returned HTTP 422 for `approve_follow_up_send`.
 - Local dashboard API approval and revoke validation passed with `SUPABASE_SERVICE_ROLE_KEY` populated in `.env.local`.
 
 ## Safety Boundary
 
 - n8n sends only rows where `follow_up_approved = true` and `follow_up_send_status = approved`.
+- n8n sends follow-ups only for `outreach_send_channel = email`.
 - n8n sends only stored Supabase copy from `follow_up_draft_subject` and `follow_up_draft_body`.
 - n8n must not generate or rewrite follow-up copy.
 - n8n normalizes escaped newline sequences in stored copy before Gmail sends.

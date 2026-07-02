@@ -236,7 +236,7 @@ For the active n8n email sender workflow, n8n may only send rows where `outreach
 
 The `approved_for_draft` and `draft_created` statuses are reserved for a future or legacy Gmail draft-only workflow and are not used by the current dashboard approval action.
 
-For follow-up sending, n8n may only send rows where `follow_up_approved = true`, `follow_up_send_status = approved`, `follow_up_step` is `follow_up_1` or `follow_up_2`, required follow-up draft fields are present, no terminal/reply status is present, and `demo_url` uses the stable production alias. Follow-up copy must be stored in Supabase before approval; Codex may draft or QA copy, but Supabase remains the source of truth for the exact approved message.
+For follow-up sending, n8n may only send rows where `follow_up_approved = true`, `follow_up_send_status = approved`, `follow_up_step` is `follow_up_1` or `follow_up_2`, `outreach_send_channel = email`, required follow-up draft fields are present, no terminal/reply status is present, and `demo_url` uses the stable production alias. Contact-form, manual, and missing-channel rows remain reminder/manual-record only. Follow-up copy must be stored in Supabase before approval; Codex may draft or QA copy, but Supabase remains the source of truth for the exact approved message.
 
 ## Prospect Security
 

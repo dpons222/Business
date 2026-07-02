@@ -63,6 +63,7 @@ follow_up_approved is true
 follow_up_send_status is approved
 follow_up_step is follow_up_1 or follow_up_2
 outreach_send_status is sent
+outreach_send_channel is email
 contact_email is present
 follow_up_draft_subject is present
 follow_up_draft_body is present
@@ -146,4 +147,7 @@ notes appended with send evidence
 - Pinned execution `730` validated escaped-newline normalization without sending email or updating Supabase.
 - Live execution `731` succeeded on 2026-07-02.
 - Execution `731` fetched approved row `internal-test-follow-up-reminder`, passed guardrails with `sendAllowed = true`, sent Gmail message `19f23c3c6de92594`, marked `follow_up_2_sent_at`, cleared `next_follow_up_at`, and cleared follow-up approval fields.
+- Pinned execution `732` validated the channel guardrail without sending email or updating Supabase: an email-channel row returned `sendAllowed = true`; a contact-form row returned `sendAllowed = false` and `guardrailError = outreach_send_channel must be email`.
+- Pinned execution `733` validated the channel guardrail without sending email or updating Supabase: a manual-channel row returned `sendAllowed = false` and `guardrailError = outreach_send_channel must be email`.
+- Local dashboard API validation on 2026-07-02 staged `internal-test-follow-up-reminder` as contact-form, manual, and missing-channel follow-up rows. Each local `approve_follow_up_send` PATCH returned HTTP 422 and the row was restored to completed email-channel state afterward.
 - Local dashboard API approval and revoke actions were validated after `.env.local` received a non-empty `SUPABASE_SERVICE_ROLE_KEY`.

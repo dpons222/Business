@@ -21,6 +21,16 @@ export type FollowUpSendStatus =
   | "skipped";
 
 export type FollowUpStep = "follow_up_1" | "follow_up_2";
+export type FollowUpChannelPolicyKey = "email" | "contact_form" | "manual" | "unknown";
+
+export type FollowUpChannelPolicy = {
+  key: FollowUpChannelPolicyKey;
+  label: string;
+  canAutoSendFollowUps: boolean;
+  reminderOnly: boolean;
+  requiresManualEvidence: boolean;
+  approvalBlocker: string | null;
+};
 
 export type ProspectRelationshipStatus =
   | "not_contacted"
@@ -67,6 +77,7 @@ export type ProspectDraft = {
   followUpSubject: string | null;
   followUpBody: string | null;
   followUpLastError: string | null;
+  followUpChannelPolicy: FollowUpChannelPolicy;
   replyStatus: string | null;
   notes: string | null;
   approvalBlockers: string[];
@@ -227,6 +238,53 @@ const stoppedRelationshipStatuses = new Set([
 const replyRelationshipStatuses = new Set(["positive_reply", "neutral_reply", "negative_reply"]);
 
 const stableDemoUrlPrefix = "https://local-growth-preview.vercel.app/";
+
+export function getFollowUpChannelPolicy(channel: string | null): FollowUpChannelPolicy {
+  if (channel === "email") {
+    return {
+      key: "email",
+      label: "Email",
+      canAutoSendFollowUps: true,
+      reminderOnly: false,
+      requiresManualEvidence: false,
+      approvalBlocker: null,
+    };
+  }
+
+  if (channel === "contact_form") {
+    return {
+      key: "contact_form",
+      label: "Contact form",
+      canAutoSendFollowUps: false,
+      reminderOnly: true,
+      requiresManualEvidence: true,
+      approvalBlocker:
+        "Contact-form follow-ups must be sent manually and recorded with Record Follow-up.",
+    };
+  }
+
+  if (channel === "manual") {
+    return {
+      key: "manual",
+      label: "Manual",
+      canAutoSendFollowUps: false,
+      reminderOnly: true,
+      requiresManualEvidence: true,
+      approvalBlocker:
+        "Manual-channel follow-ups must be sent manually and recorded with Record Follow-up.",
+    };
+  }
+
+  return {
+    key: "unknown",
+    label: "Unspecified channel",
+    canAutoSendFollowUps: false,
+    reminderOnly: true,
+    requiresManualEvidence: true,
+    approvalBlocker:
+      "Follow-up send approval is email-only. Set the outreach channel to email or record the follow-up manually.",
+  };
+}
 
 const localDrafts: Record<string, Pick<ProspectDraft, "subject" | "body">> = {
   "brotherhood-roofing": {
@@ -400,11 +458,17 @@ function getFollowUpApprovalBlockers(
     | "followUpSubject"
     | "nextFollowUpAt"
     | "outreachSendStatus"
+    | "outreachSendChannel"
     | "replyStatus"
   >,
 ) {
   const blockers: string[] = [];
   const expectedStep = getCurrentFollowUpStep(draft);
+  const channelPolicy = getFollowUpChannelPolicy(draft.outreachSendChannel);
+
+  if (!channelPolicy.canAutoSendFollowUps && channelPolicy.approvalBlocker) {
+    blockers.push(channelPolicy.approvalBlocker);
+  }
 
   if (draft.outreachSendStatus !== "sent") {
     blockers.push("First outreach must be marked sent before follow-up approval.");
@@ -500,6 +564,7 @@ function rowToProspectDraft(row: SupabaseProspectRow): ProspectDraft {
     followUpSubject: normalizeDraftText(row.follow_up_draft_subject),
     followUpBody: normalizeDraftText(row.follow_up_draft_body),
     followUpLastError: row.follow_up_last_error,
+    followUpChannelPolicy: getFollowUpChannelPolicy(row.outreach_send_channel),
     replyStatus: row.reply_status,
     notes: row.notes,
     approvalBlockers: [],
@@ -516,17 +581,44 @@ function rowToProspectDraft(row: SupabaseProspectRow): ProspectDraft {
 
 export function getSupabaseConfig(options: { requireServiceRole?: boolean } = {}) {
   const url = process.env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const publishableKey =
+    process.env.SUPABASE_PUBLISHABLE_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
+    process.env.SUPABASE_ANON_KEY;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const key = options.requireServiceRole
-    ? process.env.SUPABASE_SERVICE_ROLE_KEY
-    : process.env.SUPABASE_SERVICE_ROLE_KEY ?? process.env.SUPABASE_ANON_KEY;
+    ? serviceRoleKey
+    : serviceRoleKey ?? publishableKey;
+  const isJwtKey = key?.split(".").length === 3;
+  const isSecretKey = key?.startsWith("sb_secret_");
+  const apiKey = isSecretKey ? key : publishableKey ?? key;
+  const authorizationKey = isJwtKey ? key : null;
 
-  if (!url || !key) {
+  if (!url || !key || !apiKey) {
     return null;
   }
 
   return {
     url: url.replace(/\/$/, ""),
     key,
+    apiKey,
+    authorizationKey,
+  };
+}
+
+function getSupabaseHeaders(
+  config: NonNullable<ReturnType<typeof getSupabaseConfig>>,
+  extraHeaders: Record<string, string> = {},
+) {
+  return {
+    apikey: config.apiKey,
+    ...(config.authorizationKey
+      ? {
+          Authorization: `Bearer ${config.authorizationKey}`,
+        }
+      : {}),
+    ...extraHeaders,
   };
 }
 
@@ -567,6 +659,7 @@ export function getLocalProspectDraft(slug: string): ProspectDraft | null {
     followUpSubject: null,
     followUpBody: null,
     followUpLastError: null,
+    followUpChannelPolicy: getFollowUpChannelPolicy(null),
     replyStatus: null,
     notes: null,
     approvalBlockers: ["Local fallback drafts cannot be approved for n8n."],
@@ -590,10 +683,7 @@ async function fetchSupabaseProspectDraft(slug: string, config = getSupabaseConf
     });
 
     return fetch(`${supabaseConfig.url}/rest/v1/prospects?${params}`, {
-      headers: {
-        apikey: supabaseConfig.key,
-        Authorization: `Bearer ${supabaseConfig.key}`,
-      },
+      headers: getSupabaseHeaders(supabaseConfig),
       cache: "no-store",
     });
   }
@@ -631,10 +721,7 @@ export async function getProspectDraftSummaries(slugs: string[]) {
       });
 
       return fetch(`${supabaseConfig.url}/rest/v1/prospects?${params}`, {
-        headers: {
-          apikey: supabaseConfig.key,
-          Authorization: `Bearer ${supabaseConfig.key}`,
-        },
+        headers: getSupabaseHeaders(supabaseConfig),
         cache: "no-store",
       });
     }
@@ -789,12 +876,10 @@ export async function updateProspectDraftApproval(
 
   const response = await fetch(`${config.url}/rest/v1/prospects?prospect_slug=eq.${slug}`, {
     method: "PATCH",
-    headers: {
-      apikey: config.key,
-      Authorization: `Bearer ${config.key}`,
+    headers: getSupabaseHeaders(config, {
       "Content-Type": "application/json",
       Prefer: "return=representation",
-    },
+    }),
     body: JSON.stringify(update),
     cache: "no-store",
   });
@@ -931,12 +1016,10 @@ export async function updateProspectFollowUpApproval(
 
   const response = await fetch(`${config.url}/rest/v1/prospects?prospect_slug=eq.${slug}`, {
     method: "PATCH",
-    headers: {
-      apikey: config.key,
-      Authorization: `Bearer ${config.key}`,
+    headers: getSupabaseHeaders(config, {
       "Content-Type": "application/json",
       Prefer: "return=representation",
-    },
+    }),
     body: JSON.stringify(update),
     cache: "no-store",
   });
@@ -1132,12 +1215,10 @@ export async function updateProspectManualContact(slug: string, input: ManualCon
 
   const response = await fetch(`${config.url}/rest/v1/prospects?prospect_slug=eq.${slug}`, {
     method: "PATCH",
-    headers: {
-      apikey: config.key,
-      Authorization: `Bearer ${config.key}`,
+    headers: getSupabaseHeaders(config, {
       "Content-Type": "application/json",
       Prefer: "return=representation",
-    },
+    }),
     body: JSON.stringify(update),
     cache: "no-store",
   });
@@ -1260,12 +1341,10 @@ export async function updateProspectManualFollowUp(slug: string, input: ManualFo
 
   const response = await fetch(`${config.url}/rest/v1/prospects?prospect_slug=eq.${slug}`, {
     method: "PATCH",
-    headers: {
-      apikey: config.key,
-      Authorization: `Bearer ${config.key}`,
+    headers: getSupabaseHeaders(config, {
       "Content-Type": "application/json",
       Prefer: "return=representation",
-    },
+    }),
     body: JSON.stringify(update),
     cache: "no-store",
   });
@@ -1341,12 +1420,10 @@ export async function updateProspectRelationshipStatus(
 
   const response = await fetch(`${config.url}/rest/v1/prospects?prospect_slug=eq.${slug}`, {
     method: "PATCH",
-    headers: {
-      apikey: config.key,
-      Authorization: `Bearer ${config.key}`,
+    headers: getSupabaseHeaders(config, {
       "Content-Type": "application/json",
       Prefer: "return=representation",
-    },
+    }),
     body: JSON.stringify(update),
     cache: "no-store",
   });

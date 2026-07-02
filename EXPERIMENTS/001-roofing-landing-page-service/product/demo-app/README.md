@@ -505,12 +505,15 @@ the app's server-side API route:
 
 ```text
 SUPABASE_URL=https://uwukaydnmwiwggqoemtc.supabase.co
+SUPABASE_PUBLISHABLE_KEY=...
 SUPABASE_SERVICE_ROLE_KEY=...
 ```
 
 Use `SUPABASE_SERVICE_ROLE_KEY` only as a server-side Vercel/local environment variable. Do not expose
-it with a `NEXT_PUBLIC_` prefix. The app has a local fallback for selected prospects, but Supabase is
-required for approval, revoke, manual-contact, and manual-follow-up write actions.
+it with a `NEXT_PUBLIC_` prefix. Legacy JWT service-role keys can use `SUPABASE_PUBLISHABLE_KEY` as
+the REST `apikey`; newer `sb_secret_...` keys are used server-side as the REST `apikey` and are not
+sent as bearer JWTs. The app has a local fallback for selected prospects, but Supabase is required for
+approval, revoke, manual-contact, and manual-follow-up write actions.
 
 ## Run Locally
 

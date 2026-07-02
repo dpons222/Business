@@ -17,7 +17,6 @@ Use a channel policy layer, not duplicated workflows.
 Keep one prospect record and one dashboard follow-up queue, but make follow-up actions depend on `outreach_send_channel` and, if needed later, `follow_up_send_channel`.
 
 ## Explicitly Out of Scope
-- Implementing code changes in this planning step.
 - Enabling fully automatic follow-up sends without human approval.
 - Auto-sending follow-ups for contact-form or manual-channel prospects.
 - Gmail/n8n reply classification.
@@ -105,6 +104,8 @@ Cons:
 Recommendation:
 - Use Option A for the first implementation pass unless manual evidence becomes messy.
 
+Decision: selected for Issue #118 implementation.
+
 ### Option B: Add Minimal Follow-Up Evidence Fields
 Keep `outreach_send_channel` as the default policy source, but add fields for manual follow-up evidence.
 
@@ -123,6 +124,8 @@ Cons:
 
 Recommendation:
 - Defer this unless notes become insufficient.
+
+Decision: deferred.
 
 ### Option C: Add `follow_up_send_channel`
 Add a channel field specifically for the follow-up action.
@@ -148,6 +151,8 @@ Cons:
 Recommendation:
 - Defer until there is evidence that follow-up channel often differs from original outreach channel.
 
+Decision: deferred.
+
 ## Recommended First Implementation
 Use Option A plus stricter UI/n8n policy.
 
@@ -164,62 +169,66 @@ Implementation summary:
 Objective: Centralize channel-specific behavior so dashboard and API checks use the same rules.
 
 Tasks:
-- [ ] Add or define a `followUpChannelPolicies` map.
-- [ ] Support at least `email`, `contact_form`, and `manual`.
-- [ ] Default unknown or missing channel to safest behavior: reminder/manual-record only.
-- [ ] Keep email-channel behavior compatible with Issue #116.
+- [x] Add or define a `followUpChannelPolicies` map.
+- [x] Support at least `email`, `contact_form`, and `manual`.
+- [x] Default unknown or missing channel to safest behavior: reminder/manual-record only.
+- [x] Keep email-channel behavior compatible with Issue #116.
 
 Validation:
-- [ ] Email-channel draft reports approval-send eligible when all other checks pass.
-- [ ] Contact-form-channel draft reports manual-record only.
-- [ ] Manual-channel draft reports manual-record only.
-- [ ] Missing channel does not allow automated follow-up send.
+- [x] Email-channel draft reports approval-send eligible when all other checks pass.
+- [x] Contact-form-channel draft reports manual-record only.
+- [x] Manual-channel draft reports manual-record only.
+- [x] Missing channel does not allow automated follow-up send.
 
 ### Phase 2 - Dashboard Behavior
 Objective: Make the follow-up panel clearly show the right action for each channel.
 
 Tasks:
-- [ ] For `email`, keep `Approve Follow-up Send`.
-- [ ] For `contact_form`, disable/hide approval and show manual follow-up required.
-- [ ] For `manual`, disable/hide approval and show manual follow-up required.
-- [ ] Ensure copy is operational and not over-explaining implementation details.
-- [ ] Preserve `Record Follow-up` behavior for manual completion.
+- [x] For `email`, keep `Approve Follow-up Send`.
+- [x] For `contact_form`, disable/hide approval and show manual follow-up required.
+- [x] For `manual`, disable/hide approval and show manual follow-up required.
+- [x] Ensure copy is operational and not over-explaining implementation details.
+- [x] Preserve `Record Follow-up` behavior for manual completion.
 
 Validation:
-- [ ] Email row shows approval controls.
-- [ ] Contact-form row does not show an active automated send approval button.
-- [ ] Manual row does not show an active automated send approval button.
+- [x] Email row shows approval controls.
+- [x] Contact-form row does not show an active automated send approval button.
+- [x] Manual row does not show an active automated send approval button.
 - [ ] Text fits and does not overlap in desktop/mobile dashboard views.
+
+Validation note: browser automation was attempted against desktop and mobile dashboard viewports on 2026-07-02, but the Playwright-run server could not reach Supabase from that environment and rendered fallback local data instead of the staged channel-policy row. `npm.cmd run build` passed, and the local API checks verified the channel-specific dashboard/API payloads.
 
 ### Phase 3 - API And n8n Guardrails
 Objective: Prevent accidental automated sends for non-email channels even if UI or data is wrong.
 
 Tasks:
-- [ ] Update dashboard/API approval blockers so `approve_follow_up_send` requires `outreach_send_channel = email`.
-- [ ] Update `Manual Approved Follow-Up Email Sender` n8n Code node to require `outreach_send_channel = email`.
-- [ ] Update workflow docs with the channel guardrail.
+- [x] Update dashboard/API approval blockers so `approve_follow_up_send` requires `outreach_send_channel = email`.
+- [x] Update `Manual Approved Follow-Up Email Sender` n8n Code node to require `outreach_send_channel = email`.
+- [x] Update workflow docs with the channel guardrail.
 
 Validation:
-- [ ] API rejects approval for contact-form rows.
-- [ ] API rejects approval for manual rows.
-- [ ] n8n sender blocks contact-form rows even if approval fields are manually set.
-- [ ] n8n sender blocks manual rows even if approval fields are manually set.
-- [ ] n8n sender still sends approved email-channel internal test row.
+- [x] API rejects approval for contact-form rows.
+- [x] API rejects approval for manual rows.
+- [x] n8n sender blocks contact-form rows even if approval fields are manually set.
+- [x] n8n sender blocks manual rows even if approval fields are manually set.
+- [x] n8n sender still sends approved email-channel internal test row.
+
+Validation note: local API validation on 2026-07-02 staged `internal-test-follow-up-reminder` as contact-form, manual, and missing-channel rows. `approve_follow_up_send` returned HTTP 422 for each non-email/missing-channel case. The row was restored to completed email-channel state after validation.
 
 ### Phase 4 - Internal Test Rows
 Objective: Validate behavior safely without prospect-facing mistakes.
 
 Tasks:
-- [ ] Prepare or create internal email-channel due follow-up test row.
-- [ ] Prepare or create internal contact-form-channel due follow-up test row.
-- [ ] Prepare or create internal manual-channel due follow-up test row.
-- [ ] Restore internal rows after tests so no accidental sends remain queued.
+- [x] Prepare or create internal email-channel due follow-up test row.
+- [x] Prepare or create internal contact-form-channel due follow-up test row.
+- [x] Prepare or create internal manual-channel due follow-up test row.
+- [x] Restore internal rows after tests so no accidental sends remain queued.
 
 Validation:
-- [ ] Email test row can be approved and sent only after dashboard approval.
-- [ ] Contact-form test row appears in reminder/manual queue but cannot be approved for n8n send.
-- [ ] Manual test row appears in reminder/manual queue but cannot be approved for n8n send.
-- [ ] No non-email prospect-facing send occurs.
+- [x] Email test row can be approved and sent only after dashboard approval.
+- [x] Contact-form test row appears in reminder/manual queue but cannot be approved for n8n send.
+- [x] Manual test row appears in reminder/manual queue but cannot be approved for n8n send.
+- [x] No non-email prospect-facing send occurs.
 
 ## Proposed n8n Guardrail Addition
 Add this guardrail to `Manual Approved Follow-Up Email Sender`:
@@ -246,16 +255,19 @@ Use Record Follow-up after sending manually through the original or chosen manua
 The UI should avoid making this feel like an error. It is an intentional safety policy.
 
 ## Open Decisions
-- [ ] Should missing `outreach_send_channel` default to manual-only, or should those rows be treated as needing data cleanup?
-- [ ] Should manual evidence stay in `notes` for now, or should a small `follow_up_manual_evidence` field be added immediately?
-- [ ] Should contact-form/manual follow-up timing stay at the same 7-day cadence as email follow-ups?
-- [ ] Should the internal reminder email label contact-form/manual rows differently from email rows?
+- [x] Should missing `outreach_send_channel` default to manual-only, or should those rows be treated as needing data cleanup?
+  - Decision: default to manual-only for safety.
+- [x] Should manual evidence stay in `notes` for now, or should a small `follow_up_manual_evidence` field be added immediately?
+  - Decision: keep manual evidence in `notes` for now.
+- [x] Should contact-form/manual follow-up timing stay at the same 7-day cadence as email follow-ups?
+  - Decision: keep the shared 7-day cadence for now.
+- [x] Should the internal reminder email label contact-form/manual rows differently from email rows?
+  - Decision: defer reminder-label changes; the dashboard policy is the first enforcement point.
 
 ## Acceptance Criteria
-- [ ] Plan reviewed and approved before implementation.
-- [ ] No implementation changes are made as part of this planning step.
-- [ ] Issue #118 is used for future implementation tracking.
-- [ ] Implementation can be split into small code/n8n changes with safe internal validation.
+- [x] Plan reviewed and approved before implementation.
+- [x] Issue #118 is used for implementation tracking.
+- [x] Implementation can be split into small code/n8n changes with safe internal validation.
 
 ## Safety Notes
 - The default for unknown or non-email channels should be no automated prospect-facing send.
