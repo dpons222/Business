@@ -198,7 +198,7 @@ Validation:
 
 Validation note: browser automation was attempted against desktop and mobile dashboard viewports on 2026-07-02, but the Playwright-run server could not reach Supabase from that environment and rendered fallback local data instead of the staged channel-policy row. `npm.cmd run build` passed, and the local API checks verified the channel-specific dashboard/API payloads.
 
-Follow-up validation note: mobile portrait overlap in the follow-up queue was fixed on 2026-07-02 by stacking `.follow-up-row` content and making the row action button full-width below the text at narrow widths. `npm.cmd run build` passed, and local production screenshots at 393x852 and 852x393 confirmed the follow-up queue rows no longer overlap or squeeze the date text.
+Follow-up validation note: mobile portrait overlap in the follow-up queue was fixed on 2026-07-02 by stacking `.follow-up-row` content and making the row action button full-width below the text at narrow widths. A related desktop overflow case was fixed by giving follow-up cards a practical minimum width, rendering row content as a text/action grid, and allowing long business names to wrap instead of pushing the `Open` button outside the card. `npm.cmd run build` passed, and local production screenshots at 393x852, 980x420, 1366x768, and 852x393 confirmed the follow-up queue rows no longer overlap or squeeze the date text.
 
 ### Phase 3 - API And n8n Guardrails
 Objective: Prevent accidental automated sends for non-email channels even if UI or data is wrong.

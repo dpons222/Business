@@ -2080,7 +2080,7 @@ main.landing-page {
 
 .follow-up-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
   gap: 12px;
 }
 
@@ -2126,6 +2126,8 @@ main.landing-page {
 }
 
 .follow-up-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
   align-items: flex-start;
   border-top: 1px solid var(--line);
   padding-top: 8px;
@@ -2141,11 +2143,12 @@ main.landing-page {
 }
 
 .follow-up-row strong {
-  overflow: hidden;
+  overflow: visible;
   color: var(--ink);
   font-size: 0.92rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .follow-up-row small,
@@ -2155,9 +2158,11 @@ main.landing-page {
   color: var(--muted);
   font-size: 0.82rem;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .follow-up-row .button {
+  max-width: 100%;
   min-height: 34px;
   flex: 0 0 auto;
   padding: 7px 10px;
