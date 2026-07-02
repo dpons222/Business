@@ -15,10 +15,8 @@ The idea is not to replace your full website. It would be a focused page you cou
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/rivertop-roofing
+https://local-growth-preview.vercel.app/rivertop-roofing
 ```
-
-Would you be open to seeing a quick example of what that page could look like for Rivertop?
 
 Best,
 
@@ -37,7 +35,7 @@ The main idea is simple: send homeowners who are worried about storm damage to o
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/rivertop-roofing
+https://local-growth-preview.vercel.app/rivertop-roofing
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Rivertop Roofing, I noticed your Plano roof inspection page already has a strong offer: free inspections, a detailed checklist, weather history, and a color photo report. My thought was that the same offer could work well as a shorter storm-specific landing page built around one action: helping Plano homeowners book a free roof inspection after hail or wind damage. Would you be open to seeing a quick example of what that page could look like for Rivertop?
+Hi Rivertop Roofing, I noticed your Plano roof inspection page already has a strong offer: free inspections, a detailed checklist, weather history, and a color photo report. My thought was that the same offer could work well as a shorter storm-specific landing page built around one action: helping Plano homeowners book a free roof inspection after hail or wind damage.
 
 Best,
 Diego
@@ -58,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL: `https://roof-check-preview.vercel.app/rivertop-roofing`.
+- Verified production URL: `https://local-growth-preview.vercel.app/rivertop-roofing`.
 - Current contact method verified on 2026-06-24: `info@RivertopRoofing.com` and `(888) 909-5424` from the live Rivertop page footer.
 - Supabase review status prepared on 2026-06-24: `ready_for_review`; not approved and not sent.
 - Send the initial email or contact form version only after explicit approval.

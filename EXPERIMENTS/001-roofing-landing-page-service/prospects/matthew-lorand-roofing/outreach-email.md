@@ -15,10 +15,8 @@ The idea is not to replace your full website. It would be a focused page you cou
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/matthew-lorand-roofing
+https://local-growth-preview.vercel.app/matthew-lorand-roofing
 ```
-
-Would you be open to seeing a quick example of what that page could look like for Matthew Lorand?
 
 Best,
 
@@ -37,7 +35,7 @@ The main idea is simple: send storm-concerned homeowners to one focused page wit
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/matthew-lorand-roofing
+https://local-growth-preview.vercel.app/matthew-lorand-roofing
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Matthew Lorand Roofing, I noticed your Austin storm damage page already has a strong offer: complimentary inspections, detailed damage reports, clear estimates, and 20 years of local roof and restoration experience. My thought was that the same message could work well as a shorter storm-specific landing page built around one action: helping Austin homeowners book a complimentary inspection after hail, wind, leaks, or fallen branches. Would you be open to seeing a quick example of what that page could look like for Matthew Lorand?
+Hi Matthew Lorand Roofing, I noticed your Austin storm damage page already has a strong offer: complimentary inspections, detailed damage reports, clear estimates, and 20 years of local roof and restoration experience. My thought was that the same message could work well as a shorter storm-specific landing page built around one action: helping Austin homeowners book a complimentary inspection after hail, wind, leaks, or fallen branches.
 
 Best,
 Diego
@@ -58,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL: `https://roof-check-preview.vercel.app/matthew-lorand-roofing`.
+- Verified production URL: `https://local-growth-preview.vercel.app/matthew-lorand-roofing`.
 - Send the initial email or contact form version only after explicit approval.
 - Use the follow-up only if there is no response after 3-5 business days.
 - Log the send date, reply status, and next follow-up date in Supabase and the prospect tracker.

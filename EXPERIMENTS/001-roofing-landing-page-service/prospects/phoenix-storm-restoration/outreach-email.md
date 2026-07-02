@@ -15,10 +15,8 @@ The idea is not to replace your full site. It would be a focused page you could 
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/phoenix-storm-restoration
+https://local-growth-preview.vercel.app/phoenix-storm-restoration
 ```
-
-Would you be open to seeing a quick example of what that page could look like for Phoenix?
 
 Best,
 
@@ -37,7 +35,7 @@ The main idea is simple: send storm-concerned homeowners to one focused page wit
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/phoenix-storm-restoration
+https://local-growth-preview.vercel.app/phoenix-storm-restoration
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Phoenix Storm Restoration, I noticed your Fort Worth page already has strong emergency storm positioning: 24/7 response language, BBB Accredited and HAAG Certified proof, and a clear schedule inspection path. My thought was that the same proof could work well as a shorter emergency storm inspection page built around one action: helping Fort Worth homeowners schedule an inspection after roof damage, leaks, or storm debris. Would you be open to seeing a quick example of what that page could look like for Phoenix?
+Hi Phoenix Storm Restoration, I noticed your Fort Worth page already has strong emergency storm positioning: 24/7 response language, BBB Accredited and HAAG Certified proof, and a clear schedule inspection path. My thought was that the same proof could work well as a shorter emergency storm inspection page built around one action: helping Fort Worth homeowners schedule an inspection after roof damage, leaks, or storm debris.
 
 Best,
 Diego
@@ -58,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL target: `https://roof-check-preview.vercel.app/phoenix-storm-restoration`.
+- Verified production URL target: `https://local-growth-preview.vercel.app/phoenix-storm-restoration`.
 - Current contact method verified on 2026-06-24: `(945) 308-0425` and website contact form.
 - Send only after explicit approval.
 - Log send status in Supabase and the prospect tracker.

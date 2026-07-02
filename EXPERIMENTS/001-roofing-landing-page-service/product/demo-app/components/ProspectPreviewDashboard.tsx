@@ -2,9 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
+  AlertTriangle,
   ArrowUpDown,
   CalendarDays,
   Check,
+  CheckCircle2,
   Copy,
   ExternalLink,
   FileText,
@@ -17,10 +19,26 @@ import {
 } from "lucide-react";
 import type { DemoEntry, DemoNiche, DemoStatus } from "../lib/demoRegistry";
 import { nicheFilters, statusLabels } from "../lib/demoRegistry";
+import { relationshipStatusLabel } from "../lib/prospectDrafts";
+import type { ProspectDraftSummary } from "../lib/prospectDrafts";
 
 type SortMode = "name" | "date";
 type SortDirection = "asc" | "desc";
-type ContactFilter = "contacted" | "not_contacted" | "has_email" | "has_email_draft";
+type ContactFilter =
+  | "contacted"
+  | "not_contacted"
+  | "do_not_contact"
+  | "not_interested"
+  | "has_email"
+  | "has_email_draft";
+type ManualContactMethod =
+  | "contact_form"
+  | "email"
+  | "phone"
+  | "facebook"
+  | "instagram"
+  | "linkedin"
+  | "other";
 type DemoStatusFilter = Extract<
   DemoStatus,
   "ready_for_review" | "outreach_ready" | "follow_up" | "building_demo"
@@ -35,6 +53,8 @@ const nicheFilterOptions = nicheFilters.filter(
 const contactFilterOptions: Array<{ value: ContactFilter; label: string }> = [
   { value: "contacted", label: "Contacted" },
   { value: "not_contacted", label: "Not contacted" },
+  { value: "do_not_contact", label: "Do not contact" },
+  { value: "not_interested", label: "Not interested" },
   { value: "has_email", label: "Has email" },
   { value: "has_email_draft", label: "Has email draft" },
 ];
@@ -46,22 +66,63 @@ const demoStatusFilterOptions: Array<{ value: DemoStatusFilter; label: string }>
   { value: "building_demo", label: "Building demo" },
 ];
 
+const manualContactMethodOptions: Array<{ value: ManualContactMethod; label: string }> = [
+  { value: "contact_form", label: "Contact form" },
+  { value: "email", label: "Email" },
+  { value: "phone", label: "Phone" },
+  { value: "facebook", label: "Facebook" },
+  { value: "instagram", label: "Instagram" },
+  { value: "linkedin", label: "LinkedIn" },
+  { value: "other", label: "Other" },
+];
+
 type ProspectDraft = {
   businessName: string;
   businessEmail: string | null;
   contactStatus: string | null;
   outreachSendStatus: string | null;
   outreachSendChannel: string | null;
+  outreachApproved: boolean;
+  outreachApprovedAt: string | null;
+  outreachApprovedBy: string | null;
   subject: string | null;
   body: string | null;
   website: string | null;
   demoUrl: string | null;
+  dateContacted: string | null;
+  lastContactedAt: string | null;
+  followUp1DueAt: string | null;
+  followUp1SentAt: string | null;
+  followUp2DueAt: string | null;
+  followUp2SentAt: string | null;
+  nextFollowUpAt: string | null;
+  followUpSendStatus: string | null;
+  followUpApproved: boolean;
+  followUpApprovedAt: string | null;
+  followUpApprovedBy: string | null;
+  followUpStep: "follow_up_1" | "follow_up_2" | null;
+  followUpSubject: string | null;
+  followUpBody: string | null;
+  followUpLastError: string | null;
+  replyStatus: string | null;
+  notes: string | null;
+  approvalBlockers: string[];
+  followUpApprovalBlockers: string[];
   source: "supabase" | "local";
 };
 
 type ProspectPreviewDashboardProps = {
   currentFocus: DemoEntry;
   entries: DemoEntry[];
+  nowIso: string;
+  prospectDraftSummaries: Record<string, ProspectDraftSummary>;
+};
+
+type FollowUpQueueItem = {
+  entry: DemoEntry;
+  summary: ProspectDraftSummary;
+  dueAt: string | null;
+  label: string;
 };
 
 function formatDate(date: string) {
@@ -78,26 +139,170 @@ function toggleSelectedValue<T extends string>(selectedValues: T[], value: T) {
     : [...selectedValues, value];
 }
 
-function entryMatchesContactFilter(entry: DemoEntry, filter: ContactFilter) {
+function getEntryContactStatus(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
+  return summaries[entry.slug]?.contactStatus ?? (entry.status === "contacted" ? "contacted" : "not_contacted");
+}
+
+function formatDateTime(value: string | null) {
+  if (!value) {
+    return "Not set";
+  }
+
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(value));
+}
+
+function entryHasEmail(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
+  return Boolean(summaries[entry.slug]?.businessEmail ?? entry.contactEmail);
+}
+
+function entryHasEmailDraft(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
+  return summaries[entry.slug]?.hasEmailDraft ?? Boolean(entry.hasEmailDraft);
+}
+
+function entryMatchesContactFilter(
+  entry: DemoEntry,
+  filter: ContactFilter,
+  summaries: Record<string, ProspectDraftSummary>,
+) {
   if (filter === "contacted") {
-    return entry.status === "contacted";
+    return getEntryContactStatus(entry, summaries) === "contacted";
   }
 
   if (filter === "not_contacted") {
-    return entry.status !== "contacted";
+    return getEntryContactStatus(entry, summaries) === "not_contacted";
+  }
+
+  if (filter === "do_not_contact") {
+    return getEntryContactStatus(entry, summaries) === "do_not_contact";
+  }
+
+  if (filter === "not_interested") {
+    return getEntryContactStatus(entry, summaries) === "not_interested";
   }
 
   if (filter === "has_email") {
-    return Boolean(entry.contactEmail);
+    return entryHasEmail(entry, summaries);
   }
 
-  return Boolean(entry.hasEmailDraft);
+  return entryHasEmailDraft(entry, summaries);
+}
+
+const stoppedFollowUpStatuses = new Set([
+  "do_not_contact",
+  "not_interested",
+  "positive_reply",
+  "negative_reply",
+  "won",
+  "lost",
+  "not_fit",
+]);
+const replyFollowUpStatuses = new Set(["positive_reply", "neutral_reply", "negative_reply"]);
+
+function isStoppedOrReplied(status: string | null | undefined, replyStatus: string | null | undefined) {
+  return Boolean(
+    (status && (stoppedFollowUpStatuses.has(status) || replyFollowUpStatuses.has(status))) ||
+      replyStatus?.trim(),
+  );
+}
+
+function getManualFollowUpStep(draft: ProspectDraft | null) {
+  if (!draft || draft.followUp2SentAt || draft.contactStatus === "follow_up_2_sent") {
+    return null;
+  }
+
+  if (
+    draft.followUp1SentAt ||
+    draft.contactStatus === "follow_up_1_sent" ||
+    draft.contactStatus === "follow_up_2_due"
+  ) {
+    return "follow_up_2" as const;
+  }
+
+  return "follow_up_1" as const;
+}
+
+function sortFollowUps(first: FollowUpQueueItem, second: FollowUpQueueItem) {
+  const firstTime = first.dueAt ? new Date(first.dueAt).getTime() : Number.MAX_SAFE_INTEGER;
+  const secondTime = second.dueAt ? new Date(second.dueAt).getTime() : Number.MAX_SAFE_INTEGER;
+
+  if (firstTime !== secondTime) {
+    return firstTime - secondTime;
+  }
+
+  return first.entry.title.localeCompare(second.entry.title);
+}
+
+const lockedOutreachStatuses = new Set(["approved_for_draft", "draft_created", "approved", "queued", "sent"]);
+
+const outreachStatusLabels: Record<string, string> = {
+  not_ready: "Not ready",
+  ready_for_review: "Ready for review",
+  approved_for_draft: "Approved for Gmail draft",
+  draft_created: "Gmail draft created",
+  approved: "Approved for n8n send",
+  queued: "Queued",
+  sent: "Sent",
+  failed: "Failed",
+  skipped: "Skipped",
+};
+
+function draftStatusLabel(status: string | null) {
+  if (!status) {
+    return "No outreach status";
+  }
+
+  return outreachStatusLabels[status] ?? status;
+}
+
+function followUpStatusLabel(status: string | null) {
+  if (!status) {
+    return "No follow-up send status";
+  }
+
+  return outreachStatusLabels[status] ?? status;
+}
+
+function relationshipPillClass(status: string | null | undefined) {
+  return status ? `relationship-pill relationship-pill-${status}` : "relationship-pill";
+}
+
+function summaryFromDraft(draft: ProspectDraft): ProspectDraftSummary {
+  return {
+    businessEmail: draft.businessEmail,
+    contactStatus: draft.contactStatus,
+    hasEmailDraft: Boolean(draft.subject?.trim() && draft.body?.trim()),
+    outreachSendStatus: draft.outreachSendStatus as ProspectDraftSummary["outreachSendStatus"],
+    dateContacted: draft.dateContacted,
+    lastContactedAt: draft.lastContactedAt,
+    followUp1DueAt: draft.followUp1DueAt,
+    followUp1SentAt: draft.followUp1SentAt,
+    followUp2DueAt: draft.followUp2DueAt,
+    followUp2SentAt: draft.followUp2SentAt,
+    nextFollowUpAt: draft.nextFollowUpAt,
+    followUpSendStatus: draft.followUpSendStatus as ProspectDraftSummary["followUpSendStatus"],
+    followUpApproved: draft.followUpApproved,
+    followUpStep: draft.followUpStep,
+    hasFollowUpDraft: Boolean(draft.followUpSubject?.trim() && draft.followUpBody?.trim()),
+    replyStatus: draft.replyStatus,
+    source: "supabase",
+  };
 }
 
 export function ProspectPreviewDashboard({
   currentFocus,
   entries,
+  nowIso,
+  prospectDraftSummaries: initialProspectDraftSummaries,
 }: ProspectPreviewDashboardProps) {
+  const [prospectDraftSummaries, setProspectDraftSummaries] = useState(
+    initialProspectDraftSummaries,
+  );
   const [sortMode, setSortMode] = useState<SortMode>("date");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [isFilterRailOpen, setIsFilterRailOpen] = useState(true);
@@ -111,6 +316,32 @@ export function ProspectPreviewDashboard({
   const [draftError, setDraftError] = useState<string | null>(null);
   const [isDraftLoading, setIsDraftLoading] = useState(false);
   const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
+  const [approvalIntent, setApprovalIntent] = useState<
+    | "approve"
+    | "revoke"
+    | "manual_contact"
+    | "manual_follow_up"
+    | "approve_follow_up"
+    | "revoke_follow_up"
+    | "do_not_contact"
+    | "not_interested"
+    | null
+  >(null);
+  const [isApprovalChecked, setIsApprovalChecked] = useState(false);
+  const [approvalError, setApprovalError] = useState<string | null>(null);
+  const [isApprovalSaving, setIsApprovalSaving] = useState(false);
+  const [manualContactMethod, setManualContactMethod] =
+    useState<ManualContactMethod>("contact_form");
+  const [manualContactNote, setManualContactNote] = useState("");
+  const [relationshipNote, setRelationshipNote] = useState("");
+  const [manualFollowUpDays, setManualFollowUpDays] = useState(7);
+  const [isManualContactChecked, setIsManualContactChecked] = useState(false);
+  const [manualFollowUpNote, setManualFollowUpNote] = useState("");
+  const [isManualFollowUpChecked, setIsManualFollowUpChecked] = useState(false);
+
+  useEffect(() => {
+    setProspectDraftSummaries(initialProspectDraftSummaries);
+  }, [initialProspectDraftSummaries]);
 
   useEffect(() => {
     const savedSlug = window.localStorage.getItem(CURRENT_FOCUS_STORAGE_KEY);
@@ -164,7 +395,9 @@ export function ProspectPreviewDashboard({
         selectedNiches.length === 0 || selectedNiches.includes(entry.niche);
       const matchesContactStatus =
         selectedContactFilters.length === 0 ||
-        selectedContactFilters.some((filter) => entryMatchesContactFilter(entry, filter));
+        selectedContactFilters.every((filter) =>
+          entryMatchesContactFilter(entry, filter, prospectDraftSummaries),
+        );
       const matchesDemoStatus =
         selectedDemoStatuses.length === 0 ||
         selectedDemoStatuses.some((status) => entry.status === status);
@@ -181,7 +414,15 @@ export function ProspectPreviewDashboard({
 
       return first.createdAt.localeCompare(second.createdAt) * direction;
     });
-  }, [entries, selectedContactFilters, selectedDemoStatuses, selectedNiches, sortDirection, sortMode]);
+  }, [
+    entries,
+    prospectDraftSummaries,
+    selectedContactFilters,
+    selectedDemoStatuses,
+    selectedNiches,
+    sortDirection,
+    sortMode,
+  ]);
 
   function updateSort(nextSortMode: SortMode) {
     if (nextSortMode === sortMode) {
@@ -205,6 +446,72 @@ export function ProspectPreviewDashboard({
   const focusOptions = useMemo(() => {
     return [...entries].sort((first, second) => first.title.localeCompare(second.title));
   }, [entries]);
+  const followUpQueue = useMemo(() => {
+    const nowTime = new Date(nowIso).getTime();
+    const queue = entries.reduce<{
+      due: FollowUpQueueItem[];
+      upcoming: FollowUpQueueItem[];
+      followedUp: FollowUpQueueItem[];
+      repliedOrStopped: FollowUpQueueItem[];
+    }>(
+      (groups, entry) => {
+        const summary = prospectDraftSummaries[entry.slug];
+
+        if (!summary || summary.source !== "supabase") {
+          return groups;
+        }
+
+        const status = summary.contactStatus;
+        const hasFollowUpHistory = Boolean(summary.followUp1SentAt || summary.followUp2SentAt);
+        const item: FollowUpQueueItem = {
+          entry,
+          summary,
+          dueAt: summary.nextFollowUpAt,
+          label: relationshipStatusLabel(status),
+        };
+
+        if (isStoppedOrReplied(status, summary.replyStatus)) {
+          groups.repliedOrStopped.push(item);
+          return groups;
+        }
+
+        if (summary.outreachSendStatus !== "sent" || !summary.nextFollowUpAt) {
+          if (hasFollowUpHistory) {
+            groups.followedUp.push(item);
+          }
+
+          return groups;
+        }
+
+        const nextFollowUpTime = new Date(summary.nextFollowUpAt).getTime();
+
+        if (!Number.isFinite(nextFollowUpTime)) {
+          return groups;
+        }
+
+        if (nextFollowUpTime <= nowTime) {
+          groups.due.push(item);
+          return groups;
+        }
+
+        groups.upcoming.push(item);
+        return groups;
+      },
+      {
+        due: [],
+        upcoming: [],
+        followedUp: [],
+        repliedOrStopped: [],
+      },
+    );
+
+    return {
+      due: queue.due.sort(sortFollowUps),
+      upcoming: queue.upcoming.sort(sortFollowUps),
+      followedUp: queue.followedUp.sort(sortFollowUps),
+      repliedOrStopped: queue.repliedOrStopped.sort(sortFollowUps),
+    };
+  }, [entries, nowIso, prospectDraftSummaries]);
 
   function resetFilters() {
     setSelectedNiches([]);
@@ -217,6 +524,16 @@ export function ProspectPreviewDashboard({
     setDraft(null);
     setDraftError(null);
     setCopiedLabel(null);
+    setApprovalIntent(null);
+    setIsApprovalChecked(false);
+    setApprovalError(null);
+    setManualContactMethod("contact_form");
+    setManualContactNote("");
+    setRelationshipNote("");
+    setManualFollowUpDays(7);
+    setIsManualContactChecked(false);
+    setManualFollowUpNote("");
+    setIsManualFollowUpChecked(false);
     setIsDraftLoading(true);
 
     try {
@@ -240,7 +557,277 @@ export function ProspectPreviewDashboard({
     setDraft(null);
     setDraftError(null);
     setCopiedLabel(null);
+    setApprovalIntent(null);
+    setIsApprovalChecked(false);
+    setApprovalError(null);
+    setIsApprovalSaving(false);
+    setManualContactMethod("contact_form");
+    setManualContactNote("");
+    setRelationshipNote("");
+    setManualFollowUpDays(7);
+    setIsManualContactChecked(false);
+    setManualFollowUpNote("");
+    setIsManualFollowUpChecked(false);
     setIsDraftLoading(false);
+  }
+
+  function syncDraftSummary(slug: string, nextDraft: ProspectDraft) {
+    if (nextDraft.source !== "supabase") {
+      return;
+    }
+
+    setProspectDraftSummaries((currentSummaries) => ({
+      ...currentSummaries,
+      [slug]: summaryFromDraft(nextDraft),
+    }));
+  }
+
+  async function submitApprovalAction(action: "approve_for_send" | "revoke_send_approval") {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Approval update failed.",
+        );
+      }
+
+      setDraft(payload as ProspectDraft);
+      syncDraftSummary(draftEntry.slug, payload as ProspectDraft);
+      setApprovalIntent(null);
+      setIsApprovalChecked(false);
+    } catch (error) {
+      setApprovalError(error instanceof Error ? error.message : "Approval update failed.");
+    } finally {
+      setIsApprovalSaving(false);
+    }
+  }
+
+  async function submitFollowUpApprovalAction(
+    action: "approve_follow_up_send" | "revoke_follow_up_send",
+  ) {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+          syncDraftSummary(draftEntry.slug, payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Follow-up approval update failed.",
+        );
+      }
+
+      const nextDraft = payload as ProspectDraft;
+      setDraft(nextDraft);
+      syncDraftSummary(draftEntry.slug, nextDraft);
+      setApprovalIntent(null);
+      setIsApprovalChecked(false);
+    } catch (error) {
+      setApprovalError(
+        error instanceof Error ? error.message : "Follow-up approval update failed.",
+      );
+    } finally {
+      setIsApprovalSaving(false);
+    }
+  }
+
+  async function submitManualContactAction() {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "record_manual_contact",
+          method: manualContactMethod,
+          note: manualContactNote,
+          followUpDays: manualFollowUpDays,
+        }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+          syncDraftSummary(draftEntry.slug, payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Manual contact update failed.",
+        );
+      }
+
+      const nextDraft = payload as ProspectDraft;
+      setDraft(nextDraft);
+      syncDraftSummary(draftEntry.slug, nextDraft);
+      setApprovalIntent(null);
+      setIsManualContactChecked(false);
+      setManualContactNote("");
+    } catch (error) {
+      setApprovalError(error instanceof Error ? error.message : "Manual contact update failed.");
+    } finally {
+      setIsApprovalSaving(false);
+    }
+  }
+
+  async function submitManualFollowUpAction() {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "record_manual_follow_up",
+          note: manualFollowUpNote,
+          followUpDays: manualFollowUpDays,
+        }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+          syncDraftSummary(draftEntry.slug, payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Manual follow-up update failed.",
+        );
+      }
+
+      const nextDraft = payload as ProspectDraft;
+      setDraft(nextDraft);
+      syncDraftSummary(draftEntry.slug, nextDraft);
+      setApprovalIntent(null);
+      setIsManualFollowUpChecked(false);
+      setManualFollowUpNote("");
+    } catch (error) {
+      setApprovalError(error instanceof Error ? error.message : "Manual follow-up update failed.");
+    } finally {
+      setIsApprovalSaving(false);
+    }
+  }
+
+  async function submitRelationshipAction(action: "mark_do_not_contact" | "mark_not_interested") {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action,
+          note: relationshipNote,
+        }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+          syncDraftSummary(draftEntry.slug, payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Relationship status update failed.",
+        );
+      }
+
+      const nextDraft = payload as ProspectDraft;
+      setDraft(nextDraft);
+      syncDraftSummary(draftEntry.slug, nextDraft);
+      setApprovalIntent(null);
+      setRelationshipNote("");
+    } catch (error) {
+      setApprovalError(
+        error instanceof Error ? error.message : "Relationship status update failed.",
+      );
+    } finally {
+      setIsApprovalSaving(false);
+    }
   }
 
   async function copyText(label: string, value: string | null | undefined) {
@@ -262,6 +849,106 @@ export function ProspectPreviewDashboard({
         .filter(Boolean)
         .join("\n\n")
     : "";
+  const followUpEmailBlock = draft
+    ? [
+        draft.businessEmail ? `To: ${draft.businessEmail}` : null,
+        draft.followUpSubject ? `Subject: ${draft.followUpSubject}` : null,
+        draft.followUpBody,
+      ]
+        .filter(Boolean)
+        .join("\n\n")
+    : "";
+  const canApproveForSend =
+    draft?.source === "supabase" &&
+    draft.approvalBlockers.length === 0 &&
+    draft.outreachSendStatus === "ready_for_review" &&
+    !lockedOutreachStatuses.has(draft.outreachSendStatus ?? "");
+  const canRevokeSendApproval =
+    draft?.source === "supabase" && draft.outreachSendStatus === "approved";
+  const canRecordManualContact =
+    draft?.source === "supabase" &&
+    draft.contactStatus === "not_contacted" &&
+    draft.outreachSendStatus !== "sent";
+  const manualContactUnavailableReason =
+    draft?.source !== "supabase"
+      ? "Manual contact can only be recorded for Supabase-backed prospects."
+      : draft.contactStatus === "contacted" || draft.outreachSendStatus === "sent"
+        ? "This prospect is already marked contacted."
+        : draft.contactStatus !== "not_contacted"
+          ? `Manual contact can only be recorded for not contacted prospects. Current status: ${relationshipStatusLabel(
+              draft.contactStatus,
+            )}.`
+        : undefined;
+  const manualFollowUpStep = getManualFollowUpStep(draft);
+  const manualFollowUpLabel =
+    manualFollowUpStep === "follow_up_2" ? "Follow-up 2" : "Follow-up 1";
+  const canRecordManualFollowUp =
+    draft?.source === "supabase" &&
+    draft.outreachSendStatus === "sent" &&
+    draft.contactStatus !== "not_contacted" &&
+    Boolean(manualFollowUpStep) &&
+    !isStoppedOrReplied(draft.contactStatus, draft.replyStatus);
+  const manualFollowUpUnavailableReason =
+    draft?.source !== "supabase"
+      ? "Follow-ups can only be recorded for Supabase-backed prospects."
+      : draft.outreachSendStatus !== "sent"
+        ? "Follow-ups can only be recorded after first outreach is marked sent."
+        : draft.contactStatus === "not_contacted"
+          ? "First outreach must be recorded before a follow-up."
+          : isStoppedOrReplied(draft.contactStatus, draft.replyStatus)
+            ? "Stopped or replied prospects are not eligible for follow-up."
+            : !manualFollowUpStep
+              ? "Both supported follow-ups are already recorded."
+              : undefined;
+  const followUpApprovalStep = draft?.followUpStep ?? manualFollowUpStep;
+  const followUpApprovalLabel =
+    followUpApprovalStep === "follow_up_2" ? "Follow-up 2" : "Follow-up 1";
+  const canApproveFollowUpSend =
+    draft?.source === "supabase" &&
+    draft.followUpApprovalBlockers.length === 0 &&
+    draft.followUpSendStatus === "ready_for_review";
+  const canRevokeFollowUpApproval =
+    draft?.source === "supabase" && draft.followUpSendStatus === "approved";
+
+  function renderFollowUpGroup(
+    title: string,
+    items: FollowUpQueueItem[],
+    emptyLabel: string,
+    options: { actionable?: boolean } = {},
+  ) {
+    return (
+      <article className="follow-up-card">
+        <div className="follow-up-card-heading">
+          <h3>{title}</h3>
+          <span>{items.length}</span>
+        </div>
+        {items.length > 0 ? (
+          <div className="follow-up-card-list">
+            {items.slice(0, 5).map((item) => (
+              <div className="follow-up-row" key={`${title}-${item.entry.slug}`}>
+                <div>
+                  <strong>{item.entry.title}</strong>
+                  <small>
+                    {item.label} - {formatDateTime(item.dueAt)}
+                  </small>
+                </div>
+                <button
+                  className={options.actionable ? "button button-primary" : "button button-ghost"}
+                  type="button"
+                  onClick={() => openDraft(item.entry)}
+                >
+                  {options.actionable ? "Record" : "Open"}
+                </button>
+              </div>
+            ))}
+            {items.length > 5 ? <p>{items.length - 5} more in this group.</p> : null}
+          </div>
+        ) : (
+          <p className="follow-up-empty">{emptyLabel}</p>
+        )}
+      </article>
+    );
+  }
 
   return (
     <main className="preview-dashboard">
@@ -350,6 +1037,32 @@ export function ProspectPreviewDashboard({
           </article>
         </section>
 
+        <section className="follow-up-queue" aria-labelledby="follow-up-queue-title">
+          <div className="follow-up-queue-heading">
+            <div>
+              <p className="eyebrow">Manual follow-up queue</p>
+              <h2 id="follow-up-queue-title">Contacted prospects</h2>
+            </div>
+            <span>{followUpQueue.due.length} due now</span>
+          </div>
+          <div className="follow-up-grid">
+            {renderFollowUpGroup("Due now", followUpQueue.due, "No follow-ups are due.", {
+              actionable: true,
+            })}
+            {renderFollowUpGroup("Upcoming", followUpQueue.upcoming, "No upcoming follow-ups.")}
+            {renderFollowUpGroup(
+              "Already followed up",
+              followUpQueue.followedUp,
+              "No completed follow-ups yet.",
+            )}
+            {renderFollowUpGroup(
+              "Replied or stopped",
+              followUpQueue.repliedOrStopped,
+              "No replied or stopped prospects.",
+            )}
+          </div>
+        </section>
+
         <section className="rename-note" aria-label="Project rename note">
           <div>
             <p className="eyebrow">Project naming</p>
@@ -368,17 +1081,6 @@ export function ProspectPreviewDashboard({
               <h2 id="preview-list-title">Available prospect previews</h2>
             </div>
             <div className="toolbar-controls">
-              <button
-                className={isFilterRailOpen ? "filter-toggle active" : "filter-toggle"}
-                type="button"
-                onClick={() => setIsFilterRailOpen((isOpen) => !isOpen)}
-                aria-expanded={isFilterRailOpen}
-                aria-controls="prospect-filter-rail"
-              >
-                <SlidersHorizontal size={16} aria-hidden="true" />
-                Filter
-                {activeFilterCount > 0 ? <span>{activeFilterCount}</span> : null}
-              </button>
               {activeFilterCount > 0 ? (
                 <button className="filter-reset-button" type="button" onClick={resetFilters}>
                   Reset
@@ -412,129 +1114,153 @@ export function ProspectPreviewDashboard({
               isFilterRailOpen ? "prospect-browser" : "prospect-browser filters-collapsed"
             }
           >
-            {isFilterRailOpen ? (
-              <aside className="filter-rail" id="prospect-filter-rail" aria-label="Prospect filters">
-                <div className="filter-rail-header">
+            <aside
+              className={isFilterRailOpen ? "filter-rail" : "filter-rail collapsed"}
+              id="prospect-filter-rail"
+              aria-label="Prospect filters"
+            >
+              <div className="filter-rail-header">
+                <button
+                  className="filter-rail-toggle"
+                  type="button"
+                  onClick={() => setIsFilterRailOpen((isOpen) => !isOpen)}
+                  aria-expanded={isFilterRailOpen}
+                  aria-controls="prospect-filter-panel"
+                  title={isFilterRailOpen ? "Collapse filters" : "Open filters"}
+                >
+                  <SlidersHorizontal size={16} aria-hidden="true" />
+                  {isFilterRailOpen ? <span>Filters</span> : null}
+                  {activeFilterCount > 0 ? <strong>{activeFilterCount}</strong> : null}
+                </button>
+                {isFilterRailOpen ? (
                   <div>
-                    <p className="eyebrow">Filters</p>
                     <strong>{visibleEntries.length} shown</strong>
                   </div>
+                ) : null}
+                {isFilterRailOpen && activeFilterCount > 0 ? (
+                  <button className="filter-reset-button" type="button" onClick={resetFilters}>
+                    Reset
+                  </button>
+                ) : null}
+              </div>
+
+              {isFilterRailOpen ? (
+                <div className="filter-rail-panel" id="prospect-filter-panel">
                   {activeFilterCount > 0 ? (
-                    <button className="filter-reset-button" type="button" onClick={resetFilters}>
-                      Reset
-                    </button>
+                    <div className="active-filter-count">{activeFilterCount} active</div>
                   ) : null}
+
+                  <details className="filter-rail-group">
+                    <summary>Niche</summary>
+                    <div className="filter-rail-options">
+                      {nicheFilterOptions.map((filter) => {
+                        const isSelected = selectedNiches.includes(filter.value);
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedNiches((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <Layers3 size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{nicheCounts[filter.value]}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
+
+                  <details className="filter-rail-group">
+                    <summary>Contact status</summary>
+                    <div className="filter-rail-options">
+                      {contactFilterOptions.map((filter) => {
+                        const isSelected = selectedContactFilters.includes(filter.value);
+                        const count = entries.filter((entry) =>
+                          entryMatchesContactFilter(entry, filter.value, prospectDraftSummaries),
+                        ).length;
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedContactFilters((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <Mail size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{count}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
+
+                  <details className="filter-rail-group">
+                    <summary>Demo status</summary>
+                    <div className="filter-rail-options">
+                      {demoStatusFilterOptions.map((filter) => {
+                        const isSelected = selectedDemoStatuses.includes(filter.value);
+                        const count = entries.filter((entry) => entry.status === filter.value).length;
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedDemoStatuses((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <FileText size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{count}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
                 </div>
-
-                <details className="filter-rail-group" open>
-                  <summary>Niche</summary>
-                  <div className="filter-rail-options">
-                    {nicheFilterOptions.map((filter) => {
-                      const isSelected = selectedNiches.includes(filter.value);
-
-                      return (
-                        <button
-                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                          key={filter.value}
-                          type="button"
-                          onClick={() =>
-                            setSelectedNiches((current) =>
-                              toggleSelectedValue(current, filter.value),
-                            )
-                          }
-                          aria-pressed={isSelected}
-                        >
-                          <span>
-                            {isSelected ? (
-                              <Check size={14} aria-hidden="true" />
-                            ) : (
-                              <Layers3 size={14} aria-hidden="true" />
-                            )}
-                            {filter.label}
-                          </span>
-                          <strong>{nicheCounts[filter.value]}</strong>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </details>
-
-                <details className="filter-rail-group" open>
-                  <summary>Contact status</summary>
-                  <div className="filter-rail-options">
-                    {contactFilterOptions.map((filter) => {
-                      const isSelected = selectedContactFilters.includes(filter.value);
-                      const count = entries.filter((entry) =>
-                        entryMatchesContactFilter(entry, filter.value),
-                      ).length;
-
-                      return (
-                        <button
-                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                          key={filter.value}
-                          type="button"
-                          onClick={() =>
-                            setSelectedContactFilters((current) =>
-                              toggleSelectedValue(current, filter.value),
-                            )
-                          }
-                          aria-pressed={isSelected}
-                        >
-                          <span>
-                            {isSelected ? (
-                              <Check size={14} aria-hidden="true" />
-                            ) : (
-                              <Mail size={14} aria-hidden="true" />
-                            )}
-                            {filter.label}
-                          </span>
-                          <strong>{count}</strong>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </details>
-
-                <details className="filter-rail-group" open>
-                  <summary>Demo status</summary>
-                  <div className="filter-rail-options">
-                    {demoStatusFilterOptions.map((filter) => {
-                      const isSelected = selectedDemoStatuses.includes(filter.value);
-                      const count = entries.filter((entry) => entry.status === filter.value).length;
-
-                      return (
-                        <button
-                          className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                          key={filter.value}
-                          type="button"
-                          onClick={() =>
-                            setSelectedDemoStatuses((current) =>
-                              toggleSelectedValue(current, filter.value),
-                            )
-                          }
-                          aria-pressed={isSelected}
-                        >
-                          <span>
-                            {isSelected ? (
-                              <Check size={14} aria-hidden="true" />
-                            ) : (
-                              <FileText size={14} aria-hidden="true" />
-                            )}
-                            {filter.label}
-                          </span>
-                          <strong>{count}</strong>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </details>
-              </aside>
-            ) : null}
+              ) : null}
+            </aside>
 
             <div className="prospect-results">
               <div className="preview-list">
                 {visibleEntries.map((entry) => {
                   const isCurrentFocus = entry.slug === selectedCurrentFocus.slug;
+                  const contactStatus = getEntryContactStatus(entry, prospectDraftSummaries);
 
                   return (
                     <article className="preview-row" key={`${entry.niche}-${entry.slug}`}>
@@ -551,6 +1277,9 @@ export function ProspectPreviewDashboard({
                           {isCurrentFocus ? <span className="active-pill">Current</span> : null}
                           <span className="niche-pill">{entry.niche}</span>
                           <span className="status-pill">{statusLabels[entry.status]}</span>
+                          <span className={relationshipPillClass(contactStatus)}>
+                            {relationshipStatusLabel(contactStatus)}
+                          </span>
                         </div>
                         <p>{entry.city}</p>
                         <small>
@@ -644,8 +1373,17 @@ export function ProspectPreviewDashboard({
               <>
                 <div className="draft-status-row">
                   <span>{draft.source === "supabase" ? "Supabase" : "Local fallback"}</span>
-                  <span>{draft.contactStatus ?? "No contact status"}</span>
-                  {draft.outreachSendStatus ? <span>{draft.outreachSendStatus}</span> : null}
+                  <span className={relationshipPillClass(draft.contactStatus)}>
+                    {relationshipStatusLabel(draft.contactStatus)}
+                  </span>
+                  <span>{draftStatusLabel(draft.outreachSendStatus)}</span>
+                  <span>{followUpStatusLabel(draft.followUpSendStatus)}</span>
+                  {draft.outreachApproved ? (
+                    <span>Approved by {draft.outreachApprovedBy ?? "dashboard user"}</span>
+                  ) : null}
+                  {draft.followUpApproved ? (
+                    <span>Follow-up approved by {draft.followUpApprovedBy ?? "dashboard user"}</span>
+                  ) : null}
                 </div>
 
                 <div className="draft-link-row">
@@ -662,6 +1400,20 @@ export function ProspectPreviewDashboard({
                     </a>
                   ) : null}
                 </div>
+
+                <section className="draft-field">
+                  <div>
+                    <label>Follow-up state</label>
+                  </div>
+                  <p>
+                    Last contacted: {formatDateTime(draft.lastContactedAt)}. Next follow-up:{" "}
+                    {formatDateTime(draft.nextFollowUpAt)}.
+                  </p>
+                  <p>
+                    Follow-up 1 sent: {formatDateTime(draft.followUp1SentAt)}. Follow-up 2 sent:{" "}
+                    {formatDateTime(draft.followUp2SentAt)}.
+                  </p>
+                </section>
 
                 <section className="draft-field">
                   <div>
@@ -711,6 +1463,645 @@ export function ProspectPreviewDashboard({
                   <pre>{draft.body ?? "No body draft stored yet."}</pre>
                 </section>
 
+                <section className="draft-approval-panel" aria-label="n8n send approval">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">n8n Send Approval</p>
+                      <h3>{draftStatusLabel(draft.outreachSendStatus)}</h3>
+                    </div>
+                    {canRevokeSendApproval ? (
+                      <CheckCircle2 size={22} aria-hidden="true" />
+                    ) : (
+                      <AlertTriangle size={22} aria-hidden="true" />
+                    )}
+                  </div>
+
+                  {draft.approvalBlockers.length > 0 ? (
+                    <div className="draft-approval-checks">
+                      <strong>Approval checks</strong>
+                      <ul>
+                        {draft.approvalBlockers.map((blocker) => (
+                          <li key={blocker}>{blocker}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <p className="approval-ready-copy">
+                      Recipient, subject, body, and stable demo URL are ready for n8n sending.
+                    </p>
+                  )}
+
+                  {approvalError &&
+                  (approvalIntent === "approve" || approvalIntent === "revoke") ? (
+                    <p className="approval-error">{approvalError}</p>
+                  ) : null}
+
+                  {approvalIntent === "approve" ? (
+                    <div className="draft-confirmation-panel">
+                      <dl>
+                        <div>
+                          <dt>To</dt>
+                          <dd>{draft.businessEmail}</dd>
+                        </div>
+                        <div>
+                          <dt>Subject</dt>
+                          <dd>{draft.subject}</dd>
+                        </div>
+                        <div>
+                          <dt>Demo</dt>
+                          <dd>{draft.demoUrl}</dd>
+                        </div>
+                      </dl>
+                      <label className="approval-check-label">
+                        <input
+                          type="checkbox"
+                          checked={isApprovalChecked}
+                          onChange={(event) => setIsApprovalChecked(event.target.checked)}
+                        />
+                        I reviewed the exact recipient, subject, body, and stable demo link, and
+                        approve n8n to send this email.
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-primary"
+                          type="button"
+                          onClick={() => submitApprovalAction("approve_for_send")}
+                          disabled={!isApprovalChecked || isApprovalSaving}
+                        >
+                          Approve for n8n Send
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setIsApprovalChecked(false);
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {approvalIntent === "revoke" ? (
+                    <div className="draft-confirmation-panel">
+                      <p>
+                        This removes n8n send approval and returns the row to ready for review.
+                      </p>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-danger"
+                          type="button"
+                          onClick={() => submitApprovalAction("revoke_send_approval")}
+                          disabled={isApprovalSaving}
+                        >
+                          Revoke Approval
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => setApprovalIntent(null)}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-primary"
+                        type="button"
+                        onClick={() => {
+                          setApprovalIntent("approve");
+                          setIsManualContactChecked(false);
+                        }}
+                        disabled={!canApproveForSend || isApprovalSaving}
+                        title={
+                          canApproveForSend
+                            ? undefined
+                            : "Approval is unavailable until this is a complete Supabase email row marked ready for review."
+                        }
+                      >
+                        Approve for n8n Send
+                      </button>
+                      {canRevokeSendApproval ? (
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => setApprovalIntent("revoke")}
+                          disabled={isApprovalSaving}
+                        >
+                          Revoke
+                        </button>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </section>
+
+                <section className="draft-approval-panel" aria-label="Manual outreach tracking">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">Manual Outreach</p>
+                      <h3>{relationshipStatusLabel(draft.contactStatus)}</h3>
+                    </div>
+                    {draft.contactStatus === "contacted" || draft.outreachSendStatus === "sent" ? (
+                      <CheckCircle2 size={22} aria-hidden="true" />
+                    ) : (
+                      <Mail size={22} aria-hidden="true" />
+                    )}
+                  </div>
+
+                  <p className="approval-ready-copy">
+                    Use this after you contact the business outside the email automation.
+                  </p>
+
+                  {manualContactUnavailableReason ? (
+                    <div className="draft-approval-checks">
+                      <strong>Manual contact checks</strong>
+                      <p>{manualContactUnavailableReason}</p>
+                    </div>
+                  ) : null}
+
+                  {approvalIntent === "manual_contact" ? (
+                    <div className="draft-confirmation-panel">
+                      <div className="manual-contact-grid">
+                        <label>
+                          Method
+                          <select
+                            value={manualContactMethod}
+                            onChange={(event) =>
+                              setManualContactMethod(event.target.value as ManualContactMethod)
+                            }
+                          >
+                            {manualContactMethodOptions.map((option) => (
+                              <option key={option.value} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+                        <label>
+                          Follow-up days
+                          <input
+                            type="number"
+                            min="1"
+                            max="30"
+                            value={manualFollowUpDays}
+                            onChange={(event) =>
+                              setManualFollowUpDays(Number(event.target.value) || 7)
+                            }
+                          />
+                        </label>
+                      </div>
+                      <label className="manual-contact-note-label">
+                        Note
+                        <textarea
+                          rows={3}
+                          value={manualContactNote}
+                          onChange={(event) => setManualContactNote(event.target.value)}
+                          placeholder="Optional context, such as form page used or contact name."
+                        />
+                      </label>
+                      <label className="approval-check-label">
+                        <input
+                          type="checkbox"
+                          checked={isManualContactChecked}
+                          onChange={(event) => setIsManualContactChecked(event.target.checked)}
+                        />
+                        I already contacted this business manually.
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-primary"
+                          type="button"
+                          onClick={submitManualContactAction}
+                          disabled={!isManualContactChecked || isApprovalSaving}
+                        >
+                          Save Manual Contact
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setIsManualContactChecked(false);
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-ghost"
+                        type="button"
+                        onClick={() => {
+                          setApprovalIntent("manual_contact");
+                          setIsApprovalChecked(false);
+                        }}
+                        disabled={!canRecordManualContact || isApprovalSaving}
+                        title={manualContactUnavailableReason}
+                      >
+                        Contacted Manually
+                      </button>
+                    </div>
+                  ) : null}
+                </section>
+
+                <section className="draft-approval-panel" aria-label="Follow-up send approval">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">Follow-up Send Approval</p>
+                      <h3>{followUpStatusLabel(draft.followUpSendStatus)}</h3>
+                    </div>
+                    {canRevokeFollowUpApproval ? (
+                      <CheckCircle2 size={22} aria-hidden="true" />
+                    ) : (
+                      <CalendarDays size={22} aria-hidden="true" />
+                    )}
+                  </div>
+
+                  <div className="follow-up-draft-preview">
+                    <div>
+                      <span>{followUpApprovalLabel}</span>
+                      {draft.followUpApproved ? (
+                        <small>
+                          Approved by {draft.followUpApprovedBy ?? "dashboard user"}{" "}
+                          {formatDateTime(draft.followUpApprovedAt)}
+                        </small>
+                      ) : null}
+                    </div>
+                    <section className="draft-field">
+                      <div>
+                        <label>Follow-up subject</label>
+                        <button
+                          className="copy-button"
+                          type="button"
+                          onClick={() => copyText("follow-up subject", draft.followUpSubject)}
+                          disabled={!draft.followUpSubject}
+                        >
+                          <Copy size={14} aria-hidden="true" />
+                          Copy
+                        </button>
+                      </div>
+                      <p>{draft.followUpSubject ?? "No follow-up subject stored yet."}</p>
+                    </section>
+                    <section className="draft-field draft-body-field">
+                      <div>
+                        <label>Follow-up body</label>
+                        <button
+                          className="copy-button"
+                          type="button"
+                          onClick={() => copyText("follow-up body", draft.followUpBody)}
+                          disabled={!draft.followUpBody}
+                        >
+                          <Copy size={14} aria-hidden="true" />
+                          Copy
+                        </button>
+                      </div>
+                      <pre>{draft.followUpBody ?? "No follow-up body stored yet."}</pre>
+                    </section>
+                  </div>
+
+                  {draft.followUpApprovalBlockers.length > 0 ? (
+                    <div className="draft-approval-checks">
+                      <strong>Follow-up approval checks</strong>
+                      <ul>
+                        {draft.followUpApprovalBlockers.map((blocker) => (
+                          <li key={blocker}>{blocker}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <p className="approval-ready-copy">
+                      Stored follow-up copy, recipient, step, and stable demo URL are ready for
+                      n8n sending.
+                    </p>
+                  )}
+
+                  {approvalError &&
+                  (approvalIntent === "approve_follow_up" ||
+                    approvalIntent === "revoke_follow_up") ? (
+                    <p className="approval-error">{approvalError}</p>
+                  ) : null}
+
+                  {approvalIntent === "approve_follow_up" ? (
+                    <div className="draft-confirmation-panel">
+                      <dl>
+                        <div>
+                          <dt>To</dt>
+                          <dd>{draft.businessEmail}</dd>
+                        </div>
+                        <div>
+                          <dt>Step</dt>
+                          <dd>{followUpApprovalLabel}</dd>
+                        </div>
+                        <div>
+                          <dt>Subject</dt>
+                          <dd>{draft.followUpSubject}</dd>
+                        </div>
+                        <div>
+                          <dt>Demo</dt>
+                          <dd>{draft.demoUrl}</dd>
+                        </div>
+                      </dl>
+                      <label className="approval-check-label">
+                        <input
+                          type="checkbox"
+                          checked={isApprovalChecked}
+                          onChange={(event) => setIsApprovalChecked(event.target.checked)}
+                        />
+                        I reviewed the exact recipient, subject, body, demo link, follow-up step,
+                        and current manual reply state.
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-primary"
+                          type="button"
+                          onClick={() => submitFollowUpApprovalAction("approve_follow_up_send")}
+                          disabled={!isApprovalChecked || isApprovalSaving}
+                        >
+                          Approve Follow-up Send
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setIsApprovalChecked(false);
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {approvalIntent === "revoke_follow_up" ? (
+                    <div className="draft-confirmation-panel">
+                      <p>
+                        This removes follow-up send approval and returns the follow-up row to ready
+                        for review.
+                      </p>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-danger"
+                          type="button"
+                          onClick={() => submitFollowUpApprovalAction("revoke_follow_up_send")}
+                          disabled={isApprovalSaving}
+                        >
+                          Revoke Follow-up Approval
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => setApprovalIntent(null)}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-primary"
+                        type="button"
+                        onClick={() => {
+                          setApprovalIntent("approve_follow_up");
+                          setIsApprovalChecked(false);
+                          setIsManualContactChecked(false);
+                          setIsManualFollowUpChecked(false);
+                        }}
+                        disabled={!canApproveFollowUpSend || isApprovalSaving}
+                        title={
+                          canApproveFollowUpSend
+                            ? undefined
+                            : "Follow-up approval is unavailable until stored copy and readiness checks pass."
+                        }
+                      >
+                        Approve Follow-up Send
+                      </button>
+                      {canRevokeFollowUpApproval ? (
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => setApprovalIntent("revoke_follow_up")}
+                          disabled={isApprovalSaving}
+                        >
+                          Revoke Follow-up
+                        </button>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </section>
+
+                <section className="draft-approval-panel" aria-label="Manual follow-up tracking">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">Manual Follow-up</p>
+                      <h3>{manualFollowUpStep ? manualFollowUpLabel : "Sequence complete"}</h3>
+                    </div>
+                    {manualFollowUpStep ? (
+                      <CalendarDays size={22} aria-hidden="true" />
+                    ) : (
+                      <CheckCircle2 size={22} aria-hidden="true" />
+                    )}
+                  </div>
+
+                  <p className="approval-ready-copy">
+                    Record this only after the follow-up was sent outside n8n.
+                  </p>
+
+                  {manualFollowUpUnavailableReason ? (
+                    <div className="draft-approval-checks">
+                      <strong>Follow-up checks</strong>
+                      <p>{manualFollowUpUnavailableReason}</p>
+                    </div>
+                  ) : null}
+
+                  {approvalIntent === "manual_follow_up" ? (
+                    <div className="draft-confirmation-panel">
+                      {manualFollowUpStep === "follow_up_1" ? (
+                        <div className="manual-contact-grid">
+                          <label>
+                            Follow-up 2 days
+                            <input
+                              type="number"
+                              min="1"
+                              max="30"
+                              value={manualFollowUpDays}
+                              onChange={(event) =>
+                                setManualFollowUpDays(Number(event.target.value) || 7)
+                              }
+                            />
+                          </label>
+                        </div>
+                      ) : null}
+                      <label className="manual-contact-note-label">
+                        Note
+                        <textarea
+                          rows={3}
+                          value={manualFollowUpNote}
+                          onChange={(event) => setManualFollowUpNote(event.target.value)}
+                          placeholder="Optional context from the follow-up send."
+                        />
+                      </label>
+                      <label className="approval-check-label">
+                        <input
+                          type="checkbox"
+                          checked={isManualFollowUpChecked}
+                          onChange={(event) => setIsManualFollowUpChecked(event.target.checked)}
+                        />
+                        I already sent {manualFollowUpLabel.toLowerCase()} manually and want to
+                        update Supabase.
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-primary"
+                          type="button"
+                          onClick={submitManualFollowUpAction}
+                          disabled={!isManualFollowUpChecked || isApprovalSaving}
+                        >
+                          Save {manualFollowUpLabel}
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setIsManualFollowUpChecked(false);
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-ghost"
+                        type="button"
+                        onClick={() => {
+                          setApprovalIntent("manual_follow_up");
+                          setIsApprovalChecked(false);
+                          setIsManualContactChecked(false);
+                        }}
+                        disabled={!canRecordManualFollowUp || isApprovalSaving}
+                        title={manualFollowUpUnavailableReason}
+                      >
+                        Record {manualFollowUpLabel}
+                      </button>
+                    </div>
+                  ) : null}
+                </section>
+
+                <section className="draft-approval-panel" aria-label="Prospect outcome tracking">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">Prospect Outcome</p>
+                      <h3>{relationshipStatusLabel(draft.contactStatus)}</h3>
+                    </div>
+                    <AlertTriangle size={22} aria-hidden="true" />
+                  </div>
+
+                  <p className="approval-ready-copy">
+                    Use these when this prospect should leave the active outreach queue.
+                  </p>
+
+                  {approvalIntent === "do_not_contact" || approvalIntent === "not_interested" ? (
+                    <div className="draft-confirmation-panel">
+                      <p>
+                        {approvalIntent === "do_not_contact"
+                          ? "Mark this as an internal decision not to contact the business."
+                          : "Mark this when the prospect has indicated they are not interested."}
+                      </p>
+                      <label className="manual-contact-note-label">
+                        Note
+                        <textarea
+                          rows={3}
+                          value={relationshipNote}
+                          onChange={(event) => setRelationshipNote(event.target.value)}
+                          placeholder="Optional reason or context for this status."
+                        />
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-danger"
+                          type="button"
+                          onClick={() =>
+                            submitRelationshipAction(
+                              approvalIntent === "do_not_contact"
+                                ? "mark_do_not_contact"
+                                : "mark_not_interested",
+                            )
+                          }
+                          disabled={isApprovalSaving}
+                        >
+                          {approvalIntent === "do_not_contact"
+                            ? "Save Do Not Contact"
+                            : "Save Not Interested"}
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setRelationshipNote("");
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-ghost"
+                        type="button"
+                        onClick={() => setApprovalIntent("do_not_contact")}
+                        disabled={
+                          draft.source !== "supabase" ||
+                          draft.contactStatus === "do_not_contact" ||
+                          isApprovalSaving
+                        }
+                      >
+                        Do Not Contact
+                      </button>
+                      <button
+                        className="button button-ghost"
+                        type="button"
+                        onClick={() => setApprovalIntent("not_interested")}
+                        disabled={
+                          draft.source !== "supabase" ||
+                          draft.contactStatus === "not_interested" ||
+                          isApprovalSaving
+                        }
+                      >
+                        Not Interested
+                      </button>
+                    </div>
+                  ) : null}
+                </section>
+
                 <div className="draft-drawer-actions">
                   <button
                     className="button button-primary"
@@ -720,6 +2111,15 @@ export function ProspectPreviewDashboard({
                   >
                     <FileText size={16} aria-hidden="true" />
                     Copy Email
+                  </button>
+                  <button
+                    className="button button-ghost"
+                    type="button"
+                    onClick={() => copyText("follow-up email", followUpEmailBlock)}
+                    disabled={!followUpEmailBlock}
+                  >
+                    <FileText size={16} aria-hidden="true" />
+                    Copy Follow-up
                   </button>
                   {copiedLabel ? <span>Copied {copiedLabel}</span> : null}
                 </div>

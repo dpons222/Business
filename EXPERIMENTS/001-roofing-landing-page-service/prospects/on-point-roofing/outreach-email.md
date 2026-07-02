@@ -15,10 +15,8 @@ The idea is not to replace your full page. It would be a focused page you could 
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/on-point-roofing
+https://local-growth-preview.vercel.app/on-point-roofing
 ```
-
-Would you be open to seeing a quick example of what that page could look like for On Point?
 
 Best,
 
@@ -37,7 +35,7 @@ The main idea is simple: send homeowners to one focused page with your free insp
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/on-point-roofing
+https://local-growth-preview.vercel.app/on-point-roofing
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi On Point Roofing, I noticed your Plano free inspection page already has strong proof: same-day inspection language, photo documentation, drone-ready reports, reviews, and a no-pressure tone. My thought was that the same content could work well as a shorter landing page built around one action: helping Plano homeowners schedule a free inspection or quote after hail, wind, leaks, or roof concerns. Would you be open to seeing a quick example of what that page could look like for On Point?
+Hi On Point Roofing, I noticed your Plano free inspection page already has strong proof: same-day inspection language, photo documentation, drone-ready reports, reviews, and a no-pressure tone. My thought was that the same content could work well as a shorter landing page built around one action: helping Plano homeowners schedule a free inspection or quote after hail, wind, leaks, or roof concerns.
 
 Best,
 Diego
@@ -58,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL target: `https://roof-check-preview.vercel.app/on-point-roofing`.
+- Verified production URL target: `https://local-growth-preview.vercel.app/on-point-roofing`.
 - Current contact method verified on 2026-06-24: `(817) 904-9423` and website schedule service path.
 - Send only after explicit approval.
 - Log send status in Supabase and the prospect tracker.

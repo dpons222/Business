@@ -50,7 +50,7 @@ The email-style draft below can still be used as the source copy for a manual me
 Subject:
 
 ```text
-Quick cleanup idea for Pizza Bella
+Customer-facing ordering cleanup idea for Pizza Bella
 ```
 
 Body:
@@ -71,7 +71,11 @@ My first recommendation would not be a full rebuild. It would be a focused custo
 
 The goal would be to make the guest path clearer before someone orders, without changing your POS or promising anything unrealistic.
 
-I put together a short preview of what I would clean up first. Would it be useful if I sent that over?
+Demo:
+
+https://local-growth-preview.vercel.app/pizabella
+
+If another site priority would be more useful to look at first, I can focus there instead.
 
 Diego
 ```
@@ -79,13 +83,13 @@ Diego
 ## Short Contact Form Version
 
 ```text
-Hi, I had a practical cleanup idea for Pizza Bella. Your online ordering is active, but the public site around it looks unfinished in a few places, including placeholder About copy. I would start with a focused customer journey cleanup: Home/About/Hours copy, order path review, top menu description/photo recommendations, public order-link cleanup, and a weekly specials workflow. I put together a short preview of what I would clean up first if useful. - Diego
+Hi, I had a practical cleanup idea for Pizza Bella. Your online ordering is active, but the public site around it looks unfinished in a few places, including placeholder About copy. I would start with a focused customer journey cleanup: Home/About/Hours copy, order path review, top menu description/photo recommendations, public order-link cleanup, and a weekly specials workflow. If another site priority would be more useful to look at first, I can focus there instead. - Diego
 ```
 
 ## Short Manual Facebook Version
 
 ```text
-Hi, I was looking at Pizza Bella's online ordering path and noticed the order system is live, but the public site around it still looks unfinished in a few places, including the About page. I put together a short customer-facing preview and a practical cleanup idea around Home/About copy, order links, menu highlights, and weekly specials. Would it be useful if I sent it over? - Diego
+Hi, I was looking at Pizza Bella's online ordering path and noticed the order system is live, but the public site around it still looks unfinished in a few places, including the About page. I put together a short customer-facing preview and a practical cleanup idea around Home/About copy, order links, menu highlights, and weekly specials. If another site priority would be more useful to look at first, I can focus there instead. - Diego
 ```
 
 ## Follow-Up 1

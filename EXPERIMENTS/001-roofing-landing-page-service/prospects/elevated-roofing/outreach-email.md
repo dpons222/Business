@@ -15,10 +15,8 @@ The idea is not to replace your current site. It would be a focused page you cou
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/elevated-roofing
+https://local-growth-preview.vercel.app/elevated-roofing
 ```
-
-Would you be open to seeing a quick example of what that page could look like for Elevated?
 
 Best,
 
@@ -37,7 +35,7 @@ The main idea is simple: send storm-concerned homeowners to one focused page wit
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/elevated-roofing
+https://local-growth-preview.vercel.app/elevated-roofing
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Elevated Roofing, I noticed your Fort Worth page already has strong proof around free no-obligation assessments, photo assessment reports, Google review proof, GAF credentials, and storm/hail services. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage. Would you be open to seeing a quick example of what that page could look like for Elevated?
+Hi Elevated Roofing, I noticed your Fort Worth page already has strong proof around free no-obligation assessments, photo assessment reports, Google review proof, GAF credentials, and storm/hail services. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners request an inspection after hail, wind, leaks, or visible roof damage.
 
 Best,
 Diego
@@ -58,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL target: `https://roof-check-preview.vercel.app/elevated-roofing`.
+- Verified production URL target: `https://local-growth-preview.vercel.app/elevated-roofing`.
 - Current contact method checked on 2026-06-24: Inspection CTA / phone.
 - Send only after explicit approval.
 - Log send status in Supabase and the prospect tracker.

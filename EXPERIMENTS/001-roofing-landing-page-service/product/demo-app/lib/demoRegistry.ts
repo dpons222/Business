@@ -99,7 +99,27 @@ const restaurantEntries: DemoEntry[] = [
   },
 ];
 
-export const demoEntries: DemoEntry[] = [...restaurantEntries, ...roofingEntries];
+const internalTestEntries: DemoEntry[] = [
+  {
+    slug: "internal-test-follow-up-reminder",
+    title: "Internal Test Follow-Up Reminder",
+    shortName: "Internal Follow-Up Test",
+    createdAt: "2026-07-02",
+    city: "Internal Test, US",
+    niche: "other",
+    status: "follow_up",
+    stageLabel: "Internal automation validation row",
+    primaryService: "Follow-up approval workflow validation",
+    observedIssue:
+      "Synthetic prospect used only to validate reminder and approval-gated follow-up automation.",
+    href: "/internal-test-follow-up-reminder",
+    sourceUrl: "https://example.com/internal-follow-up-reminder-test",
+    contactEmail: "digidaps@gmail.com",
+    hasEmailDraft: true,
+  },
+];
+
+export const demoEntries: DemoEntry[] = [...restaurantEntries, ...roofingEntries, ...internalTestEntries];
 
 export const currentFocusEntry =
   demoEntries.find((entry) => entry.isCurrentFocus) ?? demoEntries[0];

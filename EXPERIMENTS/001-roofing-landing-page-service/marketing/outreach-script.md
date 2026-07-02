@@ -15,7 +15,7 @@ I am testing a focused landing page offer for roofers: a storm damage / roof ins
 
 The idea is simple: one page, clear trust proof, strong mobile layout, and a direct call/request-inspection flow.
 
-Would you be open to seeing a quick example or a short audit of what I would improve on your current page? If another site priority would be more useful to look at first, I can focus there instead.
+If another site priority would be more useful to look at first, I can focus there instead.
 
 Best,
 [Your Name]

@@ -15,10 +15,8 @@ The idea is not to replace your full guide. It would be a focused page you could
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/arrington-roofing
+https://local-growth-preview.vercel.app/arrington-roofing
 ```
-
-Would you be open to seeing a quick example of what that page could look like for Arrington?
 
 Best,
 
@@ -37,7 +35,7 @@ The main idea is simple: send storm-concerned homeowners to one focused page wit
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/arrington-roofing
+https://local-growth-preview.vercel.app/arrington-roofing
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi Arrington Roofing, I noticed your North Texas storm damage guide already has strong content: free inspections, storm documentation, emergency service language, and decades of DFW experience. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners schedule a free storm damage inspection after hail, wind, debris, or leaks. Would you be open to seeing a quick example of what that page could look like for Arrington?
+Hi Arrington Roofing, I noticed your North Texas storm damage guide already has strong content: free inspections, storm documentation, emergency service language, and decades of DFW experience. My thought was that the same proof could work well as a shorter storm-specific landing page built around one action: helping homeowners schedule a free storm damage inspection after hail, wind, debris, or leaks.
 
 Best,
 Diego
@@ -58,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL target: `https://roof-check-preview.vercel.app/arrington-roofing`.
+- Verified production URL target: `https://local-growth-preview.vercel.app/arrington-roofing`.
 - Current contact method verified on 2026-06-24: `(214) 698-8443` and website inspection path from live page.
 - Send only after explicit approval.
 - Log send status in Supabase and the prospect tracker.

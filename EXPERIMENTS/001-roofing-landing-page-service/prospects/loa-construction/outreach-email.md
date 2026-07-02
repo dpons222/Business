@@ -18,7 +18,7 @@ Demo:
 https://local-growth-preview.vercel.app/loa-construction
 ```
 
-Would you be open to seeing a quick example of what that page could look like for LOA? If another site priority would be more useful to look at first, I can focus there instead.
+If another site priority would be more useful to look at first, I can focus there instead.
 
 Best,
 
@@ -40,7 +40,7 @@ Demo:
 https://local-growth-preview.vercel.app/loa-construction
 ```
 
-If this is useful, I can put together a quick example and show what it would track.
+If another site priority would be more useful to look at first, I can focus there instead.
 
 Best,
 
@@ -49,7 +49,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi LOA Construction, I was reviewing Austin roofing companies and noticed your hail storm article already tells homeowners to call for a free inspection after hail. My thought was that the same message could work harder as a short landing page built around one action: helping Austin homeowners request a free hail inspection or call your team faster. Would you be open to seeing a quick example of what that page could look like for LOA? If another site priority would be more useful to look at first, I can focus there instead.
+Hi LOA Construction, I was reviewing Austin roofing companies and noticed your hail storm article already tells homeowners to call for a free inspection after hail. My thought was that the same message could work harder as a short landing page built around one action: helping Austin homeowners request a free hail inspection or call your team faster. If another site priority would be more useful to look at first, I can focus there instead.
 
 Best,
 Diego

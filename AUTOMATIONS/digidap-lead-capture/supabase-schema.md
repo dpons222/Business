@@ -140,8 +140,8 @@ demo: https://local-growth-preview.vercel.app/charger-roofing
 | `interest_reason` | `text` | no | Reason the prospect showed interest or accepted the offer |
 | `loss_reason` | `text` | no | Reason the opportunity was lost, if known |
 | `decision_notes` | `text` | no | Additional decision context from replies, calls, or follow-up |
-| `outreach_send_status` | `text` | yes | Approval-gated send status for n8n outreach automation |
-| `outreach_approved` | `boolean` | yes | True only after Diego approves the exact draft/demo/contact method |
+| `outreach_send_status` | `text` | yes | Approval-gated draft/send status for n8n outreach automation |
+| `outreach_approved` | `boolean` | yes | True only after a dashboard user approves the exact draft/demo/contact method |
 | `outreach_approved_at` | `timestamptz` | no | Approval timestamp |
 | `outreach_approved_by` | `text` | no | Approver/operator |
 | `outreach_batch_id` | `text` | no | Batch label for grouped outreach review |
@@ -153,12 +153,26 @@ demo: https://local-growth-preview.vercel.app/charger-roofing
 | `outreach_pre_send_checked_by` | `text` | no | Checklist operator |
 | `outreach_pre_send_checklist` | `jsonb` | yes | Structured pre-send checklist evidence |
 | `outreach_last_error` | `text` | no | Latest send or automation guardrail error |
+| `follow_up_send_status` | `text` | yes | Approval-gated draft/send status for n8n follow-up automation |
+| `follow_up_approved` | `boolean` | yes | True only after a dashboard user approves the exact follow-up copy/demo/contact method |
+| `follow_up_approved_at` | `timestamptz` | no | Follow-up approval timestamp |
+| `follow_up_approved_by` | `text` | no | Follow-up approver/operator |
+| `follow_up_step` | `text` | no | `follow_up_1` or `follow_up_2` |
+| `follow_up_draft_subject` | `text` | no | Exact approved follow-up subject |
+| `follow_up_draft_body` | `text` | no | Exact approved follow-up body |
+| `follow_up_pre_send_checked_at` | `timestamptz` | no | Follow-up checklist completion timestamp |
+| `follow_up_pre_send_checked_by` | `text` | no | Follow-up checklist operator |
+| `follow_up_pre_send_checklist` | `jsonb` | yes | Structured follow-up pre-send checklist evidence |
+| `follow_up_last_error` | `text` | no | Latest follow-up send or guardrail error |
+| `follow_up_last_message_id` | `text` | no | Latest follow-up Gmail message ID |
 
 ## Prospect Status Values
 
 ```text
 not_contacted
 contacted
+do_not_contact
+not_interested
 follow_up_1_due
 follow_up_1_sent
 follow_up_2_due
@@ -172,6 +186,9 @@ lost
 not_fit
 ```
 
+Use `do_not_contact` when Diego internally decides not to pursue a prospect before outreach.
+Use `not_interested` when a prospect indicates no interest after outreach.
+
 ## Prospect Outreach Automation Status Values
 
 `outreach_send_status`:
@@ -179,6 +196,8 @@ not_fit
 ```text
 not_ready
 ready_for_review
+approved_for_draft
+draft_created
 approved
 queued
 sent
@@ -194,7 +213,30 @@ contact_form
 manual
 ```
 
-The n8n sender may only send rows where `outreach_approved = true`, `outreach_send_status = approved`, `outreach_send_channel = email`, required draft fields are present, and `demo_url` uses the stable production alias: `https://local-growth-preview.vercel.app/...`.
+`follow_up_send_status`:
+
+```text
+not_ready
+ready_for_review
+approved
+queued
+sent
+failed
+skipped
+```
+
+`follow_up_step`:
+
+```text
+follow_up_1
+follow_up_2
+```
+
+For the active n8n email sender workflow, n8n may only send rows where `outreach_approved = true`, `outreach_send_status = approved`, `outreach_send_channel = email`, required draft fields are present, and `demo_url` uses the stable production alias: `https://local-growth-preview.vercel.app/...`. After sending the email, n8n should write `outreach_send_status = sent` and update the prospect relationship `status = contacted`.
+
+The `approved_for_draft` and `draft_created` statuses are reserved for a future or legacy Gmail draft-only workflow and are not used by the current dashboard approval action.
+
+For follow-up sending, n8n may only send rows where `follow_up_approved = true`, `follow_up_send_status = approved`, `follow_up_step` is `follow_up_1` or `follow_up_2`, required follow-up draft fields are present, no terminal/reply status is present, and `demo_url` uses the stable production alias. Follow-up copy must be stored in Supabase before approval; Codex may draft or QA copy, but Supabase remains the source of truth for the exact approved message.
 
 ## Prospect Security
 

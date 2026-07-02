@@ -13,6 +13,7 @@ export const invictusRoofing: ProspectData = {
   recommendedCta: "Request Free Roof Inspection",
   secondaryCta: "Call (469) 649-0288",
   trustSignal: "Frisco roofing team with reviews, roof inspection guidance, storm and hail damage service, and insurance process resources",
+  logoUrl: "/prospects/invictus-roofing/invictus-roofing-wordmark.svg",
   projectImages: [],
   brand: {
     primary: "#1D3557",

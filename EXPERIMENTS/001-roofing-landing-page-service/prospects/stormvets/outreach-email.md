@@ -15,10 +15,8 @@ The idea is not to replace your full website. It would be a focused page you cou
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/stormvets
+https://local-growth-preview.vercel.app/stormvets
 ```
-
-Would you be open to seeing a quick example of what that page could look like for StormVets?
 
 Best,
 
@@ -37,7 +35,7 @@ The main idea is simple: send homeowners who are worried about storm damage to o
 Demo:
 
 ```text
-https://roof-check-preview.vercel.app/stormvets
+https://local-growth-preview.vercel.app/stormvets
 ```
 
 If useful, I can help set this up as a short pilot and show what it tracks.
@@ -49,7 +47,7 @@ Diego
 ## Contact Form Version
 
 ```text
-Hi StormVets, I noticed your Frisco free roof inspection page already has a strong offer: no-cost inspections, veteran-owned trust, and clear storm-damage language. My thought was that the same offer could work well as a shorter storm-specific landing page built around one action: helping Frisco homeowners request a free roof inspection after hail or wind. Would you be open to seeing a quick example of what that page could look like for StormVets?
+Hi StormVets, I noticed your Frisco free roof inspection page already has a strong offer: no-cost inspections, veteran-owned trust, and clear storm-damage language. My thought was that the same offer could work well as a shorter storm-specific landing page built around one action: helping Frisco homeowners request a free roof inspection after hail or wind.
 
 Best,
 Diego
@@ -58,7 +56,7 @@ https://digidap.vercel.app
 
 ## Notes
 
-- Verified production URL: `https://roof-check-preview.vercel.app/stormvets`.
+- Verified production URL: `https://local-growth-preview.vercel.app/stormvets`.
 - Current contact method verified on 2026-06-24: `info@stormvets.com` and `(469) 422-4238` from the live StormVets page footer.
 - Supabase review status prepared on 2026-06-24: `ready_for_review`; not approved and not sent.
 - Send the initial email or contact form version only after explicit approval.

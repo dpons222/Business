@@ -500,8 +500,8 @@ For Vercel, copy the resulting `DASHBOARD_AUTH_SECRET` and `DASHBOARD_USERS_JSON
 
 ## Dashboard Draft Data Configuration
 
-The dashboard email draft drawer can read from Supabase `public.prospects` through the app's
-server-side API route:
+The dashboard email draft drawer and approval actions read/write Supabase `public.prospects` through
+the app's server-side API route:
 
 ```text
 SUPABASE_URL=https://uwukaydnmwiwggqoemtc.supabase.co
@@ -510,7 +510,7 @@ SUPABASE_SERVICE_ROLE_KEY=...
 
 Use `SUPABASE_SERVICE_ROLE_KEY` only as a server-side Vercel/local environment variable. Do not expose
 it with a `NEXT_PUBLIC_` prefix. The app has a local fallback for selected prospects, but Supabase is
-the preferred source because it reflects draft/status updates without requiring a new code commit.
+required for approval, revoke, manual-contact, and manual-follow-up write actions.
 
 ## Run Locally
 

@@ -1,8 +1,8 @@
 # Outreach Approval Send Automation
 
-This automation is the planned human-approved send workflow for outbound prospect outreach.
+This automation is the human-approved n8n email send workflow for outbound prospect outreach.
 
-It is not an autonomous cold-email sender. The purpose is to let Codex prepare small batches, let Diego review the exact demos and drafts, and then allow n8n to send only approved records.
+It is not an autonomous cold-email sender. The purpose is to let Codex prepare small batches, let the dashboard user review the exact demos and drafts, and then allow the manual n8n sender to send only approved records.
 
 ## Current Status
 
@@ -22,32 +22,35 @@ It is not an autonomous cold-email sender. The purpose is to let Codex prepare s
 - Sender default batch limit is `3`; set `noLimit = true` in `Sender Config` only for an intentional all-approved-row run.
 - Sender guardrails now require `https://local-growth-preview.vercel.app/...` demo URLs and were retested with pinned data on June 26, 2026.
 - All workflows are manual-trigger only and are not published or scheduled.
-- No real prospect emails are sent by this automation yet.
+- Real prospect emails are sent only when the manual approved sender workflow is run against dashboard-approved rows.
+- Dashboard manual follow-up tracking is available for contacted prospects; it records follow-ups after Diego sends them outside n8n and does not send prospect-facing email.
 
 ## Intended Operating Model
 
 ```text
 1. Codex prepares a batch of 3-5 prospects.
 2. Codex completes the pre-send checklist for each prospect.
-3. Diego reviews the live demo, draft, recipient/contact method, and fit.
-4. Diego approves specific rows in Supabase.
-5. n8n dry-run workflow validates only approved email rows and outputs the would-send payload.
-6. n8n internal-send test proves Gmail can send the exact stored subject/body to Diego only.
-7. n8n approved sender sends only approved email rows, then writes sent/failed status back to Supabase.
+3. The dashboard user reviews the live demo, draft, recipient/contact method, and fit.
+4. The dashboard user clicks `Approve for n8n Send`, which approves specific rows in Supabase.
+5. n8n validates only approved email rows and sends the email.
+6. After a real outbound send, n8n updates Supabase to `status = contacted` and `outreach_send_status = sent`.
 ```
 
 ## Human Approval Boundary
 
-The system must not send outreach until Diego explicitly approves the exact draft and demo link.
+The system must not send an email until a dashboard user explicitly approves the exact draft and demo link. n8n workflows remain manual-trigger only unless the operating model is intentionally changed.
 
 Approval is represented in Supabase by:
 
 ```text
 outreach_approved = true
 outreach_send_status = approved
+outreach_send_channel = email
 outreach_approved_at is not null
 outreach_approved_by is not null
 ```
+
+The dashboard records the logged-in username in `outreach_approved_by`.
 
 ## Status Field Meanings
 
@@ -62,8 +65,10 @@ contacted = an outbound email or contact form message was actually sent
 
 ```text
 not_ready = draft, demo, contact method, or checklist evidence is incomplete
-ready_for_review = Codex prepared the draft/demo and Diego needs to review it
-approved = Diego approved the exact draft and demo URL for n8n sending
+ready_for_review = Codex prepared the draft/demo and a dashboard user needs to review it
+approved = dashboard user approved the exact draft and demo URL for n8n email sending
+approved_for_draft = legacy/reserved state for a draft-only Gmail workflow
+draft_created = legacy/reserved state for a draft-only Gmail workflow
 queued = n8n picked up the row and is preparing or attempting the send
 sent = the email provider confirmed the message was sent
 failed = n8n or the email provider failed the send attempt
@@ -71,6 +76,29 @@ skipped = n8n or the operator intentionally skipped the row
 ```
 
 Rule of thumb: `status` answers whether the prospect has been contacted; `outreach_send_status` answers where the row is in the approval/send workflow.
+
+## Manual Follow-Up Tracking
+
+The dashboard follow-up queue uses `next_follow_up_at` as the source of truth for due and upcoming follow-ups. It separates contacted prospects into due now, upcoming, already followed-up, and replied/stopped groups.
+
+Manual follow-up recording is intentionally conservative:
+
+```text
+follow-up 1 recorded:
+status = follow_up_1_sent
+last_contacted_at = now()
+follow_up_1_sent_at = now()
+follow_up_2_due_at = now() + selected days
+next_follow_up_at = follow_up_2_due_at
+
+follow-up 2 recorded:
+status = follow_up_2_sent
+last_contacted_at = now()
+follow_up_2_sent_at = now()
+next_follow_up_at = null
+```
+
+Rows with stopped or replied statuses are excluded from actionable follow-up recording. A third follow-up is intentionally unsupported until a later workflow is approved.
 
 ## Files
 
@@ -84,7 +112,8 @@ Rule of thumb: `status` answers whether the prospect has been contacted; `outrea
 - `EXPERIMENTS/001-roofing-landing-page-service/marketing/README.md`
 - `EXPERIMENTS/001-roofing-landing-page-service/marketing/outreach-script.md`
 - `AUTOMATIONS/digidap-lead-capture/README.md`
+- `AUTOMATIONS/follow-up-reminder/README.md`
 
 ## Rule
 
-No autonomous sending. n8n may send only records that pass the approval gate and pre-send checklist.
+No autonomous sending. The manual n8n sender may send email only for records that pass the approval gate and pre-send checklist.
