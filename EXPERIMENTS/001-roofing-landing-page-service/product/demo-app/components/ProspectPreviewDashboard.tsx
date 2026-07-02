@@ -14,6 +14,7 @@ import {
   Layers3,
   Link as LinkIcon,
   Mail,
+  Search,
   Star,
   X,
 } from "lucide-react";
@@ -166,6 +167,39 @@ function entryHasEmailDraft(entry: DemoEntry, summaries: Record<string, Prospect
   return summaries[entry.slug]?.hasEmailDraft ?? Boolean(entry.hasEmailDraft);
 }
 
+function normalizeSearchValue(value: string | null | undefined) {
+  return value?.trim().toLowerCase() ?? "";
+}
+
+function entryMatchesSearch(
+  entry: DemoEntry,
+  summaries: Record<string, ProspectDraftSummary>,
+  searchTerm: string,
+) {
+  if (!searchTerm) {
+    return true;
+  }
+
+  const summary = summaries[entry.slug];
+  const searchableText = [
+    entry.title,
+    entry.shortName,
+    entry.slug,
+    entry.city,
+    entry.niche,
+    entry.primaryService,
+    entry.stageLabel,
+    statusLabels[entry.status],
+    summary?.businessEmail,
+    summary?.contactStatus ? relationshipStatusLabel(summary.contactStatus) : null,
+  ]
+    .map(normalizeSearchValue)
+    .filter(Boolean)
+    .join(" ");
+
+  return searchableText.includes(searchTerm);
+}
+
 function entryMatchesContactFilter(
   entry: DemoEntry,
   filter: ContactFilter,
@@ -307,6 +341,7 @@ export function ProspectPreviewDashboard({
   const [sortMode, setSortMode] = useState<SortMode>("date");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
   const [isFilterRailOpen, setIsFilterRailOpen] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedNiches, setSelectedNiches] = useState<DemoNiche[]>([]);
   const [selectedContactFilters, setSelectedContactFilters] = useState<ContactFilter[]>([]);
   const [selectedDemoStatuses, setSelectedDemoStatuses] = useState<DemoStatusFilter[]>([]);
@@ -391,6 +426,8 @@ export function ProspectPreviewDashboard({
   }, [entries]);
 
   const visibleEntries = useMemo(() => {
+    const searchTerm = normalizeSearchValue(searchQuery);
+
     const filteredEntries = entries.filter((entry) => {
       const matchesNiche =
         selectedNiches.length === 0 || selectedNiches.includes(entry.niche);
@@ -402,8 +439,9 @@ export function ProspectPreviewDashboard({
       const matchesDemoStatus =
         selectedDemoStatuses.length === 0 ||
         selectedDemoStatuses.some((status) => entry.status === status);
+      const matchesSearch = entryMatchesSearch(entry, prospectDraftSummaries, searchTerm);
 
-      return matchesNiche && matchesContactStatus && matchesDemoStatus;
+      return matchesNiche && matchesContactStatus && matchesDemoStatus && matchesSearch;
     });
 
     return [...filteredEntries].sort((first, second) => {
@@ -418,6 +456,7 @@ export function ProspectPreviewDashboard({
   }, [
     entries,
     prospectDraftSummaries,
+    searchQuery,
     selectedContactFilters,
     selectedDemoStatuses,
     selectedNiches,
@@ -438,8 +477,12 @@ export function ProspectPreviewDashboard({
   const dateSortLabel =
     sortMode === "date" && sortDirection === "asc" ? "Oldest First" : "Newest First";
   const nameSortLabel = sortMode === "name" && sortDirection === "desc" ? "Z-A" : "A-Z";
+  const trimmedSearchQuery = searchQuery.trim();
   const activeFilterCount =
-    selectedNiches.length + selectedContactFilters.length + selectedDemoStatuses.length;
+    selectedNiches.length +
+    selectedContactFilters.length +
+    selectedDemoStatuses.length +
+    (trimmedSearchQuery ? 1 : 0);
   const activeFilterLabel =
     activeFilterCount > 0
       ? `${activeFilterCount} active filter${activeFilterCount === 1 ? "" : "s"}`
@@ -515,6 +558,7 @@ export function ProspectPreviewDashboard({
   }, [entries, nowIso, prospectDraftSummaries]);
 
   function resetFilters() {
+    setSearchQuery("");
     setSelectedNiches([]);
     setSelectedContactFilters([]);
     setSelectedDemoStatuses([]);
@@ -1095,6 +1139,30 @@ export function ProspectPreviewDashboard({
                   Reset
                 </button>
               ) : null}
+              <div className="prospect-search">
+                <label className="sr-only" htmlFor="prospect-search-input">
+                  Search businesses
+                </label>
+                <Search size={16} aria-hidden="true" />
+                <input
+                  id="prospect-search-input"
+                  type="search"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Search businesses"
+                  autoComplete="off"
+                />
+                {trimmedSearchQuery ? (
+                  <button
+                    className="search-clear-button"
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    aria-label="Clear business search"
+                  >
+                    <X size={14} aria-hidden="true" />
+                  </button>
+                ) : null}
+              </div>
               <div className="sort-controls" aria-label="Sort prospect previews">
                 <button
                   className={sortMode === "date" ? "sort-button active" : "sort-button"}
@@ -1338,8 +1406,8 @@ export function ProspectPreviewDashboard({
                 })}
                 {visibleEntries.length === 0 ? (
                   <div className="empty-filter-state">
-                    <h3>No demos match these filters.</h3>
-                    <p>Adjust the niche, contact status, or demo status filter to show more demos.</p>
+                    <h3>No demos match this view.</h3>
+                    <p>Adjust the search, niche, contact status, or demo status filter to show more demos.</p>
                   </div>
                 ) : null}
               </div>
