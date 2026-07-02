@@ -16,6 +16,7 @@ export default async function DashboardPage() {
     <ProspectPreviewDashboard
       currentFocus={currentFocusEntry}
       entries={demoEntries}
+      nowIso={new Date().toISOString()}
       prospectDraftSummaries={prospectDraftSummaries}
     />
   );

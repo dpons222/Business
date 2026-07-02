@@ -153,6 +153,18 @@ demo: https://local-growth-preview.vercel.app/charger-roofing
 | `outreach_pre_send_checked_by` | `text` | no | Checklist operator |
 | `outreach_pre_send_checklist` | `jsonb` | yes | Structured pre-send checklist evidence |
 | `outreach_last_error` | `text` | no | Latest send or automation guardrail error |
+| `follow_up_send_status` | `text` | yes | Approval-gated draft/send status for n8n follow-up automation |
+| `follow_up_approved` | `boolean` | yes | True only after a dashboard user approves the exact follow-up copy/demo/contact method |
+| `follow_up_approved_at` | `timestamptz` | no | Follow-up approval timestamp |
+| `follow_up_approved_by` | `text` | no | Follow-up approver/operator |
+| `follow_up_step` | `text` | no | `follow_up_1` or `follow_up_2` |
+| `follow_up_draft_subject` | `text` | no | Exact approved follow-up subject |
+| `follow_up_draft_body` | `text` | no | Exact approved follow-up body |
+| `follow_up_pre_send_checked_at` | `timestamptz` | no | Follow-up checklist completion timestamp |
+| `follow_up_pre_send_checked_by` | `text` | no | Follow-up checklist operator |
+| `follow_up_pre_send_checklist` | `jsonb` | yes | Structured follow-up pre-send checklist evidence |
+| `follow_up_last_error` | `text` | no | Latest follow-up send or guardrail error |
+| `follow_up_last_message_id` | `text` | no | Latest follow-up Gmail message ID |
 
 ## Prospect Status Values
 
@@ -201,9 +213,30 @@ contact_form
 manual
 ```
 
+`follow_up_send_status`:
+
+```text
+not_ready
+ready_for_review
+approved
+queued
+sent
+failed
+skipped
+```
+
+`follow_up_step`:
+
+```text
+follow_up_1
+follow_up_2
+```
+
 For the active n8n email sender workflow, n8n may only send rows where `outreach_approved = true`, `outreach_send_status = approved`, `outreach_send_channel = email`, required draft fields are present, and `demo_url` uses the stable production alias: `https://local-growth-preview.vercel.app/...`. After sending the email, n8n should write `outreach_send_status = sent` and update the prospect relationship `status = contacted`.
 
 The `approved_for_draft` and `draft_created` statuses are reserved for a future or legacy Gmail draft-only workflow and are not used by the current dashboard approval action.
+
+For follow-up sending, n8n may only send rows where `follow_up_approved = true`, `follow_up_send_status = approved`, `follow_up_step` is `follow_up_1` or `follow_up_2`, required follow-up draft fields are present, no terminal/reply status is present, and `demo_url` uses the stable production alias. Follow-up copy must be stored in Supabase before approval; Codex may draft or QA copy, but Supabase remains the source of truth for the exact approved message.
 
 ## Prospect Security
 

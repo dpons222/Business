@@ -14,6 +14,8 @@ Use this directory for automation plans, workflow specs, and operational automat
 ## Current Automations
 
 - [DigiDap lead capture](digidap-lead-capture/README.md) - website form to n8n, Supabase, and email notification.
+- [Follow-up approval send](follow-up-approval-send/README.md) - manual approved follow-up email sender using follow-up-specific Supabase approval fields.
+- [Follow-up reminder](follow-up-reminder/README.md) - manual dry-run n8n workflow that surfaces due follow-up candidates without sending emails.
 - [Lead growth pipeline](lead-growth-pipeline/README.md) - draft-only lead sourcing, qualification, diagnosis, prospect package, and Gmail draft handoff scaffold.
 - [Outreach approval send](outreach-approval-send/README.md) - planned human-approved prospect outreach sender using Supabase and n8n.
 

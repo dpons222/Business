@@ -5,9 +5,12 @@ import {
   hasLocalDemoEntry,
   updateProspectRelationshipStatus,
   updateProspectDraftApproval,
+  updateProspectFollowUpApproval,
   updateProspectManualContact,
+  updateProspectManualFollowUp,
   type ManualContactMethod,
   type ProspectDraftApprovalAction,
+  type ProspectFollowUpApprovalAction,
   type ProspectRelationshipAction,
 } from "@/lib/prospectDrafts";
 
@@ -35,6 +38,10 @@ export async function GET(_request: Request, context: ProspectDraftRouteContext)
 
 function isApprovalAction(value: unknown): value is ProspectDraftApprovalAction {
   return value === "approve_for_send" || value === "revoke_send_approval";
+}
+
+function isFollowUpApprovalAction(value: unknown): value is ProspectFollowUpApprovalAction {
+  return value === "approve_follow_up_send" || value === "revoke_follow_up_send";
 }
 
 function isRelationshipAction(value: unknown): value is ProspectRelationshipAction {
@@ -95,6 +102,26 @@ export async function PATCH(request: Request, context: ProspectDraftRouteContext
     return NextResponse.json(result.draft);
   }
 
+  if (isFollowUpApprovalAction(payload.action)) {
+    const result = await updateProspectFollowUpApproval(
+      slug,
+      payload.action,
+      session.username,
+    );
+
+    if (result.error) {
+      return NextResponse.json(
+        {
+          error: result.error,
+          draft: result.draft,
+        },
+        { status: result.status },
+      );
+    }
+
+    return NextResponse.json(result.draft);
+  }
+
   if (isRelationshipAction(payload.action)) {
     const result = await updateProspectRelationshipStatus(
       slug,
@@ -116,7 +143,27 @@ export async function PATCH(request: Request, context: ProspectDraftRouteContext
   }
 
   if (payload.action !== "record_manual_contact") {
-    return NextResponse.json({ error: "Invalid prospect draft action" }, { status: 400 });
+    if (payload.action !== "record_manual_follow_up") {
+      return NextResponse.json({ error: "Invalid prospect draft action" }, { status: 400 });
+    }
+
+    const result = await updateProspectManualFollowUp(slug, {
+      note: typeof payload.note === "string" ? payload.note : "",
+      nextFollowUpDays:
+        typeof payload.followUpDays === "number" ? payload.followUpDays : undefined,
+    });
+
+    if (result.error) {
+      return NextResponse.json(
+        {
+          error: result.error,
+          draft: result.draft,
+        },
+        { status: result.status },
+      );
+    }
+
+    return NextResponse.json(result.draft);
   }
 
   if (!isManualContactMethod(payload.method)) {

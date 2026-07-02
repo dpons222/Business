@@ -89,15 +89,40 @@ type ProspectDraft = {
   body: string | null;
   website: string | null;
   demoUrl: string | null;
+  dateContacted: string | null;
+  lastContactedAt: string | null;
+  followUp1DueAt: string | null;
+  followUp1SentAt: string | null;
+  followUp2DueAt: string | null;
+  followUp2SentAt: string | null;
+  nextFollowUpAt: string | null;
+  followUpSendStatus: string | null;
+  followUpApproved: boolean;
+  followUpApprovedAt: string | null;
+  followUpApprovedBy: string | null;
+  followUpStep: "follow_up_1" | "follow_up_2" | null;
+  followUpSubject: string | null;
+  followUpBody: string | null;
+  followUpLastError: string | null;
+  replyStatus: string | null;
   notes: string | null;
   approvalBlockers: string[];
+  followUpApprovalBlockers: string[];
   source: "supabase" | "local";
 };
 
 type ProspectPreviewDashboardProps = {
   currentFocus: DemoEntry;
   entries: DemoEntry[];
+  nowIso: string;
   prospectDraftSummaries: Record<string, ProspectDraftSummary>;
+};
+
+type FollowUpQueueItem = {
+  entry: DemoEntry;
+  summary: ProspectDraftSummary;
+  dueAt: string | null;
+  label: string;
 };
 
 function formatDate(date: string) {
@@ -116,6 +141,20 @@ function toggleSelectedValue<T extends string>(selectedValues: T[], value: T) {
 
 function getEntryContactStatus(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
   return summaries[entry.slug]?.contactStatus ?? (entry.status === "contacted" ? "contacted" : "not_contacted");
+}
+
+function formatDateTime(value: string | null) {
+  if (!value) {
+    return "Not set";
+  }
+
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  }).format(new Date(value));
 }
 
 function entryHasEmail(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
@@ -154,6 +193,51 @@ function entryMatchesContactFilter(
   return entryHasEmailDraft(entry, summaries);
 }
 
+const stoppedFollowUpStatuses = new Set([
+  "do_not_contact",
+  "not_interested",
+  "positive_reply",
+  "negative_reply",
+  "won",
+  "lost",
+  "not_fit",
+]);
+const replyFollowUpStatuses = new Set(["positive_reply", "neutral_reply", "negative_reply"]);
+
+function isStoppedOrReplied(status: string | null | undefined, replyStatus: string | null | undefined) {
+  return Boolean(
+    (status && (stoppedFollowUpStatuses.has(status) || replyFollowUpStatuses.has(status))) ||
+      replyStatus?.trim(),
+  );
+}
+
+function getManualFollowUpStep(draft: ProspectDraft | null) {
+  if (!draft || draft.followUp2SentAt || draft.contactStatus === "follow_up_2_sent") {
+    return null;
+  }
+
+  if (
+    draft.followUp1SentAt ||
+    draft.contactStatus === "follow_up_1_sent" ||
+    draft.contactStatus === "follow_up_2_due"
+  ) {
+    return "follow_up_2" as const;
+  }
+
+  return "follow_up_1" as const;
+}
+
+function sortFollowUps(first: FollowUpQueueItem, second: FollowUpQueueItem) {
+  const firstTime = first.dueAt ? new Date(first.dueAt).getTime() : Number.MAX_SAFE_INTEGER;
+  const secondTime = second.dueAt ? new Date(second.dueAt).getTime() : Number.MAX_SAFE_INTEGER;
+
+  if (firstTime !== secondTime) {
+    return firstTime - secondTime;
+  }
+
+  return first.entry.title.localeCompare(second.entry.title);
+}
+
 const lockedOutreachStatuses = new Set(["approved_for_draft", "draft_created", "approved", "queued", "sent"]);
 
 const outreachStatusLabels: Record<string, string> = {
@@ -176,6 +260,14 @@ function draftStatusLabel(status: string | null) {
   return outreachStatusLabels[status] ?? status;
 }
 
+function followUpStatusLabel(status: string | null) {
+  if (!status) {
+    return "No follow-up send status";
+  }
+
+  return outreachStatusLabels[status] ?? status;
+}
+
 function relationshipPillClass(status: string | null | undefined) {
   return status ? `relationship-pill relationship-pill-${status}` : "relationship-pill";
 }
@@ -186,6 +278,18 @@ function summaryFromDraft(draft: ProspectDraft): ProspectDraftSummary {
     contactStatus: draft.contactStatus,
     hasEmailDraft: Boolean(draft.subject?.trim() && draft.body?.trim()),
     outreachSendStatus: draft.outreachSendStatus as ProspectDraftSummary["outreachSendStatus"],
+    dateContacted: draft.dateContacted,
+    lastContactedAt: draft.lastContactedAt,
+    followUp1DueAt: draft.followUp1DueAt,
+    followUp1SentAt: draft.followUp1SentAt,
+    followUp2DueAt: draft.followUp2DueAt,
+    followUp2SentAt: draft.followUp2SentAt,
+    nextFollowUpAt: draft.nextFollowUpAt,
+    followUpSendStatus: draft.followUpSendStatus as ProspectDraftSummary["followUpSendStatus"],
+    followUpApproved: draft.followUpApproved,
+    followUpStep: draft.followUpStep,
+    hasFollowUpDraft: Boolean(draft.followUpSubject?.trim() && draft.followUpBody?.trim()),
+    replyStatus: draft.replyStatus,
     source: "supabase",
   };
 }
@@ -193,6 +297,7 @@ function summaryFromDraft(draft: ProspectDraft): ProspectDraftSummary {
 export function ProspectPreviewDashboard({
   currentFocus,
   entries,
+  nowIso,
   prospectDraftSummaries: initialProspectDraftSummaries,
 }: ProspectPreviewDashboardProps) {
   const [prospectDraftSummaries, setProspectDraftSummaries] = useState(
@@ -212,7 +317,15 @@ export function ProspectPreviewDashboard({
   const [isDraftLoading, setIsDraftLoading] = useState(false);
   const [copiedLabel, setCopiedLabel] = useState<string | null>(null);
   const [approvalIntent, setApprovalIntent] = useState<
-    "approve" | "revoke" | "manual_contact" | "do_not_contact" | "not_interested" | null
+    | "approve"
+    | "revoke"
+    | "manual_contact"
+    | "manual_follow_up"
+    | "approve_follow_up"
+    | "revoke_follow_up"
+    | "do_not_contact"
+    | "not_interested"
+    | null
   >(null);
   const [isApprovalChecked, setIsApprovalChecked] = useState(false);
   const [approvalError, setApprovalError] = useState<string | null>(null);
@@ -223,6 +336,8 @@ export function ProspectPreviewDashboard({
   const [relationshipNote, setRelationshipNote] = useState("");
   const [manualFollowUpDays, setManualFollowUpDays] = useState(7);
   const [isManualContactChecked, setIsManualContactChecked] = useState(false);
+  const [manualFollowUpNote, setManualFollowUpNote] = useState("");
+  const [isManualFollowUpChecked, setIsManualFollowUpChecked] = useState(false);
 
   useEffect(() => {
     setProspectDraftSummaries(initialProspectDraftSummaries);
@@ -331,6 +446,72 @@ export function ProspectPreviewDashboard({
   const focusOptions = useMemo(() => {
     return [...entries].sort((first, second) => first.title.localeCompare(second.title));
   }, [entries]);
+  const followUpQueue = useMemo(() => {
+    const nowTime = new Date(nowIso).getTime();
+    const queue = entries.reduce<{
+      due: FollowUpQueueItem[];
+      upcoming: FollowUpQueueItem[];
+      followedUp: FollowUpQueueItem[];
+      repliedOrStopped: FollowUpQueueItem[];
+    }>(
+      (groups, entry) => {
+        const summary = prospectDraftSummaries[entry.slug];
+
+        if (!summary || summary.source !== "supabase") {
+          return groups;
+        }
+
+        const status = summary.contactStatus;
+        const hasFollowUpHistory = Boolean(summary.followUp1SentAt || summary.followUp2SentAt);
+        const item: FollowUpQueueItem = {
+          entry,
+          summary,
+          dueAt: summary.nextFollowUpAt,
+          label: relationshipStatusLabel(status),
+        };
+
+        if (isStoppedOrReplied(status, summary.replyStatus)) {
+          groups.repliedOrStopped.push(item);
+          return groups;
+        }
+
+        if (summary.outreachSendStatus !== "sent" || !summary.nextFollowUpAt) {
+          if (hasFollowUpHistory) {
+            groups.followedUp.push(item);
+          }
+
+          return groups;
+        }
+
+        const nextFollowUpTime = new Date(summary.nextFollowUpAt).getTime();
+
+        if (!Number.isFinite(nextFollowUpTime)) {
+          return groups;
+        }
+
+        if (nextFollowUpTime <= nowTime) {
+          groups.due.push(item);
+          return groups;
+        }
+
+        groups.upcoming.push(item);
+        return groups;
+      },
+      {
+        due: [],
+        upcoming: [],
+        followedUp: [],
+        repliedOrStopped: [],
+      },
+    );
+
+    return {
+      due: queue.due.sort(sortFollowUps),
+      upcoming: queue.upcoming.sort(sortFollowUps),
+      followedUp: queue.followedUp.sort(sortFollowUps),
+      repliedOrStopped: queue.repliedOrStopped.sort(sortFollowUps),
+    };
+  }, [entries, nowIso, prospectDraftSummaries]);
 
   function resetFilters() {
     setSelectedNiches([]);
@@ -351,6 +532,8 @@ export function ProspectPreviewDashboard({
     setRelationshipNote("");
     setManualFollowUpDays(7);
     setIsManualContactChecked(false);
+    setManualFollowUpNote("");
+    setIsManualFollowUpChecked(false);
     setIsDraftLoading(true);
 
     try {
@@ -383,6 +566,8 @@ export function ProspectPreviewDashboard({
     setRelationshipNote("");
     setManualFollowUpDays(7);
     setIsManualContactChecked(false);
+    setManualFollowUpNote("");
+    setIsManualFollowUpChecked(false);
     setIsDraftLoading(false);
   }
 
@@ -441,6 +626,56 @@ export function ProspectPreviewDashboard({
     }
   }
 
+  async function submitFollowUpApprovalAction(
+    action: "approve_follow_up_send" | "revoke_follow_up_send",
+  ) {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ action }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+          syncDraftSummary(draftEntry.slug, payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Follow-up approval update failed.",
+        );
+      }
+
+      const nextDraft = payload as ProspectDraft;
+      setDraft(nextDraft);
+      syncDraftSummary(draftEntry.slug, nextDraft);
+      setApprovalIntent(null);
+      setIsApprovalChecked(false);
+    } catch (error) {
+      setApprovalError(
+        error instanceof Error ? error.message : "Follow-up approval update failed.",
+      );
+    } finally {
+      setIsApprovalSaving(false);
+    }
+  }
+
   async function submitManualContactAction() {
     if (!draftEntry) {
       return;
@@ -488,6 +723,57 @@ export function ProspectPreviewDashboard({
       setManualContactNote("");
     } catch (error) {
       setApprovalError(error instanceof Error ? error.message : "Manual contact update failed.");
+    } finally {
+      setIsApprovalSaving(false);
+    }
+  }
+
+  async function submitManualFollowUpAction() {
+    if (!draftEntry) {
+      return;
+    }
+
+    setApprovalError(null);
+    setIsApprovalSaving(true);
+
+    try {
+      const response = await fetch(`/api/prospect-drafts/${draftEntry.slug}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "record_manual_follow_up",
+          note: manualFollowUpNote,
+          followUpDays: manualFollowUpDays,
+        }),
+      });
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; draft?: ProspectDraft }
+        | ProspectDraft
+        | null;
+
+      if (!response.ok) {
+        if (payload && "draft" in payload && payload.draft) {
+          setDraft(payload.draft);
+          syncDraftSummary(draftEntry.slug, payload.draft);
+        }
+
+        throw new Error(
+          payload && "error" in payload && payload.error
+            ? payload.error
+            : "Manual follow-up update failed.",
+        );
+      }
+
+      const nextDraft = payload as ProspectDraft;
+      setDraft(nextDraft);
+      syncDraftSummary(draftEntry.slug, nextDraft);
+      setApprovalIntent(null);
+      setIsManualFollowUpChecked(false);
+      setManualFollowUpNote("");
+    } catch (error) {
+      setApprovalError(error instanceof Error ? error.message : "Manual follow-up update failed.");
     } finally {
       setIsApprovalSaving(false);
     }
@@ -563,6 +849,15 @@ export function ProspectPreviewDashboard({
         .filter(Boolean)
         .join("\n\n")
     : "";
+  const followUpEmailBlock = draft
+    ? [
+        draft.businessEmail ? `To: ${draft.businessEmail}` : null,
+        draft.followUpSubject ? `Subject: ${draft.followUpSubject}` : null,
+        draft.followUpBody,
+      ]
+        .filter(Boolean)
+        .join("\n\n")
+    : "";
   const canApproveForSend =
     draft?.source === "supabase" &&
     draft.approvalBlockers.length === 0 &&
@@ -584,6 +879,76 @@ export function ProspectPreviewDashboard({
               draft.contactStatus,
             )}.`
         : undefined;
+  const manualFollowUpStep = getManualFollowUpStep(draft);
+  const manualFollowUpLabel =
+    manualFollowUpStep === "follow_up_2" ? "Follow-up 2" : "Follow-up 1";
+  const canRecordManualFollowUp =
+    draft?.source === "supabase" &&
+    draft.outreachSendStatus === "sent" &&
+    draft.contactStatus !== "not_contacted" &&
+    Boolean(manualFollowUpStep) &&
+    !isStoppedOrReplied(draft.contactStatus, draft.replyStatus);
+  const manualFollowUpUnavailableReason =
+    draft?.source !== "supabase"
+      ? "Follow-ups can only be recorded for Supabase-backed prospects."
+      : draft.outreachSendStatus !== "sent"
+        ? "Follow-ups can only be recorded after first outreach is marked sent."
+        : draft.contactStatus === "not_contacted"
+          ? "First outreach must be recorded before a follow-up."
+          : isStoppedOrReplied(draft.contactStatus, draft.replyStatus)
+            ? "Stopped or replied prospects are not eligible for follow-up."
+            : !manualFollowUpStep
+              ? "Both supported follow-ups are already recorded."
+              : undefined;
+  const followUpApprovalStep = draft?.followUpStep ?? manualFollowUpStep;
+  const followUpApprovalLabel =
+    followUpApprovalStep === "follow_up_2" ? "Follow-up 2" : "Follow-up 1";
+  const canApproveFollowUpSend =
+    draft?.source === "supabase" &&
+    draft.followUpApprovalBlockers.length === 0 &&
+    draft.followUpSendStatus === "ready_for_review";
+  const canRevokeFollowUpApproval =
+    draft?.source === "supabase" && draft.followUpSendStatus === "approved";
+
+  function renderFollowUpGroup(
+    title: string,
+    items: FollowUpQueueItem[],
+    emptyLabel: string,
+    options: { actionable?: boolean } = {},
+  ) {
+    return (
+      <article className="follow-up-card">
+        <div className="follow-up-card-heading">
+          <h3>{title}</h3>
+          <span>{items.length}</span>
+        </div>
+        {items.length > 0 ? (
+          <div className="follow-up-card-list">
+            {items.slice(0, 5).map((item) => (
+              <div className="follow-up-row" key={`${title}-${item.entry.slug}`}>
+                <div>
+                  <strong>{item.entry.title}</strong>
+                  <small>
+                    {item.label} - {formatDateTime(item.dueAt)}
+                  </small>
+                </div>
+                <button
+                  className={options.actionable ? "button button-primary" : "button button-ghost"}
+                  type="button"
+                  onClick={() => openDraft(item.entry)}
+                >
+                  {options.actionable ? "Record" : "Open"}
+                </button>
+              </div>
+            ))}
+            {items.length > 5 ? <p>{items.length - 5} more in this group.</p> : null}
+          </div>
+        ) : (
+          <p className="follow-up-empty">{emptyLabel}</p>
+        )}
+      </article>
+    );
+  }
 
   return (
     <main className="preview-dashboard">
@@ -670,6 +1035,32 @@ export function ProspectPreviewDashboard({
             <span>local-growth-preview</span>
             <p>Generic hub name</p>
           </article>
+        </section>
+
+        <section className="follow-up-queue" aria-labelledby="follow-up-queue-title">
+          <div className="follow-up-queue-heading">
+            <div>
+              <p className="eyebrow">Manual follow-up queue</p>
+              <h2 id="follow-up-queue-title">Contacted prospects</h2>
+            </div>
+            <span>{followUpQueue.due.length} due now</span>
+          </div>
+          <div className="follow-up-grid">
+            {renderFollowUpGroup("Due now", followUpQueue.due, "No follow-ups are due.", {
+              actionable: true,
+            })}
+            {renderFollowUpGroup("Upcoming", followUpQueue.upcoming, "No upcoming follow-ups.")}
+            {renderFollowUpGroup(
+              "Already followed up",
+              followUpQueue.followedUp,
+              "No completed follow-ups yet.",
+            )}
+            {renderFollowUpGroup(
+              "Replied or stopped",
+              followUpQueue.repliedOrStopped,
+              "No replied or stopped prospects.",
+            )}
+          </div>
         </section>
 
         <section className="rename-note" aria-label="Project rename note">
@@ -986,8 +1377,12 @@ export function ProspectPreviewDashboard({
                     {relationshipStatusLabel(draft.contactStatus)}
                   </span>
                   <span>{draftStatusLabel(draft.outreachSendStatus)}</span>
+                  <span>{followUpStatusLabel(draft.followUpSendStatus)}</span>
                   {draft.outreachApproved ? (
                     <span>Approved by {draft.outreachApprovedBy ?? "dashboard user"}</span>
+                  ) : null}
+                  {draft.followUpApproved ? (
+                    <span>Follow-up approved by {draft.followUpApprovedBy ?? "dashboard user"}</span>
                   ) : null}
                 </div>
 
@@ -1005,6 +1400,20 @@ export function ProspectPreviewDashboard({
                     </a>
                   ) : null}
                 </div>
+
+                <section className="draft-field">
+                  <div>
+                    <label>Follow-up state</label>
+                  </div>
+                  <p>
+                    Last contacted: {formatDateTime(draft.lastContactedAt)}. Next follow-up:{" "}
+                    {formatDateTime(draft.nextFollowUpAt)}.
+                  </p>
+                  <p>
+                    Follow-up 1 sent: {formatDateTime(draft.followUp1SentAt)}. Follow-up 2 sent:{" "}
+                    {formatDateTime(draft.followUp2SentAt)}.
+                  </p>
+                </section>
 
                 <section className="draft-field">
                   <div>
@@ -1082,7 +1491,10 @@ export function ProspectPreviewDashboard({
                     </p>
                   )}
 
-                  {approvalError ? <p className="approval-error">{approvalError}</p> : null}
+                  {approvalError &&
+                  (approvalIntent === "approve" || approvalIntent === "revoke") ? (
+                    <p className="approval-error">{approvalError}</p>
+                  ) : null}
 
                   {approvalIntent === "approve" ? (
                     <div className="draft-confirmation-panel">
@@ -1305,6 +1717,300 @@ export function ProspectPreviewDashboard({
                   ) : null}
                 </section>
 
+                <section className="draft-approval-panel" aria-label="Follow-up send approval">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">Follow-up Send Approval</p>
+                      <h3>{followUpStatusLabel(draft.followUpSendStatus)}</h3>
+                    </div>
+                    {canRevokeFollowUpApproval ? (
+                      <CheckCircle2 size={22} aria-hidden="true" />
+                    ) : (
+                      <CalendarDays size={22} aria-hidden="true" />
+                    )}
+                  </div>
+
+                  <div className="follow-up-draft-preview">
+                    <div>
+                      <span>{followUpApprovalLabel}</span>
+                      {draft.followUpApproved ? (
+                        <small>
+                          Approved by {draft.followUpApprovedBy ?? "dashboard user"}{" "}
+                          {formatDateTime(draft.followUpApprovedAt)}
+                        </small>
+                      ) : null}
+                    </div>
+                    <section className="draft-field">
+                      <div>
+                        <label>Follow-up subject</label>
+                        <button
+                          className="copy-button"
+                          type="button"
+                          onClick={() => copyText("follow-up subject", draft.followUpSubject)}
+                          disabled={!draft.followUpSubject}
+                        >
+                          <Copy size={14} aria-hidden="true" />
+                          Copy
+                        </button>
+                      </div>
+                      <p>{draft.followUpSubject ?? "No follow-up subject stored yet."}</p>
+                    </section>
+                    <section className="draft-field draft-body-field">
+                      <div>
+                        <label>Follow-up body</label>
+                        <button
+                          className="copy-button"
+                          type="button"
+                          onClick={() => copyText("follow-up body", draft.followUpBody)}
+                          disabled={!draft.followUpBody}
+                        >
+                          <Copy size={14} aria-hidden="true" />
+                          Copy
+                        </button>
+                      </div>
+                      <pre>{draft.followUpBody ?? "No follow-up body stored yet."}</pre>
+                    </section>
+                  </div>
+
+                  {draft.followUpApprovalBlockers.length > 0 ? (
+                    <div className="draft-approval-checks">
+                      <strong>Follow-up approval checks</strong>
+                      <ul>
+                        {draft.followUpApprovalBlockers.map((blocker) => (
+                          <li key={blocker}>{blocker}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ) : (
+                    <p className="approval-ready-copy">
+                      Stored follow-up copy, recipient, step, and stable demo URL are ready for
+                      n8n sending.
+                    </p>
+                  )}
+
+                  {approvalError &&
+                  (approvalIntent === "approve_follow_up" ||
+                    approvalIntent === "revoke_follow_up") ? (
+                    <p className="approval-error">{approvalError}</p>
+                  ) : null}
+
+                  {approvalIntent === "approve_follow_up" ? (
+                    <div className="draft-confirmation-panel">
+                      <dl>
+                        <div>
+                          <dt>To</dt>
+                          <dd>{draft.businessEmail}</dd>
+                        </div>
+                        <div>
+                          <dt>Step</dt>
+                          <dd>{followUpApprovalLabel}</dd>
+                        </div>
+                        <div>
+                          <dt>Subject</dt>
+                          <dd>{draft.followUpSubject}</dd>
+                        </div>
+                        <div>
+                          <dt>Demo</dt>
+                          <dd>{draft.demoUrl}</dd>
+                        </div>
+                      </dl>
+                      <label className="approval-check-label">
+                        <input
+                          type="checkbox"
+                          checked={isApprovalChecked}
+                          onChange={(event) => setIsApprovalChecked(event.target.checked)}
+                        />
+                        I reviewed the exact recipient, subject, body, demo link, follow-up step,
+                        and current manual reply state.
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-primary"
+                          type="button"
+                          onClick={() => submitFollowUpApprovalAction("approve_follow_up_send")}
+                          disabled={!isApprovalChecked || isApprovalSaving}
+                        >
+                          Approve Follow-up Send
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setIsApprovalChecked(false);
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {approvalIntent === "revoke_follow_up" ? (
+                    <div className="draft-confirmation-panel">
+                      <p>
+                        This removes follow-up send approval and returns the follow-up row to ready
+                        for review.
+                      </p>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-danger"
+                          type="button"
+                          onClick={() => submitFollowUpApprovalAction("revoke_follow_up_send")}
+                          disabled={isApprovalSaving}
+                        >
+                          Revoke Follow-up Approval
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => setApprovalIntent(null)}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-primary"
+                        type="button"
+                        onClick={() => {
+                          setApprovalIntent("approve_follow_up");
+                          setIsApprovalChecked(false);
+                          setIsManualContactChecked(false);
+                          setIsManualFollowUpChecked(false);
+                        }}
+                        disabled={!canApproveFollowUpSend || isApprovalSaving}
+                        title={
+                          canApproveFollowUpSend
+                            ? undefined
+                            : "Follow-up approval is unavailable until stored copy and readiness checks pass."
+                        }
+                      >
+                        Approve Follow-up Send
+                      </button>
+                      {canRevokeFollowUpApproval ? (
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => setApprovalIntent("revoke_follow_up")}
+                          disabled={isApprovalSaving}
+                        >
+                          Revoke Follow-up
+                        </button>
+                      ) : null}
+                    </div>
+                  ) : null}
+                </section>
+
+                <section className="draft-approval-panel" aria-label="Manual follow-up tracking">
+                  <div className="draft-approval-heading">
+                    <div>
+                      <p className="eyebrow">Manual Follow-up</p>
+                      <h3>{manualFollowUpStep ? manualFollowUpLabel : "Sequence complete"}</h3>
+                    </div>
+                    {manualFollowUpStep ? (
+                      <CalendarDays size={22} aria-hidden="true" />
+                    ) : (
+                      <CheckCircle2 size={22} aria-hidden="true" />
+                    )}
+                  </div>
+
+                  <p className="approval-ready-copy">
+                    Record this only after the follow-up was sent outside n8n.
+                  </p>
+
+                  {manualFollowUpUnavailableReason ? (
+                    <div className="draft-approval-checks">
+                      <strong>Follow-up checks</strong>
+                      <p>{manualFollowUpUnavailableReason}</p>
+                    </div>
+                  ) : null}
+
+                  {approvalIntent === "manual_follow_up" ? (
+                    <div className="draft-confirmation-panel">
+                      {manualFollowUpStep === "follow_up_1" ? (
+                        <div className="manual-contact-grid">
+                          <label>
+                            Follow-up 2 days
+                            <input
+                              type="number"
+                              min="1"
+                              max="30"
+                              value={manualFollowUpDays}
+                              onChange={(event) =>
+                                setManualFollowUpDays(Number(event.target.value) || 7)
+                              }
+                            />
+                          </label>
+                        </div>
+                      ) : null}
+                      <label className="manual-contact-note-label">
+                        Note
+                        <textarea
+                          rows={3}
+                          value={manualFollowUpNote}
+                          onChange={(event) => setManualFollowUpNote(event.target.value)}
+                          placeholder="Optional context from the follow-up send."
+                        />
+                      </label>
+                      <label className="approval-check-label">
+                        <input
+                          type="checkbox"
+                          checked={isManualFollowUpChecked}
+                          onChange={(event) => setIsManualFollowUpChecked(event.target.checked)}
+                        />
+                        I already sent {manualFollowUpLabel.toLowerCase()} manually and want to
+                        update Supabase.
+                      </label>
+                      <div className="draft-approval-actions">
+                        <button
+                          className="button button-primary"
+                          type="button"
+                          onClick={submitManualFollowUpAction}
+                          disabled={!isManualFollowUpChecked || isApprovalSaving}
+                        >
+                          Save {manualFollowUpLabel}
+                        </button>
+                        <button
+                          className="button button-ghost"
+                          type="button"
+                          onClick={() => {
+                            setApprovalIntent(null);
+                            setIsManualFollowUpChecked(false);
+                          }}
+                          disabled={isApprovalSaving}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {!approvalIntent ? (
+                    <div className="draft-approval-actions">
+                      <button
+                        className="button button-ghost"
+                        type="button"
+                        onClick={() => {
+                          setApprovalIntent("manual_follow_up");
+                          setIsApprovalChecked(false);
+                          setIsManualContactChecked(false);
+                        }}
+                        disabled={!canRecordManualFollowUp || isApprovalSaving}
+                        title={manualFollowUpUnavailableReason}
+                      >
+                        Record {manualFollowUpLabel}
+                      </button>
+                    </div>
+                  ) : null}
+                </section>
+
                 <section className="draft-approval-panel" aria-label="Prospect outcome tracking">
                   <div className="draft-approval-heading">
                     <div>
@@ -1405,6 +2111,15 @@ export function ProspectPreviewDashboard({
                   >
                     <FileText size={16} aria-hidden="true" />
                     Copy Email
+                  </button>
+                  <button
+                    className="button button-ghost"
+                    type="button"
+                    onClick={() => copyText("follow-up email", followUpEmailBlock)}
+                    disabled={!followUpEmailBlock}
+                  >
+                    <FileText size={16} aria-hidden="true" />
+                    Copy Follow-up
                   </button>
                   {copiedLabel ? <span>Copied {copiedLabel}</span> : null}
                 </div>

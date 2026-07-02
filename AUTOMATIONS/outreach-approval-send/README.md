@@ -23,6 +23,7 @@ It is not an autonomous cold-email sender. The purpose is to let Codex prepare s
 - Sender guardrails now require `https://local-growth-preview.vercel.app/...` demo URLs and were retested with pinned data on June 26, 2026.
 - All workflows are manual-trigger only and are not published or scheduled.
 - Real prospect emails are sent only when the manual approved sender workflow is run against dashboard-approved rows.
+- Dashboard manual follow-up tracking is available for contacted prospects; it records follow-ups after Diego sends them outside n8n and does not send prospect-facing email.
 
 ## Intended Operating Model
 
@@ -76,6 +77,29 @@ skipped = n8n or the operator intentionally skipped the row
 
 Rule of thumb: `status` answers whether the prospect has been contacted; `outreach_send_status` answers where the row is in the approval/send workflow.
 
+## Manual Follow-Up Tracking
+
+The dashboard follow-up queue uses `next_follow_up_at` as the source of truth for due and upcoming follow-ups. It separates contacted prospects into due now, upcoming, already followed-up, and replied/stopped groups.
+
+Manual follow-up recording is intentionally conservative:
+
+```text
+follow-up 1 recorded:
+status = follow_up_1_sent
+last_contacted_at = now()
+follow_up_1_sent_at = now()
+follow_up_2_due_at = now() + selected days
+next_follow_up_at = follow_up_2_due_at
+
+follow-up 2 recorded:
+status = follow_up_2_sent
+last_contacted_at = now()
+follow_up_2_sent_at = now()
+next_follow_up_at = null
+```
+
+Rows with stopped or replied statuses are excluded from actionable follow-up recording. A third follow-up is intentionally unsupported until a later workflow is approved.
+
 ## Files
 
 - `workflow-spec.md`: n8n workflow stages, inputs, output updates, and guardrails.
@@ -88,6 +112,7 @@ Rule of thumb: `status` answers whether the prospect has been contacted; `outrea
 - `EXPERIMENTS/001-roofing-landing-page-service/marketing/README.md`
 - `EXPERIMENTS/001-roofing-landing-page-service/marketing/outreach-script.md`
 - `AUTOMATIONS/digidap-lead-capture/README.md`
+- `AUTOMATIONS/follow-up-reminder/README.md`
 
 ## Rule
 
