@@ -2623,12 +2623,12 @@ main.landing-page {
 }
 
 .rail-filter-option {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
   width: 100%;
   min-width: 0;
   min-height: 34px;
   align-items: center;
-  justify-content: space-between;
   gap: 10px;
   border: 0;
   border-radius: 0;
@@ -2652,17 +2652,18 @@ main.landing-page {
 }
 
 .rail-filter-option span {
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: 14px minmax(0, 1fr);
   min-width: 0;
   align-items: center;
   gap: 7px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .rail-filter-option svg {
   flex: 0 0 auto;
+  width: 14px;
 }
 
 .rail-filter-option strong {
@@ -3162,6 +3163,24 @@ main.landing-page {
   }
 }
 
+@media (max-width: 1100px) {
+  .prospect-browser,
+  .prospect-browser.filters-collapsed {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-rail {
+    position: static;
+    max-height: none;
+    max-width: none;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding-right: 0;
+    padding-bottom: 16px;
+  }
+}
+
 @media (max-width: 640px) {
   .pipeline-summary,
   .follow-up-grid,
@@ -3224,19 +3243,6 @@ main.landing-page {
 
   .sort-controls {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .prospect-browser,
-  .prospect-browser.filters-collapsed {
-    grid-template-columns: 1fr;
-  }
-
-  .filter-rail {
-    position: static;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-    padding-right: 0;
-    padding-bottom: 16px;
   }
 
   .filter-toggle,

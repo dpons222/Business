@@ -200,6 +200,8 @@ Validation note: browser automation was attempted against desktop and mobile das
 
 Follow-up validation note: mobile portrait overlap in the follow-up queue was fixed on 2026-07-02 by stacking `.follow-up-row` content and making the row action button full-width below the text at narrow widths. A related desktop overflow case was fixed by giving follow-up cards a practical minimum width, rendering row content as a text/action grid, and allowing long business names to wrap instead of pushing the `Open` button outside the card. `npm.cmd run build` passed, and local production screenshots at 393x852, 980x420, 1366x768, and 852x393 confirmed the follow-up queue rows no longer overlap or squeeze the date text.
 
+Filter validation note: zoomed/narrow desktop filter-label clipping was fixed on 2026-07-02 by replacing the filter option flex row with a text/count grid, allowing long labels to wrap beside the icon, and moving the filter rail above results at widths up to 1100px. `npm.cmd run build` passed, and local production screenshots at 980x760 and 1366x768 confirmed the filter section no longer clips labels or squeezes the results column at zoom-like desktop widths.
+
 ### Phase 3 - API And n8n Guardrails
 Objective: Prevent accidental automated sends for non-email channels even if UI or data is wrong.
 
