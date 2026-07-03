@@ -1400,101 +1400,106 @@ export function ProspectPreviewDashboard({
                   </details>
 
                   <details className="filter-rail-group">
-                    <summary>Country</summary>
-                    <div className="filter-rail-options">
-                      {countryFilterOptions.map((filter) => {
-                        const isSelected = selectedCountries.includes(filter.value);
+                    <summary>Location</summary>
+                    <div className="filter-rail-nested-groups">
+                      <section className="filter-rail-subgroup" aria-label="Country filters">
+                        <h4>Country</h4>
+                        <div className="filter-rail-options">
+                          {countryFilterOptions.map((filter) => {
+                            const isSelected = selectedCountries.includes(filter.value);
 
-                        return (
-                          <button
-                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                            key={filter.value}
-                            type="button"
-                            onClick={() =>
-                              setSelectedCountries((current) =>
-                                toggleSelectedValue(current, filter.value),
-                              )
-                            }
-                            aria-pressed={isSelected}
-                          >
-                            <span>
-                              {isSelected ? (
-                                <Check size={14} aria-hidden="true" />
-                              ) : (
-                                <Globe2 size={14} aria-hidden="true" />
-                              )}
-                              {filter.label}
-                            </span>
-                            <strong>{filter.count}</strong>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </details>
+                            return (
+                              <button
+                                className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                                key={filter.value}
+                                type="button"
+                                onClick={() =>
+                                  setSelectedCountries((current) =>
+                                    toggleSelectedValue(current, filter.value),
+                                  )
+                                }
+                                aria-pressed={isSelected}
+                              >
+                                <span>
+                                  {isSelected ? (
+                                    <Check size={14} aria-hidden="true" />
+                                  ) : (
+                                    <Globe2 size={14} aria-hidden="true" />
+                                  )}
+                                  {filter.label}
+                                </span>
+                                <strong>{filter.count}</strong>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </section>
 
-                  <details className="filter-rail-group">
-                    <summary>State / region</summary>
-                    <div className="filter-rail-options">
-                      {stateRegionFilterOptions.map((filter) => {
-                        const isSelected = selectedStateRegions.includes(filter.value);
+                      <section className="filter-rail-subgroup" aria-label="State or region filters">
+                        <h4>State / region</h4>
+                        <div className="filter-rail-options">
+                          {stateRegionFilterOptions.map((filter) => {
+                            const isSelected = selectedStateRegions.includes(filter.value);
 
-                        return (
-                          <button
-                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                            key={filter.value}
-                            type="button"
-                            onClick={() =>
-                              setSelectedStateRegions((current) =>
-                                toggleSelectedValue(current, filter.value),
-                              )
-                            }
-                            aria-pressed={isSelected}
-                          >
-                            <span>
-                              {isSelected ? (
-                                <Check size={14} aria-hidden="true" />
-                              ) : (
-                                <MapIcon size={14} aria-hidden="true" />
-                              )}
-                              {filter.label}
-                            </span>
-                            <strong>{filter.count}</strong>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </details>
+                            return (
+                              <button
+                                className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                                key={filter.value}
+                                type="button"
+                                onClick={() =>
+                                  setSelectedStateRegions((current) =>
+                                    toggleSelectedValue(current, filter.value),
+                                  )
+                                }
+                                aria-pressed={isSelected}
+                              >
+                                <span>
+                                  {isSelected ? (
+                                    <Check size={14} aria-hidden="true" />
+                                  ) : (
+                                    <MapIcon size={14} aria-hidden="true" />
+                                  )}
+                                  {filter.label}
+                                </span>
+                                <strong>{filter.count}</strong>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </section>
 
-                  <details className="filter-rail-group">
-                    <summary>City</summary>
-                    <div className="filter-rail-options">
-                      {cityFilterOptions.map((filter) => {
-                        const isSelected = selectedCities.includes(filter.value);
+                      <section className="filter-rail-subgroup" aria-label="City filters">
+                        <h4>City</h4>
+                        <div className="filter-rail-options">
+                          {cityFilterOptions.map((filter) => {
+                            const isSelected = selectedCities.includes(filter.value);
 
-                        return (
-                          <button
-                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                            key={filter.value}
-                            type="button"
-                            onClick={() =>
-                              setSelectedCities((current) =>
-                                toggleSelectedValue(current, filter.value),
-                              )
-                            }
-                            aria-pressed={isSelected}
-                          >
-                            <span>
-                              {isSelected ? (
-                                <Check size={14} aria-hidden="true" />
-                              ) : (
-                                <MapPin size={14} aria-hidden="true" />
-                              )}
-                              {filter.label}
-                            </span>
-                            <strong>{filter.count}</strong>
-                          </button>
-                        );
-                      })}
+                            return (
+                              <button
+                                className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                                key={filter.value}
+                                type="button"
+                                onClick={() =>
+                                  setSelectedCities((current) =>
+                                    toggleSelectedValue(current, filter.value),
+                                  )
+                                }
+                                aria-pressed={isSelected}
+                              >
+                                <span>
+                                  {isSelected ? (
+                                    <Check size={14} aria-hidden="true" />
+                                  ) : (
+                                    <MapPin size={14} aria-hidden="true" />
+                                  )}
+                                  {filter.label}
+                                </span>
+                                <strong>{filter.count}</strong>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </section>
                     </div>
                   </details>
 

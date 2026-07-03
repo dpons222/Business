@@ -19,9 +19,10 @@ Restaurants
 HVAC
 Plumbing
 Other / Testing
-Country
-State / region
-City
+Location
+  Country
+  State / region
+  City
 ```
 
 Dashboard entries are registered in:
