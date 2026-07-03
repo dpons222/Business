@@ -754,7 +754,7 @@ export function getSupabaseConfig(options: { requireServiceRole?: boolean } = {}
   };
 }
 
-function getSupabaseHeaders(
+export function getSupabaseHeaders(
   config: NonNullable<ReturnType<typeof getSupabaseConfig>>,
   extraHeaders: Record<string, string> = {},
 ) {

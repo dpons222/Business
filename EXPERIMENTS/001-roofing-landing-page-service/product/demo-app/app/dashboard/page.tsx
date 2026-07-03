@@ -1,5 +1,5 @@
 import { ProspectPreviewDashboard } from "../../components/ProspectPreviewDashboard";
-import { currentFocusEntry } from "../../lib/demoRegistry";
+import { getDashboardFocusState } from "../../lib/dashboardFocus";
 import { getDashboardProspectData } from "../../lib/prospectDrafts";
 
 export const metadata = {
@@ -9,13 +9,13 @@ export const metadata = {
 
 export default async function DashboardPage() {
   const { entries, summaries } = await getDashboardProspectData();
-  const currentFocus =
-    entries.find((entry) => entry.slug === currentFocusEntry.slug) ?? currentFocusEntry;
+  const focusState = await getDashboardFocusState();
 
   return (
     <ProspectPreviewDashboard
-      currentFocus={currentFocus}
       entries={entries}
+      initialFocusItems={focusState.items}
+      initialFocusSource={focusState.source}
       nowIso={new Date().toISOString()}
       prospectDraftSummaries={summaries}
     />

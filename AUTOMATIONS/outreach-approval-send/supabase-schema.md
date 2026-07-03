@@ -17,7 +17,18 @@ add_urls_to_prospect_email_drafts_view
 add_contact_status_to_prospect_email_drafts_view
 add_prospect_relationship_outcome_statuses
 add_follow_up_approval_fields
+add_dashboard_focus_items
 ```
+
+## Dashboard Focus List
+
+`public.dashboard_focus_items` stores the shared dashboard Focus list. It is intentionally global, not per user, and is managed through trusted dashboard API routes with localStorage fallback in the dashboard UI.
+
+| Column | Type | Required | Default | Purpose |
+| --- | --- | --- | --- | --- |
+| `prospect_slug` | `text` | yes |  | Dashboard entry slug currently in focus. May reference a Supabase prospect row or a local-only demo entry. |
+| `added_at` | `timestamptz` | yes | `now()` | Timestamp used for newest-first Focus list ordering. |
+| `added_by` | `text` | no |  | Dashboard username or operator who added the prospect. |
 
 ## Views
 

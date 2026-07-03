@@ -32,7 +32,6 @@ lib/demoRegistry.ts
 The local registry stores optional route and asset metadata for demos that have code in this app:
 
 ```text
-default current focus
 public preview URL
 source URL
 contact email
@@ -43,10 +42,11 @@ New prospects should be added to Supabase first. Add or update `lib/demoRegistry
 prospect has a coded local demo route, logo/asset references, or must remain visible as a local
 fallback if Supabase is unavailable.
 
-The dashboard can change the current focus from the browser UI. The selected business is stored in
-browser `localStorage` under `local-growth-preview-current-focus`, so it persists for the same browser
-without changing the source-controlled registry default. If the saved slug no longer exists, the
-dashboard falls back to the local default in `lib/demoRegistry.ts`.
+The dashboard Focus list can hold multiple businesses at once. It is global for the dashboard and is
+stored in Supabase `public.dashboard_focus_items` when server-side Supabase credentials are
+available. The browser mirrors the same list in `localStorage` under
+`local-growth-preview-focus-list` and falls back to that local copy if Supabase is unavailable. The
+old single-focus key `local-growth-preview-current-focus` is migrated into the new list shape.
 
 Dashboard card actions:
 
@@ -436,6 +436,7 @@ scripts/
 - `app/page.tsx`: renders the neutral preview-link-required page.
 - `app/login/page.tsx`: renders the dashboard login form.
 - `app/login/actions.ts`: handles dashboard login/logout server actions.
+- `app/api/dashboard-focus/route.ts`: reads and writes the shared dashboard Focus list.
 - `app/api/prospect-drafts/[slug]/route.ts`: returns read-only outreach draft data for the dashboard drawer.
 - `app/dashboard/layout.tsx`: requires a dashboard session for all dashboard routes.
 - `app/dashboard/page.tsx`: renders the internal multi-niche preview dashboard with filtering and sorting.
@@ -452,6 +453,7 @@ scripts/
 - `lib/prospects/`: prospect types, registry, and one data file per prospect.
 - `lib/demoRegistry.ts`: local demo route/asset metadata, statuses, filters, and current focus.
 - `lib/prospectDrafts.ts`: server-side Supabase prospect/draft lookup with local fallback draft data.
+- `lib/dashboardFocus.ts`: server-side Supabase Focus list helpers.
 - `lib/dashboardAuth.ts`: signed-cookie dashboard authentication helpers.
 - `lib/designVariants.ts`: template/variant configuration for internal comparison.
 - `app/globals.css`: visual styling.
@@ -517,7 +519,7 @@ Use `SUPABASE_SERVICE_ROLE_KEY` only as a server-side Vercel/local environment v
 it with a `NEXT_PUBLIC_` prefix. Legacy JWT service-role keys can use `SUPABASE_PUBLISHABLE_KEY` as
 the REST `apikey`; newer `sb_secret_...` keys are used server-side as the REST `apikey` and are not
 sent as bearer JWTs. The app has a local fallback for selected prospects, but Supabase is required for
-approval, revoke, manual-contact, and manual-follow-up write actions.
+approval, revoke, manual-contact, manual-follow-up, and shared Focus list write actions.
 
 ## Run Locally
 

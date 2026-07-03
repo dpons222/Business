@@ -21,6 +21,7 @@ import {
   Star,
   X,
 } from "lucide-react";
+import type { DashboardFocusItem } from "../lib/dashboardFocus";
 import type { DemoEntry, DemoNiche, DemoStatus } from "../lib/demoRegistry";
 import { nicheFilters, statusLabels } from "../lib/demoRegistry";
 import { relationshipStatusLabel } from "../lib/prospectDrafts";
@@ -71,6 +72,7 @@ type EntryLocation = {
 };
 
 const CURRENT_FOCUS_STORAGE_KEY = "local-growth-preview-current-focus";
+const FOCUS_LIST_STORAGE_KEY = "local-growth-preview-focus-list";
 
 const nicheFilterOptions = nicheFilters.filter(
   (filter): filter is { value: DemoNiche; label: string } => filter.value !== "all",
@@ -142,8 +144,9 @@ type ProspectDraft = {
 };
 
 type ProspectPreviewDashboardProps = {
-  currentFocus: DemoEntry;
   entries: DemoEntry[];
+  initialFocusItems: DashboardFocusItem[];
+  initialFocusSource: "supabase" | "unavailable";
   nowIso: string;
   prospectDraftSummaries: Record<string, ProspectDraftSummary>;
 };
@@ -167,6 +170,94 @@ function toggleSelectedValue<T extends string>(selectedValues: T[], value: T) {
   return selectedValues.includes(value)
     ? selectedValues.filter((selectedValue) => selectedValue !== value)
     : [...selectedValues, value];
+}
+
+function focusItemForSlug(slug: string): DashboardFocusItem {
+  return {
+    slug,
+    addedAt: new Date().toISOString(),
+    addedBy: null,
+  };
+}
+
+function sortFocusItems(items: DashboardFocusItem[]) {
+  return [...items].sort((first, second) => second.addedAt.localeCompare(first.addedAt));
+}
+
+function normalizeFocusItems(items: DashboardFocusItem[], validSlugs: Set<string>) {
+  const seenSlugs = new Set<string>();
+  const normalizedItems: DashboardFocusItem[] = [];
+
+  items.forEach((item) => {
+    if (!item.slug || !validSlugs.has(item.slug) || seenSlugs.has(item.slug)) {
+      return;
+    }
+
+    const parsedAddedAt = new Date(item.addedAt);
+
+    normalizedItems.push({
+      slug: item.slug,
+      addedAt: Number.isFinite(parsedAddedAt.getTime())
+        ? parsedAddedAt.toISOString()
+        : new Date().toISOString(),
+      addedBy: item.addedBy ?? null,
+    });
+    seenSlugs.add(item.slug);
+  });
+
+  return sortFocusItems(normalizedItems);
+}
+
+function readStoredFocusItems(validSlugs: Set<string>) {
+  const storedFocusItems = window.localStorage.getItem(FOCUS_LIST_STORAGE_KEY);
+  const storedCurrentFocusSlug = window.localStorage.getItem(CURRENT_FOCUS_STORAGE_KEY);
+  const parsedItems: DashboardFocusItem[] = [];
+
+  if (storedFocusItems) {
+    try {
+      const parsedValue = JSON.parse(storedFocusItems) as unknown;
+
+      if (Array.isArray(parsedValue)) {
+        parsedValue.forEach((item) => {
+          if (!item || typeof item !== "object") {
+            return;
+          }
+
+          const candidate = item as Partial<DashboardFocusItem>;
+
+          if (!candidate.slug || typeof candidate.slug !== "string") {
+            return;
+          }
+
+          parsedItems.push({
+            slug: candidate.slug,
+            addedAt:
+              typeof candidate.addedAt === "string"
+                ? candidate.addedAt
+                : new Date().toISOString(),
+            addedBy: typeof candidate.addedBy === "string" ? candidate.addedBy : null,
+          });
+        });
+      }
+    } catch {
+      window.localStorage.removeItem(FOCUS_LIST_STORAGE_KEY);
+    }
+  }
+
+  if (
+    storedCurrentFocusSlug &&
+    validSlugs.has(storedCurrentFocusSlug) &&
+    !parsedItems.some((item) => item.slug === storedCurrentFocusSlug)
+  ) {
+    parsedItems.push(focusItemForSlug(storedCurrentFocusSlug));
+  }
+
+  return normalizeFocusItems(parsedItems, validSlugs);
+}
+
+function writeStoredFocusItems(items: DashboardFocusItem[]) {
+  window.localStorage.setItem(FOCUS_LIST_STORAGE_KEY, JSON.stringify(items));
+  window.localStorage.removeItem(CURRENT_FOCUS_STORAGE_KEY);
 }
 
 function getEntryContactStatus(entry: DemoEntry, summaries: Record<string, ProspectDraftSummary>) {
@@ -489,8 +580,9 @@ function summaryFromDraft(draft: ProspectDraft): ProspectDraftSummary {
 }
 
 export function ProspectPreviewDashboard({
-  currentFocus,
   entries,
+  initialFocusItems,
+  initialFocusSource,
   nowIso,
   prospectDraftSummaries: initialProspectDraftSummaries,
 }: ProspectPreviewDashboardProps) {
@@ -507,8 +599,17 @@ export function ProspectPreviewDashboard({
   const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
   const [selectedStateRegions, setSelectedStateRegions] = useState<string[]>([]);
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
-  const [selectedFocusSlug, setSelectedFocusSlug] = useState(currentFocus.slug);
+  const [focusItems, setFocusItems] = useState<DashboardFocusItem[]>(initialFocusItems);
+  const [focusPersistenceSource, setFocusPersistenceSource] = useState<
+    "supabase" | "local"
+  >(initialFocusSource === "supabase" ? "supabase" : "local");
+  const [focusPersistenceMessage, setFocusPersistenceMessage] = useState(
+    initialFocusSource === "supabase"
+      ? "Synced with Supabase."
+      : "Using local focus list until Supabase is available.",
+  );
   const [hasLoadedSavedFocus, setHasLoadedSavedFocus] = useState(false);
+  const [isFocusSaving, setIsFocusSaving] = useState(false);
   const [draftEntry, setDraftEntry] = useState<DemoEntry | null>(null);
   const [draft, setDraft] = useState<ProspectDraft | null>(null);
   const [draftError, setDraftError] = useState<string | null>(null);
@@ -541,33 +642,38 @@ export function ProspectPreviewDashboard({
     setProspectDraftSummaries(initialProspectDraftSummaries);
   }, [initialProspectDraftSummaries]);
 
-  useEffect(() => {
-    const savedSlug = window.localStorage.getItem(CURRENT_FOCUS_STORAGE_KEY);
+  const entrySlugSet = useMemo(() => new Set(entries.map((entry) => entry.slug)), [entries]);
+  const entryBySlug = useMemo(() => {
+    return entries.reduce<Record<string, DemoEntry>>((entryMap, entry) => {
+      entryMap[entry.slug] = entry;
+      return entryMap;
+    }, {});
+  }, [entries]);
 
-    if (savedSlug && entries.some((entry) => entry.slug === savedSlug)) {
-      setSelectedFocusSlug(savedSlug);
+  useEffect(() => {
+    const normalizedInitialItems = normalizeFocusItems(initialFocusItems, entrySlugSet);
+    const storedFocusItems = readStoredFocusItems(entrySlugSet);
+
+    if (normalizedInitialItems.length > 0 || initialFocusSource === "supabase") {
+      setFocusItems(normalizedInitialItems);
+      setFocusPersistenceSource("supabase");
+      setFocusPersistenceMessage("Synced with Supabase.");
+      writeStoredFocusItems(normalizedInitialItems);
+
+      if (normalizedInitialItems.length === 0 && storedFocusItems.length > 0) {
+        void saveFocusItemsToSupabase("replace", storedFocusItems, {
+          items: storedFocusItems,
+        });
+      }
+    } else if (storedFocusItems.length > 0) {
+      setFocusItems(storedFocusItems);
+      setFocusPersistenceSource("local");
+      setFocusPersistenceMessage("Using local focus list until Supabase is available.");
+      writeStoredFocusItems(storedFocusItems);
     }
 
     setHasLoadedSavedFocus(true);
-  }, [entries]);
-
-  const selectedCurrentFocus =
-    entries.find((entry) => entry.slug === selectedFocusSlug) ?? currentFocus;
-
-  useEffect(() => {
-    if (!hasLoadedSavedFocus) {
-      return;
-    }
-
-    const hasSelectedEntry = entries.some((entry) => entry.slug === selectedFocusSlug);
-
-    if (!hasSelectedEntry) {
-      setSelectedFocusSlug(currentFocus.slug);
-      return;
-    }
-
-    window.localStorage.setItem(CURRENT_FOCUS_STORAGE_KEY, selectedFocusSlug);
-  }, [currentFocus.slug, entries, hasLoadedSavedFocus, selectedFocusSlug]);
+  }, [entrySlugSet, initialFocusItems, initialFocusSource]);
 
   const nicheCounts = useMemo(() => {
     return entries.reduce<Record<"all" | DemoNiche, number>>(
@@ -677,9 +783,25 @@ export function ProspectPreviewDashboard({
     activeFilterCount > 0
       ? `${activeFilterCount} active filter${activeFilterCount === 1 ? "" : "s"}`
       : "All demos";
-  const focusOptions = useMemo(() => {
-    return [...entries].sort((first, second) => first.title.localeCompare(second.title));
-  }, [entries]);
+  const normalizedFocusItems = useMemo(
+    () => normalizeFocusItems(focusItems, entrySlugSet),
+    [entrySlugSet, focusItems],
+  );
+  const focusedSlugSet = useMemo(
+    () => new Set(normalizedFocusItems.map((item) => item.slug)),
+    [normalizedFocusItems],
+  );
+  const focusedEntries = useMemo(() => {
+    return normalizedFocusItems
+      .map((item) => ({
+        item,
+        entry: entryBySlug[item.slug],
+      }))
+      .filter(
+        (focusEntry): focusEntry is { item: DashboardFocusItem; entry: DemoEntry } =>
+          Boolean(focusEntry.entry),
+      );
+  }, [entryBySlug, normalizedFocusItems]);
   const followUpQueue = useMemo(() => {
     const nowTime = new Date(nowIso).getTime();
     const queue = entries.reduce<{
@@ -755,6 +877,69 @@ export function ProspectPreviewDashboard({
     setSelectedCities([]);
     setSelectedContactFilters([]);
     setSelectedDemoStatuses([]);
+  }
+
+  async function saveFocusItemsToSupabase(
+    action: "add" | "remove" | "clear" | "replace",
+    nextItems: DashboardFocusItem[],
+    payload: { slug?: string; items?: DashboardFocusItem[] } = {},
+  ) {
+    const normalizedItems = normalizeFocusItems(nextItems, entrySlugSet);
+
+    setFocusItems(normalizedItems);
+    writeStoredFocusItems(normalizedItems);
+    setIsFocusSaving(true);
+
+    try {
+      const response = await fetch("/api/dashboard-focus", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          action,
+          ...payload,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Focus API unavailable");
+      }
+
+      const result = (await response.json()) as {
+        items?: DashboardFocusItem[];
+        source?: "supabase";
+      };
+      const syncedItems = normalizeFocusItems(result.items ?? normalizedItems, entrySlugSet);
+
+      setFocusItems(syncedItems);
+      setFocusPersistenceSource("supabase");
+      setFocusPersistenceMessage("Synced with Supabase.");
+      writeStoredFocusItems(syncedItems);
+    } catch {
+      setFocusPersistenceSource("local");
+      setFocusPersistenceMessage("Saved locally. Supabase sync will be retried on the next change.");
+    } finally {
+      setIsFocusSaving(false);
+    }
+  }
+
+  function addEntryToFocus(entry: DemoEntry) {
+    if (focusedSlugSet.has(entry.slug)) {
+      return;
+    }
+
+    const nextItems = [focusItemForSlug(entry.slug), ...normalizedFocusItems];
+    void saveFocusItemsToSupabase("add", nextItems, { slug: entry.slug });
+  }
+
+  function removeEntryFromFocus(slug: string) {
+    const nextItems = normalizedFocusItems.filter((item) => item.slug !== slug);
+    void saveFocusItemsToSupabase("remove", nextItems, { slug });
+  }
+
+  function clearFocusList() {
+    void saveFocusItemsToSupabase("clear", []);
   }
 
   function toggleCountryFilter(country: LocationCountryFilterOption) {
@@ -1270,61 +1455,108 @@ export function ProspectPreviewDashboard({
         </div>
 
         <section className="active-preview" aria-labelledby="active-preview-title">
-          <div>
-            <p className="eyebrow">Current focus</p>
-            <h2 id="active-preview-title">{selectedCurrentFocus.title}</h2>
-            <p>{selectedCurrentFocus.observedIssue}</p>
-            <div className="preview-meta-row">
-              <span>{selectedCurrentFocus.city}</span>
-              <span>Current active prospect</span>
-              <span>{statusLabels[selectedCurrentFocus.status]}</span>
-              <span>{selectedCurrentFocus.primaryService}</span>
+          <div className="focus-list-header">
+            <div>
+              <p className="eyebrow">Focus list</p>
+              <h2 id="active-preview-title">Current focus queue</h2>
+              <p>
+                Keep the businesses you are actively working in one shared dashboard list.
+              </p>
             </div>
-          </div>
-          <div className="current-focus-panel">
-            <label className="focus-select-label" htmlFor="current-focus-select">
-              Set current focus
-              <select
-                className="focus-select"
-                id="current-focus-select"
-                value={selectedCurrentFocus.slug}
-                onChange={(event) => setSelectedFocusSlug(event.target.value)}
-              >
-                {focusOptions.map((entry) => (
-                  <option key={`${entry.niche}-${entry.slug}`} value={entry.slug}>
-                    {entry.title}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <div className="preview-actions">
-              <a className="button button-primary" href={selectedCurrentFocus.href}>
-                {selectedCurrentFocus.previewLabel === "Website"
-                  ? "Open Website"
-                  : "Open Current Preview"}
-                <ExternalLink size={17} aria-hidden="true" />
-              </a>
-              {selectedCurrentFocus.sourceUrl ? (
-                <a
+            <div className="focus-list-header-actions">
+              <span className={focusPersistenceSource === "supabase" ? "focus-sync-pill" : "focus-sync-pill local"}>
+                {focusPersistenceSource === "supabase" ? "Supabase" : "Local"}
+              </span>
+              {focusedEntries.length > 0 ? (
+                <button
                   className="button button-ghost"
-                  href={selectedCurrentFocus.sourceUrl}
-                  target="_blank"
-                  rel="noreferrer"
+                  type="button"
+                  onClick={clearFocusList}
+                  disabled={isFocusSaving}
                 >
-                  Source
-                  <LinkIcon size={16} aria-hidden="true" />
-                </a>
+                  Clear Focus
+                </button>
               ) : null}
-              <button
-                className="button button-ghost"
-                type="button"
-                onClick={() => openDraft(selectedCurrentFocus)}
-              >
-                Email Draft
-                <Mail size={16} aria-hidden="true" />
-              </button>
             </div>
           </div>
+
+          {focusedEntries.length > 0 ? (
+            <div className="focus-list" aria-label="Focused businesses">
+              {focusedEntries.map(({ entry, item }) => (
+                <article className="focus-list-item" key={entry.slug}>
+                  <div className={`preview-logo-slot logo-slot-${entry.slug}`}>
+                    {entry.logoUrl ? (
+                      <img src={entry.logoUrl} alt={`${entry.title} logo`} />
+                    ) : (
+                      <span>{entry.shortName}</span>
+                    )}
+                  </div>
+                  <div className="focus-list-item-body">
+                    <div className="preview-title-row">
+                      <h3>{entry.title}</h3>
+                      <span className="active-pill">Focused</span>
+                      <span className="niche-pill">{nicheLabelByValue[entry.niche]}</span>
+                      <span className="status-pill">{statusLabels[entry.status]}</span>
+                    </div>
+                    <p>{entry.observedIssue}</p>
+                    <div className="preview-meta-row">
+                      <span>{entry.city}</span>
+                      <span>Added {formatDate(item.addedAt.slice(0, 10))}</span>
+                      <span>{entry.primaryService}</span>
+                    </div>
+                  </div>
+                  <div className="preview-actions focus-list-item-actions">
+                    <a
+                      className="button button-primary"
+                      href={entry.href}
+                      target={entry.isExternalHref ? "_blank" : undefined}
+                      rel={entry.isExternalHref ? "noreferrer" : undefined}
+                    >
+                      {entry.previewLabel === "Website" ? "Open Website" : "Open preview"}
+                      <ExternalLink size={16} aria-hidden="true" />
+                    </a>
+                    {entry.sourceUrl ? (
+                      <a
+                        className="button button-ghost"
+                        href={entry.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Source
+                        <LinkIcon size={16} aria-hidden="true" />
+                      </a>
+                    ) : null}
+                    <button
+                      className="button button-ghost"
+                      type="button"
+                      onClick={() => openDraft(entry)}
+                    >
+                      Email Draft
+                      <Mail size={16} aria-hidden="true" />
+                    </button>
+                    <button
+                      className="button button-ghost"
+                      type="button"
+                      onClick={() => removeEntryFromFocus(entry.slug)}
+                      disabled={isFocusSaving}
+                    >
+                      Remove
+                      <X size={16} aria-hidden="true" />
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="focus-empty">
+              <h3>No businesses are focused.</h3>
+              <p>Add businesses from the prospect list when they become active work.</p>
+            </div>
+          )}
+
+          <p className="focus-status-note">
+            {isFocusSaving ? "Saving focus list..." : focusPersistenceMessage}
+          </p>
         </section>
 
         <section className="pipeline-summary" aria-label="Pipeline summary">
@@ -1703,7 +1935,7 @@ export function ProspectPreviewDashboard({
             <div className="prospect-results">
               <div className="preview-list">
                 {visibleEntries.map((entry) => {
-                  const isCurrentFocus = entry.slug === selectedCurrentFocus.slug;
+                  const isFocused = focusedSlugSet.has(entry.slug);
                   const contactStatus = getEntryContactStatus(entry, prospectDraftSummaries);
 
                   return (
@@ -1718,7 +1950,7 @@ export function ProspectPreviewDashboard({
                       <div>
                         <div className="preview-title-row">
                           <h3>{entry.title}</h3>
-                          {isCurrentFocus ? <span className="active-pill">Current</span> : null}
+                          {isFocused ? <span className="active-pill">Focused</span> : null}
                           <span className="niche-pill">{nicheLabelByValue[entry.niche]}</span>
                           <span className="status-pill">{statusLabels[entry.status]}</span>
                           <span className={relationshipPillClass(contactStatus)}>
@@ -1733,17 +1965,21 @@ export function ProspectPreviewDashboard({
                       <div className="preview-row-actions">
                         <button
                           className={
-                            isCurrentFocus
+                            isFocused
                               ? "button button-ghost active-focus-button"
                               : "button button-ghost"
                           }
                           type="button"
-                          onClick={() => setSelectedFocusSlug(entry.slug)}
-                          disabled={isCurrentFocus}
-                          aria-pressed={isCurrentFocus}
+                          onClick={() =>
+                            isFocused
+                              ? removeEntryFromFocus(entry.slug)
+                              : addEntryToFocus(entry)
+                          }
+                          disabled={isFocusSaving}
+                          aria-pressed={isFocused}
                         >
                           <Star size={15} aria-hidden="true" />
-                          {isCurrentFocus ? "Current Focus" : "Set Focus"}
+                          {isFocused ? "Remove Focus" : "Add to Focus"}
                         </button>
                         <a
                           className="button button-primary"
