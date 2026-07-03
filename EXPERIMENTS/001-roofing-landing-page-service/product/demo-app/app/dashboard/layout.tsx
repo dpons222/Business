@@ -13,15 +13,28 @@ export default async function DashboardLayout({
   return (
     <div className="dashboard-protected-shell">
       <header className="dashboard-auth-bar">
-        <div>
+        <div className="dashboard-auth-identity">
           <span>Signed in</span>
           <strong>{session.username}</strong>
         </div>
-        <form action={logoutAction}>
-          <button className="button button-ghost" type="submit">
-            Log out
-          </button>
-        </form>
+        <div className="dashboard-auth-actions">
+          <nav className="dashboard-section-nav" aria-label="Dashboard sections">
+            <a className="button button-ghost dashboard-nav-button" href="#current-focus">
+              Current focus
+            </a>
+            <a
+              className="button button-ghost dashboard-nav-button"
+              href="#available-prospect-previews"
+            >
+              Available prospects
+            </a>
+          </nav>
+          <form action={logoutAction}>
+            <button className="button button-ghost" type="submit">
+              Log out
+            </button>
+          </form>
+        </div>
       </header>
       {children}
     </div>

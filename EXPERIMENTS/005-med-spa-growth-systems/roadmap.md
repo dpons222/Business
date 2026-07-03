@@ -175,4 +175,4 @@ Personalization rule:
 
 ## Next Action
 
-Run `prospect-demo-qa` on the first three recommendation packages before drafting or reviewing outreach.
+Run `prospect-demo-qa` on the first five recommendation packages before drafting or reviewing outreach.

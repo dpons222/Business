@@ -1454,11 +1454,15 @@ export function ProspectPreviewDashboard({
           </p>
         </div>
 
-        <section className="active-preview" aria-labelledby="active-preview-title">
+        <section
+          id="current-focus"
+          className="active-preview"
+          aria-labelledby="active-preview-title"
+        >
           <div className="focus-list-header">
             <div>
               <p className="eyebrow">Focus list</p>
-              <h2 id="active-preview-title">Current focus queue</h2>
+              <h2 id="active-preview-title">Current focus</h2>
               <p>
                 Keep the businesses you are actively working in one shared dashboard list.
               </p>
@@ -1559,29 +1563,6 @@ export function ProspectPreviewDashboard({
           </p>
         </section>
 
-        <section className="pipeline-summary" aria-label="Pipeline summary">
-          <article>
-            <span>{entries.length}</span>
-            <p>Total records tracked</p>
-          </article>
-          <article>
-            <span>{nicheCounts.restaurant}</span>
-            <p>Restaurant demos</p>
-          </article>
-          <article>
-            <span>{nicheCounts.roofing}</span>
-            <p>Roofing demos</p>
-          </article>
-          <article>
-            <span>{nicheCounts.med_spa}</span>
-            <p>Med spa prospects</p>
-          </article>
-          <article>
-            <span>local-growth-preview</span>
-            <p>Generic hub name</p>
-          </article>
-        </section>
-
         <section className="follow-up-queue" aria-labelledby="follow-up-queue-title">
           <div className="follow-up-queue-heading">
             <div>
@@ -1608,22 +1589,15 @@ export function ProspectPreviewDashboard({
           </div>
         </section>
 
-        <section className="rename-note" aria-label="Project rename note">
-          <div>
-            <p className="eyebrow">Project naming</p>
-            <h2>Use local-growth-preview for every niche demo.</h2>
-          </div>
-          <p>
-            The preview hub is now generic and can track roofing, restaurant, HVAC, plumbing, and
-            other local business demos from one dashboard.
-          </p>
-        </section>
-
-        <section className="preview-list-section" aria-labelledby="preview-list-title">
+        <section
+          id="available-prospect-previews"
+          className="preview-list-section"
+          aria-labelledby="preview-list-title"
+        >
           <div className="preview-list-toolbar">
             <div>
               <p className="eyebrow">{activeFilterLabel}</p>
-              <h2 id="preview-list-title">Available prospect previews</h2>
+              <h2 id="preview-list-title">Available prospects</h2>
             </div>
             <div className="toolbar-controls">
               {activeFilterCount > 0 ? (
