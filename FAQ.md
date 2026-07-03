@@ -4,15 +4,19 @@
 
    Decide the niche, offer angle, buyer pain, likely recommendation type, and what kind of demo or growth asset is worth testing.
 
-2. **lead-growth-pipeline**
+2. **remote-business-experiment-builder**
+
+   Use after you pick a direction. Turn the idea into a structured experiment with an offer, validation plan, assets, outreach workflow, tracking, and monetization assumptions.
+
+3. **lead-growth-pipeline**
 
    Find businesses, qualify them, inspect their sites, choose the best recommendation per prospect, create prospect packages/tracker rows, build only the needed demo asset, and prepare draft-only outreach.
 
-3. **prospect-demo-qa**
+4. **prospect-demo-qa**
 
    Check the live demo and email draft against the real business site before outreach. This is the pre-send quality gate.
 
-4. **Manual approval/send**
+5. **Manual approval/send**
 
    You review the recipient, draft, demo URL, and contact method. Then either you send manually or later approve it for an automation flow.
 
@@ -29,7 +33,18 @@ Use this when you are deciding what niche, offer, or opportunity to pursue.
 - Use niche-growth-system-builder to brainstorm growth-system offers for local businesses that could be validated quickly.
 - Use niche-growth-system-builder to help me decide what kind of demo or preview asset would be most valuable for this niche.
 
-### 2. lead-growth-pipeline
+### 2. remote-business-experiment-builder
+
+Use this after you have picked a niche, offer direction, or business idea and need to turn it into a validation experiment.
+
+- Use remote-business-experiment-builder to turn this real estate agency offer idea into a structured validation experiment.
+- Use remote-business-experiment-builder to create the experiment plan, offer, validation steps, outreach workflow, tracking plan, and monetization assumptions for this niche.
+- Use remote-business-experiment-builder to set up a new experiment for testing AI-assisted landing page improvements for local service businesses.
+- Use remote-business-experiment-builder to define what assets I need before outreach and what should wait until there is prospect interest.
+- Use remote-business-experiment-builder to create a prospect-driven experiment for this niche without building more than necessary.
+- Use remote-business-experiment-builder to organize the experiment files and validation checklist for the offer we chose.
+
+### 3. lead-growth-pipeline
 
 Use this when you are ready to find businesses, qualify prospects, create packages, update trackers, and prepare outreach drafts.
 
@@ -41,7 +56,7 @@ Use this when you are ready to find businesses, qualify prospects, create packag
 - Use lead-growth-pipeline to update Supabase and local tracker state for the prospects that have verified emails.
 - Use lead-growth-pipeline to prepare the next outreach batch, but do not send anything.
 
-### 3. prospect-demo-qa
+### 4. prospect-demo-qa
 
 Use this before outreach to check whether the demo and draft are accurate, polished, and safe to send.
 
@@ -53,7 +68,7 @@ Use this before outreach to check whether the demo and draft are accurate, polis
 - Use prospect-demo-qa to compare the public demo page against the source site and make sure there are no unsupported claims.
 - Use prospect-demo-qa and only report findings first. Do not make changes yet.
 
-### 4. Manual approval/send
+### 5. Manual approval/send
 
 Use this when you are personally reviewing or recording outreach. This step is not really a skill; it is the human approval/send step.
 
@@ -65,4 +80,4 @@ Use this when you are personally reviewing or recording outreach. This step is n
 - I decided not to contact this prospect. Mark it skipped and add the reason.
 - I want to review the exact recipient, subject, body, and demo URL before approving this outreach.
 
-For the first three, explicitly naming the skill is useful. For the manual approval/send step, be very specific about what actually happened because that step changes your source-of-truth outreach status.
+For the first four, explicitly naming the skill is useful. For the manual approval/send step, be very specific about what actually happened because that step changes your source-of-truth outreach status.

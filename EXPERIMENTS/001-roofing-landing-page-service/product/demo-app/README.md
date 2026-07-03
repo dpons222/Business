@@ -20,9 +20,7 @@ HVAC
 Plumbing
 Other / Testing
 Location
-  Country
-  State / region
-  City
+  Country > State / region > City drill-down
 ```
 
 Dashboard entries are registered in:

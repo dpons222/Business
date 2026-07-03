@@ -52,6 +52,16 @@ type LocationFilterOption = {
   label: string;
   count: number;
 };
+type LocationCityFilterOption = LocationFilterOption & {
+  key: string;
+};
+type LocationStateRegionFilterOption = LocationFilterOption & {
+  key: string;
+  cities: LocationCityFilterOption[];
+};
+type LocationCountryFilterOption = LocationFilterOption & {
+  stateRegions: LocationStateRegionFilterOption[];
+};
 type EntryLocation = {
   country: string;
   countryLabel: string;
@@ -189,6 +199,14 @@ function normalizeLocationValue(value: string) {
   return value.trim().toLowerCase();
 }
 
+function locationStateRegionKey(countryValue: string, stateRegionValue: string) {
+  return `${countryValue}::${stateRegionValue}`;
+}
+
+function locationCityKey(countryValue: string, stateRegionValue: string, cityValue: string) {
+  return `${countryValue}::${stateRegionValue}::${cityValue}`;
+}
+
 function countryLabel(country: string) {
   if (country.toUpperCase() === "US") {
     return "United States";
@@ -220,37 +238,78 @@ function parseEntryLocation(entry: Pick<DemoEntry, "city">): EntryLocation {
   };
 }
 
-function buildLocationFilterOptions(
-  entries: DemoEntry[],
-  getLocationPart: (location: EntryLocation) => { value: string; label: string },
-): LocationFilterOption[] {
-  const optionMap = new Map<string, LocationFilterOption>();
+function buildLocationFilterTree(entries: DemoEntry[]): LocationCountryFilterOption[] {
+  const countryMap = new Map<string, LocationCountryFilterOption>();
 
   entries.forEach((entry) => {
-    const option = getLocationPart(parseEntryLocation(entry));
-    const value = normalizeLocationValue(option.value);
+    const location = parseEntryLocation(entry);
+    const countryValue = normalizeLocationValue(location.country);
+    const stateRegionValue = normalizeLocationValue(location.stateRegion);
+    const cityValue = normalizeLocationValue(location.city);
 
-    if (!value) {
+    if (!countryValue || !stateRegionValue || !cityValue) {
       return;
     }
 
-    const existingOption = optionMap.get(value);
+    let country = countryMap.get(countryValue);
 
-    if (existingOption) {
-      existingOption.count += 1;
+    if (!country) {
+      country = {
+        value: countryValue,
+        label: location.countryLabel,
+        count: 0,
+        stateRegions: [],
+      };
+      countryMap.set(countryValue, country);
+    }
+
+    country.count += 1;
+
+    const stateKey = locationStateRegionKey(countryValue, stateRegionValue);
+    let stateRegion = country.stateRegions.find((state) => state.key === stateKey);
+
+    if (!stateRegion) {
+      stateRegion = {
+        key: stateKey,
+        value: stateRegionValue,
+        label: location.stateRegion,
+        count: 0,
+        cities: [],
+      };
+      country.stateRegions.push(stateRegion);
+    }
+
+    stateRegion.count += 1;
+
+    const cityKey = locationCityKey(countryValue, stateRegionValue, cityValue);
+    const city = stateRegion.cities.find((cityOption) => cityOption.key === cityKey);
+
+    if (city) {
+      city.count += 1;
       return;
     }
 
-    optionMap.set(value, {
-      value,
-      label: option.label,
+    stateRegion.cities.push({
+      key: cityKey,
+      value: cityValue,
+      label: location.city,
       count: 1,
     });
   });
 
-  return [...optionMap.values()].sort((first, second) =>
-    first.label.localeCompare(second.label),
-  );
+  return [...countryMap.values()]
+    .map((country) => ({
+      ...country,
+      stateRegions: country.stateRegions
+        .map((stateRegion) => ({
+          ...stateRegion,
+          cities: [...stateRegion.cities].sort((first, second) =>
+            first.label.localeCompare(second.label),
+          ),
+        }))
+        .sort((first, second) => first.label.localeCompare(second.label)),
+    }))
+    .sort((first, second) => first.label.localeCompare(second.label));
 }
 
 function entryMatchesSearch(
@@ -512,47 +571,26 @@ export function ProspectPreviewDashboard({
       },
     );
   }, [entries]);
-  const countryFilterOptions = useMemo(
-    () =>
-      buildLocationFilterOptions(entries, (location) => ({
-        value: location.country,
-        label: location.countryLabel,
-      })),
-    [entries],
-  );
-  const stateRegionFilterOptions = useMemo(
-    () =>
-      buildLocationFilterOptions(entries, (location) => ({
-        value: location.stateRegion,
-        label: location.stateRegion,
-      })),
-    [entries],
-  );
-  const cityFilterOptions = useMemo(
-    () =>
-      buildLocationFilterOptions(entries, (location) => ({
-        value: location.city,
-        label: location.city,
-      })),
-    [entries],
-  );
+  const locationFilterTree = useMemo(() => buildLocationFilterTree(entries), [entries]);
 
   const visibleEntries = useMemo(() => {
     const searchTerm = normalizeSearchValue(searchQuery);
 
     const filteredEntries = entries.filter((entry) => {
       const location = parseEntryLocation(entry);
+      const countryValue = normalizeLocationValue(location.country);
+      const stateRegionValue = normalizeLocationValue(location.stateRegion);
+      const cityValue = normalizeLocationValue(location.city);
+      const stateRegionKey = locationStateRegionKey(countryValue, stateRegionValue);
+      const cityKey = locationCityKey(countryValue, stateRegionValue, cityValue);
       const matchesNiche =
         selectedNiches.length === 0 || selectedNiches.includes(entry.niche);
       const matchesCountry =
-        selectedCountries.length === 0 ||
-        selectedCountries.includes(normalizeLocationValue(location.country));
+        selectedCountries.length === 0 || selectedCountries.includes(countryValue);
       const matchesStateRegion =
-        selectedStateRegions.length === 0 ||
-        selectedStateRegions.includes(normalizeLocationValue(location.stateRegion));
+        selectedStateRegions.length === 0 || selectedStateRegions.includes(stateRegionKey);
       const matchesCity =
-        selectedCities.length === 0 ||
-        selectedCities.includes(normalizeLocationValue(location.city));
+        selectedCities.length === 0 || selectedCities.includes(cityKey);
       const matchesContactStatus =
         selectedContactFilters.length === 0 ||
         selectedContactFilters.every((filter) =>
@@ -701,6 +739,66 @@ export function ProspectPreviewDashboard({
     setSelectedCities([]);
     setSelectedContactFilters([]);
     setSelectedDemoStatuses([]);
+  }
+
+  function toggleCountryFilter(country: LocationCountryFilterOption) {
+    const isSelected = selectedCountries.includes(country.value);
+    const stateRegionKeys = country.stateRegions.map((stateRegion) => stateRegion.key);
+    const cityKeys = country.stateRegions.flatMap((stateRegion) =>
+      stateRegion.cities.map((city) => city.key),
+    );
+
+    if (isSelected) {
+      setSelectedCountries((current) =>
+        current.filter((countryValue) => countryValue !== country.value),
+      );
+      setSelectedStateRegions((current) =>
+        current.filter((stateRegionKey) => !stateRegionKeys.includes(stateRegionKey)),
+      );
+      setSelectedCities((current) => current.filter((cityKey) => !cityKeys.includes(cityKey)));
+      return;
+    }
+
+    setSelectedCountries((current) =>
+      current.includes(country.value) ? current : [...current, country.value],
+    );
+  }
+
+  function toggleStateRegionFilter(
+    country: LocationCountryFilterOption,
+    stateRegion: LocationStateRegionFilterOption,
+  ) {
+    const isSelected = selectedStateRegions.includes(stateRegion.key);
+    const cityKeys = stateRegion.cities.map((city) => city.key);
+
+    if (isSelected) {
+      setSelectedStateRegions((current) =>
+        current.filter((stateRegionKey) => stateRegionKey !== stateRegion.key),
+      );
+      setSelectedCities((current) => current.filter((cityKey) => !cityKeys.includes(cityKey)));
+      return;
+    }
+
+    setSelectedCountries((current) =>
+      current.includes(country.value) ? current : [...current, country.value],
+    );
+    setSelectedStateRegions((current) =>
+      current.includes(stateRegion.key) ? current : [...current, stateRegion.key],
+    );
+  }
+
+  function toggleCityFilter(
+    country: LocationCountryFilterOption,
+    stateRegion: LocationStateRegionFilterOption,
+    city: LocationCityFilterOption,
+  ) {
+    setSelectedCountries((current) =>
+      current.includes(country.value) ? current : [...current, country.value],
+    );
+    setSelectedStateRegions((current) =>
+      current.includes(stateRegion.key) ? current : [...current, stateRegion.key],
+    );
+    setSelectedCities((current) => toggleSelectedValue(current, city.key));
   }
 
   async function openDraft(entry: DemoEntry) {
@@ -1401,105 +1499,108 @@ export function ProspectPreviewDashboard({
 
                   <details className="filter-rail-group">
                     <summary>Location</summary>
-                    <div className="filter-rail-nested-groups">
-                      <section className="filter-rail-subgroup" aria-label="Country filters">
-                        <h4>Country</h4>
-                        <div className="filter-rail-options">
-                          {countryFilterOptions.map((filter) => {
-                            const isSelected = selectedCountries.includes(filter.value);
+                    <div className="location-filter-tree">
+                      {locationFilterTree.map((country) => {
+                        const isCountrySelected = selectedCountries.includes(country.value);
 
-                            return (
-                              <button
-                                className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                                key={filter.value}
-                                type="button"
-                                onClick={() =>
-                                  setSelectedCountries((current) =>
-                                    toggleSelectedValue(current, filter.value),
-                                  )
-                                }
-                                aria-pressed={isSelected}
-                              >
-                                <span>
-                                  {isSelected ? (
-                                    <Check size={14} aria-hidden="true" />
-                                  ) : (
-                                    <Globe2 size={14} aria-hidden="true" />
-                                  )}
-                                  {filter.label}
-                                </span>
-                                <strong>{filter.count}</strong>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </section>
+                        return (
+                          <div className="location-filter-branch" key={country.value}>
+                            <button
+                              className={
+                                isCountrySelected ? "rail-filter-option active" : "rail-filter-option"
+                              }
+                              type="button"
+                              onClick={() => toggleCountryFilter(country)}
+                              aria-pressed={isCountrySelected}
+                              aria-expanded={isCountrySelected}
+                            >
+                              <span>
+                                {isCountrySelected ? (
+                                  <Check size={14} aria-hidden="true" />
+                                ) : (
+                                  <Globe2 size={14} aria-hidden="true" />
+                                )}
+                                {country.label}
+                              </span>
+                              <strong>{country.count}</strong>
+                            </button>
 
-                      <section className="filter-rail-subgroup" aria-label="State or region filters">
-                        <h4>State / region</h4>
-                        <div className="filter-rail-options">
-                          {stateRegionFilterOptions.map((filter) => {
-                            const isSelected = selectedStateRegions.includes(filter.value);
+                            {isCountrySelected ? (
+                              <div className="location-filter-children">
+                                {country.stateRegions.map((stateRegion) => {
+                                  const isStateRegionSelected = selectedStateRegions.includes(
+                                    stateRegion.key,
+                                  );
 
-                            return (
-                              <button
-                                className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                                key={filter.value}
-                                type="button"
-                                onClick={() =>
-                                  setSelectedStateRegions((current) =>
-                                    toggleSelectedValue(current, filter.value),
-                                  )
-                                }
-                                aria-pressed={isSelected}
-                              >
-                                <span>
-                                  {isSelected ? (
-                                    <Check size={14} aria-hidden="true" />
-                                  ) : (
-                                    <MapIcon size={14} aria-hidden="true" />
-                                  )}
-                                  {filter.label}
-                                </span>
-                                <strong>{filter.count}</strong>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </section>
+                                  return (
+                                    <div className="location-filter-branch" key={stateRegion.key}>
+                                      <button
+                                        className={
+                                          isStateRegionSelected
+                                            ? "rail-filter-option location-filter-child-option active"
+                                            : "rail-filter-option location-filter-child-option"
+                                        }
+                                        type="button"
+                                        onClick={() =>
+                                          toggleStateRegionFilter(country, stateRegion)
+                                        }
+                                        aria-pressed={isStateRegionSelected}
+                                        aria-expanded={isStateRegionSelected}
+                                      >
+                                        <span>
+                                          {isStateRegionSelected ? (
+                                            <Check size={14} aria-hidden="true" />
+                                          ) : (
+                                            <MapIcon size={14} aria-hidden="true" />
+                                          )}
+                                          {stateRegion.label}
+                                        </span>
+                                        <strong>{stateRegion.count}</strong>
+                                      </button>
 
-                      <section className="filter-rail-subgroup" aria-label="City filters">
-                        <h4>City</h4>
-                        <div className="filter-rail-options">
-                          {cityFilterOptions.map((filter) => {
-                            const isSelected = selectedCities.includes(filter.value);
+                                      {isStateRegionSelected ? (
+                                        <div className="location-filter-children">
+                                          {stateRegion.cities.map((city) => {
+                                            const isCitySelected = selectedCities.includes(
+                                              city.key,
+                                            );
 
-                            return (
-                              <button
-                                className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
-                                key={filter.value}
-                                type="button"
-                                onClick={() =>
-                                  setSelectedCities((current) =>
-                                    toggleSelectedValue(current, filter.value),
-                                  )
-                                }
-                                aria-pressed={isSelected}
-                              >
-                                <span>
-                                  {isSelected ? (
-                                    <Check size={14} aria-hidden="true" />
-                                  ) : (
-                                    <MapPin size={14} aria-hidden="true" />
-                                  )}
-                                  {filter.label}
-                                </span>
-                                <strong>{filter.count}</strong>
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </section>
+                                            return (
+                                              <button
+                                                className={
+                                                  isCitySelected
+                                                    ? "rail-filter-option location-filter-child-option active"
+                                                    : "rail-filter-option location-filter-child-option"
+                                                }
+                                                key={city.key}
+                                                type="button"
+                                                onClick={() =>
+                                                  toggleCityFilter(country, stateRegion, city)
+                                                }
+                                                aria-pressed={isCitySelected}
+                                              >
+                                                <span>
+                                                  {isCitySelected ? (
+                                                    <Check size={14} aria-hidden="true" />
+                                                  ) : (
+                                                    <MapPin size={14} aria-hidden="true" />
+                                                  )}
+                                                  {city.label}
+                                                </span>
+                                                <strong>{city.count}</strong>
+                                              </button>
+                                            );
+                                          })}
+                                        </div>
+                                      ) : null}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            ) : null}
+                          </div>
+                        );
+                      })}
                     </div>
                   </details>
 
