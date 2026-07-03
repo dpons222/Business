@@ -462,6 +462,18 @@ function primaryServiceFromProspect(row: Partial<SupabaseDashboardProspectRow>) 
   return "Local growth system";
 }
 
+function hasRecommendationPackage(row: Partial<SupabaseDashboardProspectRow>) {
+  return row.metadata?.package_status === "recommendation_created";
+}
+
+function recommendationPreviewHrefFromProspect(row: Partial<SupabaseDashboardProspectRow>) {
+  if (!row.prospect_slug || !hasRecommendationPackage(row)) {
+    return null;
+  }
+
+  return `/prospects/${row.prospect_slug}`;
+}
+
 function initialsFromBusinessName(name: string) {
   return name
     .split(/\s+/)
@@ -477,8 +489,9 @@ function dashboardEntryFromSupabaseRow(row: Partial<SupabaseDashboardProspectRow
     return null;
   }
 
-  const href = row.demo_url ?? row.website ?? "#";
-  const hasDemo = Boolean(row.demo_url);
+  const previewHref = row.demo_url ?? recommendationPreviewHrefFromProspect(row);
+  const href = previewHref ?? row.website ?? "#";
+  const hasPreview = Boolean(previewHref);
 
   return {
     slug: row.prospect_slug,
@@ -492,7 +505,7 @@ function dashboardEntryFromSupabaseRow(row: Partial<SupabaseDashboardProspectRow
     primaryService: primaryServiceFromProspect(row),
     observedIssue: row.observed_issue ?? row.outreach_angle ?? "Qualified prospect in Supabase.",
     href,
-    previewLabel: hasDemo ? "Preview" : "Website",
+    previewLabel: hasPreview ? "Preview" : "Website",
     isExternalHref: href.startsWith("http"),
     sourceUrl: row.website ?? undefined,
     contactEmail: row.contact_email ?? undefined,
@@ -927,6 +940,52 @@ function appendLocalFallbackEntries(entries: DemoEntry[], seenSlugs: Set<string>
     entries.push(entry);
     seenSlugs.add(entry.slug);
   });
+}
+
+async function fetchSupabaseDashboardProspectRow(slug: string, config = getSupabaseConfig()) {
+  if (!config) {
+    return null;
+  }
+
+  const supabaseConfig = config;
+
+  async function requestProspect(select: string) {
+    const params = new URLSearchParams({
+      prospect_slug: `eq.${slug}`,
+      select,
+      limit: "1",
+    });
+
+    return fetch(`${supabaseConfig.url}/rest/v1/prospects?${params}`, {
+      headers: getSupabaseHeaders(supabaseConfig),
+      cache: "no-store",
+    });
+  }
+
+  let response = await requestProspect(dashboardProspectSelect);
+
+  if (!response.ok) {
+    response = await requestProspect(legacyDashboardProspectSelect);
+  }
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const rows = (await response.json()) as Partial<SupabaseDashboardProspectRow>[];
+
+  return rows[0] ?? null;
+}
+
+export async function getRecommendationPreviewEntry(slug: string) {
+  try {
+    const row = await fetchSupabaseDashboardProspectRow(slug);
+    const entry = row ? dashboardEntryFromSupabaseRow(row) : null;
+
+    return entry ? enrichDashboardEntryWithLocalMetadata(entry) : null;
+  } catch {
+    return null;
+  }
 }
 
 export async function getDashboardProspectData() {
