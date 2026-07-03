@@ -19,7 +19,7 @@ Replace the dashboard's single local current-focus business with a global Supaba
 - [x] Add Add to Focus / Remove from Focus controls to prospect cards.
 - [x] Add Clear Focus.
 - [x] Validate build and behavior.
-- [ ] Commit, sync, and deploy if requested.
+- [x] Commit, sync, and deploy.
 
 ## Validation Notes
 - Supabase migration `add_dashboard_focus_items` applied successfully.
@@ -28,3 +28,7 @@ Replace the dashboard's single local current-focus business with a global Supaba
 - Server-side Supabase helper add/get/remove cycle passed for `charger-roofing`, and the table was left empty after the test.
 - Authenticated `/api/dashboard-focus` route GET/add/remove cycle passed locally through `next start`.
 - Local dashboard screenshots verified the Focus list on desktop and mobile portrait widths.
+- Commit `757c674` was pushed to `develop`.
+- Production deploy `dpl_7927PykmCKdAaBk1qLG5uASDuZRo` completed and was aliased to `https://local-growth-preview.vercel.app`.
+- Production `/api/dashboard-focus` GET/add/remove cycle passed and left the shared Focus list empty after testing.
+- Production dashboard screenshots verified the Focus list on desktop and mobile widths.
