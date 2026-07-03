@@ -5,7 +5,7 @@ export const texasStarRoofingConstruction: ProspectData = {
   companyName: "Texas Star Roofing & Construction",
   shortName: "Texas Star",
   createdAt: "2026-06-24",
-  city: "San Antonio",
+  city: "San Antonio, TX",
   serviceArea: "San Antonio and nearby Central Texas communities",
   phone: "(210) 649-4300",
   phoneHref: "tel:2106494300",

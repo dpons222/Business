@@ -5,7 +5,7 @@ export const proclaimRoofingHouston: ProspectData = {
   companyName: "Proclaim Roofing Houston",
   shortName: "Proclaim",
   createdAt: "2026-06-24",
-  city: "Houston",
+  city: "Houston, TX",
   serviceArea: "Houston and Harris County neighborhoods",
   phone: "Website contact",
   phoneHref: "https://proclaimroof.com/contact/",

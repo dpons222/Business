@@ -66,6 +66,7 @@ type EntryLocation = {
   country: string;
   countryLabel: string;
   stateRegion: string;
+  stateRegionLabel: string;
   city: string;
 };
 
@@ -215,6 +216,16 @@ function countryLabel(country: string) {
   return country;
 }
 
+function stateRegionLabel(stateRegion: string) {
+  const stateRegionLabels: Record<string, string> = {
+    TX: "Texas",
+    VA: "Virginia",
+  };
+  const normalizedStateRegion = stateRegion.toUpperCase();
+
+  return stateRegionLabels[normalizedStateRegion] ?? stateRegion;
+}
+
 function parseEntryLocation(entry: Pick<DemoEntry, "city">): EntryLocation {
   const [rawCity, rawRegion, rawCountry] = entry.city
     .split(",")
@@ -234,6 +245,7 @@ function parseEntryLocation(entry: Pick<DemoEntry, "city">): EntryLocation {
     country,
     countryLabel: countryLabel(country),
     stateRegion,
+    stateRegionLabel: stateRegionLabel(stateRegion),
     city,
   };
 }
@@ -272,7 +284,7 @@ function buildLocationFilterTree(entries: DemoEntry[]): LocationCountryFilterOpt
       stateRegion = {
         key: stateKey,
         value: stateRegionValue,
-        label: location.stateRegion,
+        label: location.stateRegionLabel,
         count: 0,
         cities: [],
       };
@@ -329,7 +341,7 @@ function entryMatchesSearch(
     entry.slug,
     entry.city,
     location.countryLabel,
-    location.stateRegion,
+    location.stateRegionLabel,
     entry.niche,
     entry.primaryService,
     entry.stageLabel,

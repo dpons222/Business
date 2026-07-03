@@ -7,7 +7,7 @@ export const sixthGenRoofing: ProspectData = {
   companyName: "Sixth Gen Roofing",
   shortName: "Sixth Gen",
   createdAt: "2026-06-24",
-  city: "Austin",
+  city: "Austin, TX",
   serviceArea: "Austin, Georgetown, Round Rock, and Central Texas",
   phone: "512-645-2416",
   phoneHref: "tel:5126452416",

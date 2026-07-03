@@ -5,7 +5,7 @@ export const houstonRoofingConstruction: ProspectData = {
   companyName: "Houston Roofing & Construction",
   shortName: "Houston Roofing",
   createdAt: "2026-06-24",
-  city: "Houston",
+  city: "Houston, TX",
   serviceArea: "Houston and surrounding communities",
   phone: "Website contact",
   phoneHref: "https://houstonroofingonline.com/residential-roofing/free-roof-inspection/",

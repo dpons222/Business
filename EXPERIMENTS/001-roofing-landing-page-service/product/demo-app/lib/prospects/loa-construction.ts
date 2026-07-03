@@ -7,7 +7,7 @@ export const loaConstruction: ProspectData = {
   companyName: "LOA Construction",
   shortName: "LOA",
   createdAt: "2026-06-23",
-  city: "Austin",
+  city: "Austin, TX",
   serviceArea: "Austin, Central Texas, Round Rock, and nearby service areas",
   phone: "512-375-3654",
   phoneHref: "tel:5123753654",

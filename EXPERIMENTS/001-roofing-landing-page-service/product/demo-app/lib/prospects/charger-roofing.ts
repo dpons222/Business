@@ -5,7 +5,7 @@ export const chargerRoofing: ProspectData = {
   companyName: "Charger Roofing",
   shortName: "Charger",
   createdAt: "2026-06-17",
-  city: "San Antonio",
+  city: "San Antonio, TX",
   serviceArea: "San Antonio and surrounding areas",
   phone: "(210) 305-ROOF",
   phoneHref: "tel:2103057663",

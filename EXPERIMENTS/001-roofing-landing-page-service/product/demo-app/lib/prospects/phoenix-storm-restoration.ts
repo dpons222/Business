@@ -7,7 +7,7 @@ export const phoenixStormRestoration: ProspectData = {
   companyName: "Phoenix Storm Restoration",
   shortName: "Phoenix",
   createdAt: "2026-06-24",
-  city: "Fort Worth",
+  city: "Fort Worth, TX",
   serviceArea: "Fort Worth, Tarrant County, and nearby North Texas communities",
   phone: "(945) 308-0425",
   phoneHref: "tel:9453080425",

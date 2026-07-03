@@ -5,7 +5,7 @@ export const rescueRoofingTexas: ProspectData = {
   companyName: "Rescue Roofing Texas",
   shortName: "Rescue",
   createdAt: "2026-06-24",
-  city: "Dallas County",
+  city: "Dallas County, TX",
   serviceArea: "Dallas County, Tarrant, Collin, Parker, Ellis, Denton, Johnson, Hood, and Palo Pinto counties",
   phone: "(817) 550-7271",
   phoneHref: "tel:8175507271",

@@ -5,7 +5,7 @@ export const elevatedRoofing: ProspectData = {
   companyName: "Elevated Roofing",
   shortName: "Elevated",
   createdAt: "2026-06-24",
-  city: "Fort Worth",
+  city: "Fort Worth, TX",
   serviceArea: "Fort Worth, Dallas, North Dallas, and DFW communities",
   phone: "(469) 305-0010",
   phoneHref: "tel:4693050010",

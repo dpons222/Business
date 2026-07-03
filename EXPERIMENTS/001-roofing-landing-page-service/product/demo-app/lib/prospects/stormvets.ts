@@ -7,7 +7,7 @@ export const stormvets: ProspectData = {
   companyName: "StormVets",
   shortName: "StormVets",
   createdAt: "2026-06-24",
-  city: "Frisco",
+  city: "Frisco, TX",
   serviceArea: "Frisco, Collin County, Denton, and nearby North Texas communities",
   phone: "(469) 422-4238",
   phoneHref: "tel:4694224238",

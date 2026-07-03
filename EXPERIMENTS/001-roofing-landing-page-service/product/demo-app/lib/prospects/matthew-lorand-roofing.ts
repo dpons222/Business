@@ -7,7 +7,7 @@ export const matthewLorandRoofing: ProspectData = {
   companyName: "Matthew Lorand Roofing",
   shortName: "Matthew Lorand",
   createdAt: "2026-06-24",
-  city: "Austin",
+  city: "Austin, TX",
   serviceArea: "Austin and nearby Central Texas communities",
   phone: "(512) 808-0403",
   phoneHref: "tel:5128080403",

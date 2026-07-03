@@ -5,7 +5,7 @@ export const invictusRoofing: ProspectData = {
   companyName: "Invictus Roofing",
   shortName: "Invictus",
   createdAt: "2026-06-24",
-  city: "Frisco",
+  city: "Frisco, TX",
   serviceArea: "Frisco and North Texas",
   phone: "(469) 649-0288",
   phoneHref: "tel:4696490288",

@@ -7,7 +7,7 @@ export const brotherhoodRoofing: ProspectData = {
   companyName: "Brotherhood Roofing",
   shortName: "Brotherhood",
   createdAt: "2026-06-24",
-  city: "Frisco",
+  city: "Frisco, TX",
   serviceArea: "Dallas, Frisco, and the Dallas-Fort Worth metro area",
   phone: "972-742-5332",
   phoneHref: "tel:9727425332",

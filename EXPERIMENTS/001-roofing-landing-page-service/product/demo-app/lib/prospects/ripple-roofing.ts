@@ -5,7 +5,7 @@ export const rippleRoofing: ProspectData = {
   companyName: "Ripple Roofing",
   shortName: "Ripple",
   createdAt: "2026-06-24",
-  city: "Waco",
+  city: "Waco, TX",
   serviceArea: "Waco, Hewitt, Woodway, Bellmead, and McLennan County",
   phone: "(512) 763-5277",
   phoneHref: "tel:5127635277",

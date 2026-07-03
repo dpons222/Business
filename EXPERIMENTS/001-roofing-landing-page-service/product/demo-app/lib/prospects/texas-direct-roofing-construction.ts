@@ -5,7 +5,7 @@ export const texasDirectRoofingConstruction: ProspectData = {
   companyName: "Texas Direct Roofing & Construction",
   shortName: "Texas Direct",
   createdAt: "2026-06-24",
-  city: "Dallas-Fort Worth",
+  city: "Dallas-Fort Worth, TX",
   serviceArea: "Dallas-Fort Worth and North Texas",
   phone: "Website contact",
   phoneHref: "https://txdroofing.com/#contact",

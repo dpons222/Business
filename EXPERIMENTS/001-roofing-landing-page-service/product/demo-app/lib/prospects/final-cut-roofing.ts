@@ -7,7 +7,7 @@ export const finalCutRoofing: ProspectData = {
   companyName: "Final Cut Roofing",
   shortName: "Final Cut",
   createdAt: "2026-06-16",
-  city: "Frisco",
+  city: "Frisco, TX",
   serviceArea: "Frisco, McKinney, Plano, The Colony, Denton, and nearby DFW neighborhoods",
   phone: "972-777-0350",
   phoneHref: "tel:9727770350",

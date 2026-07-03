@@ -5,7 +5,7 @@ export const cloudRoofing: ProspectData = {
   companyName: "Cloud Roofing",
   shortName: "Cloud",
   createdAt: "2026-06-24",
-  city: "San Antonio",
+  city: "San Antonio, TX",
   serviceArea: "San Antonio and Central Texas",
   phone: "(210) 366-9484",
   phoneHref: "tel:2103669484",

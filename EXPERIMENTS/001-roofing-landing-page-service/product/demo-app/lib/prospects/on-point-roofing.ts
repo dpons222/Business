@@ -7,7 +7,7 @@ export const onPointRoofing: ProspectData = {
   companyName: "On Point Roofing",
   shortName: "On Point",
   createdAt: "2026-06-24",
-  city: "Plano",
+  city: "Plano, TX",
   serviceArea: "Plano, DFW, Allen, Frisco, Richardson, Carrollton, and nearby North Texas areas",
   phone: "(817) 904-9423",
   phoneHref: "tel:8179049423",

@@ -31,3 +31,11 @@ Creates approved email/SMS-style copy for returning clients where appropriate.
 ## 8. GBP And Booking Link Cleanup
 
 Audits public links and recommends a cleaner path from local search to booking.
+
+## 9. Chatbot Or AI Intake Module
+
+Creates a narrow, approved intake assistant for FAQs, consult routing, or lead capture. This should hand off clearly to a human and avoid treatment advice, diagnosis, clinical claims, and private patient data during validation.
+
+## 10. AI Phone Follow-Up Module
+
+Uses a narrow approved script for reminders, missed-call callbacks, basic reactivation, or qualification. Treat this as an advanced module after trust is built, not the default first offer.

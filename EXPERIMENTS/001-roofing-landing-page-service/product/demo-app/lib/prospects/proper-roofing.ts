@@ -7,7 +7,7 @@ export const properRoofing: ProspectData = {
   companyName: "Proper Roofing",
   shortName: "Proper",
   createdAt: "2026-06-24",
-  city: "Houston",
+  city: "Houston, TX",
   serviceArea: "Greater Houston, Katy, Cinco Ranch, League City, and nearby areas",
   phone: "(832) 554-7830",
   phoneHref: "tel:8325547830",

@@ -5,7 +5,7 @@ export const pappasRoofingAndConstruction: ProspectData = {
   companyName: "Pappas Roofing and Construction",
   shortName: "Pappas",
   createdAt: "2026-06-24",
-  city: "Plano",
+  city: "Plano, TX",
   serviceArea: "Plano, the DFW Metroplex, and Texas service areas",
   phone: "(972) 806-9791",
   phoneHref: "tel:9728069791",

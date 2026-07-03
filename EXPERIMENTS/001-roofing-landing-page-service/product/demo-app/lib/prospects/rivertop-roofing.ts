@@ -7,7 +7,7 @@ export const rivertopRoofing: ProspectData = {
   companyName: "Rivertop Roofing",
   shortName: "Rivertop",
   createdAt: "2026-06-24",
-  city: "Plano",
+  city: "Plano, TX",
   serviceArea: "Plano, North Texas, and nearby service areas",
   phone: "(888) 909-5424",
   phoneHref: "tel:8889095424",

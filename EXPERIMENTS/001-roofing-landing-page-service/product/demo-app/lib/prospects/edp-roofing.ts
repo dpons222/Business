@@ -7,7 +7,7 @@ export const edpRoofing: ProspectData = {
   companyName: "EDP Roofing",
   shortName: "EDP",
   createdAt: "2026-06-24",
-  city: "Dallas",
+  city: "Dallas, TX",
   serviceArea: "Dallas, DFW, and nearby North Texas communities",
   phone: "(972) 274-5277",
   phoneHref: "tel:9722745277",

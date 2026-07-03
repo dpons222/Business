@@ -5,7 +5,7 @@ export const tsgRoofing: ProspectData = {
   companyName: "TSG Roofing",
   shortName: "TSG",
   createdAt: "2026-06-24",
-  city: "Texas",
+  city: "Statewide, TX",
   serviceArea: "Greater Austin, Greater Houston, Greater San Antonio, and surrounding Texas metros",
   phone: "(888) 831-1005",
   phoneHref: "tel:8888311005",

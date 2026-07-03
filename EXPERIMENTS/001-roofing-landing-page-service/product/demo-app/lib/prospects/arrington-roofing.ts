@@ -7,7 +7,7 @@ export const arringtonRoofing: ProspectData = {
   companyName: "Arrington Roofing",
   shortName: "Arrington",
   createdAt: "2026-06-24",
-  city: "Dallas-Fort Worth",
+  city: "Dallas-Fort Worth, TX",
   serviceArea: "Dallas, Fort Worth, Plano, Frisco, Irving, and North Texas",
   phone: "(214) 698-8443",
   phoneHref: "tel:2146988443",

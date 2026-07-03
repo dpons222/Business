@@ -5,7 +5,7 @@ export const sugarRoofing: ProspectData = {
   companyName: "Sugar Roofing",
   shortName: "Sugar",
   createdAt: "2026-06-24",
-  city: "Houston",
+  city: "Houston, TX",
   serviceArea: "Houston and the greater Houston area",
   phone: "(713) 843-7204",
   phoneHref: "tel:7138437204",

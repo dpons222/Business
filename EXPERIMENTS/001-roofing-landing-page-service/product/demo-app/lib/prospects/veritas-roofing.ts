@@ -5,7 +5,7 @@ export const veritasRoofing: ProspectData = {
   companyName: "Veritas Roofing",
   shortName: "Veritas",
   createdAt: "2026-06-24",
-  city: "Fort Worth",
+  city: "Fort Worth, TX",
   serviceArea: "Fort Worth, Round Rock, College Station, and Oklahoma City service areas",
   phone: "(817) 455-0117",
   phoneHref: "tel:8174550117",

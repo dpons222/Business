@@ -5,7 +5,7 @@ export const rhinoRoofers: ProspectData = {
   companyName: "Rhino Roofers",
   shortName: "Rhino",
   createdAt: "2026-06-24",
-  city: "San Antonio",
+  city: "San Antonio, TX",
   serviceArea: "San Antonio, Austin, Round Rock, and Central Texas",
   phone: "(210) 361-7663",
   phoneHref: "tel:2103617663",

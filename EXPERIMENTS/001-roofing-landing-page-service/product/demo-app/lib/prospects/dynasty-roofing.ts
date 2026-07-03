@@ -5,7 +5,7 @@ export const dynastyRoofing: ProspectData = {
   companyName: "Dynasty Roofing",
   shortName: "Dynasty",
   createdAt: "2026-06-24",
-  city: "Houston",
+  city: "Houston, TX",
   serviceArea: "Houston, Webster, Clear Lake, League City, Friendswood, Pasadena, and nearby areas",
   phone: "281-698-0448",
   phoneHref: "tel:2816980448",

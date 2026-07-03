@@ -8,7 +8,7 @@ export const integrityFirstRoofingConstruction: ProspectData = {
   companyName: "Integrity First Roofing & Construction",
   shortName: "Integrity First",
   createdAt: "2026-06-24",
-  city: "Frisco",
+  city: "Frisco, TX",
   serviceArea: "Frisco, North Texas, and Central Texas",
   phone: "(972) 836-9196",
   phoneHref: "tel:9728369196",

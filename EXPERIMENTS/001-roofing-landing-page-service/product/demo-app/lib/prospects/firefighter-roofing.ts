@@ -5,7 +5,7 @@ export const firefighterRoofing: ProspectData = {
   companyName: "Firefighter Roofing",
   shortName: "Firefighter",
   createdAt: "2026-06-24",
-  city: "Fort Worth",
+  city: "Fort Worth, TX",
   serviceArea: "Fort Worth and surrounding Tarrant County area",
   phone: "(817) 479-8999",
   phoneHref: "tel:8174798999",
