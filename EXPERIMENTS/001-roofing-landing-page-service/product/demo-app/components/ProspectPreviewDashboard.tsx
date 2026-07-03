@@ -10,10 +10,13 @@ import {
   Copy,
   ExternalLink,
   FileText,
+  Globe2,
   SlidersHorizontal,
   Layers3,
   Link as LinkIcon,
   Mail,
+  Map as MapIcon,
+  MapPin,
   Search,
   Star,
   X,
@@ -44,6 +47,17 @@ type DemoStatusFilter = Extract<
   DemoStatus,
   "ready_for_review" | "outreach_ready" | "follow_up" | "building_demo"
 >;
+type LocationFilterOption = {
+  value: string;
+  label: string;
+  count: number;
+};
+type EntryLocation = {
+  country: string;
+  countryLabel: string;
+  stateRegion: string;
+  city: string;
+};
 
 const CURRENT_FOCUS_STORAGE_KEY = "local-growth-preview-current-focus";
 
@@ -171,6 +185,74 @@ function normalizeSearchValue(value: string | null | undefined) {
   return value?.trim().toLowerCase() ?? "";
 }
 
+function normalizeLocationValue(value: string) {
+  return value.trim().toLowerCase();
+}
+
+function countryLabel(country: string) {
+  if (country.toUpperCase() === "US") {
+    return "United States";
+  }
+
+  return country;
+}
+
+function parseEntryLocation(entry: Pick<DemoEntry, "city">): EntryLocation {
+  const [rawCity, rawRegion, rawCountry] = entry.city
+    .split(",")
+    .map((part) => part.trim())
+    .filter(Boolean);
+  const city = rawCity || "Unknown city";
+  const regionCandidate = rawRegion || "Unspecified region";
+  const country = (
+    rawCountry || (regionCandidate.toUpperCase() === "US" ? regionCandidate : "US")
+  ).toUpperCase();
+  const stateRegion =
+    !rawCountry && regionCandidate.toUpperCase() === "US"
+      ? "Unspecified region"
+      : regionCandidate;
+
+  return {
+    country,
+    countryLabel: countryLabel(country),
+    stateRegion,
+    city,
+  };
+}
+
+function buildLocationFilterOptions(
+  entries: DemoEntry[],
+  getLocationPart: (location: EntryLocation) => { value: string; label: string },
+): LocationFilterOption[] {
+  const optionMap = new Map<string, LocationFilterOption>();
+
+  entries.forEach((entry) => {
+    const option = getLocationPart(parseEntryLocation(entry));
+    const value = normalizeLocationValue(option.value);
+
+    if (!value) {
+      return;
+    }
+
+    const existingOption = optionMap.get(value);
+
+    if (existingOption) {
+      existingOption.count += 1;
+      return;
+    }
+
+    optionMap.set(value, {
+      value,
+      label: option.label,
+      count: 1,
+    });
+  });
+
+  return [...optionMap.values()].sort((first, second) =>
+    first.label.localeCompare(second.label),
+  );
+}
+
 function entryMatchesSearch(
   entry: DemoEntry,
   summaries: Record<string, ProspectDraftSummary>,
@@ -181,11 +263,14 @@ function entryMatchesSearch(
   }
 
   const summary = summaries[entry.slug];
+  const location = parseEntryLocation(entry);
   const searchableText = [
     entry.title,
     entry.shortName,
     entry.slug,
     entry.city,
+    location.countryLabel,
+    location.stateRegion,
     entry.niche,
     entry.primaryService,
     entry.stageLabel,
@@ -345,6 +430,9 @@ export function ProspectPreviewDashboard({
   const [selectedNiches, setSelectedNiches] = useState<DemoNiche[]>([]);
   const [selectedContactFilters, setSelectedContactFilters] = useState<ContactFilter[]>([]);
   const [selectedDemoStatuses, setSelectedDemoStatuses] = useState<DemoStatusFilter[]>([]);
+  const [selectedCountries, setSelectedCountries] = useState<string[]>([]);
+  const [selectedStateRegions, setSelectedStateRegions] = useState<string[]>([]);
+  const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedFocusSlug, setSelectedFocusSlug] = useState(currentFocus.slug);
   const [hasLoadedSavedFocus, setHasLoadedSavedFocus] = useState(false);
   const [draftEntry, setDraftEntry] = useState<DemoEntry | null>(null);
@@ -424,13 +512,47 @@ export function ProspectPreviewDashboard({
       },
     );
   }, [entries]);
+  const countryFilterOptions = useMemo(
+    () =>
+      buildLocationFilterOptions(entries, (location) => ({
+        value: location.country,
+        label: location.countryLabel,
+      })),
+    [entries],
+  );
+  const stateRegionFilterOptions = useMemo(
+    () =>
+      buildLocationFilterOptions(entries, (location) => ({
+        value: location.stateRegion,
+        label: location.stateRegion,
+      })),
+    [entries],
+  );
+  const cityFilterOptions = useMemo(
+    () =>
+      buildLocationFilterOptions(entries, (location) => ({
+        value: location.city,
+        label: location.city,
+      })),
+    [entries],
+  );
 
   const visibleEntries = useMemo(() => {
     const searchTerm = normalizeSearchValue(searchQuery);
 
     const filteredEntries = entries.filter((entry) => {
+      const location = parseEntryLocation(entry);
       const matchesNiche =
         selectedNiches.length === 0 || selectedNiches.includes(entry.niche);
+      const matchesCountry =
+        selectedCountries.length === 0 ||
+        selectedCountries.includes(normalizeLocationValue(location.country));
+      const matchesStateRegion =
+        selectedStateRegions.length === 0 ||
+        selectedStateRegions.includes(normalizeLocationValue(location.stateRegion));
+      const matchesCity =
+        selectedCities.length === 0 ||
+        selectedCities.includes(normalizeLocationValue(location.city));
       const matchesContactStatus =
         selectedContactFilters.length === 0 ||
         selectedContactFilters.every((filter) =>
@@ -441,7 +563,15 @@ export function ProspectPreviewDashboard({
         selectedDemoStatuses.some((status) => entry.status === status);
       const matchesSearch = entryMatchesSearch(entry, prospectDraftSummaries, searchTerm);
 
-      return matchesNiche && matchesContactStatus && matchesDemoStatus && matchesSearch;
+      return (
+        matchesNiche &&
+        matchesCountry &&
+        matchesStateRegion &&
+        matchesCity &&
+        matchesContactStatus &&
+        matchesDemoStatus &&
+        matchesSearch
+      );
     });
 
     return [...filteredEntries].sort((first, second) => {
@@ -457,9 +587,12 @@ export function ProspectPreviewDashboard({
     entries,
     prospectDraftSummaries,
     searchQuery,
+    selectedCities,
     selectedContactFilters,
+    selectedCountries,
     selectedDemoStatuses,
     selectedNiches,
+    selectedStateRegions,
     sortDirection,
     sortMode,
   ]);
@@ -480,6 +613,9 @@ export function ProspectPreviewDashboard({
   const trimmedSearchQuery = searchQuery.trim();
   const activeFilterCount =
     selectedNiches.length +
+    selectedCountries.length +
+    selectedStateRegions.length +
+    selectedCities.length +
     selectedContactFilters.length +
     selectedDemoStatuses.length +
     (trimmedSearchQuery ? 1 : 0);
@@ -560,6 +696,9 @@ export function ProspectPreviewDashboard({
   function resetFilters() {
     setSearchQuery("");
     setSelectedNiches([]);
+    setSelectedCountries([]);
+    setSelectedStateRegions([]);
+    setSelectedCities([]);
     setSelectedContactFilters([]);
     setSelectedDemoStatuses([]);
   }
@@ -1261,6 +1400,105 @@ export function ProspectPreviewDashboard({
                   </details>
 
                   <details className="filter-rail-group">
+                    <summary>Country</summary>
+                    <div className="filter-rail-options">
+                      {countryFilterOptions.map((filter) => {
+                        const isSelected = selectedCountries.includes(filter.value);
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedCountries((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <Globe2 size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{filter.count}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
+
+                  <details className="filter-rail-group">
+                    <summary>State / region</summary>
+                    <div className="filter-rail-options">
+                      {stateRegionFilterOptions.map((filter) => {
+                        const isSelected = selectedStateRegions.includes(filter.value);
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedStateRegions((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <MapIcon size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{filter.count}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
+
+                  <details className="filter-rail-group">
+                    <summary>City</summary>
+                    <div className="filter-rail-options">
+                      {cityFilterOptions.map((filter) => {
+                        const isSelected = selectedCities.includes(filter.value);
+
+                        return (
+                          <button
+                            className={isSelected ? "rail-filter-option active" : "rail-filter-option"}
+                            key={filter.value}
+                            type="button"
+                            onClick={() =>
+                              setSelectedCities((current) =>
+                                toggleSelectedValue(current, filter.value),
+                              )
+                            }
+                            aria-pressed={isSelected}
+                          >
+                            <span>
+                              {isSelected ? (
+                                <Check size={14} aria-hidden="true" />
+                              ) : (
+                                <MapPin size={14} aria-hidden="true" />
+                              )}
+                              {filter.label}
+                            </span>
+                            <strong>{filter.count}</strong>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </details>
+
+                  <details className="filter-rail-group">
                     <summary>Contact status</summary>
                     <div className="filter-rail-options">
                       {contactFilterOptions.map((filter) => {
@@ -1407,7 +1645,10 @@ export function ProspectPreviewDashboard({
                 {visibleEntries.length === 0 ? (
                   <div className="empty-filter-state">
                     <h3>No demos match this view.</h3>
-                    <p>Adjust the search, niche, contact status, or demo status filter to show more demos.</p>
+                    <p>
+                      Adjust the search, niche, location, contact status, or demo status filter to
+                      show more demos.
+                    </p>
                   </div>
                 ) : null}
               </div>
