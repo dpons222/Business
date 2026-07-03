@@ -1,4 +1,4 @@
-import { demoEntries, getDemoEntryBySlug } from "./demoRegistry";
+import { getLocalDemoEntryBySlug, localDemoEntries } from "./demoRegistry";
 import type { DemoEntry, DemoNiche, DemoStatus } from "./demoRegistry";
 
 export type OutreachSendStatus =
@@ -770,7 +770,7 @@ function getSupabaseHeaders(
 }
 
 export function getLocalProspectDraft(slug: string): ProspectDraft | null {
-  const entry = getDemoEntryBySlug(slug);
+  const entry = getLocalDemoEntryBySlug(slug);
 
   if (!entry) {
     return null;
@@ -899,17 +899,46 @@ export async function getProspectDraftSummaries(slugs: string[]) {
   }
 }
 
-export async function getSupabaseDashboardEntries(excludedSlugs: string[] = []) {
+function enrichDashboardEntryWithLocalMetadata(entry: DemoEntry): DemoEntry {
+  const localEntry = getLocalDemoEntryBySlug(entry.slug);
+
+  if (!localEntry) {
+    return entry;
+  }
+
+  return {
+    ...entry,
+    href: localEntry.href || entry.href,
+    internalHref: localEntry.internalHref,
+    previewLabel: localEntry.previewLabel ?? entry.previewLabel,
+    isExternalHref: localEntry.href ? localEntry.href.startsWith("http") : entry.isExternalHref,
+    sourceUrl: entry.sourceUrl ?? localEntry.sourceUrl,
+    logoUrl: localEntry.logoUrl ?? entry.logoUrl,
+    primaryService: entry.primaryService || localEntry.primaryService,
+  };
+}
+
+function appendLocalFallbackEntries(entries: DemoEntry[], seenSlugs: Set<string>) {
+  localDemoEntries.forEach((entry) => {
+    if (seenSlugs.has(entry.slug)) {
+      return;
+    }
+
+    entries.push(entry);
+    seenSlugs.add(entry.slug);
+  });
+}
+
+export async function getDashboardProspectData() {
   const config = getSupabaseConfig();
 
   if (!config) {
     return {
-      entries: [],
+      entries: localDemoEntries,
       summaries: {},
     };
   }
 
-  const excludedSlugSet = new Set(excludedSlugs);
   const supabaseConfig = config;
 
   try {
@@ -932,8 +961,11 @@ export async function getSupabaseDashboardEntries(excludedSlugs: string[] = []) 
     }
 
     if (!response.ok) {
+      const entries: DemoEntry[] = [];
+      appendLocalFallbackEntries(entries, new Set());
+
       return {
-        entries: [],
+        entries,
         summaries: {},
       };
     }
@@ -941,9 +973,10 @@ export async function getSupabaseDashboardEntries(excludedSlugs: string[] = []) 
     const rows = (await response.json()) as Partial<SupabaseDashboardProspectRow>[];
     const entries: DemoEntry[] = [];
     const summaries: Record<string, ProspectDraftSummary> = {};
+    const seenSlugs = new Set<string>();
 
     rows.forEach((row) => {
-      if (!row.prospect_slug || excludedSlugSet.has(row.prospect_slug)) {
+      if (!row.prospect_slug) {
         return;
       }
 
@@ -953,20 +986,36 @@ export async function getSupabaseDashboardEntries(excludedSlugs: string[] = []) 
         return;
       }
 
-      entries.push(entry);
+      entries.push(enrichDashboardEntryWithLocalMetadata(entry));
       summaries[row.prospect_slug] = prospectSummaryFromRow(row);
+      seenSlugs.add(row.prospect_slug);
     });
+
+    appendLocalFallbackEntries(entries, seenSlugs);
 
     return {
       entries,
       summaries,
     };
   } catch {
+    const entries: DemoEntry[] = [];
+    appendLocalFallbackEntries(entries, new Set());
+
     return {
-      entries: [],
+      entries,
       summaries: {},
     };
   }
+}
+
+export async function getSupabaseDashboardEntries(excludedSlugs: string[] = []) {
+  const excludedSlugSet = new Set(excludedSlugs);
+  const dashboardData = await getDashboardProspectData();
+
+  return {
+    entries: dashboardData.entries.filter((entry) => !excludedSlugSet.has(entry.slug)),
+    summaries: dashboardData.summaries,
+  };
 }
 
 export async function getProspectDraft(slug: string): Promise<ProspectDraft | null> {
@@ -1654,5 +1703,5 @@ export async function updateProspectRelationshipStatus(
 }
 
 export function hasLocalDemoEntry(slug: string) {
-  return demoEntries.some((entry) => entry.slug === slug);
+  return Boolean(getLocalDemoEntryBySlug(slug));
 }

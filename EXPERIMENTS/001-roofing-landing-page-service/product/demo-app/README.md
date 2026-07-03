@@ -4,7 +4,7 @@ Reusable local growth preview hub for roofing, restaurants, and future niche dem
 
 ## Purpose
 
-This app renders personalized prospect demos from reusable components, prospect data objects, and a multi-niche demo registry.
+This app renders personalized prospect demos from reusable components, prospect data objects, Supabase prospect records, and local demo metadata.
 
 The app still lives inside the original roofing experiment folder for now, but the UI and package name are now generic. Use `local-growth-preview` as the product/project name for the dashboard and future docs.
 
@@ -23,17 +23,15 @@ Location
   Country > State / region > City drill-down
 ```
 
-Dashboard entries are registered in:
+Dashboard prospect rows come from Supabase `public.prospects` first. Local coded demos are registered in:
 
 ```text
 lib/demoRegistry.ts
 ```
 
-The registry stores:
+The local registry stores optional route and asset metadata for demos that have code in this app:
 
 ```text
-niche
-status
 default current focus
 public preview URL
 source URL
@@ -41,10 +39,14 @@ contact email
 summary copy
 ```
 
+New prospects should be added to Supabase first. Add or update `lib/demoRegistry.ts` only when a
+prospect has a coded local demo route, logo/asset references, or must remain visible as a local
+fallback if Supabase is unavailable.
+
 The dashboard can change the current focus from the browser UI. The selected business is stored in
 browser `localStorage` under `local-growth-preview-current-focus`, so it persists for the same browser
 without changing the source-controlled registry default. If the saved slug no longer exists, the
-dashboard falls back to the registry default in `lib/demoRegistry.ts`.
+dashboard falls back to the local default in `lib/demoRegistry.ts`.
 
 Dashboard card actions:
 
@@ -439,7 +441,7 @@ scripts/
 - `app/dashboard/page.tsx`: renders the internal multi-niche preview dashboard with filtering and sorting.
 - `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
 - `app/pizabella/page.tsx`: renders the first customer-facing restaurant demo route.
-- `app/prospects/page.tsx`: lists prospect-specific demo pages.
+- `app/prospects/page.tsx`: lists Supabase-first prospect rows, enriched with local demo routes/assets.
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.
 - `app/prospects/[slug]/assessment/page.tsx`: renders the secondary Charger assessment flow variant.
 - `app/prospects/[slug]/storm-response/page.tsx`: legacy direct URL for the Charger storm response landing page variant.
@@ -448,8 +450,8 @@ scripts/
 - `components/VariantLandingPage.tsx`: alternate design branch renderer.
 - `components/ui/`: shadcn/ui primitives owned by this repo.
 - `lib/prospects/`: prospect types, registry, and one data file per prospect.
-- `lib/demoRegistry.ts`: multi-niche demo registry, statuses, filters, and current focus.
-- `lib/prospectDrafts.ts`: server-side Supabase draft lookup with local fallback draft data.
+- `lib/demoRegistry.ts`: local demo route/asset metadata, statuses, filters, and current focus.
+- `lib/prospectDrafts.ts`: server-side Supabase prospect/draft lookup with local fallback draft data.
 - `lib/dashboardAuth.ts`: signed-cookie dashboard authentication helpers.
 - `lib/designVariants.ts`: template/variant configuration for internal comparison.
 - `app/globals.css`: visual styling.

@@ -53,7 +53,7 @@ export const statusLabels: Record<DemoStatus, string> = {
   planned: "Planned",
 };
 
-const currentFocusSlug = "pizabella";
+export const currentFocusSlug = "pizabella";
 const contactedRoofingSlugs = new Set([chargerRoofing.slug, "sixth-gen-roofing"]);
 
 const roofingEntries: DemoEntry[] = prospects.map((prospect) => ({
@@ -122,11 +122,25 @@ const internalTestEntries: DemoEntry[] = [
   },
 ];
 
-export const demoEntries: DemoEntry[] = [...restaurantEntries, ...roofingEntries, ...internalTestEntries];
+export const localDemoEntries: DemoEntry[] = [
+  ...restaurantEntries,
+  ...roofingEntries,
+  ...internalTestEntries,
+];
+
+export const localDemoMetadataBySlug = new Map(
+  localDemoEntries.map((entry) => [entry.slug, entry]),
+);
+
+// Backward-compatible export for existing demo pages. Dashboard data should use
+// Supabase first and treat this list as route/asset metadata plus local fallback.
+export const demoEntries = localDemoEntries;
 
 export const currentFocusEntry =
-  demoEntries.find((entry) => entry.isCurrentFocus) ?? demoEntries[0];
+  localDemoEntries.find((entry) => entry.isCurrentFocus) ?? localDemoEntries[0];
 
-export function getDemoEntryBySlug(slug: string): DemoEntry | undefined {
-  return demoEntries.find((entry) => entry.slug === slug);
+export function getLocalDemoEntryBySlug(slug: string): DemoEntry | undefined {
+  return localDemoMetadataBySlug.get(slug);
 }
+
+export const getDemoEntryBySlug = getLocalDemoEntryBySlug;

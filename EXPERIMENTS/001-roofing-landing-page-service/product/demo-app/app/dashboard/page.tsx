@@ -1,6 +1,6 @@
 import { ProspectPreviewDashboard } from "../../components/ProspectPreviewDashboard";
-import { currentFocusEntry, demoEntries } from "../../lib/demoRegistry";
-import { getProspectDraftSummaries, getSupabaseDashboardEntries } from "../../lib/prospectDrafts";
+import { currentFocusEntry } from "../../lib/demoRegistry";
+import { getDashboardProspectData } from "../../lib/prospectDrafts";
 
 export const metadata = {
   title: "local-growth-preview Dashboard",
@@ -8,23 +8,16 @@ export const metadata = {
 };
 
 export default async function DashboardPage() {
-  const staticSlugs = demoEntries.map((entry) => entry.slug);
-  const [staticProspectDraftSummaries, supabaseDashboardEntries] = await Promise.all([
-    getProspectDraftSummaries(staticSlugs),
-    getSupabaseDashboardEntries(staticSlugs),
-  ]);
-  const entries = [...supabaseDashboardEntries.entries, ...demoEntries];
-  const prospectDraftSummaries = {
-    ...staticProspectDraftSummaries,
-    ...supabaseDashboardEntries.summaries,
-  };
+  const { entries, summaries } = await getDashboardProspectData();
+  const currentFocus =
+    entries.find((entry) => entry.slug === currentFocusEntry.slug) ?? currentFocusEntry;
 
   return (
     <ProspectPreviewDashboard
-      currentFocus={currentFocusEntry}
+      currentFocus={currentFocus}
       entries={entries}
       nowIso={new Date().toISOString()}
-      prospectDraftSummaries={prospectDraftSummaries}
+      prospectDraftSummaries={summaries}
     />
   );
 }

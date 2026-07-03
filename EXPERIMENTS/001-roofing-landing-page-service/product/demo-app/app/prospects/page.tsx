@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { demoEntries, statusLabels } from "../../lib/demoRegistry";
+import { statusLabels } from "../../lib/demoRegistry";
+import { getDashboardProspectData } from "../../lib/prospectDrafts";
 
-export default function ProspectsIndexPage() {
+export default async function ProspectsIndexPage() {
+  const { entries } = await getDashboardProspectData();
+
   return (
     <main className="prospects-index">
       <section>
@@ -12,7 +15,7 @@ export default function ProspectsIndexPage() {
           contact details, niche metadata, and status tracking.
         </p>
         <div className="prospects-list">
-          {demoEntries.map((entry) => (
+          {entries.map((entry) => (
             <Link href={entry.internalHref ?? entry.href} key={`${entry.niche}-${entry.slug}`}>
               {entry.logoUrl ? <img src={entry.logoUrl} alt={`${entry.title} logo`} /> : null}
               <span>{entry.niche}</span>
