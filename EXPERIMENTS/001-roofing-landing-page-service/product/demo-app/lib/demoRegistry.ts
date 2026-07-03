@@ -1,6 +1,6 @@
 import { chargerRoofing, prospects } from "./prospects";
 
-export type DemoNiche = "roofing" | "restaurant" | "hvac" | "plumbing" | "other";
+export type DemoNiche = "roofing" | "restaurant" | "med_spa" | "hvac" | "plumbing" | "other";
 
 export type DemoStatus =
   | "researching"
@@ -24,6 +24,8 @@ export type DemoEntry = {
   observedIssue: string;
   href: string;
   internalHref?: string;
+  previewLabel?: string;
+  isExternalHref?: boolean;
   sourceUrl?: string;
   contactEmail?: string;
   hasEmailDraft?: boolean;
@@ -35,6 +37,7 @@ export const nicheFilters: Array<{ value: "all" | DemoNiche; label: string }> = 
   { value: "all", label: "All" },
   { value: "roofing", label: "Roofing" },
   { value: "restaurant", label: "Restaurants" },
+  { value: "med_spa", label: "Med Spas" },
   { value: "hvac", label: "HVAC" },
   { value: "plumbing", label: "Plumbing" },
   { value: "other", label: "Other / Testing" },

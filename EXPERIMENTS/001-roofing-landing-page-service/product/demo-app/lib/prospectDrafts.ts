@@ -1,4 +1,5 @@
 import { demoEntries, getDemoEntryBySlug } from "./demoRegistry";
+import type { DemoEntry, DemoNiche, DemoStatus } from "./demoRegistry";
 
 export type OutreachSendStatus =
   | "not_ready"
@@ -159,6 +160,19 @@ type SupabaseProspectSummaryRow = {
   reply_status: string | null;
 };
 
+type SupabaseDashboardProspectRow = SupabaseProspectSummaryRow & {
+  business_name: string | null;
+  city_state: string | null;
+  vertical: string | null;
+  website: string | null;
+  demo_url: string | null;
+  source_page: string | null;
+  observed_issue: string | null;
+  outreach_angle: string | null;
+  metadata: Record<string, unknown> | null;
+  created_at: string | null;
+};
+
 type SupabaseUpdateResponse = SupabaseProspectRow & {
   prospect_slug: string | null;
 };
@@ -171,6 +185,10 @@ const prospectSummarySelect =
   "prospect_slug,contact_email,status,outreach_send_status,outreach_draft_subject,outreach_draft_body,date_contacted,last_contacted_at,follow_up_1_due_at,follow_up_1_sent_at,follow_up_2_due_at,follow_up_2_sent_at,next_follow_up_at,follow_up_send_status,follow_up_approved,follow_up_step,follow_up_draft_subject,follow_up_draft_body,reply_status";
 const legacyProspectSummarySelect =
   "prospect_slug,contact_email,status,outreach_send_status,outreach_draft_subject,outreach_draft_body,date_contacted,last_contacted_at,follow_up_1_due_at,follow_up_1_sent_at,follow_up_2_due_at,follow_up_2_sent_at,next_follow_up_at,reply_status";
+const dashboardProspectSelect =
+  `${prospectSummarySelect},business_name,city_state,vertical,website,demo_url,source_page,observed_issue,outreach_angle,metadata,created_at`;
+const legacyDashboardProspectSelect =
+  `${legacyProspectSummarySelect},business_name,city_state,vertical,website,demo_url,source_page,observed_issue,outreach_angle,metadata,created_at`;
 
 export type ProspectDraftApprovalAction = "approve_for_send" | "revoke_send_approval";
 export type ProspectFollowUpApprovalAction =
@@ -351,6 +369,135 @@ function normalizeDraftText(value: string | null) {
 
 function hasText(value: string | null) {
   return Boolean(value?.trim());
+}
+
+function prospectSummaryFromRow(row: Partial<SupabaseProspectSummaryRow>): ProspectDraftSummary {
+  return {
+    businessEmail: row.contact_email ?? null,
+    contactStatus: row.status ?? null,
+    hasEmailDraft: hasText(row.outreach_draft_subject ?? null) && hasText(row.outreach_draft_body ?? null),
+    outreachSendStatus: row.outreach_send_status ?? null,
+    dateContacted: row.date_contacted ?? null,
+    lastContactedAt: row.last_contacted_at ?? null,
+    followUp1DueAt: row.follow_up_1_due_at ?? null,
+    followUp1SentAt: row.follow_up_1_sent_at ?? null,
+    followUp2DueAt: row.follow_up_2_due_at ?? null,
+    followUp2SentAt: row.follow_up_2_sent_at ?? null,
+    nextFollowUpAt: row.next_follow_up_at ?? null,
+    followUpSendStatus: row.follow_up_send_status ?? null,
+    followUpApproved: Boolean(row.follow_up_approved),
+    followUpStep: row.follow_up_step ?? null,
+    hasFollowUpDraft: hasText(row.follow_up_draft_subject ?? null) && hasText(row.follow_up_draft_body ?? null),
+    replyStatus: row.reply_status ?? null,
+    source: "supabase",
+  };
+}
+
+function demoNicheFromVertical(vertical: string | null | undefined): DemoNiche {
+  if (vertical === "med_spa") {
+    return "med_spa";
+  }
+
+  if (vertical === "roofing" || vertical === "restaurant" || vertical === "hvac" || vertical === "plumbing") {
+    return vertical;
+  }
+
+  return "other";
+}
+
+function demoStatusFromProspect(row: Partial<SupabaseDashboardProspectRow>): DemoStatus {
+  if (row.status === "contacted") {
+    return "contacted";
+  }
+
+  if (
+    row.status === "follow_up_1_due" ||
+    row.status === "follow_up_1_sent" ||
+    row.status === "follow_up_2_due" ||
+    row.status === "follow_up_2_sent"
+  ) {
+    return "follow_up";
+  }
+
+  if (row.outreach_send_status === "ready_for_review" || row.outreach_send_status === "approved") {
+    return "outreach_ready";
+  }
+
+  if (row.metadata?.package_status === "recommendation_created" || row.demo_url) {
+    return "ready_for_review";
+  }
+
+  return "researching";
+}
+
+function stageLabelFromProspect(row: Partial<SupabaseDashboardProspectRow>) {
+  if (row.metadata?.package_status === "recommendation_created") {
+    return "Recommendation package created";
+  }
+
+  if (row.outreach_send_status === "ready_for_review") {
+    return "Outreach ready for review";
+  }
+
+  if (row.outreach_send_status === "approved") {
+    return "Outreach approved";
+  }
+
+  if (row.outreach_send_status === "sent") {
+    return "Outreach sent";
+  }
+
+  return "Qualified prospect";
+}
+
+function primaryServiceFromProspect(row: Partial<SupabaseDashboardProspectRow>) {
+  if (typeof row.metadata?.primary_recommendation === "string") {
+    return row.metadata.primary_recommendation;
+  }
+
+  if (row.vertical === "med_spa") {
+    return "Med spa growth system";
+  }
+
+  return "Local growth system";
+}
+
+function initialsFromBusinessName(name: string) {
+  return name
+    .split(/\s+/)
+    .map((part) => part.replace(/[^a-z0-9]/gi, ""))
+    .filter(Boolean)
+    .slice(0, 3)
+    .map((part) => part[0]?.toUpperCase())
+    .join("");
+}
+
+function dashboardEntryFromSupabaseRow(row: Partial<SupabaseDashboardProspectRow>): DemoEntry | null {
+  if (!row.prospect_slug || !row.business_name) {
+    return null;
+  }
+
+  const href = row.demo_url ?? row.website ?? "#";
+  const hasDemo = Boolean(row.demo_url);
+
+  return {
+    slug: row.prospect_slug,
+    title: row.business_name,
+    shortName: initialsFromBusinessName(row.business_name) || row.business_name,
+    createdAt: row.created_at?.slice(0, 10) ?? "2026-07-03",
+    city: row.city_state ?? "Unknown city, US",
+    niche: demoNicheFromVertical(row.vertical),
+    status: demoStatusFromProspect(row),
+    stageLabel: stageLabelFromProspect(row),
+    primaryService: primaryServiceFromProspect(row),
+    observedIssue: row.observed_issue ?? row.outreach_angle ?? "Qualified prospect in Supabase.",
+    href,
+    previewLabel: hasDemo ? "Preview" : "Website",
+    isExternalHref: href.startsWith("http"),
+    sourceUrl: row.website ?? undefined,
+    contactEmail: row.contact_email ?? undefined,
+    hasEmailDraft: hasText(row.outreach_draft_subject ?? null) && hasText(row.outreach_draft_body ?? null),
+  };
 }
 
 function normalizeSupabaseProspectRow(row: Partial<SupabaseProspectRow>): SupabaseProspectRow {
@@ -743,30 +890,82 @@ export async function getProspectDraftSummaries(slugs: string[]) {
         return summaries;
       }
 
-      summaries[row.prospect_slug] = {
-        businessEmail: row.contact_email ?? null,
-        contactStatus: row.status ?? null,
-        hasEmailDraft: hasText(row.outreach_draft_subject ?? null) && hasText(row.outreach_draft_body ?? null),
-        outreachSendStatus: row.outreach_send_status ?? null,
-        dateContacted: row.date_contacted ?? null,
-        lastContactedAt: row.last_contacted_at ?? null,
-        followUp1DueAt: row.follow_up_1_due_at ?? null,
-        followUp1SentAt: row.follow_up_1_sent_at ?? null,
-        followUp2DueAt: row.follow_up_2_due_at ?? null,
-        followUp2SentAt: row.follow_up_2_sent_at ?? null,
-        nextFollowUpAt: row.next_follow_up_at ?? null,
-        followUpSendStatus: row.follow_up_send_status ?? null,
-        followUpApproved: Boolean(row.follow_up_approved),
-        followUpStep: row.follow_up_step ?? null,
-        hasFollowUpDraft: hasText(row.follow_up_draft_subject ?? null) && hasText(row.follow_up_draft_body ?? null),
-        replyStatus: row.reply_status ?? null,
-        source: "supabase",
-      };
+      summaries[row.prospect_slug] = prospectSummaryFromRow(row);
 
       return summaries;
     }, {});
   } catch {
     return {};
+  }
+}
+
+export async function getSupabaseDashboardEntries(excludedSlugs: string[] = []) {
+  const config = getSupabaseConfig();
+
+  if (!config) {
+    return {
+      entries: [],
+      summaries: {},
+    };
+  }
+
+  const excludedSlugSet = new Set(excludedSlugs);
+  const supabaseConfig = config;
+
+  try {
+    async function requestEntries(select: string) {
+      const params = new URLSearchParams({
+        select,
+        order: "created_at.desc",
+      });
+
+      return fetch(`${supabaseConfig.url}/rest/v1/prospects?${params}`, {
+        headers: getSupabaseHeaders(supabaseConfig),
+        cache: "no-store",
+      });
+    }
+
+    let response = await requestEntries(dashboardProspectSelect);
+
+    if (!response.ok) {
+      response = await requestEntries(legacyDashboardProspectSelect);
+    }
+
+    if (!response.ok) {
+      return {
+        entries: [],
+        summaries: {},
+      };
+    }
+
+    const rows = (await response.json()) as Partial<SupabaseDashboardProspectRow>[];
+    const entries: DemoEntry[] = [];
+    const summaries: Record<string, ProspectDraftSummary> = {};
+
+    rows.forEach((row) => {
+      if (!row.prospect_slug || excludedSlugSet.has(row.prospect_slug)) {
+        return;
+      }
+
+      const entry = dashboardEntryFromSupabaseRow(row);
+
+      if (!entry) {
+        return;
+      }
+
+      entries.push(entry);
+      summaries[row.prospect_slug] = prospectSummaryFromRow(row);
+    });
+
+    return {
+      entries,
+      summaries,
+    };
+  } catch {
+    return {
+      entries: [],
+      summaries: {},
+    };
   }
 }
 

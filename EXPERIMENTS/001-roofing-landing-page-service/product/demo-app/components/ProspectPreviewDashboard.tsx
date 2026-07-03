@@ -75,6 +75,9 @@ const CURRENT_FOCUS_STORAGE_KEY = "local-growth-preview-current-focus";
 const nicheFilterOptions = nicheFilters.filter(
   (filter): filter is { value: DemoNiche; label: string } => filter.value !== "all",
 );
+const nicheLabelByValue = Object.fromEntries(
+  nicheFilters.map((filter) => [filter.value, filter.label]),
+) as Record<"all" | DemoNiche, string>;
 
 const contactFilterOptions: Array<{ value: ContactFilter; label: string }> = [
   { value: "contacted", label: "Contacted" },
@@ -577,6 +580,7 @@ export function ProspectPreviewDashboard({
         all: 0,
         roofing: 0,
         restaurant: 0,
+        med_spa: 0,
         hvac: 0,
         plumbing: 0,
         other: 0,
@@ -1259,8 +1263,9 @@ export function ProspectPreviewDashboard({
           <p className="eyebrow">local-growth-preview</p>
           <h1>Multi-niche demo hub</h1>
           <p>
-            Review prospect demos across roofing, restaurants, HVAC, plumbing, and future local
-            growth experiments before sharing a direct client-facing URL.
+            Review prospect demos and recommendation packages across roofing, restaurants, med
+            spas, HVAC, plumbing, and future local growth experiments before sharing a direct
+            client-facing URL.
           </p>
         </div>
 
@@ -1294,7 +1299,9 @@ export function ProspectPreviewDashboard({
             </label>
             <div className="preview-actions">
               <a className="button button-primary" href={selectedCurrentFocus.href}>
-                Open Current Preview
+                {selectedCurrentFocus.previewLabel === "Website"
+                  ? "Open Website"
+                  : "Open Current Preview"}
                 <ExternalLink size={17} aria-hidden="true" />
               </a>
               {selectedCurrentFocus.sourceUrl ? (
@@ -1323,7 +1330,7 @@ export function ProspectPreviewDashboard({
         <section className="pipeline-summary" aria-label="Pipeline summary">
           <article>
             <span>{entries.length}</span>
-            <p>Total demos tracked</p>
+            <p>Total records tracked</p>
           </article>
           <article>
             <span>{nicheCounts.restaurant}</span>
@@ -1332,6 +1339,10 @@ export function ProspectPreviewDashboard({
           <article>
             <span>{nicheCounts.roofing}</span>
             <p>Roofing demos</p>
+          </article>
+          <article>
+            <span>{nicheCounts.med_spa}</span>
+            <p>Med spa prospects</p>
           </article>
           <article>
             <span>local-growth-preview</span>
@@ -1708,7 +1719,7 @@ export function ProspectPreviewDashboard({
                         <div className="preview-title-row">
                           <h3>{entry.title}</h3>
                           {isCurrentFocus ? <span className="active-pill">Current</span> : null}
-                          <span className="niche-pill">{entry.niche}</span>
+                          <span className="niche-pill">{nicheLabelByValue[entry.niche]}</span>
                           <span className="status-pill">{statusLabels[entry.status]}</span>
                           <span className={relationshipPillClass(contactStatus)}>
                             {relationshipStatusLabel(contactStatus)}
@@ -1734,8 +1745,13 @@ export function ProspectPreviewDashboard({
                           <Star size={15} aria-hidden="true" />
                           {isCurrentFocus ? "Current Focus" : "Set Focus"}
                         </button>
-                        <a className="button button-primary" href={entry.href}>
-                          Preview
+                        <a
+                          className="button button-primary"
+                          href={entry.href}
+                          target={entry.isExternalHref ? "_blank" : undefined}
+                          rel={entry.isExternalHref ? "noreferrer" : undefined}
+                        >
+                          {entry.previewLabel ?? "Preview"}
                         </a>
                         {entry.sourceUrl ? (
                           <a
