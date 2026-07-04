@@ -1,4 +1,5 @@
 import { chargerRoofing, prospects } from "./prospects";
+import { medSpaDemos } from "./medSpaDemos";
 
 export type DemoNiche = "roofing" | "restaurant" | "med_spa" | "hvac" | "plumbing" | "other";
 
@@ -122,9 +123,26 @@ const internalTestEntries: DemoEntry[] = [
   },
 ];
 
+const medSpaEntries: DemoEntry[] = medSpaDemos.map((demo) => ({
+  slug: demo.slug,
+  title: demo.businessName,
+  shortName: demo.shortName,
+  createdAt: "2026-07-04",
+  city: demo.city,
+  niche: "med_spa",
+  status: "ready_for_review",
+  stageLabel: "Finished treatment consultation demo",
+  primaryService: "Treatment consultation path",
+  observedIssue: demo.subheadline,
+  href: `/med-spa/${demo.slug}`,
+  sourceUrl: demo.sourceUrl,
+  hasEmailDraft: false,
+}));
+
 export const localDemoEntries: DemoEntry[] = [
   ...restaurantEntries,
   ...roofingEntries,
+  ...medSpaEntries,
   ...internalTestEntries,
 ];
 
