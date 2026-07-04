@@ -27,6 +27,9 @@ The five pages now exist as customer-facing treatment-consultation paths and loc
 
 - `npm run build` passed in `EXPERIMENTS/001-roofing-landing-page-service/product/demo-app`.
 - Local production server route checks returned `200 OK` for all five demo routes.
+- Production deployment succeeded and is aliased to `https://local-growth-preview.vercel.app`.
+- Stable production route checks returned `200 OK` for all five demo routes.
+- Production blocked-term scan found no internal/source-review terms on the five route HTML responses.
 - Chrome desktop/mobile checks passed at `1366x900` and `390x844`.
 - Chrome checks found no horizontal overflow, no broken images, no collapsed mobile buttons, and no relevant console errors.
 - Final focused mobile regression on Adam & Eve confirmed hero buttons render at full width, with no overflow, no broken images, and no console errors.
@@ -50,11 +53,11 @@ The five pages now exist as customer-facing treatment-consultation paths and loc
 
 | Prospect | Local demo URL | Status | Public-copy scan | Verdict |
 | --- | --- | --- | --- | --- |
-| Adam & Eve Medical Aesthetics | `http://localhost:3005/med-spa/adam-eve-medical-aesthetics` | 200 OK | Passed | Needs minor fixes |
-| SkinSpirit Paradise Valley | `http://localhost:3005/med-spa/skinspirit-paradise-valley` | 200 OK | Passed | Needs minor fixes |
-| It's a Secret Med Spa Scottsdale | `http://localhost:3005/med-spa/it-s-a-secret-med-spa-scottsdale` | 200 OK | Passed | Needs minor fixes |
-| DS Skin & Lips Medical Spa | `http://localhost:3005/med-spa/ds-skin-lips-medical-spa` | 200 OK | Passed | Needs minor fixes |
-| Phoenix Medspa | `http://localhost:3005/med-spa/phoenix-medspa` | 200 OK | Passed | Needs minor fixes |
+| Adam & Eve Medical Aesthetics | `https://local-growth-preview.vercel.app/med-spa/adam-eve-medical-aesthetics` | 200 OK | Passed | Needs minor fixes |
+| SkinSpirit Paradise Valley | `https://local-growth-preview.vercel.app/med-spa/skinspirit-paradise-valley` | 200 OK | Passed | Needs minor fixes |
+| It's a Secret Med Spa Scottsdale | `https://local-growth-preview.vercel.app/med-spa/it-s-a-secret-med-spa-scottsdale` | 200 OK | Passed | Needs minor fixes |
+| DS Skin & Lips Medical Spa | `https://local-growth-preview.vercel.app/med-spa/ds-skin-lips-medical-spa` | 200 OK | Passed | Needs minor fixes |
+| Phoenix Medspa | `https://local-growth-preview.vercel.app/med-spa/phoenix-medspa` | 200 OK | Passed | Needs minor fixes |
 
 ## Source Checks
 
@@ -67,11 +70,6 @@ The five pages now exist as customer-facing treatment-consultation paths and loc
 | Phoenix Medspa | `https://phxmedspa.com/` | 200 OK | Metadata/title scan confirms Botox, Dysport, fillers, PRP therapy, and microneedling. |
 
 ## Findings
-
-- [Medium] Production URLs are not verified yet.
-  Evidence: Checks ran against `localhost:3005`.
-  Risk: External image, route, and cache behavior may differ after deploy.
-  Recommended change: Deploy only after the approved first-batch slice, then verify `https://local-growth-preview.vercel.app/med-spa/<slug>`.
 
 - [Medium] Outreach readiness is incomplete.
   Evidence: Contact methods remain unverified and exact outreach drafts were not reviewed in this QA pass.

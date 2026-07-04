@@ -207,9 +207,10 @@ Start with the batch that has the best combination of repeatability, revenue pro
 - [x] Update dashboard metadata so `Preview` opens the finished demo for the first five-page slice.
 - [x] Keep `Source` pointing to the original business website.
 - [ ] Update Supabase/tracker `demo_url` and readiness fields only after QA supports the change.
-- [ ] Commit and push scoped changes.
-- [ ] Deploy to Vercel.
-- [ ] Verify production demo routes and dashboard links.
+- [x] Commit and push scoped changes.
+- [x] Deploy to Vercel.
+- [x] Verify production demo routes.
+- [ ] Verify dashboard links in authenticated production dashboard.
 - [ ] Post issue progress update with files, validation, deploy URL, and remaining batches.
 
 ### Phase 8 - Repeat Batches
