@@ -57,6 +57,7 @@ Recommended first implementation slice:
 
 - Build one shared treatment-consultation demo pattern.
 - Personalize the first 3-5 Batch B prospects first.
+- Use `prospect-demo-builder` to turn each recommendation into a finished business-specific customer-facing page.
 - Run `prospect-demo-qa` on those before rolling the same pattern across the rest of Batch B.
 
 ## Classification Table
@@ -144,4 +145,5 @@ For Batch B, use a treatment-consultation page pattern:
 - Do not imply the med spa approved the page.
 - Do not copy internal audit language onto public demos.
 - Do not update Supabase `demo_url` until the finished demo is built and QA supports the update.
+- Use `prospect-demo-builder` for finished demo creation; use `prospect-demo-qa` as the pre-send quality gate.
 - Run `prospect-demo-qa` before marking any demo ready for outreach.

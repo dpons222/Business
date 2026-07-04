@@ -10,13 +10,17 @@
 
 3. **lead-growth-pipeline**
 
-   Find businesses, qualify them, inspect their sites, choose the best recommendation per prospect, create prospect packages/tracker rows, build only the needed demo asset, and prepare draft-only outreach.
+   Find businesses, qualify them, inspect their sites, choose the best recommendation per prospect, create prospect packages/tracker rows, and prepare draft-only outreach.
 
-4. **prospect-demo-qa**
+4. **prospect-demo-builder**
+
+   Turn an approved recommendation into a finished, business-specific customer-facing demo preview. This is the builder step: it should create the actual page or flow the prospect can review, not an internal recommendation summary.
+
+5. **prospect-demo-qa**
 
    Check the live demo and email draft against the real business site before outreach. This is the pre-send quality gate.
 
-5. **Manual approval/send**
+6. **Manual approval/send**
 
    You review the recipient, draft, demo URL, and contact method. Then either you send manually or later approve it for an automation flow.
 
@@ -56,7 +60,17 @@ Use this when you are ready to find businesses, qualify prospects, create packag
 - Use lead-growth-pipeline to update Supabase and local tracker state for the prospects that have verified emails.
 - Use lead-growth-pipeline to prepare the next outreach batch, but do not send anything.
 
-### 4. prospect-demo-qa
+### 4. prospect-demo-builder
+
+Use this after a prospect has a diagnosis/recommendation and needs the actual finished demo preview.
+
+- Use prospect-demo-builder to turn this Chandler Med Spa recommendation into a finished customer-facing demo page.
+- Use prospect-demo-builder to build the finished preview for these five med spas using their source sites, brands, services, locations, and CTA paths.
+- Use prospect-demo-builder to create a specific demo flow for this business, not a generic niche template.
+- Use prospect-demo-builder to update the dashboard preview link so it opens the finished demo while Source still opens the original website.
+- Use prospect-demo-builder to build the page first, then hand it to prospect-demo-qa before outreach.
+
+### 5. prospect-demo-qa
 
 Use this before outreach to check whether the demo and draft are accurate, polished, and safe to send.
 
@@ -68,7 +82,7 @@ Use this before outreach to check whether the demo and draft are accurate, polis
 - Use prospect-demo-qa to compare the public demo page against the source site and make sure there are no unsupported claims.
 - Use prospect-demo-qa and only report findings first. Do not make changes yet.
 
-### 5. Manual approval/send
+### 6. Manual approval/send
 
 Use this when you are personally reviewing or recording outreach. This step is not really a skill; it is the human approval/send step.
 
@@ -80,4 +94,4 @@ Use this when you are personally reviewing or recording outreach. This step is n
 - I decided not to contact this prospect. Mark it skipped and add the reason.
 - I want to review the exact recipient, subject, body, and demo URL before approving this outreach.
 
-For the first four, explicitly naming the skill is useful. For the manual approval/send step, be very specific about what actually happened because that step changes your source-of-truth outreach status.
+For the first five, explicitly naming the skill is useful. For the manual approval/send step, be very specific about what actually happened because that step changes your source-of-truth outreach status.

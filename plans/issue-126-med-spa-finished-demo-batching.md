@@ -48,7 +48,8 @@ Do not batch by location first. Location supports personalization, but the build
 
 ## Skill Ownership
 
-- `niche-growth-system-builder` owns creating the finished prospect-facing solution demos.
+- `niche-growth-system-builder` owns diagnosis, module selection, and the implementation brief.
+- `prospect-demo-builder` owns creating the finished business-specific customer-facing demo pages/flows.
 - `prospect-demo-qa` owns the final pre-send quality gate after a finished demo exists.
 - If a page only shows an internal recommendation/package summary, it is not ready for outreach.
 
@@ -149,6 +150,7 @@ Start with the batch that has the best combination of repeatability, revenue pro
 - [x] Post session-start comment.
 - [x] Read project issue and business-lab guidance.
 - [x] Read `niche-growth-system-builder` guidance.
+- [x] Create/update `prospect-demo-builder` skill ownership for finished demo implementation.
 - [x] Create this implementation plan.
 
 ### Phase 1 - Inventory
@@ -254,6 +256,7 @@ A finished med spa demo is done when:
 - Do not update outreach status to contacted unless Diego actually sends a message.
 - Do not treat package/recommendation preview pages as finished demos.
 - Prefer reusable med spa modules over 25 unrelated implementations.
+- Finished demo pages must be built through the `prospect-demo-builder` standard before `prospect-demo-qa`.
 
 ## Acceptance Criteria For This Plan-Only Issue
 
