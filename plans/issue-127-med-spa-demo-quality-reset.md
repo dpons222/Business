@@ -49,3 +49,26 @@ The current med spa pages are too close to internal recommendation summaries. Th
 - Lazaderm Chandler reads as a real Lazaderm-specific customer-facing page, using source-backed services, CTA, location, trust context, and brand direction.
 - `/med-spa/lazaderm-chandler` remains the demo URL, while `https://lazaderm.com/locations/chandler-az` remains the source URL.
 - Build and visual checks pass, or any remaining issue is documented.
+
+## Follow-Up QA Pass - July 7, 2026
+
+Scope: all 25 businesses in `plans/med-spa-demo-builds`.
+
+Checklist:
+
+- [x] Run `prospect-demo-qa` references and full pre-send checklist.
+- [x] Check all 25 local med spa routes from built app output.
+- [x] Fix hard CTA failures found during QA.
+- [x] Fix Supabase-backed dashboard state mismatch for rebuilt med spa rows.
+- [x] Re-run build after fixes.
+- [x] Re-run route, source, CTA, image, and blocked-copy checks.
+- [x] Update `EXPERIMENTS/005-med-spa-growth-systems/marketing/finished-demo-batch-qa.md`.
+- [ ] Run visual browser QA for desktop/mobile on all 25 routes.
+- [ ] Verify exact outreach drafts and contact methods.
+- [ ] Decide whether 24 generated-section pages need another hand-authored builder pass before outreach.
+
+QA result:
+
+- Automated route/copy/link/image checks pass after fixes.
+- Overall outreach verdict remains `Needs meaningful fixes before outreach` because visual review, contact method verification, and exact email draft review are incomplete.
+- Lazaderm remains the strongest exemplar; the other 24 pages are improved but still rely on generated rich sections rather than prospect-specific hand-authored sections.

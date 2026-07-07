@@ -146,7 +146,7 @@ export const medSpaDemos: MedSpaDemo[] = [
     shortName: "All About Me",
     city: "Phoenix, AZ",
     sourceUrl: "https://allaboutmeaz.com/",
-    primaryCtaHref: "https://allaboutmeaz.zenoti.com/webstorenew/services",
+    primaryCtaHref: "https://allaboutmeaz.com/",
     heroImageUrl: "https://allaboutmeaz.com/_static_/background/og-image.jpg",
     logoUrl: "https://allaboutmeaz.com/_static_/logos/logo.png",
     theme: {
@@ -357,7 +357,7 @@ export const medSpaDemos: MedSpaDemo[] = [
     shortName: "Bellagio",
     city: "Phoenix / Arcadia, AZ",
     sourceUrl: "https://www.bellagiomedicalspa.com/",
-    primaryCtaHref: "https://bellagiomedspa.zenoti.com/webstoreNew/services",
+    primaryCtaHref: "https://www.bellagiomedicalspa.com/services/microneedling",
     heroImageUrl:
       "https://cdn.prod.website-files.com/675a9513da7423975479c5e8%2F6760dd7fb3193f26b40ee4a6_HORIZONTAL%20-%20SITE%20VIDEO-poster-00001.jpg",
     logoUrl:
@@ -570,8 +570,7 @@ export const medSpaDemos: MedSpaDemo[] = [
     shortName: "SkinSpirit",
     city: "Phoenix / Paradise Valley, AZ",
     sourceUrl: "https://www.skinspirit.com/locations/paradise-valley",
-    primaryCtaHref:
-      "https://booking.skinspirit.com/webstoreNew/services/07453e1e-fbd4-4c12-8f75-36ee300f56db",
+    primaryCtaHref: "https://www.skinspirit.com/book-an-appointment",
     heroImageUrl:
       "https://cdn.prod.website-files.com/6764496e34ff7106c11cc5da/67c0fdbcc64efc8805de4ab6_Paradise-Valley%20(1).webp",
     logoUrl:
@@ -625,8 +624,7 @@ export const medSpaDemos: MedSpaDemo[] = [
     shortName: "SkinSpirit",
     city: "Scottsdale, AZ",
     sourceUrl: "https://www.skinspirit.com/locations/scottsdale",
-    primaryCtaHref:
-      "https://booking.skinspirit.com/webstoreNew/services/e4a64810-d4cf-4225-8c5b-930780695a36",
+    primaryCtaHref: "https://www.skinspirit.com/book-an-appointment",
     heroImageUrl:
       "https://cdn.prod.website-files.com/6764496e34ff7106c11cc5da/67c0feb71c7bdfd5be19a635_Scottsdale.webp",
     logoUrl:
@@ -734,7 +732,7 @@ export const medSpaDemos: MedSpaDemo[] = [
     shortName: "Secret Biltmore",
     city: "Phoenix / Biltmore, AZ",
     sourceUrl: "https://secretmedspa.com/biltmore-phoenix-az/",
-    primaryCtaHref: "https://secretmedspa.zenoti.com/webstoreNew/services/",
+    primaryCtaHref: "https://secretmedspa.com/biltmore-phoenix-az/",
     theme: {
       primary: "#242136",
       primaryDark: "#141221",
@@ -784,7 +782,7 @@ export const medSpaDemos: MedSpaDemo[] = [
     shortName: "It's a Secret",
     city: "Scottsdale, AZ",
     sourceUrl: "https://secretmedspa.com/scottsdale-az/",
-    primaryCtaHref: "https://secretmedspa.zenoti.com/webstoreNew/services/",
+    primaryCtaHref: "https://secretmedspa.com/scottsdale-az/",
     theme: {
       primary: "#242136",
       primaryDark: "#141221",
@@ -1039,7 +1037,7 @@ export const medSpaDemos: MedSpaDemo[] = [
     city: "Chandler, AZ",
     sourceUrl: "https://lazaderm.com/locations/chandler-az",
     primaryCtaHref: "https://lazaderm.com/free-consultation",
-    bookingCtaHref: "https://lazaderm.zenoti.com/webstoreNew/services",
+    bookingCtaHref: "https://lazaderm.com/schedule",
     bookingCtaLabel: "Book online",
     phone: "1-480-573-7546",
     phoneHref: "tel:+14805737546",

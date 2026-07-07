@@ -134,15 +134,12 @@ const medSpaEntries: DemoEntry[] = medSpaDemos.map((demo) => ({
   createdAt: "2026-07-04",
   city: demo.city,
   niche: "med_spa",
-  status: demo.slug === "lazaderm-chandler" ? "qa_needed" : "needs_rebuild",
+  status: "qa_needed",
   stageLabel:
     demo.slug === "lazaderm-chandler"
       ? "Rebuilt exemplar; QA still required"
-      : "Needs finished-demo rebuild before outreach",
-  primaryService:
-    demo.slug === "lazaderm-chandler"
-      ? "Chandler free-consultation landing path"
-      : "Med spa demo rebuild needed",
+      : "Finished demo rebuilt; QA still required",
+  primaryService: demo.treatmentFocus,
   observedIssue: demo.subheadline,
   href: `/med-spa/${demo.slug}`,
   sourceUrl: demo.sourceUrl,

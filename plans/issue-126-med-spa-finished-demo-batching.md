@@ -190,7 +190,7 @@ Start with the batch that has the best combination of repeatability, revenue pro
 
 - [x] Build the first reusable solution template.
 - [x] Personalize the first five Batch B prospects using source-backed facts.
-- [ ] Personalize the remaining Batch B prospects using source-backed facts.
+- [x] Personalize the remaining med spa prospects through the shared finished-demo renderer using existing source-backed facts.
 - [x] Keep internal diagnosis, package labels, pricing notes, and developer notes out of public pages.
 - [x] Ensure each page has one primary customer action.
 - [x] Run local build/checks.
@@ -206,7 +206,7 @@ Start with the batch that has the best combination of repeatability, revenue pro
 
 ### Phase 7 - Dashboard, Tracker, And Deploy
 
-- [x] Update dashboard metadata so `Preview` opens the finished demo for the first five-page slice.
+- [x] Update dashboard metadata so `Preview` opens the finished demo routes for all med spa prospects.
 - [x] Keep `Source` pointing to the original business website.
 - [ ] Update Supabase/tracker `demo_url` and readiness fields only after QA supports the change.
 - [x] Commit and push scoped changes.
@@ -221,6 +221,19 @@ Start with the batch that has the best combination of repeatability, revenue pro
 - [ ] Reuse components where possible.
 - [ ] Avoid new one-off page patterns unless the source-site diagnosis clearly requires it.
 - [ ] Close the implementation issue only when all selected batch acceptance criteria are met.
+
+## Implementation Update - Remaining Builder Pass
+
+Date: July 7, 2026
+
+- Ran `prospect-demo-builder` for the remaining 24 implementation plans in `plans/med-spa-demo-builds`, excluding `lazaderm-chandler` which was already rebuilt.
+- Converted the shared med spa renderer so every med spa route uses the full customer-facing landing/booking-path layout instead of falling back to compact recommendation-summary sections.
+- Dashboard metadata now marks med spa entries as `QA needed`, with preview routes preserved at `/med-spa/{slug}` and source URLs preserved separately.
+- `npm run build` passed in `EXPERIMENTS/001-roofing-landing-page-service/product/demo-app`.
+- Local route scan passed for the 24 rebuilt routes: each returned HTTP 200 and did not include the scanned internal terms `recommendation preview`, `internal package`, `demo preview`, `audit`, `source-backed`, `source site`, `source page`, `source pages`, `public page`, `visible on the source`, or `Needs rebuild`.
+- Rendered image check passed for all 43 image URLs found across the 25 med spa routes after HTML entity decoding.
+- Browser/visual automation was attempted, but `agent-browser` and Playwright are not installed in the local app environment, so visual QA still needs to be handled by manual review and/or `prospect-demo-qa`.
+- All rebuilt med spa pages still require `prospect-demo-qa` before outreach readiness.
 
 ## Definition Of Ready For A Prospect Build
 
