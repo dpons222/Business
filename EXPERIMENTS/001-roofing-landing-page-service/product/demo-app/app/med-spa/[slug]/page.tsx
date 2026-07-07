@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: MedSpaPageProps): Promise<Met
   }
 
   return {
-    title: `${demo.businessName} Treatment Consultation Path`,
+    title: `${demo.businessName} Free Consultation`,
     description: demo.subheadline,
   };
 }

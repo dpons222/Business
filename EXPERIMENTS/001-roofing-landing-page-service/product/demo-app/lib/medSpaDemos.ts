@@ -12,8 +12,28 @@ export type MedSpaDemo = {
   city: string;
   sourceUrl: string;
   primaryCtaHref?: string;
+  bookingCtaHref?: string;
+  bookingCtaLabel?: string;
+  phone?: string;
+  phoneHref?: string;
+  addressLines?: string[];
+  hours?: string[];
+  locationIntro?: string;
+  serviceArea?: string;
   heroImageUrl?: string;
   logoUrl?: string;
+  promo?: {
+    label: string;
+    title: string;
+    body: string;
+    ctaLabel: string;
+    ctaHref: string;
+  };
+  heroBadge?: string;
+  heroStats?: Array<{
+    value: string;
+    label: string;
+  }>;
   theme: {
     primary: string;
     primaryDark: string;
@@ -34,9 +54,36 @@ export type MedSpaDemo = {
   consultationHeading?: string;
   consultationIntro?: string;
   consultationSteps: string[];
+  consultationChoices?: Array<{
+    title: string;
+    body: string;
+    href?: string;
+    ctaLabel?: string;
+  }>;
   trustHeading?: string;
   trustIntro?: string;
   trustSignals: string[];
+  featuredServices?: Array<{
+    title: string;
+    eyebrow: string;
+    body: string;
+    href: string;
+    ctaLabel: string;
+  }>;
+  teamMembers?: Array<{
+    name: string;
+    role: string;
+    imageUrl: string;
+  }>;
+  reviewThemes?: Array<{
+    title: string;
+    body: string;
+  }>;
+  galleryImages?: Array<{
+    src: string;
+    alt: string;
+    caption: string;
+  }>;
   finalNote: string;
 };
 
@@ -992,49 +1039,203 @@ export const medSpaDemos: MedSpaDemo[] = [
     city: "Chandler, AZ",
     sourceUrl: "https://lazaderm.com/locations/chandler-az",
     primaryCtaHref: "https://lazaderm.com/free-consultation",
+    bookingCtaHref: "https://lazaderm.zenoti.com/webstoreNew/services",
+    bookingCtaLabel: "Book online",
+    phone: "1-480-573-7546",
+    phoneHref: "tel:+14805737546",
+    addressLines: ["2551 W Queen Creek Rd", "Unit 1", "Chandler, AZ 85248"],
+    hours: [
+      "Monday-Friday 9:00am-5:00pm",
+      "Holiday hours may vary",
+    ],
+    locationIntro:
+      "The Chandler clinic is near downtown Ocotillo and serves Chandler plus nearby Tempe, Mesa, Gilbert, Scottsdale, and surrounding areas.",
+    serviceArea: "Chandler, Tempe, Mesa, Gilbert, Scottsdale",
+    heroImageUrl:
+      "https://laza-derm.transforms.svdcdn.com/production/general-uploads/Locations/24-Lazaderm-GP_Chandler_750x840_2024-05-02-201224_njsz.jpg?w=750&h=840&auto=compress%2Cformat&fit=crop&dm=1718109555&s=b980212f02865fe36f067b51d8e17943",
     logoUrl: "https://lazaderm.com/assets/images/logo-color.svg",
+    promo: {
+      label: "Current specials",
+      title: "Check Lazaderm specials before you book.",
+      body:
+        "Lazaderm keeps current events and specials available for popular aesthetic treatments and gift card offers.",
+      ctaLabel: "View specials",
+      ctaHref: "https://lazaderm.com/specials",
+    },
+    heroBadge: "Physician-led aesthetic clinic in Chandler",
+    heroStats: [
+      { value: "4", label: "first-step service lanes" },
+      { value: "1", label: "free consultation path" },
+      { value: "AZ", label: "Chandler clinic" },
+    ],
     theme: {
-      primary: "#264f58",
-      primaryDark: "#10282e",
-      accent: "#c4a15f",
-      accentSoft: "#f3eadb",
+      primary: "#3f77af",
+      primaryDark: "#111827",
+      accent: "#7d3bb8",
+      accentSoft: "#edf7fb",
     },
     batch: "treatment_consultation",
-    eyebrow: "Chandler free consultation path",
-    headline: "Choose one high-intent service before the free consult.",
+    eyebrow: "Lazaderm Chandler",
+    headline: "Start your free consult with the right treatment lane.",
     subheadline:
-      "A Chandler Lazaderm path that narrows Botox, filler, laser, and CoolSculpting interest into one focused consultation question.",
+      "A focused Chandler path for new visitors comparing BOTOX, filler, laser skin treatments, and CoolSculpting before they request a free consultation.",
     primaryCtaLabel: "Request free consultation",
-    secondaryCtaLabel: "Choose service path",
+    secondaryCtaLabel: "Choose a starting point",
     treatmentFocus: "Botox, Dysport, dermal fillers, laser treatments, and CoolSculpting",
     visitorQuestion:
-      "Should I ask Lazaderm Chandler about Botox, filler, laser skin, or CoolSculpting first?",
-    treatmentPathHeading: "Use the detailed treatment menu without turning it into a directory.",
+      "Should I ask about wrinkle relaxers, filler, laser skin, or body contouring first?",
+    treatmentPathHeading: "Pick the service family before the consultation click.",
     treatmentPathIntro:
-      "The Chandler page already includes service depth, free consultation, reviews, provider proof, and location details. This path helps the visitor choose one starting lane before requesting the consult.",
+      "Lazaderm offers a deep Chandler treatment menu. This page turns that breadth into four clear starting lanes so the consultation request feels prepared instead of vague.",
     serviceHighlights: [
-      "Injectables path: BOTOX, Dysport, JUVEDERM, Restylane, Sculptra, Bellafill, and non-surgical nose job options are visible Chandler services.",
-      "Laser and skin path: BBL HERO, Moxi, Fraxel, HALO, microneedling, HydraFacial, chemical peels, Q-Switch, and laser hair removal are visible treatment options.",
-      "Body path: CoolSculpting Elite is presented as a Chandler body-contouring option, while vein treatments and tattoo removal stay separate from injectable decision copy.",
+      "Wrinkle relaxer lane: BOTOX and Dysport for visitors focused on expression lines.",
+      "Volume lane: JUVEDERM, Restylane, Sculptra, Bellafill, and related filler options for facial contour questions.",
+      "Skin and laser lane: Moxi, BBL HERO, HALO, Fraxel, HydraFacial, microneedling, peels, and laser hair removal.",
+      "Body lane: CoolSculpting Elite for visitors who want to ask about non-surgical body contouring.",
     ],
     consultationHeading: "Make the free consult request more specific.",
     consultationIntro:
-      "A high-intent visitor should not need to compare every treatment page before contacting Lazaderm. They can arrive with one category and let the team guide fit.",
+      "The consultation path stays simple: choose the concern, request the free consult, then let the Chandler team guide fit, timing, and next steps.",
     consultationSteps: [
-      "Choose the first treatment lane: wrinkle relaxer, filler, laser skin, body contouring, or skin health.",
-      "Use Lazaderm's current free consultation path for Chandler.",
-      "Bring the chosen category into the consultation so the provider can discuss the right service sequence.",
+      "Choose a starting lane: wrinkle relaxer, filler, laser and skin, or body contouring.",
+      "Use Lazaderm's free consultation path, book online, or call the Chandler number.",
+      "Bring that treatment lane into the visit so the team can guide the right service sequence.",
     ],
-    trustHeading: "Keep Chandler provider proof next to the CTA.",
+    consultationChoices: [
+      {
+        title: "Wrinkle relaxer consult",
+        body:
+          "Ask whether BOTOX or Dysport is the right first conversation for expression lines, crow's feet, or forehead lines.",
+        href: "https://lazaderm.com/services/botox-injections",
+        ctaLabel: "Review BOTOX",
+      },
+      {
+        title: "Filler and facial contour consult",
+        body:
+          "Start with volume, lip, cheek, chin, or facial contour questions before comparing every filler option.",
+        href: "https://lazaderm.com/services/juvederm-fillers",
+        ctaLabel: "Review filler",
+      },
+      {
+        title: "Laser and skin refresh consult",
+        body:
+          "Bring texture, tone, hair removal, pigmentation, or overall skin-refresh questions into one consult lane.",
+        href: "https://lazaderm.com/services/skin",
+        ctaLabel: "Review skin treatments",
+      },
+      {
+        title: "CoolSculpting consult",
+        body:
+          "Use the consultation to ask whether CoolSculpting Elite fits your body-contouring goals and treatment area.",
+        href: "https://lazaderm.com/services/coolsculpting",
+        ctaLabel: "Review CoolSculpting",
+      },
+    ],
+    trustHeading: "Chandler team, services, and reviews in one place.",
     trustIntro:
-      "The public location page has enough source-backed provider and review context to support a confident consultation path.",
+      "The Chandler page supports the consultation action with a visible local clinic, service list, named team members, and review themes around injectables, laser care, and staff guidance.",
     trustSignals: [
       "Lazaderm Chandler lists 2551 W Queen Creek Rd, Unit 1, Chandler, AZ 85248 and phone 1-480-573-7546.",
       "The Chandler team section names Lornell E. Hansen II, MD; Amy O'Hara, NMD; Alisha Knowlton; and Brooke Wonder.",
-      "The location page includes reviews mentioning Botox, filler, Dr. O'Hara, Alisha, and the Chandler staff experience.",
+      "Chandler reviews mention BOTOX, filler, laser care, provider guidance, staff warmth, and first-time visitor comfort.",
+      "The service menu includes face, body, and skin treatment paths with BOTOX, Dysport, JUVEDERM, CoolSculpting, Moxi, BBL HERO, HALO, HydraFacial, microneedling, and more.",
+    ],
+    featuredServices: [
+      {
+        title: "BOTOX and Dysport",
+        eyebrow: "Smooth lines",
+        body:
+          "Start here when the main question is expression lines, crow's feet, elevens, or forehead movement.",
+        href: "https://lazaderm.com/services/botox-injections",
+        ctaLabel: "View BOTOX",
+      },
+      {
+        title: "Filler and facial contour",
+        eyebrow: "Restore volume",
+        body:
+          "Use this lane for lip, cheek, chin, smile-line, and facial contour questions before the consult.",
+        href: "https://lazaderm.com/services/juvederm-fillers",
+        ctaLabel: "View filler",
+      },
+      {
+        title: "Laser and skin treatments",
+        eyebrow: "Refresh skin",
+        body:
+          "Group Moxi, BBL HERO, HALO, Fraxel, HydraFacial, peels, microneedling, and laser hair removal questions together.",
+        href: "https://lazaderm.com/services/skin",
+        ctaLabel: "View skin",
+      },
+      {
+        title: "CoolSculpting Elite",
+        eyebrow: "Body contouring",
+        body:
+          "Start here for non-surgical body-contouring questions before choosing a treatment area.",
+        href: "https://lazaderm.com/services/coolsculpting",
+        ctaLabel: "View CoolSculpting",
+      },
+    ],
+    teamMembers: [
+      {
+        name: "Lornell E. Hansen II, MD",
+        role: "Owner / Medical Director",
+        imageUrl:
+          "https://laza-derm.transforms.svdcdn.com/production/general-uploads/Staff-Pictures/24-Lazaderm-GP_People-600x600_Lornell-Hansen.jpg?w=250&h=250&auto=compress%2Cformat&fit=crop&dm=1718109691&s=29be0f8e91abc3772e461f4081be1c86",
+      },
+      {
+        name: "Amy O'Hara, NMD",
+        role: "NMD",
+        imageUrl:
+          "https://laza-derm.transforms.svdcdn.com/production/general-uploads/Staff-Pictures/Dr-OHara-AZ.jpg?w=250&h=250&auto=compress%2Cformat&fit=crop&dm=1733421690&s=9436cb3e4897b00646b1000e3f1b8db1",
+      },
+      {
+        name: "Alisha Knowlton",
+        role: "CLT, LE",
+        imageUrl:
+          "https://laza-derm.transforms.svdcdn.com/production/general-uploads/Staff-Pictures/Alisha-AZ.jpg?w=250&h=250&auto=compress%2Cformat&fit=crop&dm=1744925806&s=dcc808b785a547c0c1be650cce326ebe",
+      },
+      {
+        name: "Brooke Wonder",
+        role: "First Impressions Coordinator, Client Relations, Aesthetician, LA CLT, LSO",
+        imageUrl:
+          "https://laza-derm.transforms.svdcdn.com/production/general-uploads/Staff-Pictures/24-Lazaderm-GP_People-600x600_BrookeBradly.jpg?w=250&h=250&auto=compress%2Cformat&fit=crop&dm=1718109757&s=8add3d0e99cdd6d84a6691e872c1f8da",
+      },
+    ],
+    reviewThemes: [
+      {
+        title: "Injectable confidence",
+        body:
+          "Reviews frequently mention BOTOX, fillers, natural-looking guidance, and providers who take time with questions.",
+      },
+      {
+        title: "Comfort for first-time visitors",
+        body:
+          "Several Chandler reviews focus on feeling welcomed, listened to, and more comfortable during an unfamiliar treatment.",
+      },
+      {
+        title: "Laser and skin-care guidance",
+        body:
+          "Skin and laser reviews mention consultation support, after-care explanations, and clear treatment expectations.",
+      },
+    ],
+    galleryImages: [
+      {
+        src: "https://laza-derm.transforms.svdcdn.com/production/general-uploads/Locations/24-Lazaderm-GP_Chandler_750x840_2024-05-02-201224_njsz.jpg?w=750&h=840&auto=compress%2Cformat&fit=crop&dm=1718109555&s=b980212f02865fe36f067b51d8e17943",
+        alt: "Lazaderm Chandler clinic exterior",
+        caption: "Chandler clinic",
+      },
+      {
+        src: "https://laza-derm.transforms.svdcdn.com/production/general-uploads/Service-Detail-Pages/MOXI-Laser/24-Lazaderm-GP-Service-Detail-Pages-Moxi-Laser-RCB-550x582.png?w=550&h=582&auto=compress%2Cformat&fit=crop&dm=1720475232&s=398954ecfda88adfdeb512212b9e933f",
+        alt: "Laser facial treatment at Lazaderm",
+        caption: "Laser and skin care",
+      },
+      {
+        src: "https://laza-derm.transforms.svdcdn.com/production/general-uploads/lazaderm-az-crew.jpg?w=1200&h=594&auto=compress%2Cformat&fit=crop&dm=1743195214&s=a8dec08123ae61d02d925f365fb21f4e",
+        alt: "Lazaderm Chandler team",
+        caption: "Chandler team",
+      },
     ],
     finalNote:
-      "The page gives Chandler visitors one practical action: choose the service lane, then request Lazaderm's free consultation.",
+      "Choose the service lane that matches your goal, then request Lazaderm's free Chandler consultation.",
   },
   {
     slug: "moderne-medical-aesthetics",

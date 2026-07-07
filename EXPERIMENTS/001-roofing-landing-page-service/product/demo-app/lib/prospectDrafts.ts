@@ -256,6 +256,7 @@ const stoppedRelationshipStatuses = new Set([
 const replyRelationshipStatuses = new Set(["positive_reply", "neutral_reply", "negative_reply"]);
 
 const stableDemoUrlPrefix = "https://local-growth-preview.vercel.app/";
+const rebuiltMedSpaDemoSlugs = new Set(["lazaderm-chandler"]);
 
 export function getFollowUpChannelPolicy(channel: string | null): FollowUpChannelPolicy {
   if (channel === "email") {
@@ -419,6 +420,12 @@ function demoStatusFromProspect(row: Partial<SupabaseDashboardProspectRow>): Dem
     return "follow_up";
   }
 
+  if (row.vertical === "med_spa") {
+    return row.prospect_slug && rebuiltMedSpaDemoSlugs.has(row.prospect_slug)
+      ? "qa_needed"
+      : "needs_rebuild";
+  }
+
   if (row.outreach_send_status === "ready_for_review" || row.outreach_send_status === "approved") {
     return "outreach_ready";
   }
@@ -431,6 +438,12 @@ function demoStatusFromProspect(row: Partial<SupabaseDashboardProspectRow>): Dem
 }
 
 function stageLabelFromProspect(row: Partial<SupabaseDashboardProspectRow>) {
+  if (row.vertical === "med_spa") {
+    return row.prospect_slug && rebuiltMedSpaDemoSlugs.has(row.prospect_slug)
+      ? "Rebuilt exemplar; QA still required"
+      : "Needs finished-demo rebuild before outreach";
+  }
+
   if (row.metadata?.package_status === "recommendation_created") {
     return "Recommendation package created";
   }
@@ -451,6 +464,12 @@ function stageLabelFromProspect(row: Partial<SupabaseDashboardProspectRow>) {
 }
 
 function primaryServiceFromProspect(row: Partial<SupabaseDashboardProspectRow>) {
+  if (row.vertical === "med_spa") {
+    return row.prospect_slug && rebuiltMedSpaDemoSlugs.has(row.prospect_slug)
+      ? "Chandler free-consultation landing path"
+      : "Med spa demo rebuild needed";
+  }
+
   if (typeof row.metadata?.primary_recommendation === "string") {
     return row.metadata.primary_recommendation;
   }

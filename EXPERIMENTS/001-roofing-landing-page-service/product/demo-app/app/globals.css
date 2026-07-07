@@ -2399,6 +2399,53 @@ main.landing-page {
   color: #172033;
 }
 
+.medspa-page-expanded {
+  background:
+    linear-gradient(180deg, #eef8fe 0, #fff 34rem),
+    #fff;
+}
+
+.medspa-promo-strip {
+  display: grid;
+  grid-template-columns: auto minmax(0, auto) minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px clamp(18px, 4vw, 54px);
+  background: var(--medspa-primary-dark);
+  color: #fff;
+}
+
+.medspa-promo-strip span {
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 0.72rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.medspa-promo-strip strong {
+  font-size: 0.92rem;
+}
+
+.medspa-promo-strip p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.medspa-promo-strip a,
+.medspa-service-card a,
+.medspa-choice-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: inherit;
+  font-weight: 900;
+}
+
 .medspa-header {
   position: sticky;
   top: 0;
@@ -2411,6 +2458,13 @@ main.landing-page {
   padding: 14px clamp(18px, 4vw, 54px);
   background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(14px);
+}
+
+.medspa-page .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .medspa-brand,
@@ -2441,6 +2495,17 @@ main.landing-page {
   max-width: 34px;
   max-height: 34px;
   object-fit: contain;
+}
+
+.medspa-page-expanded .medspa-brand-mark {
+  width: 132px;
+  border: 1px solid rgba(23, 32, 51, 0.1);
+  background: #fff;
+}
+
+.medspa-page-expanded .medspa-brand-mark img {
+  max-width: 110px;
+  max-height: 30px;
 }
 
 .medspa-brand strong,
@@ -2483,6 +2548,16 @@ main.landing-page {
   color: var(--medspa-primary-dark);
 }
 
+.medspa-page-expanded .button-primary {
+  background: var(--medspa-accent);
+  color: #fff;
+}
+
+.medspa-page-expanded .button-ghost {
+  border-color: rgba(23, 32, 51, 0.14);
+  background: #fff;
+}
+
 .medspa-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(320px, 0.78fr);
@@ -2494,8 +2569,28 @@ main.landing-page {
   padding: 58px 0;
 }
 
+.medspa-page-expanded .medspa-hero {
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 0.76fr);
+  min-height: calc(100vh - 116px);
+}
+
 .medspa-hero-copy {
   min-width: 0;
+}
+
+.medspa-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 14px;
+  border: 1px solid rgba(63, 119, 175, 0.24);
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: #fff;
+  color: var(--medspa-primary);
+  font-size: 0.78rem;
+  font-weight: 950;
 }
 
 .medspa-hero h1 {
@@ -2519,6 +2614,36 @@ main.landing-page {
   font-size: 1.12rem;
 }
 
+.medspa-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 560px;
+  margin: 28px 0 0;
+}
+
+.medspa-hero-stats div {
+  border: 1px solid rgba(23, 32, 51, 0.1);
+  border-radius: 8px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.medspa-hero-stats dt {
+  color: var(--medspa-accent);
+  font-size: clamp(1.45rem, 3vw, 2.1rem);
+  font-weight: 950;
+  line-height: 1;
+}
+
+.medspa-hero-stats dd {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 750;
+  line-height: 1.25;
+}
+
 .medspa-hero-visual {
   position: relative;
   min-height: min(64vh, 620px);
@@ -2526,6 +2651,11 @@ main.landing-page {
   border-radius: 8px;
   background: var(--medspa-primary-dark);
   box-shadow: var(--shadow);
+}
+
+.medspa-page-expanded .medspa-hero-visual {
+  border: 8px solid #fff;
+  box-shadow: 0 26px 80px rgba(17, 24, 39, 0.2);
 }
 
 .medspa-hero-visual img {
@@ -2602,6 +2732,231 @@ main.landing-page {
 .medspa-visual-card strong {
   display: block;
   line-height: 1.2;
+}
+
+.medspa-service-showcase {
+  border-top: 1px solid rgba(23, 32, 51, 0.1);
+}
+
+.medspa-service-grid,
+.medspa-choice-grid,
+.medspa-team-grid,
+.medspa-review-theme-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.medspa-service-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.medspa-service-card,
+.medspa-choice-card,
+.medspa-visit-card,
+.medspa-team-card,
+.medspa-review-theme {
+  border: 1px solid rgba(23, 32, 51, 0.1);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 18px 46px rgba(23, 32, 51, 0.08);
+}
+
+.medspa-service-card,
+.medspa-choice-card,
+.medspa-visit-card,
+.medspa-review-theme {
+  padding: 22px;
+}
+
+.medspa-service-card span,
+.medspa-review-theme span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--medspa-primary);
+  font-size: 0.74rem;
+  font-weight: 950;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.medspa-service-card h3,
+.medspa-choice-card h3,
+.medspa-visit-card h3,
+.medspa-team-card h3,
+.medspa-review-theme h3 {
+  margin: 0 0 10px;
+  color: var(--medspa-primary-dark);
+}
+
+.medspa-service-card p,
+.medspa-choice-card p,
+.medspa-visit-card p,
+.medspa-review-theme p {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.medspa-consult-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.42fr);
+  gap: clamp(24px, 4vw, 44px);
+  align-items: start;
+  border-top: 1px solid rgba(23, 32, 51, 0.1);
+}
+
+.medspa-consult-copy > h2,
+.medspa-choice-section h2 {
+  color: var(--medspa-primary-dark);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+}
+
+.medspa-visit-card {
+  position: sticky;
+  top: 104px;
+}
+
+.medspa-visit-card address {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  margin: 20px 0;
+  color: var(--medspa-primary-dark);
+  font-style: normal;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.medspa-visit-card ul {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 0;
+  color: var(--muted);
+  list-style: none;
+}
+
+.medspa-visit-actions,
+.medspa-final-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.medspa-choice-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.medspa-choice-card svg {
+  margin-bottom: 16px;
+  color: var(--medspa-accent);
+}
+
+.medspa-gallery-section {
+  padding-top: 0;
+}
+
+.medspa-gallery-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.82fr) minmax(0, 0.82fr);
+  gap: 16px;
+}
+
+.medspa-gallery-grid figure {
+  position: relative;
+  min-height: 330px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--medspa-primary-dark);
+}
+
+.medspa-gallery-grid figure:first-child {
+  min-height: 520px;
+}
+
+.medspa-gallery-grid img {
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+}
+
+.medspa-gallery-grid figcaption {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--medspa-primary-dark);
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.medspa-team-section {
+  border-top: 1px solid rgba(23, 32, 51, 0.1);
+}
+
+.medspa-team-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.medspa-team-card {
+  overflow: hidden;
+}
+
+.medspa-team-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.medspa-team-card div {
+  padding: 16px;
+}
+
+.medspa-team-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.medspa-trust-reviews {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 54px);
+  border-top: 1px solid rgba(23, 32, 51, 0.1);
+}
+
+.medspa-trust-reviews h2 {
+  color: var(--medspa-primary-dark);
+}
+
+.medspa-trust-reviews ul {
+  display: grid;
+  gap: 10px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.medspa-trust-reviews li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  border-radius: 8px;
+  padding: 14px;
+  background: var(--medspa-accent-soft);
+  color: var(--medspa-primary-dark);
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.medspa-trust-reviews li svg {
+  margin-top: 2px;
+  color: var(--medspa-accent);
 }
 
 .medspa-section,
@@ -2727,6 +3082,12 @@ main.landing-page {
   color: #fff;
 }
 
+.medspa-final-cta .button-ghost {
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
 .medspa-final-cta p {
   max-width: 720px;
   margin: 0;
@@ -2736,7 +3097,13 @@ main.landing-page {
 @media (max-width: 900px) {
   .medspa-hero,
   .medspa-split,
-  .medspa-trust {
+  .medspa-trust,
+  .medspa-consult-section,
+  .medspa-trust-reviews {
+    grid-template-columns: 1fr;
+  }
+
+  .medspa-promo-strip {
     grid-template-columns: 1fr;
   }
 
@@ -2745,10 +3112,34 @@ main.landing-page {
     padding: 44px 0;
   }
 
+  .medspa-page-expanded .medspa-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
   .medspa-hero-visual,
   .medspa-hero-visual img,
   .medspa-visual-panel {
     min-height: 420px;
+  }
+
+  .medspa-service-grid,
+  .medspa-choice-grid,
+  .medspa-team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .medspa-gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .medspa-gallery-grid figure,
+  .medspa-gallery-grid figure:first-child {
+    min-height: 360px;
+  }
+
+  .medspa-visit-card {
+    position: static;
   }
 }
 
@@ -2783,6 +3174,17 @@ main.landing-page {
     width: min(100% - 28px, 1120px);
   }
 
+  .medspa-page-expanded .medspa-brand-mark {
+    width: 118px;
+  }
+
+  .medspa-hero-stats,
+  .medspa-service-grid,
+  .medspa-choice-grid,
+  .medspa-team-grid {
+    grid-template-columns: 1fr;
+  }
+
   .medspa-section {
     padding: 48px 0;
   }
@@ -2799,10 +3201,20 @@ main.landing-page {
     grid-template-columns: 1fr;
   }
 
-  .medspa-final-cta {
+  .medspa-final-cta,
+  .medspa-final-actions,
+  .medspa-visit-actions {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .medspa-final-cta {
     padding: 22px;
+  }
+
+  .medspa-gallery-grid figure,
+  .medspa-gallery-grid figure:first-child {
+    min-height: 300px;
   }
 }
 

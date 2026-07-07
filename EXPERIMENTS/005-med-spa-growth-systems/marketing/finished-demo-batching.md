@@ -4,6 +4,12 @@ Issue: https://github.com/dpons222/Business/issues/126
 Plan: `plans/issue-126-med-spa-finished-demo-batching.md`  
 Refresh date: 2026-07-04
 
+## 2026-07-07 Quality Reset
+
+Issue 127 supersedes the first implementation pass. The current med spa preview routes should not be used for outreach and should not be treated as finished demos. They need rebuilds that are visibly business-specific, source-backed, and competitive with each prospect's current public site.
+
+Before rebuilding the remaining med spas, use Lazaderm Chandler as the exemplar and require each future `prospect-demo-builder` run to pass a source-site comparison: public imagery or an intentional visual substitute, brand direction, services, CTA, location context, proof/trust signals, and one concrete patient-facing flow.
+
 ## Purpose
 
 Group the 25 med spa recommendation packages into reusable finished-demo build batches. The finished demos should be customer-facing pages or flows that a prospect could imagine using with patients, not internal recommendation summaries.

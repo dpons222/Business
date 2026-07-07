@@ -46,7 +46,12 @@ type ManualContactMethod =
   | "other";
 type DemoStatusFilter = Extract<
   DemoStatus,
-  "ready_for_review" | "outreach_ready" | "follow_up" | "building_demo"
+  | "needs_rebuild"
+  | "qa_needed"
+  | "ready_for_review"
+  | "outreach_ready"
+  | "follow_up"
+  | "building_demo"
 >;
 type LocationFilterOption = {
   value: string;
@@ -91,6 +96,8 @@ const contactFilterOptions: Array<{ value: ContactFilter; label: string }> = [
 ];
 
 const demoStatusFilterOptions: Array<{ value: DemoStatusFilter; label: string }> = [
+  { value: "needs_rebuild", label: "Needs rebuild" },
+  { value: "qa_needed", label: "QA needed" },
   { value: "ready_for_review", label: "Ready for review" },
   { value: "outreach_ready", label: "Outreach ready" },
   { value: "follow_up", label: "Follow-up" },

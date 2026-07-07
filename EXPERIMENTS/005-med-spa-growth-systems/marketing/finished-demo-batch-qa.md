@@ -5,6 +5,12 @@ Plan: `plans/issue-126-med-spa-finished-demo-batching.md`
 Batch: Batch B - Treatment Or Package Decision Page  
 Date checked: 2026-07-04
 
+## 2026-07-07 Reset Notice
+
+This QA verdict is superseded by Issue 127. The earlier "Needs minor fixes" rating was too lenient because it validated route health and copy hygiene without checking whether the pages were visibly stronger than each prospect's source site.
+
+Treat the med spa routes from this pass as rebuild inputs only. Do not use them for outreach until they are rebuilt with `prospect-demo-builder`, compared against the source site, and passed through `prospect-demo-qa`.
+
 ## Scope
 
 Initial QA for the first five finished med spa treatment-consultation demos:
@@ -19,7 +25,7 @@ These are local finished-demo routes, not yet dashboard-wired production outreac
 
 ## Overall Verdict
 
-Verdict: Needs minor fixes before outreach.
+Verdict: Superseded - needs finished-demo rebuild before outreach.
 
 The five pages now exist as customer-facing treatment-consultation paths and local route checks pass. Dashboard local metadata is wired for the five routes. They are not outreach-ready yet because Supabase/tracker `demo_url` updates, production deployment verification, and exact outreach draft review still need to happen.
 

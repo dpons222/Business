@@ -13,6 +13,12 @@ Use this folder for med spa prospect research, outreach, validation tracking, an
 
 All 25 lightweight recommendation packages are created for the Scottsdale / Phoenix med spa batch. Outreach drafts have not been created and no outreach has been approved or sent.
 
+## Current Demo Status
+
+The med spa preview routes created from the first finished-demo batching pass are no longer considered outreach candidates. They need a finished-demo rebuild because they read too much like internal recommendation summaries and do not yet meet the business-specific public-page quality bar.
+
+Use the current routes only as rebuild inputs until each prospect is rebuilt with `prospect-demo-builder`, checked against the live source site, and passed through `prospect-demo-qa`.
+
 ## Supabase
 
 The first med spa batch is synced to public.prospects with outreach_batch_id med-spa-scottsdale-phoenix-2026-07-batch-001. Rows should remain not_contacted, not_ready, and unapproved until a recommendation package, exact outreach draft, stable URL, contact method, and pre-send checklist are reviewed.
