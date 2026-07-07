@@ -2437,6 +2437,12 @@ main.landing-page {
   overflow-wrap: anywhere;
 }
 
+.medspa-brand-mark img {
+  max-width: 34px;
+  max-height: 34px;
+  object-fit: contain;
+}
+
 .medspa-brand strong,
 .medspa-brand small {
   display: block;

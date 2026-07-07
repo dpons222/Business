@@ -1,17 +1,13 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { MedSpaTreatmentConsultPage } from "../../../components/MedSpaTreatmentConsultPage";
-import { getMedSpaDemoBySlug, getMedSpaDemoStaticParams } from "../../../lib/medSpaDemos";
+import { getMedSpaDemoBySlug } from "../../../lib/medSpaDemos";
 
 type MedSpaPageProps = {
   params: Promise<{
     slug: string;
   }>;
 };
-
-export function generateStaticParams() {
-  return getMedSpaDemoStaticParams();
-}
 
 export async function generateMetadata({ params }: MedSpaPageProps): Promise<Metadata> {
   const { slug } = await params;
