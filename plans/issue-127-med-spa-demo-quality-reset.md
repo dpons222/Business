@@ -65,10 +65,23 @@ Checklist:
 - [x] Update `EXPERIMENTS/005-med-spa-growth-systems/marketing/finished-demo-batch-qa.md`.
 - [ ] Run visual browser QA for desktop/mobile on all 25 routes.
 - [ ] Verify exact outreach drafts and contact methods.
-- [ ] Decide whether 24 generated-section pages need another hand-authored builder pass before outreach.
+- [ ] Decide whether 23 remaining generated-section pages need another hand-authored builder pass before outreach.
 
 QA result:
 
 - Automated route/copy/link/image checks pass after fixes.
 - Overall outreach verdict remains `Needs meaningful fixes before outreach` because visual review, contact method verification, and exact email draft review are incomplete.
-- Lazaderm remains the strongest exemplar; the other 24 pages are improved but still rely on generated rich sections rather than prospect-specific hand-authored sections.
+- Lazaderm and Adam & Eve now have hand-authored, source-specific rich sections. The other 23 pages are improved but still rely on generated rich sections rather than prospect-specific hand-authored sections.
+
+## Adam & Eve Builder Pass - July 8, 2026
+
+Scope: `plans/med-spa-demo-builds/adam-eve-medical-aesthetics.md`.
+
+Checklist:
+
+- [x] Rechecked Adam & Eve public homepage, contact, about, and services pages.
+- [x] Rebuilt `/med-spa/adam-eve-medical-aesthetics` with hand-authored services, consultation choices, source imagery, provider context, address, hours, phone, and CTA links.
+- [x] Preserved source URL as `https://www.adamandevemedspa.com/`.
+- [x] Ran `npm run build`.
+- [x] Checked local route, blocked public-copy terms, required content, CTA targets, and image URLs.
+- [ ] Run `prospect-demo-qa` on the rebuilt Adam & Eve page before outreach.

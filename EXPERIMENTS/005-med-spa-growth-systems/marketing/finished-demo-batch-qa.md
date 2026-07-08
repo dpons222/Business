@@ -21,7 +21,7 @@ Scope: all 25 businesses in `plans/med-spa-demo-builds`
 
 Verdict: Needs meaningful fixes before outreach.
 
-The med spa routes now pass route, link, image, and blocked-copy checks after scoped QA fixes. They are still not outreach-ready because exact visual/source parity was not completed in browser tooling, email drafts/contact methods are not verified, and 24 of 25 pages still rely on generated rich sections rather than the hand-authored source-specific depth used for Lazaderm Chandler.
+The med spa routes now pass route, link, image, and blocked-copy checks after scoped QA fixes. They are still not outreach-ready because exact visual/source parity was not completed in browser tooling, email drafts/contact methods are not verified, and 23 of 25 pages still rely on generated rich sections rather than the hand-authored source-specific depth now used for Lazaderm Chandler and Adam & Eve Medical Aesthetics.
 
 ### Fixes Applied During QA
 
@@ -68,7 +68,7 @@ The med spa routes now pass route, link, image, and blocked-copy checks after sc
 
 | Prospect | Route | Automated QA | Outreach readiness |
 | --- | --- | --- | --- |
-| Adam & Eve Medical Aesthetics | `/med-spa/adam-eve-medical-aesthetics` | Passes route/copy/link/image checks | Not ready - generated rich sections and draft/contact not verified |
+| Adam & Eve Medical Aesthetics | `/med-spa/adam-eve-medical-aesthetics` | Passes rebuilt route/copy/link/image checks | Needs manual review - hand-authored rich sections added; prospect-demo-qa, draft, and contact method still need verification |
 | All About Me Medical Aesthetics | `/med-spa/all-about-me-medical-aesthetics` | Passes after CTA fallback | Not ready - booking path now safe but less direct; draft/contact not verified |
 | Arcadia Wellness Center | `/med-spa/arcadia-wellness-center` | Passes route/copy/link/image checks | Not ready - generated rich sections and draft/contact not verified |
 | Arizona Medical Medspa | `/med-spa/arizona-medical-medspa` | Passes route/copy/link/image checks | Not ready - generated rich sections and draft/contact not verified |
@@ -100,7 +100,7 @@ The med spa routes now pass route, link, image, and blocked-copy checks after sc
 - Manually verify booking/contact path behavior for all prospects, especially the four automated-fetch-blocked CTAs.
 - Create and review prospect-specific outreach drafts for the med spa prospects.
 - Verify recipient/contact method in Supabase/tracker before any approval.
-- Decide whether to invest another builder pass to hand-author richer sections for the 24 non-Lazaderm demos before outreach.
+- Decide whether to invest another builder pass to hand-author richer sections for the 23 remaining generated-section demos before outreach.
 
 ## Scope
 

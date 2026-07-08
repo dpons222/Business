@@ -53,3 +53,10 @@ Use source-backed language around injectables, fillers, facial treatments, consu
 - Confirm no unsupported claims, guarantees, fake prices, or invented credentials.
 - Confirm the page demonstrates the solution instead of summarizing the recommendation.
 
+## Builder Run Notes - July 8, 2026
+
+- `prospect-demo-builder` rebuilt the route data for `/med-spa/adam-eve-medical-aesthetics`.
+- Source facts were rechecked against the Adam & Eve homepage, contact page, about page, and services page.
+- The page now uses Adam & Eve logo/imagery, Scottsdale address, phone, listed hours, online booking, consultation/contact CTA, service category links, provider context, and testimonial themes.
+- Local route, public-copy, CTA, image, and build checks passed.
+- Still requires `prospect-demo-qa` and manual outreach draft/contact-method review before outreach.

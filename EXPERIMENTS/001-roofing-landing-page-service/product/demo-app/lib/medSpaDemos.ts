@@ -95,50 +95,196 @@ export const medSpaDemos: MedSpaDemo[] = [
     city: "Scottsdale, AZ",
     sourceUrl: "https://www.adamandevemedspa.com/",
     primaryCtaHref: "https://www.adamandevemedspa.com/contact-us/",
+    bookingCtaHref: "https://adamevemedical.zenoti.com/webstoreNew/services",
+    bookingCtaLabel: "Book online",
+    phone: "(480) 575-6584",
+    phoneHref: "tel:+14805756584",
+    addressLines: [
+      "31309 N. Scottsdale Rd",
+      "Suite 100",
+      "Scottsdale, AZ 85266",
+    ],
+    hours: ["Mon - Fri: 9 am - 7 pm", "Sat: 10 am - 5 pm", "Sun: Closed"],
+    locationIntro:
+      "Start with a focused treatment question online, then visit Adam & Eve's North Scottsdale Road clinic for a consultation.",
     heroImageUrl: "https://www.adamandevemedspa.com/wp-content/uploads/2022/09/about-img.png",
     logoUrl: "https://www.adamandevemedspa.com/wp-content/uploads/2022/09/adamandevemedspa-logo.png",
+    heroBadge: "Complimentary patient consultation available",
+    heroStats: [
+      { value: "6", label: "service families" },
+      { value: "9-7", label: "weekday hours" },
+      { value: "N. Scottsdale", label: "clinic area" },
+    ],
     theme: {
-      primary: "#5f4a45",
-      primaryDark: "#2f2523",
-      accent: "#b88768",
-      accentSoft: "#f7ebe5",
+      primary: "#59433c",
+      primaryDark: "#251917",
+      accent: "#b88463",
+      accentSoft: "#f7ece6",
     },
     batch: "treatment_consultation",
-    eyebrow: "Scottsdale treatment consultation",
-    headline: "Choose the right aesthetic conversation before booking.",
+    eyebrow: "Adam & Eve Medical Aesthetics",
+    headline: "Find the right Scottsdale aesthetic consultation first.",
     subheadline:
-      "A focused Adam & Eve path for Scottsdale visitors comparing injectables, laser treatments, and aesthetic services before they request a consultation.",
+      "A focused entry point for Adam & Eve visitors choosing between injectables, laser skin treatments, facials, skin tightening, and body services before they book or request a consultation.",
     primaryCtaLabel: "Request consultation",
-    secondaryCtaLabel: "Compare paths",
-    treatmentFocus: "Injectables, fillers, and facial treatments",
+    secondaryCtaLabel: "Choose a treatment lane",
+    treatmentFocus: "Botox, fillers, laser skin care, facials, and skin tightening",
     visitorQuestion:
-      "I know I want a refreshed look, but should I ask about injectables, laser treatment, or a facial first?",
-    treatmentPathHeading: "Start with the visitor's goal, then route them to the right consult.",
+      "Should I start with injectables, laser skin, facials, tightening, or body treatment?",
+    treatmentPathHeading: "Choose by goal, then move straight to the right Adam & Eve next step.",
     treatmentPathIntro:
-      "Adam & Eve already presents online booking, contact, and a broad treatment menu. This page narrows the first decision so a Scottsdale visitor can ask a better question before scheduling.",
+      "Adam & Eve has a wide service menu. This page organizes it around the first question Scottsdale visitors usually need answered before booking: what should I ask about first?",
     serviceHighlights: [
-      "Injectables path: Botox, Dysport, Juvederm, Restylane, Sculptra, Jeuveau, Xeomin, and related filler options are visible on the source site.",
-      "Skin path: facials, peels, HydraFacial, microneedling, IPL, RF microneedling, and laser skin treatments are visible treatment families.",
-      "Consult path: keep the contact and consultation action close to the treatment choice instead of making visitors scan the entire service menu.",
+      "Injectables: Botox, Dysport, Juvederm, Restylane, Sculptra, Jeuveau, Xeomin, and Radiesse options help visitors start with expression lines, volume, or facial balancing.",
+      "Laser and texture: Clear + Brilliant, CO2 laser resurfacing, IPL Photofacial, RF Microneedling, ResurFX, UltraClear, and laser hair removal options are grouped for skin tone, texture, and hair concerns.",
+      "Aesthetic and skin care: HydraFacial, chemical peels, clinical facials, DiamondGlow, dermaplaning, microneedling, and OxyGeneo give skin-care shoppers a dedicated lane.",
+      "Body, tightening, and wellness: Ultherapy, SculpSure, triLift, Aveli, hormone therapy, IV therapy, semaglutide, and tirzepatide stay available after the first consultation question is chosen.",
     ],
-    consultationHeading: "Make the consult request feel prepared, not vague.",
+    consultationHeading: "A prepared consult without making visitors scan every treatment.",
     consultationIntro:
-      "The source site already gives visitors online booking, contact, phone, and service-category options. The demo turns those pieces into a simpler first-visit path.",
+      "Pick a goal, use the consultation request or online booking path, and bring one clear question to the Scottsdale team.",
     consultationSteps: [
-      "Choose the concern: expression lines, volume, skin texture, laser, or overall aesthetic plan.",
-      "Use Adam & Eve's contact path to request guidance from the Scottsdale team.",
-      "Bring one focused question into the consultation instead of a full menu of undecided services.",
+      "Choose one concern: expression lines, facial volume, pigment, texture, skin refresh, tightening, body contouring, or wellness support.",
+      "Request a consultation or use online booking with that service family in mind.",
+      "Review options with Adam & Eve's team before selecting a treatment plan.",
     ],
-    trustHeading: "Use the credibility already on the public site.",
+    consultationChoices: [
+      {
+        title: "Expression lines or facial balance",
+        body:
+          "Start here if your first question is about Botox, Dysport, Juvederm, Restylane, Sculptra, Jeuveau, Xeomin, or Radiesse.",
+        href: "https://www.adamandevemedspa.com/services/injectable-dermal-fillers-scottsdale/",
+        ctaLabel: "Review injectables",
+      },
+      {
+        title: "Sun damage, tone, or texture",
+        body:
+          "Use this lane for IPL, Clear + Brilliant, CO2 resurfacing, RF microneedling, ResurFX, UltraClear, or laser hair removal questions.",
+        href: "https://www.adamandevemedspa.com/services/laser-skin-resurfacing-scottsdale/",
+        ctaLabel: "Explore lasers",
+      },
+      {
+        title: "Facial refresh or event prep",
+        body:
+          "Compare HydraFacial, chemical peels, clinical facials, DiamondGlow, dermaplaning, microneedling, and OxyGeneo before scheduling.",
+        href: "https://www.adamandevemedspa.com/services/aesthetic-treatments-scottsdale-az/",
+        ctaLabel: "Compare facials",
+      },
+      {
+        title: "Lift, tightening, or body concern",
+        body:
+          "Choose this path for Ultherapy, triLift, SculpSure, Aveli, or a body-focused consultation.",
+        href: "https://www.adamandevemedspa.com/services/skin-tightening-scottsdale-az/",
+        ctaLabel: "View tightening",
+      },
+    ],
+    trustHeading: "Scottsdale team context belongs near the CTA.",
     trustIntro:
-      "The public page gives enough source-backed context to make this feel specific to Adam & Eve without inventing claims.",
+      "Adam & Eve publishes provider, technology, testimonial, contact, and office details, so the page keeps those confidence cues close to the action.",
     trustSignals: [
-      "The Scottsdale office is listed at 31309 N. Scottsdale Rd, Suite 100.",
-      "The source site lists online booking, phone, contact, new patient forms, memberships, rewards, and testimonial paths.",
-      "The team section names medical staff and nurse injectors, so the demo can frame consultation around trained providers without adding unsupported claims.",
+      "Adam & Eve lists its Scottsdale office at 31309 N. Scottsdale Rd, Suite 100.",
+      "Their service menu includes injectables, laser treatments, aesthetic treatments, skin tightening, body treatments, wellness, and vaginal rejuvenation.",
+      "The about page identifies Chelsea Hoese, NP, and team members including Nicole Le Rendard, Jenni Presmyk, Jennifer Olesinski, Jenna Arancibia, and Maria McGarry.",
+      "Consultation details include online booking, a contact page, new patient forms, phone, and listed office hours.",
+      "The about page describes Allergan Black Diamond status since 2012.",
+    ],
+    featuredServices: [
+      {
+        title: "Injectables and fillers",
+        eyebrow: "Fine lines, volume, balance",
+        body:
+          "A clear lane for Botox, Dysport, Juvederm, Restylane, Sculptra, Jeuveau, Xeomin, Radiesse, and related filler questions.",
+        href: "https://www.adamandevemedspa.com/services/injectable-dermal-fillers-scottsdale/",
+        ctaLabel: "Review injectables",
+      },
+      {
+        title: "Laser skin consultation",
+        eyebrow: "Tone, pigment, texture",
+        body:
+          "A laser-focused path for IPL Photofacial, Clear + Brilliant, CO2 resurfacing, RF Microneedling, ResurFX, UltraClear, and laser hair removal.",
+        href: "https://www.adamandevemedspa.com/services/laser-skin-resurfacing-scottsdale/",
+        ctaLabel: "Explore lasers",
+      },
+      {
+        title: "Facials and skin care",
+        eyebrow: "Refresh, peel, glow",
+        body:
+          "A skin-care path for HydraFacial, chemical peels, clinical facials, DiamondGlow, dermaplaning, microneedling, and OxyGeneo.",
+        href: "https://www.adamandevemedspa.com/services/aesthetic-treatments-scottsdale-az/",
+        ctaLabel: "Compare facials",
+      },
+      {
+        title: "Tightening and body goals",
+        eyebrow: "Lift, contour, support",
+        body:
+          "A body and tightening lane for Ultherapy, SculpSure, triLift, Aveli, and related treatment questions before consultation.",
+        href: "https://www.adamandevemedspa.com/services/skin-tightening-scottsdale-az/",
+        ctaLabel: "View tightening",
+      },
+    ],
+    teamMembers: [
+      {
+        name: "Chelsea Hoese",
+        role: "Nurse Practitioner",
+        imageUrl: "https://www.adamandevemedspa.com/wp-content/uploads/2022/09/chelsea-hoese-img.jpg",
+      },
+      {
+        name: "Nicole Le Rendard",
+        role: "RN, nurse injector",
+        imageUrl: "https://www.adamandevemedspa.com/wp-content/uploads/2022/09/nicole-le-rendard-img.jpg",
+      },
+      {
+        name: "Jennifer Olesinski",
+        role: "LME, CLT",
+        imageUrl: "https://www.adamandevemedspa.com/wp-content/uploads/2022/09/jennifer-img.jpg",
+      },
+      {
+        name: "Jenna Arancibia",
+        role: "LME, CLT",
+        imageUrl: "https://www.adamandevemedspa.com/wp-content/uploads/2024/11/Jenna-Arancibia.jpg",
+      },
+    ],
+    reviewThemes: [
+      {
+        title: "First-visit comfort",
+        body:
+          "Testimonials on Adam & Eve's site mention first-time visits, clear information, and confidence returning for more care.",
+      },
+      {
+        title: "Provider trust",
+        body:
+          "Review excerpts refer to knowledgeable staff, answered questions, and trust with face-focused treatments.",
+      },
+      {
+        title: "Treatment guidance",
+        body:
+          "The page keeps those comfort cues beside the consultation step so a new visitor can choose a path with less guesswork.",
+      },
+    ],
+    galleryImages: [
+      {
+        src: "https://www.adamandevemedspa.com/wp-content/uploads/2022/09/about-img.png",
+        alt: "Adam & Eve Medical Aesthetics consultation setting",
+        caption: "Scottsdale consultation setting",
+      },
+      {
+        src: "https://www.adamandevemedspa.com/wp-content/uploads/2022/09/ourservices-injectables.jpg",
+        alt: "Adam & Eve injectables service image",
+        caption: "Injectables and fillers",
+      },
+      {
+        src: "https://www.adamandevemedspa.com/wp-content/uploads/2022/09/Laser-Treatments.jpg",
+        alt: "Adam & Eve laser treatments service image",
+        caption: "Laser skin treatments",
+      },
+      {
+        src: "https://www.adamandevemedspa.com/wp-content/uploads/2022/09/Aesthetic-Treatments-e1685067108573.jpg",
+        alt: "Adam & Eve aesthetic treatments service image",
+        caption: "Facials and skin care",
+      },
     ],
     finalNote:
-      "A visitor leaves this page with one practical next step: request an Adam & Eve consultation with the treatment category already in mind.",
+      "Choose the treatment lane that best matches your goal, then request an Adam & Eve consultation or book online with a clearer first question.",
   },
   {
     slug: "all-about-me-medical-aesthetics",
