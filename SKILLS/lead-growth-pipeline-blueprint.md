@@ -62,9 +62,12 @@ demo_or_recommendation_url
 
 ## Script Responsibilities
 
-- Create standard prospect package files.
-- Update experiment prospect trackers.
-- Validate package structure.
+- Create missing prospect files and update only explicitly supplied structured fields.
+- Preserve research prose, contact history, unknown tracker columns, and stable local record IDs.
+- Validate structure, research completeness, and outreach readiness separately.
+- Use the repository's [package contract](../AUTOMATIONS/lead-growth-pipeline/data-contract.md) and [operating guide](../AUTOMATIONS/lead-growth-pipeline/README.md).
+
+The repository owns the script implementation. Seven runtime scripts/modules are synchronized into the installed personal skill by `AUTOMATIONS/lead-growth-pipeline/scripts/Sync-InstalledPipelineScripts.ps1`, with backups of changed installed files. Run its `-Check` mode after changes. Do not reintroduce an older personal script into the repository. Requires PowerShell 7.5+; the regression suite is independent of the app and uses synthetic local fixtures.
 
 ## Workflow Responsibilities
 

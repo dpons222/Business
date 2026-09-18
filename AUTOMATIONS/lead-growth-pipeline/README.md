@@ -1,232 +1,124 @@
-# Lead Growth Pipeline Automation
+# Lead Growth Pipeline
 
-This automation package documents and scaffolds the future lead-to-draft pipeline.
+Local tools for creating research packages, preserving tracker history, checking completeness, and preparing draft-only outreach. Requires **PowerShell 7.5 or newer** (`pwsh`); Windows PowerShell 5.1 is not supported. No extra modules, network requests, database writes, or sending are required.
 
-It is not an autonomous cold-email sender. The goal is to help Codex and supporting scripts move a niche prospect from public lead research to a review-ready recommendation package and Gmail draft.
+## Create and update
 
-## Current Status
-
-- Codex skill installed locally:
-
-```text
-C:\Users\Diego\.codex\skills\lead-growth-pipeline\
-```
-
-- Repo-tracked skill blueprint:
-
-```text
-SKILLS/lead-growth-pipeline-blueprint.md
-```
-
-- Prospect package scripts added:
-
-```text
-AUTOMATIONS/lead-growth-pipeline/scripts/New-ProspectPackage.ps1
-AUTOMATIONS/lead-growth-pipeline/scripts/Test-ProspectPackage.ps1
-```
-
-## Intended Flow
-
-```text
-1. Select niche, market, and target count.
-2. Source public candidate businesses.
-3. Qualify candidates and update the experiment tracker.
-4. Diagnose public customer journey gaps.
-5. Pick one primary recommendation.
-6. Preserve secondary recommendations and future opportunities.
-7. Create prospect package files.
-8. Create only the demo/preview/assets needed for the primary recommendation.
-9. Prepare Gmail draft payload.
-10. Diego reviews the exact draft and contact method before any send.
-```
-
-## How To Use
-
-Use this package when you want to move from a niche experiment to review-ready prospect outreach.
-
-### 1. Pick The Experiment
-
-Start with one existing growth-system experiment:
-
-```text
-EXPERIMENTS/003-hvac-growth-systems/
-EXPERIMENTS/004-remodeler-growth-systems/
-EXPERIMENTS/005-med-spa-growth-systems/
-EXPERIMENTS/006-dental-implant-cosmetic-growth-systems/
-EXPERIMENTS/007-personal-injury-law-growth-systems/
-```
-
-Example prompt:
-
-```text
-Use lead-growth-pipeline for HVAC prospects in Indianapolis. Do not send outreach. Find and qualify 10 candidates, then create packages only for the strongest 3.
-```
-
-### 2. Source And Qualify Prospects
-
-For each candidate business, collect enough public information to decide whether it is worth a prospect package:
-
-- business name,
-- website,
-- city/state,
-- service focus,
-- contact method,
-- current public customer journey reviewed,
-- observed issue,
-- likely recommendation category.
-
-Add or update rows in:
-
-```text
-<experiment>/marketing/prospect-tracker.csv
-```
-
-Use statuses such as:
-
-```text
-sourced
-researched
-qualified
-bad_fit
-paused
-```
-
-### 3. Diagnose The Public Journey
-
-Use the installed skill:
-
-```text
-C:\Users\Diego\.codex\skills\lead-growth-pipeline\
-```
-
-The diagnosis should choose one best first recommendation and preserve other useful ideas:
-
-```text
-Primary recommendation:
-- replacement_quote_page
-
-Secondary recommendations:
-- missed_lead_followup
-- financing_rebate_clarity
-
-Future opportunities:
-- maintenance_plan_signup after the first pilot
-```
-
-Only build a demo, preview, workflow, copy, or tracker sample for the primary recommendation unless Diego asks for more.
-
-### 4. Generate A Prospect Package
-
-Use the package generator after the primary recommendation is chosen:
+Run from the repository root. The experiment and its `marketing/prospect-tracker.csv` must already exist. Use `-DryRun` to receive a JSON before/after diff without creating files, directories, locks, or backups.
 
 ```powershell
-.\AUTOMATIONS\lead-growth-pipeline\scripts\New-ProspectPackage.ps1 `
-  -ExperimentPath "EXPERIMENTS\003-hvac-growth-systems" `
-  -BusinessName "Example HVAC Co" `
-  -Website "https://example.com" `
-  -CityState "Indianapolis, IN" `
-  -ServiceFocus "Residential HVAC" `
-  -RecommendationCategory "replacement_quote_page" `
-  -PrimaryRecommendation "Replacement quote page" `
-  -SecondaryRecommendations "missed_lead_followup; financing_rebate_clarity" `
-  -FutureOpportunities "maintenance_plan_signup after first pilot" `
-  -ObservedIssue "Replacement service path is visible but the quote CTA is not specific." `
-  -RecommendedSolution "Create a focused replacement quote path with financing FAQs and tracking." `
-  -OutreachAngle "The first fix is improving replacement quote clarity instead of pitching a full redesign." `
-  -Status "recommendation_created"
+$generator = './AUTOMATIONS/lead-growth-pipeline/scripts/New-ProspectPackage.ps1'
+$experiment = './EXPERIMENTS/003-hvac-growth-systems'
+& $generator -ExperimentPath $experiment -BusinessName 'Example HVAC' `
+  -Slug 'example-hvac-north' -Website 'https://example.invalid' `
+  -CityState 'Indianapolis, IN' -DryRun
 ```
 
-This creates:
+Remove `-DryRun` after reviewing the proposed changes. The default status is `sourced`. A new package includes `research.json`, a README, research/recommendation notes, a client summary, draft outreach, a tracking outline, and an internal personalized recommendation. Unresearched sections contain visible placeholders.
 
-```text
-prospects/<prospect-slug>/README.md
-prospects/<prospect-slug>/recommendation.md
-prospects/<prospect-slug>/client-summary.md
-prospects/<prospect-slug>/outreach-email.md
-prospects/<prospect-slug>/campaign-tracking-strategy.md
-product/personalized-demos/<prospect-slug>-recommendation.md
-```
+Every record receives a stable `local_record_id` and `prospect_slug`. Reruns preserve existing document bytes and tracker columns, including legacy IDs, comments, contact dates, follow-ups, replies, and notes. Only explicitly supplied fields change. Omitted fields remain untouched; an explicit empty string clears a text field. Alternatively, use canonical names with `-ClearField website,city_state`. Identity and status cannot be cleared.
 
-It also updates the experiment's `marketing/prospect-tracker.csv` when that file exists.
+Use the explicit slug on updates. A name-derived slug cannot silently change an existing business's name, website, or location. Name/domain matches are candidates for review, never merge keys. To create another branch or same-name business, use an unused slug with `-NewRecord`. Blank websites do not match each other.
 
-### 5. Validate The Package
+### Adopt a legacy row
 
-Run:
+First inspect the recovery inventory below. For a tracker with a valid schema, select the exact one-based **data row**, excluding the header, and its current SHA-256 hash:
 
 ```powershell
-.\AUTOMATIONS\lead-growth-pipeline\scripts\Test-ProspectPackage.ps1 `
-  -ExperimentPath "EXPERIMENTS\003-hvac-growth-systems" `
-  -Slug "example-hvac-co"
+$trackerHash = (Get-FileHash "$experiment/marketing/prospect-tracker.csv" -Algorithm SHA256).Hash.ToLowerInvariant()
+& $generator -ExperimentPath $experiment -BusinessName 'Exact existing business name' `
+  -Slug 'reviewed-location-slug' -AdoptRow 3 -ExpectedTrackerHash $trackerHash -DryRun
 ```
 
-The validator checks that the required prospect files and tracker exist.
+Adoption requires an exact business-name match and an unowned, named row. It preserves the row and records its original hash, data-row number, and legacy ID. Unnamed rows remain unresolved. Existing advanced statuses may need supplied evidence and contact verification before adoption passes validation. Do not rewrite history merely to make validation pass.
 
-### 6. Prepare Draft-Only Outreach
+### Supply evidence
 
-Review:
+`-EvidencePath` accepts a JSON array of `{source_url, observed_at, observation}`. `-ContactVerificationPath` accepts `{method, contact_method, source_url, verified_at}`. See the [contract](data-contract.md) and [synthetic examples](tests/fixtures/evidence.json). Timestamps require ISO 8601 with timezone. These inputs record the operator's verification; the scripts do not browse or authenticate the claim.
 
-```text
-prospects/<prospect-slug>/outreach-email.md
+```powershell
+& $generator -ExperimentPath $experiment -BusinessName 'Example HVAC' `
+  -Slug 'example-hvac-north' -EvidencePath './reviewed-evidence.json' `
+  -ObservedIssue 'A specific observation supported by the supplied source.' `
+  -Status researched
 ```
 
-Before creating a Gmail draft, verify:
+The generator never fills `current_flow_reviewed` or contact verification automatically. An explicitly supplied reviewed-journey description requires evidence. Research-only records do not need a website, recommendation, demo, or contact method. Evidence may refer to a public listing when the business has no website.
 
-- the contact method is current,
-- the exact draft is approved for draft creation,
-- the recommendation/demo URL opens,
-- the message mentions one observed opportunity,
-- first-touch outreach includes the default DigiDap intro unless it would make the message too long: "My name is Diego. I'm with DigiDap, where I help local service businesses improve their websites and turn high-intent pages into clearer customer inquiry paths.",
-- the message may include one short alternate-priority sentence after the main ask, for example: "If another site priority would be more useful to look at first, I can focus there instead.",
-- no guaranteed outcomes are promised.
+Existing prose remains independent of structured field updates. Edit it deliberately or use reviewed regeneration, then validate the resulting package. A new field value does not prove existing prose is current.
 
-Use `gmail-draft-handoff.md` when wiring this into n8n or the Gmail API.
+### Deliberately regenerate documents
 
-### 7. Review Before Sending
+Adopt/create the stable identity first. Then preview the exact overwrite:
 
-The safe operating states are:
-
-```text
-email_drafted
-ready_for_review
-approved_to_send
-sent
+```powershell
+$update = @{
+  ExperimentPath = $experiment
+  BusinessName = 'Example HVAC'
+  Slug = 'example-hvac-north'
+  PrimaryRecommendation = 'A focused intake workflow'
+  Regenerate = $true
+}
+$diff = & $generator @update -DryRun | ConvertFrom-Json -DateKind String
+$diff.changes | Select-Object path, before, after
+# Only after reviewing those document changes:
+& $generator @update -ReviewHash $diff.review_hash
 ```
 
-Do not move a prospect to `approved_to_send` until Diego has reviewed the exact recipient, subject, body, recommendation, and URL.
+The review hash binds the old and proposed document contents. Later edits invalidate it. Each replaced document is preserved in the transaction backup. Generated outreach always contains review placeholders, so regenerate before progressing to `ready_for_review`.
 
-This package can prepare Gmail drafts later, but sending belongs to a separate approval-gated workflow.
+## Validate the right stage
 
-## Human Approval Boundary
+```powershell
+./AUTOMATIONS/lead-growth-pipeline/scripts/Test-ProspectPackage.ps1 `
+  -ExperimentPath $experiment -Slug 'example-hvac-north' -Stage ResearchComplete
+```
 
-The pipeline may create drafts, but it must not send outreach automatically.
+| Stage | Checks |
+| --- | --- |
+| `Structure` (default) | Supported record schema, valid ID/slug/history, matching tracker row and fields, nonempty README/research notes, local references, no interrupted transaction. |
+| `ResearchComplete` | Structure plus dated source evidence, a substantive observation, and research notes with required sections resolved. Recommendations/contact/outreach remain optional. |
+| `OutreachReady` | Research plus primary recommendation, rationale, outreach angle, matching contact verification, resolved client summary and exact draft, completed draft checklist, and a syntactically valid web URL or nonempty local recommendation. |
 
-Before any send:
+Validation is local completeness checking. It does not verify factual truth, remote URL availability, deliverability, permission to contact, or approval to send. `ready_for_review` is a review queue, not sending authorization. The generator cannot advance approval/send/reply states. Diego must review the exact recipient, subject, body, live asset, and current sources before any send. Follow [the Gmail handoff](gmail-draft-handoff.md).
 
-- exact recipient/contact method must be verified,
-- exact subject/body must be reviewed,
-- recommendation/demo URL must be opened and checked,
-- tracker status must be ready for review,
-- Diego must explicitly approve the send.
+## Recovery and locking
 
-## Files
+Inventory an experiment without changing it:
 
-- `workflow-spec.md`: end-to-end orchestration plan.
-- `data-contract.md`: prospect fields and statuses.
-- `gmail-draft-handoff.md`: Gmail/n8n draft-only handoff contract.
-- `testing-checklist.md`: validation checks before using the pipeline.
-- `scripts/New-ProspectPackage.ps1`: creates prospect docs and updates tracker rows.
-- `scripts/Test-ProspectPackage.ps1`: validates required package files.
+```powershell
+./AUTOMATIONS/lead-growth-pipeline/scripts/Get-ProspectRecoveryReport.ps1 -ExperimentPath $experiment
+```
 
-## Related Experiments
+The report includes every parsed row's source line, data-row index, content hash, identity classification, malformed records, source-file hash, and old/proposed/canonical column mappings. The [Issue #130 inventory](../../plans/issue-128-business-research-platform-audit/issue-130-recovery-report.md) accounts for the current seven trackers. Originals remain unchanged.
 
-This pipeline is intended to work with growth-system experiments such as:
+The only automated legacy repair is positional naming of blank headers (`legacy_unnamed_column_N`). It preserves every cell and row, including unresolved identities. Duplicate named headers, invalid quoting, and mismatched widths stop for manual review.
 
-- `EXPERIMENTS/003-hvac-growth-systems/`
-- `EXPERIMENTS/004-remodeler-growth-systems/`
-- `EXPERIMENTS/005-med-spa-growth-systems/`
-- `EXPERIMENTS/006-dental-implant-cosmetic-growth-systems/`
-- `EXPERIMENTS/007-personal-injury-law-growth-systems/`
+```powershell
+./AUTOMATIONS/lead-growth-pipeline/scripts/Repair-ProspectTrackerHeader.ps1 `
+  -ExperimentPath $experiment -ExpectedTrackerHash $trackerHash -DryRun
+# After reviewing that narrow repair, repeat without -DryRun.
+```
 
-## Rule
+All writers share a fail-fast experiment lock and verify hashes before applying. Files are staged, flushed, backed up, then replaced by same-directory rename. Readers see complete old or new files. A multi-file package is **not** one filesystem-wide atomic transaction: an interruption leaves a journal and blocks subsequent writes/validation until recovery. These guarantees target a local filesystem; network/cloud-synchronized folders are not supported for concurrent writes. External editors do not participate in the lock, so avoid editing during an operation; hashes catch changes observed before replacement.
 
-Build one primary recommendation per prospect. Record secondary recommendations as future notes, but do not build multiple unpaid demos unless Diego asks.
+Backups and journals live under `<experiment>/.prospect-package/transactions/<id>/` and remain on disk, ignored by Git. They contain private research/history. Do not remove them while recovery or canonical import reconciliation is pending. The harmless `write.lock` file can remain after completion; ownership is the OS file handle, not the file's existence.
+
+```powershell
+./AUTOMATIONS/lead-growth-pipeline/scripts/Restore-ProspectTransaction.ps1 `
+  -ExperimentPath $experiment -TransactionId '<reported-id>' -DryRun
+# Review, then repeat without -DryRun.
+```
+
+Recovery verifies all backup checksums and current file versions before restoring any file. Later operator edits stop restoration; use a reviewed inverse field patch instead. Already restored files are recognized on retry. Abandoned same-directory `.package-*.tmp` files from a hard kill are not authoritative and can be reviewed/removed after recovery.
+
+## Verification and installed skill ownership
+
+```powershell
+pwsh -NoProfile -File ./AUTOMATIONS/lead-growth-pipeline/tests/Run-RegressionTests.ps1
+./AUTOMATIONS/lead-growth-pipeline/scripts/Sync-InstalledPipelineScripts.ps1 -Check
+```
+
+The **repository scripts are authoritative**. The installed personal skill has copies of seven runtime scripts/modules. Run the sync script without `-Check` to preserve its old copies in a transaction and update them; then run `-Check` again. Use `-SkillPath` for an alternate installed location. Never copy an older personal script back over repository source. The test fixtures are synthetic and do not contact real businesses. See [testing details](testing-checklist.md).
+
+Files: [data contract](data-contract.md), [workflow](workflow-spec.md), [Gmail handoff](gmail-draft-handoff.md), [skill blueprint](../../SKILLS/lead-growth-pipeline-blueprint.md), and [scripts](scripts/).

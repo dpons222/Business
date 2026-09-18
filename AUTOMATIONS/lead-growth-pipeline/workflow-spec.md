@@ -92,6 +92,7 @@ Required outputs:
 
 ```text
 prospects/<slug>/README.md
+prospects/<slug>/research.json
 prospects/<slug>/recommendation.md
 prospects/<slug>/client-summary.md
 prospects/<slug>/outreach-email.md
@@ -99,6 +100,10 @@ prospects/<slug>/campaign-tracking-strategy.md
 product/personalized-demos/<slug>-recommendation.md
 marketing/prospect-tracker.csv row
 ```
+
+Use stable `local_record_id` / `prospect_slug` identity and the [versioned local contract](data-contract.md). Create missing files; preserve existing prose and contact history. Apply only supplied field patches. Adopt legacy rows only after reviewing their row identity and current tracker hash. Name/domain matches never merge records automatically. Run the [recovery inventory](README.md#recovery-and-locking) before importing malformed trackers.
+
+Validate `ResearchComplete` for evidence-only research; recommendations and outreach remain optional. Validate `OutreachReady` only after the exact draft and verified contact are supplied. Local validation does not browse sources or authorize sending.
 
 ### 5. Build Primary Demo Or Preview
 
@@ -125,10 +130,12 @@ The workflow must not send.
 Mark a prospect `ready_for_review` only when:
 
 - the exact draft exists,
-- contact method is verified or explicitly marked unverified,
+- contact method is explicitly verified and matches the current contact value,
 - demo/recommendation URL is stable,
 - pre-send checklist is complete,
 - tracker row is current.
+
+An unverified contact may remain in research or draft preparation; it does not pass `OutreachReady`. The generator cannot advance approval/send/reply states. Sending remains in the separately approved workflow.
 
 ## Future n8n Shape
 

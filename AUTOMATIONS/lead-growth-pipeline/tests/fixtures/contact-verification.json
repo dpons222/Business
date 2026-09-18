@@ -1,0 +1,6 @@
+{
+  "method": "verified_public_email",
+  "contact_method": "team@example.invalid",
+  "source_url": "https://example.invalid/contact",
+  "verified_at": "2026-09-01T12:00:00Z"
+}

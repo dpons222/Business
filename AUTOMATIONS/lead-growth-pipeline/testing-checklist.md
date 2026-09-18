@@ -1,41 +1,31 @@
-# Testing Checklist
+# Pipeline Verification
 
-## Skill Validation
+Run in **PowerShell 7.5+ on Windows**, from the repository root:
 
-- Run `quick_validate.py` against the installed skill.
-- Confirm `SKILL.md` has valid frontmatter.
-- Confirm referenced files exist.
+```powershell
+pwsh -NoProfile -File AUTOMATIONS/lead-growth-pipeline/tests/Run-RegressionTests.ps1
+```
 
-## Script Validation
+The standalone suite requires no Pester installation, network, credentials, real recipients, or services. It creates isolated synthetic experiment directories under the OS temporary directory. Successful fixtures are cleaned; failed fixtures are retained with their path and detailed failure locations. `-KeepFixtures` retains successful runs for inspection. The junction containment case targets Windows; other platforms need an equivalent symlink test before claiming support. Issue #131 should run this suite as a separate Windows CI job with a pinned compatible PowerShell version.
 
-- Run `New-ProspectPackage.ps1` against a temporary experiment directory.
-- Confirm package files are created.
-- Confirm tracker row is added.
-- Run `Test-ProspectPackage.ps1` against the generated package.
+Coverage:
 
-## Workflow Validation
+- Quoted/unquoted headers, quoted commas/quotes, multiline notes, custom columns, and roofing aliases.
+- Byte-stable identical reruns; preserved legacy IDs, contact dates, follow-ups, replies, and handwritten documents.
+- Explicit patch/clear semantics, independent blank-website businesses, same-name businesses and shared-domain branches.
+- Reviewed legacy adoption, stale source hashes, duplicate IDs, malformed rows, and no guessed identity.
+- Zero-write dry runs; path traversal, reserved names, and junction containment.
+- Reviewed regeneration, stale document review hashes, backups, and later-edit protection.
+- Structural/research/outreach completeness, optional research-only recommendations, sources, contact verification, unresolved content, and invalid state transitions.
+- Real child-process lock contention, optimistic concurrency checks, interrupted multi-file recovery, and byte-exact rollback.
 
-Before connecting Gmail or n8n:
+Use the current [verification record](../../plans/issue-128-business-research-platform-audit/issue-130-lossless-prospect-packages.md) for actual results, rather than treating this coverage list as a pass report.
 
-- Test with a fake prospect and no real recipient.
-- Confirm generated outreach is draft-only.
-- Confirm secondary recommendations are preserved.
-- Confirm status does not skip straight to sent.
+After changing runtime scripts, synchronize the installed skill and verify checksums:
 
-## Gmail Draft Validation
+```powershell
+./AUTOMATIONS/lead-growth-pipeline/scripts/Sync-InstalledPipelineScripts.ps1
+./AUTOMATIONS/lead-growth-pipeline/scripts/Sync-InstalledPipelineScripts.ps1 -Check
+```
 
-When Gmail integration is added:
-
-- First create a draft addressed only to Diego.
-- Confirm no send node exists.
-- Confirm the Gmail draft ID is recorded.
-- Confirm manual review remains required before send.
-
-## Shutdown Safety
-
-Do not schedule system shutdown until:
-
-- commit succeeds,
-- push succeeds,
-- status is clean,
-- final summary is ready.
+Validate a real package at the appropriate stage before further workflow work. Existing legacy files will need reviewed identity adoption and real evidence before they pass the new record contract. Passing local checks does not establish factual accuracy, current remote-page state, deliverability, or send approval. Continue to use [the Gmail handoff](gmail-draft-handoff.md) and the relevant marketing pre-send checklist before any separately authorized contact.

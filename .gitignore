@@ -21,3 +21,6 @@ Thumbs.db
 .verification/
 
 .vercel
+
+# Local package transaction journals contain preserved research/history; retain on disk.
+.prospect-package/
