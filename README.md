@@ -2,6 +2,10 @@
 
 Remote business lab for researching, validating, and building AI-assisted business ideas.
 
+## Research Platform Review
+
+The [business research platform audit](plans/issue-128-business-research-platform-audit/issue-128-business-research-platform-audit.md) assesses the current code, research process, skills, and automation against a tool for researching niches and individual businesses. The [implementation plan index](plans/issue-128-business-research-platform-audit/README.md) connects fourteen issue-backed plans through dependencies, acceptance checks, and a master checklist. Planning is complete; implementation has not started.
+
 ## Directory Guide
 
 ```text

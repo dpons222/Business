@@ -1,0 +1,122 @@
+{
+  "passed": 28,
+  "failed": 0,
+  "results": [
+    {
+      "name": "Quoted headers, multiline fields, history, unknown columns, handwritten docs and identical reruns",
+      "passed": true
+    },
+    {
+      "name": "Omitted values preserve fields; empty string and ClearField are explicit clearing",
+      "passed": true
+    },
+    {
+      "name": "Roofing aliases preserve original IDs and do not add conflicting columns",
+      "passed": true
+    },
+    {
+      "name": "Same-name businesses and same-domain branches require explicit distinct identity",
+      "passed": true
+    },
+    {
+      "name": "Different businesses with blank websites remain separate",
+      "passed": true
+    },
+    {
+      "name": "Name-derived slugs cannot silently replace a different location or colliding name",
+      "passed": true
+    },
+    {
+      "name": "External tracker edits are preserved and reconciled before completeness validation",
+      "passed": true
+    },
+    {
+      "name": "Explicit evidence clearing is retained as an array without manufacturing verification",
+      "passed": true
+    },
+    {
+      "name": "Legacy adoption rejects stale inventory and unnamed or already owned rows",
+      "passed": true
+    },
+    {
+      "name": "Legacy adoption imports existing structured evidence and verification unchanged",
+      "passed": true
+    },
+    {
+      "name": "Dry-run contains before/after diff and creates no files or directories",
+      "passed": true
+    },
+    {
+      "name": "Traversal, reserved names, absolute slugs and missing experiments cannot write",
+      "passed": true
+    },
+    {
+      "name": "Junction path escape is rejected before writes",
+      "passed": true
+    },
+    {
+      "name": "Reviewed regeneration preserves a backup and rejects stale review hashes",
+      "passed": true
+    },
+    {
+      "name": "Structural scaffolds do not claim research or contact verification",
+      "passed": true
+    },
+    {
+      "name": "Research-only dossier passes without optional recommendations or outreach",
+      "passed": true
+    },
+    {
+      "name": "Empty and heading-only research documents cannot pass completeness",
+      "passed": true
+    },
+    {
+      "name": "Broken local references and duplicate IDs are rejected",
+      "passed": true
+    },
+    {
+      "name": "Unsupported source URLs and future timestamps are rejected",
+      "passed": true
+    },
+    {
+      "name": "Outreach readiness requires verification and resolved exact draft content",
+      "passed": true
+    },
+    {
+      "name": "Backward transitions and tampered history cannot validate",
+      "passed": true
+    },
+    {
+      "name": "Recovery inventory accounts for unnamed records without inventing values",
+      "passed": true
+    },
+    {
+      "name": "Reviewed header-only repair preserves every cell, order, original bytes and unresolved rows",
+      "passed": true
+    },
+    {
+      "name": "Malformed quoting, mismatched widths and duplicate named headers stop automatic repair",
+      "passed": true
+    },
+    {
+      "name": "Concurrent process lock fails fast and leaves tracker untouched",
+      "passed": true
+    },
+    {
+      "name": "Optimistic hash checks reject edits made after planning",
+      "passed": true
+    },
+    {
+      "name": "Completed transactions roll back exactly and refuse later edits",
+      "passed": true
+    },
+    {
+      "name": "Interrupted multi-file transaction blocks new writes and restores applied files",
+      "passed": true
+    }
+  ],
+  "runtime": "7.6.5",
+  "platform": "Microsoft Windows NT 10.0.26200.0",
+  "verified_at": "2026-09-18T00:05:38.5624983-04:00",
+  "command": "pwsh -NoProfile -File AUTOMATIONS/lead-growth-pipeline/tests/Run-RegressionTests.ps1"
+}

@@ -1,5 +1,7 @@
 # Issue 127 - Move local-growth-preview App to apps/local-growth-preview
 
+Planning status (2026-09-17): superseded by [issue #142's shared-platform portability plan](issue-128-business-research-platform-audit/issue-142-shared-platform-portability.md). The #127 label in this legacy filename/title is incorrect: actual GitHub issue #127 covers med-spa quality work and explicitly excludes the app move. Preserve this document as prior planning context; use #142 and its checklist for implementation.
+
 ## Objective
 Move the shared `local-growth-preview` Next.js app out of the original roofing experiment folder and into `apps/local-growth-preview` so the project structure matches how the app is now used across roofing, restaurants, med spas, and future niches.
 

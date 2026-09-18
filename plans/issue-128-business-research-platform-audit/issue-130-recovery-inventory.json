@@ -1,0 +1,3016 @@
+{
+  "schema_version": 1,
+  "trackers": [
+    {
+      "experiment": "001-roofing-landing-page-service",
+      "tracker": "marketing/prospect-tracker.csv",
+      "source_sha256": "bc56819e5e8f2bdf81697ec319b8d776d97e11ce40f9d5d7d45bd9c339ffa2ff",
+      "parsed_rows": 199,
+      "malformed_records": 0,
+      "unnamed_rows": 169,
+      "header_issues": [
+        "Blank header(s)",
+        "Duplicate header(s)"
+      ],
+      "column_map": [
+        {
+          "ordinal": 1,
+          "original": "id",
+          "proposed": "id",
+          "canonical_field": "id"
+        },
+        {
+          "ordinal": 2,
+          "original": "business",
+          "proposed": "business",
+          "canonical_field": "business_name"
+        },
+        {
+          "ordinal": 3,
+          "original": "website",
+          "proposed": "website",
+          "canonical_field": "website"
+        },
+        {
+          "ordinal": 4,
+          "original": "city_state",
+          "proposed": "city_state",
+          "canonical_field": "city_state"
+        },
+        {
+          "ordinal": 5,
+          "original": "contact_method",
+          "proposed": "contact_method",
+          "canonical_field": "contact_method"
+        },
+        {
+          "ordinal": 6,
+          "original": "reviews",
+          "proposed": "reviews",
+          "canonical_field": "reviews"
+        },
+        {
+          "ordinal": 7,
+          "original": "page_reviewed",
+          "proposed": "page_reviewed",
+          "canonical_field": "current_flow_reviewed"
+        },
+        {
+          "ordinal": 8,
+          "original": "observed_issue",
+          "proposed": "observed_issue",
+          "canonical_field": "observed_issue"
+        },
+        {
+          "ordinal": 9,
+          "original": "outreach_angle",
+          "proposed": "outreach_angle",
+          "canonical_field": "personalized_outreach_angle"
+        },
+        {
+          "ordinal": 10,
+          "original": "date_contacted",
+          "proposed": "date_contacted",
+          "canonical_field": "date_contacted"
+        },
+        {
+          "ordinal": 11,
+          "original": "follow_up_1",
+          "proposed": "follow_up_1",
+          "canonical_field": "follow_up_1"
+        },
+        {
+          "ordinal": 12,
+          "original": "follow_up_2",
+          "proposed": "follow_up_2",
+          "canonical_field": "follow_up_2"
+        },
+        {
+          "ordinal": 13,
+          "original": "reply",
+          "proposed": "reply",
+          "canonical_field": "reply"
+        },
+        {
+          "ordinal": 14,
+          "original": "status",
+          "proposed": "status",
+          "canonical_field": "status"
+        },
+        {
+          "ordinal": 15,
+          "original": "notes",
+          "proposed": "notes",
+          "canonical_field": "notes"
+        },
+        {
+          "ordinal": 16,
+          "original": "",
+          "proposed": "legacy_unnamed_column_16",
+          "canonical_field": "legacy_unnamed_column_16"
+        },
+        {
+          "ordinal": 17,
+          "original": "",
+          "proposed": "legacy_unnamed_column_17",
+          "canonical_field": "legacy_unnamed_column_17"
+        },
+        {
+          "ordinal": 18,
+          "original": "",
+          "proposed": "legacy_unnamed_column_18",
+          "canonical_field": "legacy_unnamed_column_18"
+        },
+        {
+          "ordinal": 19,
+          "original": "",
+          "proposed": "legacy_unnamed_column_19",
+          "canonical_field": "legacy_unnamed_column_19"
+        },
+        {
+          "ordinal": 20,
+          "original": "",
+          "proposed": "legacy_unnamed_column_20",
+          "canonical_field": "legacy_unnamed_column_20"
+        }
+      ],
+      "rows": [
+        {
+          "data_row": 1,
+          "source_line": 2,
+          "cells_sha256": "b1bc18cc8a6b027a0b56b51f6c1e4b21ed22e70c20f652f3ae1cf8be30400453",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 2,
+          "source_line": 3,
+          "cells_sha256": "b953c07ce1e92ac3651f75ea937d08c620dded47d72149c542a26a86a9e8cf20",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 3,
+          "source_line": 4,
+          "cells_sha256": "e50dc22b7ae14576f921c7c3c30a32023dd6eccb4a92ddffbee9bc62be4848d3",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 4,
+          "source_line": 5,
+          "cells_sha256": "22fc67a4d49391e755f982ed912cf63947b799b3fd2a42bdcbbcca409678b26d",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 5,
+          "source_line": 6,
+          "cells_sha256": "4274b3bac95e5a3a7ffed8f8a9749c8245a2c9b84782660024ff894de8ba15dd",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 6,
+          "source_line": 7,
+          "cells_sha256": "0e2ecf4d288cef229e5afa4f637ccfd6e1e202f3af712d704fc4b145bc2f2bb8",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 7,
+          "source_line": 8,
+          "cells_sha256": "f23ea7b168048206d579603daa0281c499139eea2dc7d2ce4efa64c8f7b9919c",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 8,
+          "source_line": 9,
+          "cells_sha256": "574cb928f44fe8ad41338925c252e5a5ff3244e113263bca45002affa222b50a",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 9,
+          "source_line": 10,
+          "cells_sha256": "0b15ccdd408af99b4c2a5a221ed2f764297731a61f37f5cec87d7b6ab381d9ac",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 10,
+          "source_line": 11,
+          "cells_sha256": "e1d4b3988372c554fcd70a74280a283caeb950217e174498c27fb18fda8a05ca",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 11,
+          "source_line": 12,
+          "cells_sha256": "7d0a61ddaa86d29de72ff5b2d16f00cc1a4dbc2b98e19aa4381b43adef0348c4",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 12,
+          "source_line": 13,
+          "cells_sha256": "f31da45c7251155bc81baedb2a69a44ba902c68d149637ec782347261ac2cedc",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 13,
+          "source_line": 14,
+          "cells_sha256": "f526e5b70d39cea71bb8e27e610021b7e2846087006aaa57ce821f587ec71285",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 14,
+          "source_line": 15,
+          "cells_sha256": "2558579e21d88de11b3cda86262f7f618dfdc462ad1ddef92bb57be3c335caf9",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 15,
+          "source_line": 16,
+          "cells_sha256": "549abf5bc017244473142e9fa50182d34a1b78335f39c850f10a8f3f186de769",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 16,
+          "source_line": 17,
+          "cells_sha256": "3b347e2a97eadb97fca28a739b1227c086b85ae3c0ed7dbc1b6eb3ba219f0dbf",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 17,
+          "source_line": 18,
+          "cells_sha256": "d045bdb4b4f5d2e945b2d28f2e4391b18166854264d7f7b2a97ec6950f636f29",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 18,
+          "source_line": 19,
+          "cells_sha256": "c648c4f20eb5fa11df572d0a54c04fe281dfca776022027825709ccd6cdcf5fd",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 19,
+          "source_line": 20,
+          "cells_sha256": "e03e0234455eaab3fc16ce4e076c9ae8f84ec56ebc32aa34ba0d892be1d34c0e",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 20,
+          "source_line": 21,
+          "cells_sha256": "2a2ddb7cfc1106d59bb4fc3922dd79123178741c74c59b7b704687dee9c25bfb",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 21,
+          "source_line": 22,
+          "cells_sha256": "747b357433bb6583c6a34036d8b0d3f358e89224dbbcc39ec9823c7ff5cbc34d",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 22,
+          "source_line": 23,
+          "cells_sha256": "002445ae7270e5c2c9988e4641fd51157ed481a9a6b485e1e6b131d35c58113e",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 23,
+          "source_line": 24,
+          "cells_sha256": "5adfccd7452f0d0964422ce60b123a18edb29084ba6dd48c0f0fa01a8e20a098",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 24,
+          "source_line": 25,
+          "cells_sha256": "7e2d2e7df78582e2bd6d6ac6b7c8f6e379af8699c9c728d385e66ddfccc3481e",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 25,
+          "source_line": 26,
+          "cells_sha256": "3fb4838373c0444564cf71c070d832134d3eab662671b72df63fe60e2ed1a6d2",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 26,
+          "source_line": 27,
+          "cells_sha256": "6fb423ae8f6ae1823927927a3a30b914f4c10c7c69868d51a6bf5ee2738087a5",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 27,
+          "source_line": 28,
+          "cells_sha256": "edb94d7b79f1d4ca88ce162a689a9c6029c26af4f9e2cf8f3641d5d0042ab871",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 28,
+          "source_line": 29,
+          "cells_sha256": "68393626f977b5c85c178b4a844eaace4d3fad3acb69381d119fb171e3e2d55e",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 29,
+          "source_line": 30,
+          "cells_sha256": "d63be3637c4187aff4018429234ab3aaf2ba6ecda41a802098aeb359eb95db3a",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 30,
+          "source_line": 31,
+          "cells_sha256": "162428464a02ddbca022337c54fdf385b8c542d61d6f7a0d2f39082f4c42e7f4",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 31,
+          "source_line": 32,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 32,
+          "source_line": 33,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 33,
+          "source_line": 34,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 34,
+          "source_line": 35,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 35,
+          "source_line": 36,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 36,
+          "source_line": 37,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 37,
+          "source_line": 38,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 38,
+          "source_line": 39,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 39,
+          "source_line": 40,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 40,
+          "source_line": 41,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 41,
+          "source_line": 42,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 42,
+          "source_line": 43,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 43,
+          "source_line": 44,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 44,
+          "source_line": 45,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 45,
+          "source_line": 46,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 46,
+          "source_line": 47,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 47,
+          "source_line": 48,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 48,
+          "source_line": 49,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 49,
+          "source_line": 50,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 50,
+          "source_line": 51,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 51,
+          "source_line": 52,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 52,
+          "source_line": 53,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 53,
+          "source_line": 54,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 54,
+          "source_line": 55,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 55,
+          "source_line": 56,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 56,
+          "source_line": 57,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 57,
+          "source_line": 58,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 58,
+          "source_line": 59,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 59,
+          "source_line": 60,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 60,
+          "source_line": 61,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 61,
+          "source_line": 62,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 62,
+          "source_line": 63,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 63,
+          "source_line": 64,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 64,
+          "source_line": 65,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 65,
+          "source_line": 66,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 66,
+          "source_line": 67,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 67,
+          "source_line": 68,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 68,
+          "source_line": 69,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 69,
+          "source_line": 70,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 70,
+          "source_line": 71,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 71,
+          "source_line": 72,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 72,
+          "source_line": 73,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 73,
+          "source_line": 74,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 74,
+          "source_line": 75,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 75,
+          "source_line": 76,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 76,
+          "source_line": 77,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 77,
+          "source_line": 78,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 78,
+          "source_line": 79,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 79,
+          "source_line": 80,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 80,
+          "source_line": 81,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 81,
+          "source_line": 82,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 82,
+          "source_line": 83,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 83,
+          "source_line": 84,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 84,
+          "source_line": 85,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 85,
+          "source_line": 86,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 86,
+          "source_line": 87,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 87,
+          "source_line": 88,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 88,
+          "source_line": 89,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 89,
+          "source_line": 90,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 90,
+          "source_line": 91,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 91,
+          "source_line": 92,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 92,
+          "source_line": 93,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 93,
+          "source_line": 94,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 94,
+          "source_line": 95,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 95,
+          "source_line": 96,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 96,
+          "source_line": 97,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 97,
+          "source_line": 98,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 98,
+          "source_line": 99,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 99,
+          "source_line": 100,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 100,
+          "source_line": 101,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 101,
+          "source_line": 102,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 102,
+          "source_line": 103,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 103,
+          "source_line": 104,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 104,
+          "source_line": 105,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 105,
+          "source_line": 106,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 106,
+          "source_line": 107,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 107,
+          "source_line": 108,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 108,
+          "source_line": 109,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 109,
+          "source_line": 110,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 110,
+          "source_line": 111,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 111,
+          "source_line": 112,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 112,
+          "source_line": 113,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 113,
+          "source_line": 114,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 114,
+          "source_line": 115,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 115,
+          "source_line": 116,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 116,
+          "source_line": 117,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 117,
+          "source_line": 118,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 118,
+          "source_line": 119,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 119,
+          "source_line": 120,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 120,
+          "source_line": 121,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 121,
+          "source_line": 122,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 122,
+          "source_line": 123,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 123,
+          "source_line": 124,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 124,
+          "source_line": 125,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 125,
+          "source_line": 126,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 126,
+          "source_line": 127,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 127,
+          "source_line": 128,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 128,
+          "source_line": 129,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 129,
+          "source_line": 130,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 130,
+          "source_line": 131,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 131,
+          "source_line": 132,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 132,
+          "source_line": 133,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 133,
+          "source_line": 134,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 134,
+          "source_line": 135,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 135,
+          "source_line": 136,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 136,
+          "source_line": 137,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 137,
+          "source_line": 138,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 138,
+          "source_line": 139,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 139,
+          "source_line": 140,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 140,
+          "source_line": 141,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 141,
+          "source_line": 142,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 142,
+          "source_line": 143,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 143,
+          "source_line": 144,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 144,
+          "source_line": 145,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 145,
+          "source_line": 146,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 146,
+          "source_line": 147,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 147,
+          "source_line": 148,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 148,
+          "source_line": 149,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 149,
+          "source_line": 150,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 150,
+          "source_line": 151,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 151,
+          "source_line": 152,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 152,
+          "source_line": 153,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 153,
+          "source_line": 154,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 154,
+          "source_line": 155,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 155,
+          "source_line": 156,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 156,
+          "source_line": 157,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 157,
+          "source_line": 158,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 158,
+          "source_line": 159,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 159,
+          "source_line": 160,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 160,
+          "source_line": 161,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 161,
+          "source_line": 162,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 162,
+          "source_line": 163,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 163,
+          "source_line": 164,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 164,
+          "source_line": 165,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 165,
+          "source_line": 166,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 166,
+          "source_line": 167,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 167,
+          "source_line": 168,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 168,
+          "source_line": 169,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 169,
+          "source_line": 170,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 170,
+          "source_line": 171,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 171,
+          "source_line": 172,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 172,
+          "source_line": 173,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 173,
+          "source_line": 174,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 174,
+          "source_line": 175,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 175,
+          "source_line": 176,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 176,
+          "source_line": 177,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 177,
+          "source_line": 178,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 178,
+          "source_line": 179,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 179,
+          "source_line": 180,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 180,
+          "source_line": 181,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 181,
+          "source_line": 182,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 182,
+          "source_line": 183,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 183,
+          "source_line": 184,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 184,
+          "source_line": 185,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 185,
+          "source_line": 186,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 186,
+          "source_line": 187,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 187,
+          "source_line": 188,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 188,
+          "source_line": 189,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 189,
+          "source_line": 190,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 190,
+          "source_line": 191,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 191,
+          "source_line": 192,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 192,
+          "source_line": 193,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 193,
+          "source_line": 194,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 194,
+          "source_line": 195,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 195,
+          "source_line": 196,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 196,
+          "source_line": 197,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 197,
+          "source_line": 198,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 198,
+          "source_line": 199,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        },
+        {
+          "data_row": 199,
+          "source_line": 200,
+          "cells_sha256": "7e3c79df5b5a142aaecbe23e8ebdb47b5930dfd6ec1d0a9aad396624037e5e60",
+          "local_record_id": "",
+          "classification": "manual_review",
+          "reasons": [
+            "unresolved_business_identity"
+          ]
+        }
+      ],
+      "parse_errors": [],
+      "policy": "Original input retained unchanged. No identity, evidence, contact status, or canonical ID inferred. Review each legacy row before adoption/import."
+    },
+    {
+      "experiment": "002-restaurant-growth-systems",
+      "tracker": "marketing/prospect-tracker.csv",
+      "source_sha256": "6497181ac7600aa1e5c3099034eb815f7541f13da7ea801084254ab981c6b5a8",
+      "parsed_rows": 1,
+      "malformed_records": 0,
+      "unnamed_rows": 0,
+      "header_issues": [],
+      "column_map": [
+        {
+          "ordinal": 1,
+          "original": "business_name",
+          "proposed": "business_name",
+          "canonical_field": "business_name"
+        },
+        {
+          "ordinal": 2,
+          "original": "website",
+          "proposed": "website",
+          "canonical_field": "website"
+        },
+        {
+          "ordinal": 3,
+          "original": "city_state",
+          "proposed": "city_state",
+          "canonical_field": "city_state"
+        },
+        {
+          "ordinal": 4,
+          "original": "cuisine_or_concept",
+          "proposed": "cuisine_or_concept",
+          "canonical_field": "service_focus"
+        },
+        {
+          "ordinal": 5,
+          "original": "recommendation_category",
+          "proposed": "recommendation_category",
+          "canonical_field": "recommendation_category"
+        },
+        {
+          "ordinal": 6,
+          "original": "contact_method",
+          "proposed": "contact_method",
+          "canonical_field": "contact_method"
+        },
+        {
+          "ordinal": 7,
+          "original": "current_flow_reviewed",
+          "proposed": "current_flow_reviewed",
+          "canonical_field": "current_flow_reviewed"
+        },
+        {
+          "ordinal": 8,
+          "original": "observed_issue",
+          "proposed": "observed_issue",
+          "canonical_field": "observed_issue"
+        },
+        {
+          "ordinal": 9,
+          "original": "recommended_solution",
+          "proposed": "recommended_solution",
+          "canonical_field": "recommended_solution"
+        },
+        {
+          "ordinal": 10,
+          "original": "personalized_outreach_angle",
+          "proposed": "personalized_outreach_angle",
+          "canonical_field": "personalized_outreach_angle"
+        },
+        {
+          "ordinal": 11,
+          "original": "brand_palette_source",
+          "proposed": "brand_palette_source",
+          "canonical_field": "brand_palette_source"
+        },
+        {
+          "ordinal": 12,
+          "original": "demo_or_recommendation_url",
+          "proposed": "demo_or_recommendation_url",
+          "canonical_field": "demo_or_recommendation_url"
+        },
+        {
+          "ordinal": 13,
+          "original": "date_contacted",
+          "proposed": "date_contacted",
+          "canonical_field": "date_contacted"
+        },
+        {
+          "ordinal": 14,
+          "original": "follow_up_1",
+          "proposed": "follow_up_1",
+          "canonical_field": "follow_up_1"
+        },
+        {
+          "ordinal": 15,
+          "original": "follow_up_2",
+          "proposed": "follow_up_2",
+          "canonical_field": "follow_up_2"
+        },
+        {
+          "ordinal": 16,
+          "original": "reply",
+          "proposed": "reply",
+          "canonical_field": "reply"
+        },
+        {
+          "ordinal": 17,
+          "original": "status",
+          "proposed": "status",
+          "canonical_field": "status"
+        },
+        {
+          "ordinal": 18,
+          "original": "notes",
+          "proposed": "notes",
+          "canonical_field": "notes"
+        }
+      ],
+      "rows": [
+        {
+          "data_row": 1,
+          "source_line": 2,
+          "cells_sha256": "f936fa13b08f328468ff89010cd534e29528f3214ec8c83a753945dbd2b2e187",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        }
+      ],
+      "parse_errors": [],
+      "policy": "Original input retained unchanged. No identity, evidence, contact status, or canonical ID inferred. Review each legacy row before adoption/import."
+    },
+    {
+      "experiment": "003-hvac-growth-systems",
+      "tracker": "marketing/prospect-tracker.csv",
+      "source_sha256": "24902883f9f83abb2c5a9456e17a662dd7c59f20022bec3e13669e56ad2020cf",
+      "parsed_rows": 0,
+      "malformed_records": 0,
+      "unnamed_rows": 0,
+      "header_issues": [],
+      "column_map": [
+        {
+          "ordinal": 1,
+          "original": "business_name",
+          "proposed": "business_name",
+          "canonical_field": "business_name"
+        },
+        {
+          "ordinal": 2,
+          "original": "website",
+          "proposed": "website",
+          "canonical_field": "website"
+        },
+        {
+          "ordinal": 3,
+          "original": "city_state",
+          "proposed": "city_state",
+          "canonical_field": "city_state"
+        },
+        {
+          "ordinal": 4,
+          "original": "service_focus",
+          "proposed": "service_focus",
+          "canonical_field": "service_focus"
+        },
+        {
+          "ordinal": 5,
+          "original": "recommendation_category",
+          "proposed": "recommendation_category",
+          "canonical_field": "recommendation_category"
+        },
+        {
+          "ordinal": 6,
+          "original": "contact_method",
+          "proposed": "contact_method",
+          "canonical_field": "contact_method"
+        },
+        {
+          "ordinal": 7,
+          "original": "current_flow_reviewed",
+          "proposed": "current_flow_reviewed",
+          "canonical_field": "current_flow_reviewed"
+        },
+        {
+          "ordinal": 8,
+          "original": "observed_issue",
+          "proposed": "observed_issue",
+          "canonical_field": "observed_issue"
+        },
+        {
+          "ordinal": 9,
+          "original": "recommended_solution",
+          "proposed": "recommended_solution",
+          "canonical_field": "recommended_solution"
+        },
+        {
+          "ordinal": 10,
+          "original": "personalized_outreach_angle",
+          "proposed": "personalized_outreach_angle",
+          "canonical_field": "personalized_outreach_angle"
+        },
+        {
+          "ordinal": 11,
+          "original": "brand_palette_source",
+          "proposed": "brand_palette_source",
+          "canonical_field": "brand_palette_source"
+        },
+        {
+          "ordinal": 12,
+          "original": "demo_or_recommendation_url",
+          "proposed": "demo_or_recommendation_url",
+          "canonical_field": "demo_or_recommendation_url"
+        },
+        {
+          "ordinal": 13,
+          "original": "date_contacted",
+          "proposed": "date_contacted",
+          "canonical_field": "date_contacted"
+        },
+        {
+          "ordinal": 14,
+          "original": "follow_up_1",
+          "proposed": "follow_up_1",
+          "canonical_field": "follow_up_1"
+        },
+        {
+          "ordinal": 15,
+          "original": "follow_up_2",
+          "proposed": "follow_up_2",
+          "canonical_field": "follow_up_2"
+        },
+        {
+          "ordinal": 16,
+          "original": "reply",
+          "proposed": "reply",
+          "canonical_field": "reply"
+        },
+        {
+          "ordinal": 17,
+          "original": "status",
+          "proposed": "status",
+          "canonical_field": "status"
+        },
+        {
+          "ordinal": 18,
+          "original": "notes",
+          "proposed": "notes",
+          "canonical_field": "notes"
+        }
+      ],
+      "rows": [],
+      "parse_errors": [],
+      "policy": "Original input retained unchanged. No identity, evidence, contact status, or canonical ID inferred. Review each legacy row before adoption/import."
+    },
+    {
+      "experiment": "004-remodeler-growth-systems",
+      "tracker": "marketing/prospect-tracker.csv",
+      "source_sha256": "24902883f9f83abb2c5a9456e17a662dd7c59f20022bec3e13669e56ad2020cf",
+      "parsed_rows": 0,
+      "malformed_records": 0,
+      "unnamed_rows": 0,
+      "header_issues": [],
+      "column_map": [
+        {
+          "ordinal": 1,
+          "original": "business_name",
+          "proposed": "business_name",
+          "canonical_field": "business_name"
+        },
+        {
+          "ordinal": 2,
+          "original": "website",
+          "proposed": "website",
+          "canonical_field": "website"
+        },
+        {
+          "ordinal": 3,
+          "original": "city_state",
+          "proposed": "city_state",
+          "canonical_field": "city_state"
+        },
+        {
+          "ordinal": 4,
+          "original": "service_focus",
+          "proposed": "service_focus",
+          "canonical_field": "service_focus"
+        },
+        {
+          "ordinal": 5,
+          "original": "recommendation_category",
+          "proposed": "recommendation_category",
+          "canonical_field": "recommendation_category"
+        },
+        {
+          "ordinal": 6,
+          "original": "contact_method",
+          "proposed": "contact_method",
+          "canonical_field": "contact_method"
+        },
+        {
+          "ordinal": 7,
+          "original": "current_flow_reviewed",
+          "proposed": "current_flow_reviewed",
+          "canonical_field": "current_flow_reviewed"
+        },
+        {
+          "ordinal": 8,
+          "original": "observed_issue",
+          "proposed": "observed_issue",
+          "canonical_field": "observed_issue"
+        },
+        {
+          "ordinal": 9,
+          "original": "recommended_solution",
+          "proposed": "recommended_solution",
+          "canonical_field": "recommended_solution"
+        },
+        {
+          "ordinal": 10,
+          "original": "personalized_outreach_angle",
+          "proposed": "personalized_outreach_angle",
+          "canonical_field": "personalized_outreach_angle"
+        },
+        {
+          "ordinal": 11,
+          "original": "brand_palette_source",
+          "proposed": "brand_palette_source",
+          "canonical_field": "brand_palette_source"
+        },
+        {
+          "ordinal": 12,
+          "original": "demo_or_recommendation_url",
+          "proposed": "demo_or_recommendation_url",
+          "canonical_field": "demo_or_recommendation_url"
+        },
+        {
+          "ordinal": 13,
+          "original": "date_contacted",
+          "proposed": "date_contacted",
+          "canonical_field": "date_contacted"
+        },
+        {
+          "ordinal": 14,
+          "original": "follow_up_1",
+          "proposed": "follow_up_1",
+          "canonical_field": "follow_up_1"
+        },
+        {
+          "ordinal": 15,
+          "original": "follow_up_2",
+          "proposed": "follow_up_2",
+          "canonical_field": "follow_up_2"
+        },
+        {
+          "ordinal": 16,
+          "original": "reply",
+          "proposed": "reply",
+          "canonical_field": "reply"
+        },
+        {
+          "ordinal": 17,
+          "original": "status",
+          "proposed": "status",
+          "canonical_field": "status"
+        },
+        {
+          "ordinal": 18,
+          "original": "notes",
+          "proposed": "notes",
+          "canonical_field": "notes"
+        }
+      ],
+      "rows": [],
+      "parse_errors": [],
+      "policy": "Original input retained unchanged. No identity, evidence, contact status, or canonical ID inferred. Review each legacy row before adoption/import."
+    },
+    {
+      "experiment": "005-med-spa-growth-systems",
+      "tracker": "marketing/prospect-tracker.csv",
+      "source_sha256": "3a39942bdf48bd8b2ad7f5f7ed34d44dab0f8aa901873ac991f32869edd7c0b0",
+      "parsed_rows": 25,
+      "malformed_records": 0,
+      "unnamed_rows": 0,
+      "header_issues": [],
+      "column_map": [
+        {
+          "ordinal": 1,
+          "original": "business_name",
+          "proposed": "business_name",
+          "canonical_field": "business_name"
+        },
+        {
+          "ordinal": 2,
+          "original": "website",
+          "proposed": "website",
+          "canonical_field": "website"
+        },
+        {
+          "ordinal": 3,
+          "original": "city_state",
+          "proposed": "city_state",
+          "canonical_field": "city_state"
+        },
+        {
+          "ordinal": 4,
+          "original": "service_focus",
+          "proposed": "service_focus",
+          "canonical_field": "service_focus"
+        },
+        {
+          "ordinal": 5,
+          "original": "recommendation_category",
+          "proposed": "recommendation_category",
+          "canonical_field": "recommendation_category"
+        },
+        {
+          "ordinal": 6,
+          "original": "contact_method",
+          "proposed": "contact_method",
+          "canonical_field": "contact_method"
+        },
+        {
+          "ordinal": 7,
+          "original": "current_flow_reviewed",
+          "proposed": "current_flow_reviewed",
+          "canonical_field": "current_flow_reviewed"
+        },
+        {
+          "ordinal": 8,
+          "original": "observed_issue",
+          "proposed": "observed_issue",
+          "canonical_field": "observed_issue"
+        },
+        {
+          "ordinal": 9,
+          "original": "recommended_solution",
+          "proposed": "recommended_solution",
+          "canonical_field": "recommended_solution"
+        },
+        {
+          "ordinal": 10,
+          "original": "personalized_outreach_angle",
+          "proposed": "personalized_outreach_angle",
+          "canonical_field": "personalized_outreach_angle"
+        },
+        {
+          "ordinal": 11,
+          "original": "brand_palette_source",
+          "proposed": "brand_palette_source",
+          "canonical_field": "brand_palette_source"
+        },
+        {
+          "ordinal": 12,
+          "original": "demo_or_recommendation_url",
+          "proposed": "demo_or_recommendation_url",
+          "canonical_field": "demo_or_recommendation_url"
+        },
+        {
+          "ordinal": 13,
+          "original": "date_contacted",
+          "proposed": "date_contacted",
+          "canonical_field": "date_contacted"
+        },
+        {
+          "ordinal": 14,
+          "original": "follow_up_1",
+          "proposed": "follow_up_1",
+          "canonical_field": "follow_up_1"
+        },
+        {
+          "ordinal": 15,
+          "original": "follow_up_2",
+          "proposed": "follow_up_2",
+          "canonical_field": "follow_up_2"
+        },
+        {
+          "ordinal": 16,
+          "original": "reply",
+          "proposed": "reply",
+          "canonical_field": "reply"
+        },
+        {
+          "ordinal": 17,
+          "original": "status",
+          "proposed": "status",
+          "canonical_field": "status"
+        },
+        {
+          "ordinal": 18,
+          "original": "notes",
+          "proposed": "notes",
+          "canonical_field": "notes"
+        }
+      ],
+      "rows": [
+        {
+          "data_row": 1,
+          "source_line": 2,
+          "cells_sha256": "c88678845356c4133f8b8339318193cbbe82c45314f35f39b0af66fb07d7def4",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 2,
+          "source_line": 3,
+          "cells_sha256": "807cdf69a32e7ccf9715ee6b196fb06921bdb290a3a2acf4cdbd7bd445a07041",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 3,
+          "source_line": 4,
+          "cells_sha256": "422ad05b70fb5c61a2b8f2d61eb3c2f32239b6380d05b9718c9c8fcdd6a5b8b1",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 4,
+          "source_line": 5,
+          "cells_sha256": "24e668aec029215e8f18f4a5395de5db1da4009c0771e0f786c1a4dc00c5ef92",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 5,
+          "source_line": 6,
+          "cells_sha256": "fed1bf001ab1d91cdb6f51a673c61ef240af246fafc741d4ac7856abdf376e38",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 6,
+          "source_line": 7,
+          "cells_sha256": "d439a953aa3a4c5b55c234acea6fb43a218ce8d4c8503f6a813edbb4486c30b8",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 7,
+          "source_line": 8,
+          "cells_sha256": "b80e2580ca2d28ed846c9e902f31ab7f7a064c5183d66babcdd6d66a34879cff",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 8,
+          "source_line": 9,
+          "cells_sha256": "05c4a7ad72b53e887db129a66f34b310b8c2afa596860279047d1396e1c627ed",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 9,
+          "source_line": 10,
+          "cells_sha256": "db406a7c8179562e9da205d50c89520e9855f084d64c5639098cbbff26333fc8",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 10,
+          "source_line": 11,
+          "cells_sha256": "d26bfab8b816f5d83db5dc08998f04cc2e29e5436da65549e25d03c44017223c",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 11,
+          "source_line": 12,
+          "cells_sha256": "5ba074d7eb0a1b89a7c0820de65fb7d9afca840b87197e94ac79e1e667596c14",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 12,
+          "source_line": 13,
+          "cells_sha256": "e8f338bca8df7b9fcb3123734c55ccb62712d76c9ae47c9db37eb0ec9e595067",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 13,
+          "source_line": 14,
+          "cells_sha256": "1d14c28db1bd581e4ab824f4897aec306ec5ec0aecfd4c7fd373aa39ebcbe8b2",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 14,
+          "source_line": 15,
+          "cells_sha256": "884376368bb2998da894af4ed7aba9586f5fd88d19575e9e97c35cf208de2ca2",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 15,
+          "source_line": 16,
+          "cells_sha256": "50ef707ed1e29f1c91a1e11ccbd4564911d61294a545c236d171111c8dea97d7",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 16,
+          "source_line": 17,
+          "cells_sha256": "d7ae6ee9b175ef417eaa3fd6dfb535f3ced99472853299d6702cb61c7b3b0a44",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 17,
+          "source_line": 18,
+          "cells_sha256": "961ae099bcc39a7d6af0941f2a4bc65b49ef50be6b2ab639ec4f38b00291baab",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 18,
+          "source_line": 19,
+          "cells_sha256": "2cd07c1238b9c1b5f1761ce36378c1af9894330d8da12fcf2154057a796b42ec",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 19,
+          "source_line": 20,
+          "cells_sha256": "e62a52c7627bcbafec7a7ce6397b72e1dfe480d69929b64ab3750c1ca8b5406c",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 20,
+          "source_line": 21,
+          "cells_sha256": "b2e47ccfded0839b689fad1e735bcf73ba800218b5f515cf8bd1a1dada51c985",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 21,
+          "source_line": 22,
+          "cells_sha256": "f92dca1b0a86883e622fe64bc1ec98b1cbf9ed8892f55b550dea333fcc788f96",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 22,
+          "source_line": 23,
+          "cells_sha256": "5e82ddb7fadf6b20b8adc2ba08edf9150c4668372578cf0c3e615260b9f9f9de",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 23,
+          "source_line": 24,
+          "cells_sha256": "0e7cfa76121213ec5a939152a0049040306bed69a22151f9f1f194f2a0a80b6d",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 24,
+          "source_line": 25,
+          "cells_sha256": "0b67ebb32f84aa7e959a0e7553ab082cefa5187c785b46434582458ffdb22c79",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        },
+        {
+          "data_row": 25,
+          "source_line": 26,
+          "cells_sha256": "d3ca899d73a356252937382679a4e7d4d449efe948e83ea080983ca7a31092c2",
+          "local_record_id": "",
+          "classification": "identity_review_before_import",
+          "reasons": []
+        }
+      ],
+      "parse_errors": [],
+      "policy": "Original input retained unchanged. No identity, evidence, contact status, or canonical ID inferred. Review each legacy row before adoption/import."
+    },
+    {
+      "experiment": "006-dental-implant-cosmetic-growth-systems",
+      "tracker": "marketing/prospect-tracker.csv",
+      "source_sha256": "24902883f9f83abb2c5a9456e17a662dd7c59f20022bec3e13669e56ad2020cf",
+      "parsed_rows": 0,
+      "malformed_records": 0,
+      "unnamed_rows": 0,
+      "header_issues": [],
+      "column_map": [
+        {
+          "ordinal": 1,
+          "original": "business_name",
+          "proposed": "business_name",
+          "canonical_field": "business_name"
+        },
+        {
+          "ordinal": 2,
+          "original": "website",
+          "proposed": "website",
+          "canonical_field": "website"
+        },
+        {
+          "ordinal": 3,
+          "original": "city_state",
+          "proposed": "city_state",
+          "canonical_field": "city_state"
+        },
+        {
+          "ordinal": 4,
+          "original": "service_focus",
+          "proposed": "service_focus",
+          "canonical_field": "service_focus"
+        },
+        {
+          "ordinal": 5,
+          "original": "recommendation_category",
+          "proposed": "recommendation_category",
+          "canonical_field": "recommendation_category"
+        },
+        {
+          "ordinal": 6,
+          "original": "contact_method",
+          "proposed": "contact_method",
+          "canonical_field": "contact_method"
+        },
+        {
+          "ordinal": 7,
+          "original": "current_flow_reviewed",
+          "proposed": "current_flow_reviewed",
+          "canonical_field": "current_flow_reviewed"
+        },
+        {
+          "ordinal": 8,
+          "original": "observed_issue",
+          "proposed": "observed_issue",
+          "canonical_field": "observed_issue"
+        },
+        {
+          "ordinal": 9,
+          "original": "recommended_solution",
+          "proposed": "recommended_solution",
+          "canonical_field": "recommended_solution"
+        },
+        {
+          "ordinal": 10,
+          "original": "personalized_outreach_angle",
+          "proposed": "personalized_outreach_angle",
+          "canonical_field": "personalized_outreach_angle"
+        },
+        {
+          "ordinal": 11,
+          "original": "brand_palette_source",
+          "proposed": "brand_palette_source",
+          "canonical_field": "brand_palette_source"
+        },
+        {
+          "ordinal": 12,
+          "original": "demo_or_recommendation_url",
+          "proposed": "demo_or_recommendation_url",
+          "canonical_field": "demo_or_recommendation_url"
+        },
+        {
+          "ordinal": 13,
+          "original": "date_contacted",
+          "proposed": "date_contacted",
+          "canonical_field": "date_contacted"
+        },
+        {
+          "ordinal": 14,
+          "original": "follow_up_1",
+          "proposed": "follow_up_1",
+          "canonical_field": "follow_up_1"
+        },
+        {
+          "ordinal": 15,
+          "original": "follow_up_2",
+          "proposed": "follow_up_2",
+          "canonical_field": "follow_up_2"
+        },
+        {
+          "ordinal": 16,
+          "original": "reply",
+          "proposed": "reply",
+          "canonical_field": "reply"
+        },
+        {
+          "ordinal": 17,
+          "original": "status",
+          "proposed": "status",
+          "canonical_field": "status"
+        },
+        {
+          "ordinal": 18,
+          "original": "notes",
+          "proposed": "notes",
+          "canonical_field": "notes"
+        }
+      ],
+      "rows": [],
+      "parse_errors": [],
+      "policy": "Original input retained unchanged. No identity, evidence, contact status, or canonical ID inferred. Review each legacy row before adoption/import."
+    },
+    {
+      "experiment": "007-personal-injury-law-growth-systems",
+      "tracker": "marketing/prospect-tracker.csv",
+      "source_sha256": "fb9a99f977029be12917c8603de5ab8c9db557f3dc49d17256afad347715d9a1",
+      "parsed_rows": 0,
+      "malformed_records": 0,
+      "unnamed_rows": 0,
+      "header_issues": [],
+      "column_map": [
+        {
+          "ordinal": 1,
+          "original": "business_name",
+          "proposed": "business_name",
+          "canonical_field": "business_name"
+        },
+        {
+          "ordinal": 2,
+          "original": "website",
+          "proposed": "website",
+          "canonical_field": "website"
+        },
+        {
+          "ordinal": 3,
+          "original": "city_state",
+          "proposed": "city_state",
+          "canonical_field": "city_state"
+        },
+        {
+          "ordinal": 4,
+          "original": "practice_focus",
+          "proposed": "practice_focus",
+          "canonical_field": "service_focus"
+        },
+        {
+          "ordinal": 5,
+          "original": "recommendation_category",
+          "proposed": "recommendation_category",
+          "canonical_field": "recommendation_category"
+        },
+        {
+          "ordinal": 6,
+          "original": "contact_method",
+          "proposed": "contact_method",
+          "canonical_field": "contact_method"
+        },
+        {
+          "ordinal": 7,
+          "original": "current_flow_reviewed",
+          "proposed": "current_flow_reviewed",
+          "canonical_field": "current_flow_reviewed"
+        },
+        {
+          "ordinal": 8,
+          "original": "observed_issue",
+          "proposed": "observed_issue",
+          "canonical_field": "observed_issue"
+        },
+        {
+          "ordinal": 9,
+          "original": "recommended_solution",
+          "proposed": "recommended_solution",
+          "canonical_field": "recommended_solution"
+        },
+        {
+          "ordinal": 10,
+          "original": "personalized_outreach_angle",
+          "proposed": "personalized_outreach_angle",
+          "canonical_field": "personalized_outreach_angle"
+        },
+        {
+          "ordinal": 11,
+          "original": "brand_palette_source",
+          "proposed": "brand_palette_source",
+          "canonical_field": "brand_palette_source"
+        },
+        {
+          "ordinal": 12,
+          "original": "demo_or_recommendation_url",
+          "proposed": "demo_or_recommendation_url",
+          "canonical_field": "demo_or_recommendation_url"
+        },
+        {
+          "ordinal": 13,
+          "original": "date_contacted",
+          "proposed": "date_contacted",
+          "canonical_field": "date_contacted"
+        },
+        {
+          "ordinal": 14,
+          "original": "follow_up_1",
+          "proposed": "follow_up_1",
+          "canonical_field": "follow_up_1"
+        },
+        {
+          "ordinal": 15,
+          "original": "follow_up_2",
+          "proposed": "follow_up_2",
+          "canonical_field": "follow_up_2"
+        },
+        {
+          "ordinal": 16,
+          "original": "reply",
+          "proposed": "reply",
+          "canonical_field": "reply"
+        },
+        {
+          "ordinal": 17,
+          "original": "status",
+          "proposed": "status",
+          "canonical_field": "status"
+        },
+        {
+          "ordinal": 18,
+          "original": "notes",
+          "proposed": "notes",
+          "canonical_field": "notes"
+        }
+      ],
+      "rows": [],
+      "parse_errors": [],
+      "policy": "Original input retained unchanged. No identity, evidence, contact status, or canonical ID inferred. Review each legacy row before adoption/import."
+    }
+  ],
+  "canonical_mapping": "experiment + local_record_id -> future business_id/location_id; preserve import_origin, legacy id, source hash and data row"
+}
