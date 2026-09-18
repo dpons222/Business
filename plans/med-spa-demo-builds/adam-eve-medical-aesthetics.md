@@ -60,3 +60,12 @@ Use source-backed language around injectables, fillers, facial treatments, consu
 - The page now uses Adam & Eve logo/imagery, Scottsdale address, phone, listed hours, online booking, consultation/contact CTA, service category links, provider context, and testimonial themes.
 - Local route, public-copy, CTA, image, and build checks passed.
 - Still requires `prospect-demo-qa` and manual outreach draft/contact-method review before outreach.
+
+## QA Run Notes - July 8, 2026
+
+- `prospect-demo-qa` ran against the stable production route: `https://local-growth-preview.vercel.app/med-spa/adam-eve-medical-aesthetics`.
+- Source homepage, contact, services, and about pages were rechecked.
+- `npm run build` passed.
+- Stable route, CTA URLs, image URLs, public-copy scan, and desktop/mobile screenshots were checked.
+- Demo-page verdict: Needs minor fixes because the white source logo appears effectively blank in the demo's white header logo container.
+- Outreach verdict: Not ready because outreach copy is not drafted and the contact method remains unverified.

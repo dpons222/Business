@@ -68,7 +68,7 @@ The med spa routes now pass route, link, image, and blocked-copy checks after sc
 
 | Prospect | Route | Automated QA | Outreach readiness |
 | --- | --- | --- | --- |
-| Adam & Eve Medical Aesthetics | `/med-spa/adam-eve-medical-aesthetics` | Passes rebuilt route/copy/link/image checks | Needs manual review - hand-authored rich sections added; prospect-demo-qa, draft, and contact method still need verification |
+| Adam & Eve Medical Aesthetics | `/med-spa/adam-eve-medical-aesthetics` | Passes rebuilt route/copy/link/image checks; desktop/mobile screenshots reviewed | Not ready for outreach - page needs minor logo polish; draft and contact method still need verification |
 | All About Me Medical Aesthetics | `/med-spa/all-about-me-medical-aesthetics` | Passes after CTA fallback | Not ready - booking path now safe but less direct; draft/contact not verified |
 | Arcadia Wellness Center | `/med-spa/arcadia-wellness-center` | Passes route/copy/link/image checks | Not ready - generated rich sections and draft/contact not verified |
 | Arizona Medical Medspa | `/med-spa/arizona-medical-medspa` | Passes route/copy/link/image checks | Not ready - generated rich sections and draft/contact not verified |
@@ -101,6 +101,49 @@ The med spa routes now pass route, link, image, and blocked-copy checks after sc
 - Create and review prospect-specific outreach drafts for the med spa prospects.
 - Verify recipient/contact method in Supabase/tracker before any approval.
 - Decide whether to invest another builder pass to hand-author richer sections for the 23 remaining generated-section demos before outreach.
+
+## 2026-07-08 Adam & Eve Focused QA Pass
+
+Plan: `plans/med-spa-demo-builds/adam-eve-medical-aesthetics.md`
+Skill: `prospect-demo-qa`
+Stable demo URL: `https://local-growth-preview.vercel.app/med-spa/adam-eve-medical-aesthetics`
+Source URL: `https://www.adamandevemedspa.com/`
+
+### Verdict
+
+Verdict: Not ready for outreach.
+
+Demo-page verdict: Needs minor fixes. The rebuilt page is now materially business-specific and customer-facing, but the header logo treatment should be fixed before using the page in outreach.
+
+### Verified
+
+- `npm run build` passed in `EXPERIMENTS/001-roofing-landing-page-service/product/demo-app`.
+- Stable production route returned `200 OK`.
+- Source homepage, contact, services, and about pages were rechecked.
+- Desktop and mobile screenshots were captured for the source and demo.
+- Core CTA and image URLs returned `200 OK`.
+- Public-copy scan found no blocked internal terms such as `recommendation preview`, `internal package`, `demo preview`, `source-backed`, `source site`, `observed issue`, or `we noticed`.
+- Source details support the demo's business name, Scottsdale location, phone, listed hours, online booking, consultation/contact path, service families, team context, Black Diamond status, and testimonial themes.
+
+### Findings
+
+- [High] Header logo is effectively invisible in the demo.
+  Evidence: Desktop and mobile screenshots show a mostly blank logo slot in the sticky header. The source logo is a white wordmark used on the source site's dark header, but the demo places it on a white mark container.
+  Risk: The first viewport looks less polished and less brand-specific than the source site.
+  Recommended change: Render Adam & Eve's logo on a dark brand-backed logo container, or use a readable dark-on-light wordmark treatment if one is available.
+
+- [Blocker] Outreach draft and contact method are still not ready.
+  Evidence: `prospects/adam-eve-medical-aesthetics/outreach-email.md` is `not_drafted`, and the tracker/prospect docs still mark the contact method as unverified.
+  Risk: Even with a polished demo, this prospect cannot be sent safely.
+  Recommended change: Create the exact outreach draft, verify the preferred contact path, then run pre-send QA again before marking outreach-ready.
+
+### Outreach Readiness
+
+- Ready: No.
+- Contact method state: Unverified.
+- Stable URL state: Production route is live and reachable.
+- Draft subject/body state: Not drafted.
+- Already-contacted/follow-up state: No contact date or sent outreach recorded.
 
 ## Scope
 

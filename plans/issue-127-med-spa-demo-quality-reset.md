@@ -84,4 +84,12 @@ Checklist:
 - [x] Preserved source URL as `https://www.adamandevemedspa.com/`.
 - [x] Ran `npm run build`.
 - [x] Checked local route, blocked public-copy terms, required content, CTA targets, and image URLs.
-- [ ] Run `prospect-demo-qa` on the rebuilt Adam & Eve page before outreach.
+- [x] Run `prospect-demo-qa` on the rebuilt Adam & Eve page before outreach.
+
+QA result:
+
+- Stable production route returned `200 OK`.
+- `npm run build` passed.
+- Source, CTA, image, blocked-copy, desktop screenshot, and mobile screenshot checks completed.
+- Outreach verdict remains `Not ready` because the outreach draft is not written and the contact method is still unverified.
+- Demo-page verdict is `Needs minor fixes` because the source logo is white and appears effectively blank in the demo's white header logo container.
