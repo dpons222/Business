@@ -1,215 +1,53 @@
 # GitHub Issues Guide for AI Dev Agents
 
-This guide is mandatory for every new work session on this project.
+## 1) When tracking is required
+- Use GitHub Issues to track substantial implementation and work that needs follow-up across sessions.
+- Questions, read-only inspections, brainstorming, and small self-contained edits do not require an issue, issue search, or implementation plan unless the user requests tracking.
+- For tracked work, reuse an existing relevant issue. Use a known issue reference directly; otherwise search narrowly before creating one. Read the current scope, status, and relevant updates rather than the full history by default.
+- Keep one issue per meaningful deliverable. Split work when outcomes can be independently verified, shipped, or scheduled; do not create an issue for every plan section or implementation step.
+- Parent/epic issues summarize related deliverables and link to their issues without duplicating detailed checklists.
 
-## 1) Objective
-Use GitHub Issues as the single source of truth for:
-- What is being worked on
-- Why it matters
-- Current status
-- Milestone progress
-- Blockers and next actions
+## 2) Issue contents
+Keep issue bodies concise:
+- Clear action and scope in the title.
+- Brief context and intended outcome; state exclusions only when needed to prevent ambiguity.
+- Testable acceptance criteria.
+- Links to the implementation plan and dependencies/blockers, when applicable.
 
-If it is not reflected in an Issue, it is not considered tracked.
+Use existing relevant labels (for example, type, area, or priority); do not create labels just to fill a template. Use `status:blocked` only while blocked. Assign an existing relevant milestone when useful; milestones are optional and must not block work. Create milestones only when needed to organize a real delivery schedule or when requested. Keep labels and milestones in GitHub metadata rather than repeating them in the issue body.
 
-## 2) Non-Negotiable Rules
-- Always start by checking if an Issue already exists for the requested work.
-- Never do substantial implementation work without an Issue reference.
-- Keep one Issue per deliverable-sized task (not one giant Issue for everything).
-- Update the Issue at meaningful checkpoints, not only at the end.
-- Close Issues only when acceptance criteria are met and verified.
-- Link all related PRs/commits/deploys back to the Issue.
+## 3) Implementation plans
+- For large or multi-phase implementation, create a plan in `plans/issue-<number>-short-topic.md`. Small issues need acceptance criteria only.
+- Keep an up-to-date checklist of completed and remaining implementation steps in the plan. The issue holds outcome-level acceptance criteria; do not mirror the detailed plan checklist in issue comments.
+- One shared plan may cover several related delivery issues. Name it using the coordinating parent or primary issue number and link each issue to its relevant section. Do not create duplicate plan files for each issue.
+- Link the plan from the issue once; repeat the link in updates only when it helps locate new evidence or a changed plan.
 
-## 3) Session Start Protocol (Required)
-At the beginning of each chat/session:
-1. Read current open Issues relevant to the request.
-2. If Issue exists:
-   - Continue under that Issue.
-   - Post a short "Session Start" update comment.
-3. If no Issue exists:
-   - Create one.
-   - If Issue creation is unavailable in current tooling, draft title/body/labels/milestone in chat for manual creation before proceeding.
-4. Confirm milestone assignment before implementation.
+## 4) Updates and handoffs
+- Post updates when meaningful progress, scope changes, blockers, or delivery results need to be recorded. Do not post comments merely to announce session start, continued activity, or unchanged status.
+- Keep updates brief: new result or decision, relevant evidence, and remaining work or blockers when applicable. Omit empty sections and repeated background.
+- Combine completion, validation, deployment evidence, and closeout into one comment when they occur together.
+- When pausing unfinished work, leave one concise handoff with the current state and next action if that information is not already recorded. Do not add a separate end-of-session report that repeats the latest update.
+- Keep user-facing summaries concise; link to detailed records rather than reproducing them.
 
-## 4) Branch and PR Workflow
-- Do not create a new branch for every change by default.
-- Continue on the current appropriate working branch unless the user asks for a new branch, the work is risky, or the change needs isolation for review.
-- If a new branch is useful, use the format `issue-<number>-short-topic`, for example `issue-123-device-asset-links`.
-- Parent/epic Issues are for tracking only; do not create a broad implementation branch for an epic unless explicitly approved.
-- Link any related branch, PR, and commits back to the Issue when they exist.
-- If work is delivered through a PR, merge it only after the Issue is complete, validated, and accurately documented.
+## 5) Branches, PRs, and rollback safety
+- Continue on the current appropriate branch unless the user requests a new one, the work is risky, or isolation helps review. Do not create a branch for every change.
+- When a new branch is useful for tracked work, use `issue-<number>-short-topic` unless the user specifies otherwise.
+- Parent/epic issues are for tracking; do not create a broad implementation branch for an epic unless explicitly approved.
+- Before substantial implementation, record the base commit (`git rev-parse HEAD`) and branch once in the plan or issue. This is the comparison/restore reference and does not require a separate session-start comment.
+- Link related branches, PRs, commits, and deployments to the issue when they exist; avoid reposting unchanged links.
+- Merge a PR only after its acceptance criteria are met, relevant validation is complete, and tracking is accurate. Close the issue after any required merge or deployment succeeds.
+- Prefer revert commits for committed or shared work. Do not use destructive rollback commands such as `git reset --hard` unless explicitly requested and approved.
 
-## 5) Implementation Plan Files
-For large or multi-phase work, create an implementation plan in:
+## 6) Completion and validation
+Close an issue only when:
+- Acceptance criteria are satisfied.
+- Relevant tests/build checks have passed, or omissions and their reasons are explicitly documented. Do not claim verification that did not occur.
+- Required merge or deployment is complete, when applicable.
+- Any implementation plan checklist is current.
+- One closeout comment records the delivered outcome, validation evidence, relevant links, and outstanding follow-ups if any.
 
-`plans/issue-<number>-short-topic.md`
-
-Use one plan file per implementation Issue. Keep the checklist updated as work progresses, and link the plan file in Issue updates and closeout comments.
-
-## 6) Rollback Safety
-- Before substantial implementation work, record the current base commit with `git rev-parse HEAD`.
-- Include the base commit and current branch name in the Issue's Session Start comment when practical.
-- Treat the base commit as the restore/comparison point for that work.
-- Prefer revert commits for rollback after work is committed or shared.
-- Do not use destructive rollback commands such as `git reset --hard` unless explicitly requested and approved.
-
-## 7) Standard Issue Structure
-Every Issue must include:
-- Title: clear action + scope
-- Context: why this work is needed
-- Scope: in-scope and out-of-scope
-- Acceptance Criteria: testable checklist
-- Milestone: required
-- Labels: required
-- Dependencies/Blockers: if any
-
-## 8) Required Labels
-Use consistent labels (or closest equivalent available in repo):
-- `type:feature`
-- `type:bug`
-- `type:chore`
-- `area:frontend`
-- `area:backend`
-- `area:infra`
-- `priority:p0` / `priority:p1` / `priority:p2`
-- `status:blocked` (only when blocked)
-
-## 9) Milestone Mapping
-Assign each Issue to one milestone:
-- `Prototype Phase A - Discovery + Brand`
-- `Prototype Phase B - UX Skeleton`
-- `Prototype Phase C - Visual System`
-- `Prototype Phase D - Functional Prototype`
-- `Prototype Phase E - QA + Demo`
-- `Phase 2 - Production Enhancements`
-
-If milestones do not exist, create them first (or draft them for manual creation).
-
-## 10) Update Cadence Rules
-Post Issue updates at these points:
-- Session Start
-- After implementation chunk completion
-- When blocked
-- After deploy
-- Session End
-
-Each update must include:
-- What changed
-- Evidence (file paths, commit/PR/deploy links)
-- Remaining work
-- Risks/blockers
-
-## 11) Definition of Done (Issue Closure)
-Do not close an Issue until all are true:
-- Acceptance criteria completed
-- Relevant tests/build checks passed (or explicitly documented if not run)
-- Deployed or merged as expected
-- Implementation plan/checklist updated if impacted
-- Final Issue comment posted with summary and links
-
-## 12) Required End-of-Session Summary
-At the end of every session, post or prepare this summary:
-- Completed today
-- In progress
-- Blocked
-- Next recommended step
-- Milestone progress impact
-
-## 13) Templates
-
-### 13.1 New Issue Template
-```md
-## Context
-[Why this work is needed]
-
-## Scope
-In scope:
-- [item]
-
-Out of scope:
-- [item]
-
-## Acceptance Criteria
-- [ ] [criterion 1]
-- [ ] [criterion 2]
-- [ ] [criterion 3]
-
-## Milestone
-[Milestone name]
-
-## Labels
-- [label]
-- [label]
-
-## Dependencies / Blockers
-- [dependency or "None"]
-```
-
-### 13.2 Session Start Comment
-```md
-Session start for this issue.
-
-Base commit:
-- `[commit hash]`
-
-Current branch:
-- `[branch-name]`
-
-Plan:
-1. [step]
-2. [step]
-
-Expected outcome:
-- [result]
-```
-
-### 13.3 Progress Update Comment
-```md
-Progress update:
-
-Completed:
-- [item]
-
-Evidence:
-- [file/PR/commit/deploy link]
-
-Remaining:
-- [item]
-
-Risks/Blockers:
-- [item or "None"]
-```
-
-### 13.4 Closeout Comment
-```md
-Issue complete.
-
-Delivered:
-- [item]
-
-Validation:
-- [test/build/deploy result]
-
-Links:
-- PR: [link or "None"]
-- Deploy: [link]
-- Plan update: [link]
-
-Follow-ups:
-- [item or "None"]
-```
-
-## 14) Tooling Limitation Fallback Rule
-If the active AI toolset cannot create GitHub Issues directly:
-1. Draft the full Issue payload in chat:
-   - Title
-   - Body (template filled)
-   - Labels
-   - Milestone
-2. Request manual creation by the user.
-3. Continue only after Issue number is available.
-4. Use comments/updates on that Issue for the rest of the work.
-
----
-
-Following this guide is required to keep project execution measurable, auditable, and aligned with milestones.
+## 7) When GitHub is unavailable
+- Continue authorized local work without waiting solely for an issue number.
+- Record the intended issue title, scope, acceptance criteria, current status, and next action in an existing plan or a short `plans/pending-issue-short-topic.md` note. Do not duplicate that note in chat.
+- When GitHub becomes available, check for an existing issue before creating one, synchronize the local record, and rename a temporary plan to the issue-based filename. Update affected references.
+- State briefly in the handoff that GitHub synchronization is pending. This fallback does not bypass user approvals, validation, or other safety requirements.
