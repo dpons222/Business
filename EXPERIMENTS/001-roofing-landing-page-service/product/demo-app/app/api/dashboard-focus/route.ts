@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDashboardSession } from "@/lib/dashboardAuth";
+import { privateApi } from "@/lib/privateApi";
 import {
   addDashboardFocusItem,
   getDashboardFocusState,
@@ -75,13 +75,7 @@ async function getValidDashboardSlugs() {
   return new Set(entries.map((entry) => entry.slug));
 }
 
-export async function GET() {
-  const session = await getDashboardSession();
-
-  if (!session) {
-    return NextResponse.json({ error: "Dashboard session required" }, { status: 401 });
-  }
-
+export const GET = privateApi(async () => {
   const state = await getDashboardFocusState();
 
   if (state.source === "unavailable") {
@@ -95,15 +89,9 @@ export async function GET() {
   }
 
   return NextResponse.json(state);
-}
+});
 
-export async function PATCH(request: Request) {
-  const session = await getDashboardSession();
-
-  if (!session) {
-    return NextResponse.json({ error: "Dashboard session required" }, { status: 401 });
-  }
-
+export const PATCH = privateApi(async (request: Request, _context: unknown, session) => {
   const payload = (await request.json().catch(() => null)) as DashboardFocusPayload | null;
 
   if (!payload?.action) {
@@ -158,4 +146,4 @@ export async function PATCH(request: Request) {
   }
 
   return NextResponse.json(state);
-}
+});

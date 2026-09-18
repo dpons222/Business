@@ -11,6 +11,7 @@ type LoginPageProps = {
   searchParams: Promise<{
     error?: string;
     loggedOut?: string;
+    recovered?: string;
     next?: string;
   }>;
 };
@@ -36,22 +37,24 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
 
         {hasInvalidLogin ? (
           <p className="auth-message auth-message-error" role="alert">
-            Username or password did not match.
+            Sign-in was unsuccessful. Check your details or wait five minutes before trying again.
           </p>
         ) : null}
         {hasLoggedOut ? <p className="auth-message">You have been logged out.</p> : null}
+        {params.recovered === "1" ? <p className="auth-message">Password updated. Sign in with your new password.</p> : null}
 
         <form className="auth-form" action={loginAction}>
           <input type="hidden" name="next" value={nextPath} />
           <label>
-            Username
+            Email
             <input
               autoComplete="username"
               autoFocus
-              name="username"
-              placeholder="Enter username"
+              name="email"
+              placeholder="Enter your operator email"
+              maxLength={254}
               required
-              type="text"
+              type="email"
             />
           </label>
           <label>
@@ -59,6 +62,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             <input
               autoComplete="current-password"
               name="password"
+              maxLength={1024}
               placeholder="Enter password"
               required
               type="password"
@@ -68,6 +72,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             Sign in
           </button>
         </form>
+        <p><a href="/login/recover">Set or recover your password</a></p>
       </section>
     </main>
   );

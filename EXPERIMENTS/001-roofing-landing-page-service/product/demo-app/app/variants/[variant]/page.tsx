@@ -1,3 +1,4 @@
+import { toPublicProspect } from "@/lib/publicProspects";
 import { notFound } from "next/navigation";
 import { VariantLandingPage } from "../../../components/VariantLandingPage";
 import { designVariants, getDesignVariant } from "../../../lib/designVariants";
@@ -23,5 +24,5 @@ export default async function VariantPage({ params }: VariantPageProps) {
     notFound();
   }
 
-  return <VariantLandingPage prospect={defaultProspect} variant={variant} />;
+  return <VariantLandingPage prospect={toPublicProspect(defaultProspect)} variant={variant} />;
 }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getDashboardSession } from "@/lib/dashboardAuth";
+import { privateApi } from "@/lib/privateApi";
 import {
   getProspectDraft,
   hasLocalDemoEntry,
@@ -20,7 +20,7 @@ type ProspectDraftRouteContext = {
   }>;
 };
 
-export async function GET(_request: Request, context: ProspectDraftRouteContext) {
+export const GET = privateApi(async (_request: Request, context: ProspectDraftRouteContext) => {
   const { slug } = await context.params;
 
   if (!hasLocalDemoEntry(slug)) {
@@ -34,7 +34,7 @@ export async function GET(_request: Request, context: ProspectDraftRouteContext)
   }
 
   return NextResponse.json(draft);
-}
+});
 
 function isApprovalAction(value: unknown): value is ProspectDraftApprovalAction {
   return value === "approve_for_send" || value === "revoke_send_approval";
@@ -60,13 +60,7 @@ function isManualContactMethod(value: unknown): value is ManualContactMethod {
   );
 }
 
-export async function PATCH(request: Request, context: ProspectDraftRouteContext) {
-  const session = await getDashboardSession();
-
-  if (!session) {
-    return NextResponse.json({ error: "Dashboard session required" }, { status: 401 });
-  }
-
+export const PATCH = privateApi(async (request: Request, context: ProspectDraftRouteContext, session) => {
   const { slug } = await context.params;
 
   if (!hasLocalDemoEntry(slug)) {
@@ -187,4 +181,4 @@ export async function PATCH(request: Request, context: ProspectDraftRouteContext
   }
 
   return NextResponse.json(result.draft);
-}
+});

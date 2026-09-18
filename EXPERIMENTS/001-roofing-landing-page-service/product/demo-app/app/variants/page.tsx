@@ -1,7 +1,9 @@
+import { requireDashboardSession } from "@/lib/dashboardAuth";
 import Link from "next/link";
 import { designTemplateGroups } from "../../lib/designVariants";
 
-export default function VariantsIndexPage() {
+export default async function VariantsIndexPage() {
+  await requireDashboardSession();
   return (
     <main className="variants-index">
       <section>

@@ -1,9 +1,9 @@
 import type { DesignVariant } from "../lib/designVariants";
-import type { ProspectData } from "../lib/prospects";
+import type { PublicProspect } from "../lib/publicProspects";
 import { RoofingLandingPage } from "./RoofingLandingPage";
 
 type VariantLandingPageProps = {
-  prospect: ProspectData;
+  prospect: PublicProspect;
   variant: DesignVariant;
 };
 

@@ -442,7 +442,8 @@ scripts/
 - `app/dashboard/page.tsx`: renders the internal multi-niche preview dashboard with filtering and sorting.
 - `app/[slug]/page.tsx`: renders clean client-facing prospect URLs.
 - `app/pizabella/page.tsx`: renders the first customer-facing restaurant demo route.
-- `app/prospects/page.tsx`: lists Supabase-first prospect rows, enriched with local demo routes/assets.
+- `app/prospects/page.tsx`: authenticated compatibility redirect to `/dashboard`.
+- `app/dashboard/prospects/[slug]/page.tsx`: private recommendation summaries.
 - `app/prospects/[slug]/page.tsx`: renders a prospect-specific demo by slug.
 - `app/prospects/[slug]/assessment/page.tsx`: renders the secondary Charger assessment flow variant.
 - `app/prospects/[slug]/storm-response/page.tsx`: legacy direct URL for the Charger storm response landing page variant.
@@ -454,55 +455,23 @@ scripts/
 - `lib/demoRegistry.ts`: local demo route/asset metadata, statuses, filters, and current focus.
 - `lib/prospectDrafts.ts`: server-side Supabase prospect/draft lookup with local fallback draft data.
 - `lib/dashboardFocus.ts`: server-side Supabase Focus list helpers.
-- `lib/dashboardAuth.ts`: signed-cookie dashboard authentication helpers.
+- `lib/dashboardAuth.ts`: Supabase operator authentication and live session authorization.
+- `lib/publicProspects.ts`: explicit public roofing fields; internal notes never reach public page props.
 - `lib/designVariants.ts`: template/variant configuration for internal comparison.
 - `app/globals.css`: visual styling.
 - `public/prospects/`: local-only public brand and project image references grouped by prospect.
-- `scripts/Manage-DashboardUsers.ps1`: add, remove, list, and update dashboard users in `.env.local`.
+- `scripts/manage-dashboard-operator.mjs`: provision, recover or disable the sole operator. The old PowerShell credential writer is retired.
+- `docs/dashboard-access.md`: auth setup, route/data classification, recovery, test commands and release gate.
+- `supabase/`: additive #129 auth migration and local test configuration; not a complete production schema baseline.
+- `tests/`: authorization regressions, local Supabase integration tests and public-route manifest.
 
 ## Dashboard Login Configuration
 
-The dashboard auth layer uses:
+Use Supabase Auth with one approved operator. Start with [dashboard access setup and recovery](docs/dashboard-access.md) before running the app against private data. Missing authentication configuration denies access; public business pages remain available.
 
-```text
-DASHBOARD_AUTH_SECRET
-DASHBOARD_USERS_JSON
-```
+Required server-only configuration: `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `DASHBOARD_OPERATOR_ID`, and the exact `DASHBOARD_APP_ORIGIN`. Use [.env.example](.env.example) as a sanitized template and preserve existing local values. Legacy dashboard credentials and cookies no longer grant access.
 
-`DASHBOARD_AUTH_SECRET` signs the HTTP-only dashboard session cookie.
-`DASHBOARD_USERS_JSON` stores dashboard users as JSON:
-
-```json
-[{"username":"digidap","role":"admin","passwordHash":"sha256:..."}]
-```
-
-Local setup:
-
-```powershell
-Copy-Item .env.example .env.local
-.\scripts\Manage-DashboardUsers.ps1 -Action upsert -Username digidap -Password password -Role admin
-```
-
-Add or update a user:
-
-```powershell
-.\scripts\Manage-DashboardUsers.ps1 -Action upsert -Username newadmin -Password "new-password" -Role admin
-```
-
-Remove a user:
-
-```powershell
-.\scripts\Manage-DashboardUsers.ps1 -Action remove -Username newadmin
-```
-
-List configured users:
-
-```powershell
-.\scripts\Manage-DashboardUsers.ps1 -Action list
-```
-
-For Vercel, copy the resulting `DASHBOARD_AUTH_SECRET` and `DASHBOARD_USERS_JSON` values into the
-`local-growth-preview` project environment variables for Production and Preview.
+Security checks: `npm run test:security`, `npm run test:security:integration`, `npm run build`, and `npm run test:security:http`. The integration/HTTP suites require the dedicated local Supabase instance described in the access guide. Hosted rollout is a separate reviewed step.
 
 ## Dashboard Draft Data Configuration
 

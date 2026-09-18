@@ -1,28 +1,38 @@
 "use server";
 
 import {
-  authenticateDashboardUser,
+  signInDashboard,
   clearDashboardSession,
   normalizeDashboardNextPath,
-  setDashboardSession,
+  recoverDashboardPassword,
 } from "@/lib/dashboardAuth";
 import { redirect } from "next/navigation";
 
 export async function loginAction(formData: FormData) {
-  const username = String(formData.get("username") ?? "").trim();
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
   const password = String(formData.get("password") ?? "");
   const nextPath = normalizeDashboardNextPath(formData.get("next"));
-  const user = authenticateDashboardUser(username, password);
+  const signedIn = await signInDashboard(email, password);
 
-  if (!user) {
+  if (!signedIn) {
     redirect(`/login?error=invalid&next=${encodeURIComponent(nextPath)}`);
   }
 
-  await setDashboardSession(user);
   redirect(nextPath);
 }
 
 export async function logoutAction() {
-  await clearDashboardSession();
+  if (!(await clearDashboardSession())) redirect("/dashboard?logoutError=1");
   redirect("/login?loggedOut=1");
+}
+
+export async function recoverPasswordAction(formData: FormData) {
+  const code = String(formData.get("code") ?? "").trim();
+  const password = String(formData.get("password") ?? "");
+  const confirmation = String(formData.get("confirmation") ?? "");
+  if (password !== confirmation || !(await recoverDashboardPassword(code, password))) {
+    redirect("/login/recover?error=invalid");
+  }
+  await clearDashboardSession();
+  redirect("/login?recovered=1");
 }

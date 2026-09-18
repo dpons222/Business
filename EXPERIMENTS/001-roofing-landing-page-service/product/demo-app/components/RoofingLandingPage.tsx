@@ -15,10 +15,10 @@ import {
 import type { CSSProperties } from "react";
 import { DemoLeadForm } from "./DemoLeadForm";
 import type { DesignVariant } from "../lib/designVariants";
-import type { ProspectData } from "../lib/prospects";
+import type { PublicProspect } from "../lib/publicProspects";
 
 type RoofingLandingPageProps = {
-  prospect: ProspectData;
+  prospect: PublicProspect;
   variant?: DesignVariant;
 };
 

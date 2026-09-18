@@ -1,3 +1,11 @@
 .vercel
 .env*
 !.env.example
+
+.supabase-start.log
+.security-audit.json
+.auth-*.json
+.auth-*.txt
+
+.auth-*.mjs
+.auth-*.png

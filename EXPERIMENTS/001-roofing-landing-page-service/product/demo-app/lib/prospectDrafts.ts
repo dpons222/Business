@@ -1,3 +1,6 @@
+import "server-only";
+import { assertDashboardAdmin } from "./dashboardAuth";
+import { relationshipStatusLabel } from "./prospectLabels";
 import { getLocalDemoEntryBySlug, localDemoEntries } from "./demoRegistry";
 import type { DemoEntry, DemoNiche, DemoStatus } from "./demoRegistry";
 
@@ -226,23 +229,7 @@ const manualContactMethodLabels: Record<ManualContactMethod, string> = {
   other: "other manual method",
 };
 
-export const relationshipStatusLabels: Record<string, string> = {
-  not_contacted: "Not contacted",
-  contacted: "Contacted",
-  do_not_contact: "Do not contact",
-  not_interested: "Not interested",
-  follow_up_1_due: "Follow-up 1 due",
-  follow_up_1_sent: "Follow-up 1 sent",
-  follow_up_2_due: "Follow-up 2 due",
-  follow_up_2_sent: "Follow-up 2 sent",
-  positive_reply: "Positive reply",
-  neutral_reply: "Neutral reply",
-  negative_reply: "Negative reply",
-  call_booked: "Call booked",
-  won: "Won",
-  lost: "Lost",
-  not_fit: "Not fit",
-};
+
 
 const stoppedRelationshipStatuses = new Set([
   "do_not_contact",
@@ -486,7 +473,7 @@ function recommendationPreviewHrefFromProspect(row: Partial<SupabaseDashboardPro
     return null;
   }
 
-  return `/prospects/${row.prospect_slug}`;
+  return `/dashboard/prospects/${row.prospect_slug}`;
 }
 
 function initialsFromBusinessName(name: string) {
@@ -562,13 +549,7 @@ function normalizeSupabaseProspectRow(row: Partial<SupabaseProspectRow>): Supaba
   };
 }
 
-export function relationshipStatusLabel(status: string | null) {
-  if (!status) {
-    return "No contact status";
-  }
 
-  return relationshipStatusLabels[status] ?? status;
-}
 
 function getApprovalBlockers(draft: Pick<ProspectDraft, "businessEmail" | "body" | "contactStatus" | "demoUrl" | "subject">) {
   const blockers: string[] = [];
@@ -797,7 +778,7 @@ export function getSupabaseHeaders(
   };
 }
 
-export function getLocalProspectDraft(slug: string): ProspectDraft | null {
+function getLocalProspectDraft(slug: string): ProspectDraft | null {
   const entry = getLocalDemoEntryBySlug(slug);
 
   if (!entry) {
@@ -880,6 +861,7 @@ async function fetchSupabaseProspectDraft(slug: string, config = getSupabaseConf
 }
 
 export async function getProspectDraftSummaries(slugs: string[]) {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig();
 
   if (!config || slugs.length === 0) {
@@ -993,6 +975,7 @@ async function fetchSupabaseDashboardProspectRow(slug: string, config = getSupab
 }
 
 export async function getRecommendationPreviewEntry(slug: string) {
+  await assertDashboardAdmin();
   try {
     const row = await fetchSupabaseDashboardProspectRow(slug);
     const entry = row ? dashboardEntryFromSupabaseRow(row) : null;
@@ -1004,6 +987,7 @@ export async function getRecommendationPreviewEntry(slug: string) {
 }
 
 export async function getDashboardProspectData() {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig();
 
   if (!config) {
@@ -1083,6 +1067,7 @@ export async function getDashboardProspectData() {
 }
 
 export async function getSupabaseDashboardEntries(excludedSlugs: string[] = []) {
+  await assertDashboardAdmin();
   const excludedSlugSet = new Set(excludedSlugs);
   const dashboardData = await getDashboardProspectData();
 
@@ -1093,6 +1078,7 @@ export async function getSupabaseDashboardEntries(excludedSlugs: string[] = []) 
 }
 
 export async function getProspectDraft(slug: string): Promise<ProspectDraft | null> {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig();
 
   if (!config) {
@@ -1117,6 +1103,7 @@ export async function updateProspectDraftApproval(
   action: ProspectDraftApprovalAction,
   approvedBy: string,
 ) {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {
@@ -1237,6 +1224,7 @@ export async function updateProspectFollowUpApproval(
   action: ProspectFollowUpApprovalAction,
   approvedBy: string,
 ) {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {
@@ -1471,6 +1459,7 @@ function appendRelationshipStatusNote(
 }
 
 export async function updateProspectManualContact(slug: string, input: ManualContactInput) {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {
@@ -1572,6 +1561,7 @@ export async function updateProspectManualContact(slug: string, input: ManualCon
 }
 
 export async function updateProspectManualFollowUp(slug: string, input: ManualFollowUpInput) {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {
@@ -1702,6 +1692,7 @@ export async function updateProspectRelationshipStatus(
   action: ProspectRelationshipAction,
   note?: string,
 ) {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {

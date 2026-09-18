@@ -26,10 +26,10 @@ import { Progress } from "@/components/ui/progress";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
-import type { ProspectData } from "../lib/prospects";
+import type { PublicProspect } from "../lib/publicProspects";
 
 type StormAssessmentDemoProps = {
-  prospect: ProspectData;
+  prospect: PublicProspect;
 };
 
 const issueTypes = [

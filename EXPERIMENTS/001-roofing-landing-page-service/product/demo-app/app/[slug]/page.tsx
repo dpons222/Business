@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ChargerStormResponseLandingPage } from "../../components/ChargerStormResponseLandingPage";
 import { RoofingLandingPage } from "../../components/RoofingLandingPage";
-import { getProspectBySlug, getProspectStaticParams } from "../../lib/prospects";
+import { getPublicProspectBySlug, getPublicProspectStaticParams } from "@/lib/publicProspects";
 
 type PublicProspectPageProps = {
   params: Promise<{
@@ -11,14 +11,14 @@ type PublicProspectPageProps = {
 };
 
 export function generateStaticParams() {
-  return getProspectStaticParams();
+  return getPublicProspectStaticParams();
 }
 
 export async function generateMetadata({
   params,
 }: PublicProspectPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const prospect = getProspectBySlug(slug);
+  const prospect = getPublicProspectBySlug(slug);
 
   if (!prospect) {
     return {
@@ -34,7 +34,7 @@ export async function generateMetadata({
 
 export default async function PublicProspectPage({ params }: PublicProspectPageProps) {
   const { slug } = await params;
-  const prospect = getProspectBySlug(slug);
+  const prospect = getPublicProspectBySlug(slug);
 
   if (!prospect) {
     notFound();

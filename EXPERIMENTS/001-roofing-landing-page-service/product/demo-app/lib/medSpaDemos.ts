@@ -1,3 +1,4 @@
+import "server-only";
 export type MedSpaDemoBatch =
   | "treatment_consultation"
   | "package_clarity"

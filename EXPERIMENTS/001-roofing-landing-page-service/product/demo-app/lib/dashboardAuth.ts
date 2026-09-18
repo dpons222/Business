@@ -1,193 +1,153 @@
 import "server-only";
-
-import { createHash, createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { createAuthClient, createServiceClient, getAuthConfig, isUuid, type AuthConfig } from "./auth/supabase";
 
-const DASHBOARD_SESSION_COOKIE = "local_growth_preview_dashboard_session";
-const SESSION_MAX_AGE_SECONDS = 60 * 60 * 12;
-const DEFAULT_PASSWORD_HASH =
-  "sha256:5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8";
+export const DASHBOARD_SESSION_COOKIE = "dashboard_access_v2";
+const LEGACY_COOKIE = "local_growth_preview_dashboard_session";
+const MAX_SESSION_SECONDS = 3600;
 
-type DashboardRole = "admin" | "user";
-
-type DashboardUserConfig = {
-  username: string;
-  role?: DashboardRole;
-  password?: string;
-  passwordHash?: string;
-};
-
-export type DashboardSession = {
-  username: string;
-  role: DashboardRole;
-  expiresAt: number;
-};
-
-const fallbackUsers: DashboardUserConfig[] = [
-  {
-    username: "digidap",
-    role: "admin",
-    passwordHash: DEFAULT_PASSWORD_HASH,
-  },
-];
-
-function base64UrlEncode(value: string | Buffer) {
-  return Buffer.from(value)
-    .toString("base64")
-    .replace(/=/g, "")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_");
+export type DashboardSession = { userId: string; username: string; role: "admin"; expiresAt: number };
+export class DashboardAccessError extends Error {
+  constructor(public status: 401 | 403 | 503) { super("Dashboard access denied"); }
 }
 
-function base64UrlDecode(value: string) {
-  const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
-  const padded = normalized.padEnd(normalized.length + ((4 - (normalized.length % 4)) % 4), "=");
-  return Buffer.from(padded, "base64").toString("utf8");
-}
+type Access = { session: DashboardSession; status?: never } | { session: null; status: 401 | 403 | 503 };
 
-function getDashboardAuthSecret() {
-  return process.env.DASHBOARD_AUTH_SECRET ?? "local-growth-preview-dashboard-dev-secret";
-}
-
-function getConfiguredUsers() {
-  const rawUsers = process.env.DASHBOARD_USERS_JSON;
-
-  if (!rawUsers) {
-    return fallbackUsers;
-  }
-
+// Decode only to locate the session AFTER getUser has verified the token with Auth.
+function tokenClaims(token: string) {
   try {
-    const parsedUsers = JSON.parse(rawUsers) as DashboardUserConfig[];
-
-    if (!Array.isArray(parsedUsers)) {
-      return [];
-    }
-
-    return parsedUsers.filter((user) => user.username && (user.password || user.passwordHash));
-  } catch (error) {
-    console.error("Invalid DASHBOARD_USERS_JSON value", error);
-    return [];
-  }
+    const parts = token.split(".");
+    if (parts.length !== 3 || token.length > 8192) return null;
+    const claims = JSON.parse(Buffer.from(parts[1], "base64url").toString("utf8"));
+    if (!isUuid(claims.session_id) || !isUuid(claims.sub) || !Number.isFinite(claims.exp) || !Number.isFinite(claims.iat)) return null;
+    if (claims.exp * 1000 <= Date.now() || claims.iat * 1000 > Date.now() + 30_000 ||
+        (claims.iat + MAX_SESSION_SECONDS) * 1000 <= Date.now()) return null;
+    return claims as { session_id: string; sub: string; exp: number; iat: number };
+  } catch { return null; }
 }
 
-function hashPassword(password: string) {
-  return `sha256:${createHash("sha256").update(password, "utf8").digest("hex")}`;
-}
-
-function safeCompare(first: string, second: string) {
-  const firstDigest = createHash("sha256").update(first).digest();
-  const secondDigest = createHash("sha256").update(second).digest();
-  return timingSafeEqual(firstDigest, secondDigest);
-}
-
-function verifyPassword(user: DashboardUserConfig, password: string) {
-  if (user.passwordHash) {
-    return safeCompare(hashPassword(password), user.passwordHash);
-  }
-
-  if (user.password) {
-    return safeCompare(password, user.password);
-  }
-
-  return false;
-}
-
-function signPayload(payload: string) {
-  return base64UrlEncode(createHmac("sha256", getDashboardAuthSecret()).update(payload).digest());
-}
-
-function createSessionCookieValue(session: DashboardSession) {
-  const payload = base64UrlEncode(JSON.stringify(session));
-  return `${payload}.${signPayload(payload)}`;
-}
-
-function parseSessionCookieValue(value: string): DashboardSession | null {
-  const [payload, signature] = value.split(".");
-
-  if (!payload || !signature || !safeCompare(signature, signPayload(payload))) {
-    return null;
-  }
-
+export async function verifyDashboardToken(token: string, config: AuthConfig): Promise<Access> {
+  if (!token || token.length > 8192) return { session: null, status: 401 };
   try {
-    const session = JSON.parse(base64UrlDecode(payload)) as DashboardSession;
-
-    if (!session.username || !session.role || session.expiresAt < Date.now()) {
-      return null;
+    const { data, error } = await createAuthClient(config).auth.getUser(token);
+    if (error || !data.user) return { session: null, status: 401 };
+    const user = data.user;
+    const claims = tokenClaims(token);
+    if (!claims || claims.sub !== user.id) return { session: null, status: 401 };
+    if (user.id !== config.operatorId || user.app_metadata.dashboard_role !== "admin" ||
+        user.app_metadata.dashboard_disabled === true || !user.email_confirmed_at) {
+      return { session: null, status: 403 };
     }
+    // JWTs survive logout until expiry. Check the live user AND auth.sessions on every access.
+    const { data: active, error: sessionError } = await createServiceClient(config).rpc("dashboard_session_active", {
+      p_user_id: user.id, p_session_id: claims.session_id,
+    });
+    if (sessionError) return { session: null, status: 503 };
+    if (active !== true) return { session: null, status: 403 };
+    return { session: {
+      userId: user.id, username: user.email ?? user.id, role: "admin",
+      expiresAt: Math.min(claims.exp, claims.iat + MAX_SESSION_SECONDS) * 1000,
+    } };
+  } catch { return { session: null, status: 503 }; }
+}
 
-    return session;
-  } catch {
-    return null;
-  }
+export async function getDashboardAccess(): Promise<Access> {
+  const token = (await cookies()).get(DASHBOARD_SESSION_COOKIE)?.value;
+  if (!token) return { session: null, status: 401 };
+  const config = getAuthConfig();
+  if (!config) return { session: null, status: 503 };
+  return verifyDashboardToken(token, config);
+}
+
+export async function getDashboardSession() { return (await getDashboardAccess()).session; }
+
+// No cross-request cache: every data entry point rechecks live authorization before reading/writing.
+export async function assertDashboardAdmin() {
+  const access = await getDashboardAccess();
+  if (!access.session) throw new DashboardAccessError(access.status);
+  return access.session;
 }
 
 export function normalizeDashboardNextPath(value: FormDataEntryValue | string | null | undefined) {
-  const nextPath = typeof value === "string" ? value : "";
-
-  if (nextPath === "/dashboard" || nextPath.startsWith("/dashboard/")) {
-    return nextPath;
-  }
-
+  if (typeof value !== "string" || /[\\\u0000-\u001f]/.test(value)) return "/dashboard";
+  try {
+    const parsed = new URL(value, "https://dashboard.invalid");
+    if (parsed.origin === "https://dashboard.invalid" && value.startsWith("/") &&
+        (parsed.pathname === "/dashboard" || parsed.pathname.startsWith("/dashboard/"))) {
+      return `${parsed.pathname}${parsed.search}${parsed.hash}`;
+    }
+  } catch { /* use the safe landing page */ }
   return "/dashboard";
-}
-
-export function authenticateDashboardUser(username: string, password: string) {
-  const user = getConfiguredUsers().find((configuredUser) => configuredUser.username === username);
-
-  if (!user || !verifyPassword(user, password)) {
-    return null;
-  }
-
-  return {
-    username: user.username,
-    role: user.role ?? "user",
-  };
-}
-
-export async function setDashboardSession(user: { username: string; role: DashboardRole }) {
-  const cookieStore = await cookies();
-  const expiresAt = Date.now() + SESSION_MAX_AGE_SECONDS * 1000;
-
-  cookieStore.set(
-    DASHBOARD_SESSION_COOKIE,
-    createSessionCookieValue({
-      username: user.username,
-      role: user.role,
-      expiresAt,
-    }),
-    {
-      httpOnly: true,
-      maxAge: SESSION_MAX_AGE_SECONDS,
-      path: "/",
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === "production",
-    },
-  );
-}
-
-export async function clearDashboardSession() {
-  const cookieStore = await cookies();
-  cookieStore.delete(DASHBOARD_SESSION_COOKIE);
-}
-
-export async function getDashboardSession() {
-  const cookieStore = await cookies();
-  const cookieValue = cookieStore.get(DASHBOARD_SESSION_COOKIE)?.value;
-
-  if (!cookieValue) {
-    return null;
-  }
-
-  return parseSessionCookieValue(cookieValue);
 }
 
 export async function requireDashboardSession(nextPath = "/dashboard") {
   const session = await getDashboardSession();
-
-  if (!session) {
-    redirect(`/login?next=${encodeURIComponent(nextPath)}`);
-  }
-
+  if (!session) redirect(`/login?next=${encodeURIComponent(normalizeDashboardNextPath(nextPath))}`);
   return session;
+}
+
+async function takeLoginAttempt(config: AuthConfig) {
+  const { data, error } = await createServiceClient(config).rpc("dashboard_take_login_attempt");
+  return !error && data === true;
+}
+
+export async function signInDashboard(email: string, password: string) {
+  const config = getAuthConfig();
+  if (!config || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !password || password.length > 1024) return false;
+  try {
+    if (!(await takeLoginAttempt(config))) return false;
+    const { data, error } = await createAuthClient(config).auth.signInWithPassword({ email, password });
+    if (error || !data.session) return false;
+    const access = await verifyDashboardToken(data.session.access_token, config);
+    if (!access.session) {
+      await createServiceClient(config).auth.admin.signOut(data.session.access_token, "local");
+      return false;
+    }
+    const cookieStore = await cookies();
+    cookieStore.delete(LEGACY_COOKIE);
+    cookieStore.set(DASHBOARD_SESSION_COOKIE, data.session.access_token, {
+      httpOnly: true, secure: process.env.NODE_ENV === "production" || Boolean(process.env.VERCEL_ENV),
+      sameSite: "strict", path: "/",
+      maxAge: Math.max(0, Math.floor((access.session.expiresAt - Date.now()) / 1000)),
+    });
+    return true;
+  } catch { return false; }
+}
+
+export async function clearDashboardSession() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(DASHBOARD_SESSION_COOKIE)?.value;
+  const config = getAuthConfig();
+  if (token) {
+    if (!config) return false;
+    try {
+      const { error } = await createServiceClient(config).auth.admin.signOut(token, "global");
+      // Expired/deleted sessions already cannot authorize; service failures must remain visible.
+      if (error && ![401, 403, 404].includes(error.status ?? 0)) return false;
+    } catch { return false; }
+  }
+  cookieStore.delete(DASHBOARD_SESSION_COOKIE);
+  cookieStore.delete(LEGACY_COOKIE);
+  return true;
+}
+
+export async function recoverDashboardPassword(recoveryCode: string, password: string) {
+  const config = getAuthConfig();
+  if (!config || !/^[a-f0-9]{40,128}$/i.test(recoveryCode) || password.length < 14 || password.length > 128) return false;
+  try {
+    if (!(await takeLoginAttempt(config))) return false;
+    const client = createAuthClient(config);
+    const { data, error } = await client.auth.verifyOtp({ token_hash: recoveryCode, type: "recovery" });
+    if (error || !data.session) return false;
+    const token = data.session.access_token;
+    const access = await verifyDashboardToken(token, config);
+    if (!access.session) {
+      await createServiceClient(config).auth.admin.signOut(token, "local");
+      return false;
+    }
+    const { error: updateError } = await client.auth.updateUser({ password });
+    const { error: revokeError } = await createServiceClient(config).auth.admin.signOut(token, "global");
+    return !updateError && !revokeError;
+  } catch { return false; }
 }

@@ -1,9 +1,9 @@
 import { chargerStormResponseVariant } from "../lib/chargerVariants";
-import type { ProspectData } from "../lib/prospects";
+import type { PublicProspect } from "../lib/publicProspects";
 import { RoofingLandingPage } from "./RoofingLandingPage";
 
 type ChargerStormResponseLandingPageProps = {
-  prospect: ProspectData;
+  prospect: PublicProspect;
 };
 
 export function ChargerStormResponseLandingPage({

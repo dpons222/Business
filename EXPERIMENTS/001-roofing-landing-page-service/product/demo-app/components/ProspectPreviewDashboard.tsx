@@ -23,8 +23,8 @@ import {
 } from "lucide-react";
 import type { DashboardFocusItem } from "../lib/dashboardFocus";
 import type { DemoEntry, DemoNiche, DemoStatus } from "../lib/demoRegistry";
-import { nicheFilters, statusLabels } from "../lib/demoRegistry";
-import { relationshipStatusLabel } from "../lib/prospectDrafts";
+import { nicheFilters, statusLabels } from "../lib/demoLabels";
+import { relationshipStatusLabel } from "../lib/prospectLabels";
 import type { FollowUpChannelPolicy, ProspectDraftSummary } from "../lib/prospectDrafts";
 
 type SortMode = "name" | "date";

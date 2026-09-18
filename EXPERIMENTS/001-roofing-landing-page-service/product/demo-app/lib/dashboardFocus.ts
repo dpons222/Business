@@ -1,3 +1,5 @@
+import "server-only";
+import { assertDashboardAdmin } from "./dashboardAuth";
 import { getSupabaseConfig, getSupabaseHeaders } from "./prospectDrafts";
 
 export type DashboardFocusItem = {
@@ -46,6 +48,7 @@ function focusItemsEndpoint(config: NonNullable<ReturnType<typeof getSupabaseCon
 }
 
 export async function getDashboardFocusState(): Promise<DashboardFocusState> {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {
@@ -88,6 +91,7 @@ export async function getDashboardFocusState(): Promise<DashboardFocusState> {
 }
 
 export async function addDashboardFocusItem(slug: string, addedBy: string) {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {
@@ -116,6 +120,7 @@ export async function addDashboardFocusItem(slug: string, addedBy: string) {
 }
 
 export async function replaceDashboardFocusItems(items: DashboardFocusItem[], addedBy: string) {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {
@@ -159,6 +164,7 @@ export async function replaceDashboardFocusItems(items: DashboardFocusItem[], ad
 }
 
 export async function removeDashboardFocusItem(slug: string) {
+  await assertDashboardAdmin();
   const config = getSupabaseConfig({ requireServiceRole: true });
 
   if (!config) {

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ChargerStormResponseLandingPage } from "../../../../components/ChargerStormResponseLandingPage";
-import { getProspectBySlug } from "../../../../lib/prospects";
+import { getPublicProspectBySlug } from "@/lib/publicProspects";
 
 type ChargerStormResponsePageProps = {
   params: Promise<{
@@ -17,7 +17,7 @@ export async function generateMetadata({
   params,
 }: ChargerStormResponsePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const prospect = getProspectBySlug(slug);
+  const prospect = getPublicProspectBySlug(slug);
 
   if (!prospect || prospect.slug !== "charger-roofing") {
     return {
@@ -35,7 +35,7 @@ export default async function ChargerStormResponsePage({
   params,
 }: ChargerStormResponsePageProps) {
   const { slug } = await params;
-  const prospect = getProspectBySlug(slug);
+  const prospect = getPublicProspectBySlug(slug);
 
   if (!prospect || prospect.slug !== "charger-roofing") {
     notFound();
